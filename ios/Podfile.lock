@@ -1,0 +1,358 @@
+PODS:
+  - BIJKPlayer (0.7.10)
+  - bmap_core_fluttify (0.0.1):
+    - Flutter
+    - foundation_fluttify
+  - bmap_map_fluttify (0.0.1):
+    - bmap_core_fluttify
+    - bmap_utils_fluttify
+    - Flutter
+    - foundation_fluttify
+    - path_provider
+  - bmap_utils_fluttify (0.0.1):
+    - bmap_core_fluttify
+    - Flutter
+    - foundation_fluttify
+  - BSGridCollectionViewLayout (1.2.5)
+  - BSImagePicker (2.10.3):
+    - BSGridCollectionViewLayout (= 1.2.5)
+    - BSImageView (= 1.0.3)
+  - BSImageView (1.0.3)
+  - camera (0.0.1):
+    - Flutter
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
+  - core_location_fluttify (0.0.1):
+    - Flutter
+  - device_info (0.0.1):
+    - Flutter
+  - DKImagePickerController/Core (4.3.2):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.2)
+  - DKImagePickerController/PhotoGallery (4.3.2):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.2)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - fijkplayer (0.8.7):
+    - BIJKPlayer (~> 0.7.8)
+    - Flutter
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
+  - flutter_sound (8.1.1):
+    - Flutter
+    - mobile-ffmpeg-full (= 4.4.LTS)
+    - tau_core (= 8.1.1)
+  - fluttertoast (0.0.2):
+    - Flutter
+  - fluwx (0.0.1):
+    - Flutter
+    - WechatOpenSDK (= 1.8.7.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - foundation_fluttify (0.0.1):
+    - Flutter
+  - image_gallery_saver (1.5.0):
+    - Flutter
+  - image_picker (0.0.1):
+    - Flutter
+  - mob_pushsdk (3.0.3):
+    - mob_pushsdk/MobPush (= 3.0.3)
+    - MOBFoundation
+  - mob_pushsdk/MobPush (3.0.3):
+    - MOBFoundation
+  - mob_smssdk (3.3.2):
+    - MOBFoundation
+  - mobcommonlib (0.0.1):
+    - Flutter
+    - MOBFoundation
+  - MOBFoundation (3.2.26)
+  - mobile-ffmpeg-full (4.4.LTS)
+  - mobpush_plugin (1.0.7):
+    - Flutter
+    - mob_pushsdk
+  - mobsms (0.0.1):
+    - Flutter
+    - mob_smssdk
+  - motion_sensors (0.0.1):
+    - Flutter
+  - multi_image_picker (4.8.00):
+    - BSImagePicker (~> 2.10.3)
+    - Flutter
+  - open_file (0.0.1):
+    - Flutter
+  - package_info (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - "permission_handler (5.1.0+2)":
+    - Flutter
+  - photo_manager (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - Reachability (3.2)
+  - rongcloud_im_plugin (0.0.1):
+    - Flutter
+    - RongCloudIM/IMLib (= 5.1.1.1)
+  - RongCloudIM/ChatRoom (5.1.1.1):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/CustomerService (5.1.1.1):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/Discussion (5.1.1.1):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/IMLib (5.1.1.1):
+    - RongCloudIM/ChatRoom
+    - RongCloudIM/CustomerService
+    - RongCloudIM/Discussion
+    - RongCloudIM/IMLibCore
+    - RongCloudIM/Location
+    - RongCloudIM/PublicService
+  - RongCloudIM/IMLibCore (5.1.1.1)
+  - RongCloudIM/Location (5.1.1.1):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/PublicService (5.1.1.1):
+    - RongCloudIM/IMLibCore
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - shared_preferences (0.0.1):
+    - Flutter
+  - sqflite (0.0.2):
+    - Flutter
+    - FMDB (>= 2.7.5)
+  - SwiftyGif (5.4.0)
+  - tau_core (8.1.1)
+  - url_launcher (0.0.1):
+    - Flutter
+  - video_player (0.0.1):
+    - Flutter
+  - wakelock (0.0.1):
+    - Flutter
+  - webview_flutter (0.0.1):
+    - Flutter
+  - WechatOpenSDK (1.8.7.1)
+  - weibo_kit (2.0.2):
+    - Flutter
+    - weibo_kit/vendor (= 2.0.2)
+  - weibo_kit/vendor (2.0.2):
+    - Flutter
+    - Weibo_SDK (~> 3.3.0)
+  - Weibo_SDK (3.3.0)
+
+DEPENDENCIES:
+  - bmap_core_fluttify (from `.symlinks/plugins/bmap_core_fluttify/ios`)
+  - bmap_map_fluttify (from `.symlinks/plugins/bmap_map_fluttify/ios`)
+  - bmap_utils_fluttify (from `.symlinks/plugins/bmap_utils_fluttify/ios`)
+  - camera (from `.symlinks/plugins/camera/ios`)
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - core_location_fluttify (from `.symlinks/plugins/core_location_fluttify/ios`)
+  - device_info (from `.symlinks/plugins/device_info/ios`)
+  - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
+  - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - fluwx (from `.symlinks/plugins/fluwx/ios`)
+  - foundation_fluttify (from `.symlinks/plugins/foundation_fluttify/ios`)
+  - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - mobcommonlib (from `.symlinks/plugins/mobcommonlib/ios`)
+  - mobpush_plugin (from `.symlinks/plugins/mobpush_plugin/ios`)
+  - mobsms (from `.symlinks/plugins/mobsms/ios`)
+  - motion_sensors (from `.symlinks/plugins/motion_sensors/ios`)
+  - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
+  - open_file (from `.symlinks/plugins/open_file/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
+  - rongcloud_im_plugin (from `.symlinks/plugins/rongcloud_im_plugin/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+  - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
+  - weibo_kit (from `.symlinks/plugins/weibo_kit/ios`)
+
+SPEC REPOS:
+  trunk:
+    - BIJKPlayer
+    - BSGridCollectionViewLayout
+    - BSImagePicker
+    - BSImageView
+    - DKImagePickerController
+    - DKPhotoGallery
+    - FMDB
+    - mob_pushsdk
+    - mob_smssdk
+    - MOBFoundation
+    - mobile-ffmpeg-full
+    - Reachability
+    - RongCloudIM
+    - SDWebImage
+    - SwiftyGif
+    - tau_core
+    - WechatOpenSDK
+    - Weibo_SDK
+
+EXTERNAL SOURCES:
+  bmap_core_fluttify:
+    :path: ".symlinks/plugins/bmap_core_fluttify/ios"
+  bmap_map_fluttify:
+    :path: ".symlinks/plugins/bmap_map_fluttify/ios"
+  bmap_utils_fluttify:
+    :path: ".symlinks/plugins/bmap_utils_fluttify/ios"
+  camera:
+    :path: ".symlinks/plugins/camera/ios"
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
+  core_location_fluttify:
+    :path: ".symlinks/plugins/core_location_fluttify/ios"
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
+  fijkplayer:
+    :path: ".symlinks/plugins/fijkplayer/ios"
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
+  Flutter:
+    :path: Flutter
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
+  flutter_sound:
+    :path: ".symlinks/plugins/flutter_sound/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  fluwx:
+    :path: ".symlinks/plugins/fluwx/ios"
+  foundation_fluttify:
+    :path: ".symlinks/plugins/foundation_fluttify/ios"
+  image_gallery_saver:
+    :path: ".symlinks/plugins/image_gallery_saver/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  mobcommonlib:
+    :path: ".symlinks/plugins/mobcommonlib/ios"
+  mobpush_plugin:
+    :path: ".symlinks/plugins/mobpush_plugin/ios"
+  mobsms:
+    :path: ".symlinks/plugins/mobsms/ios"
+  motion_sensors:
+    :path: ".symlinks/plugins/motion_sensors/ios"
+  multi_image_picker:
+    :path: ".symlinks/plugins/multi_image_picker/ios"
+  open_file:
+    :path: ".symlinks/plugins/open_file/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  photo_manager:
+    :path: ".symlinks/plugins/photo_manager/ios"
+  rongcloud_im_plugin:
+    :path: ".symlinks/plugins/rongcloud_im_plugin/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
+  webview_flutter:
+    :path: ".symlinks/plugins/webview_flutter/ios"
+  weibo_kit:
+    :path: ".symlinks/plugins/weibo_kit/ios"
+
+SPEC CHECKSUMS:
+  BIJKPlayer: 6727b075679eb5173b6d16f42ff2f33b9a757213
+  bmap_core_fluttify: 7fdd4ec3fe52c5a243a7cb04f898ca8a8e3dd613
+  bmap_map_fluttify: bd1a5c66e597079acaac391e38debdfdaee88fa0
+  bmap_utils_fluttify: 211991ee1c360dc40d2e4e2f863009a606d63be7
+  BSGridCollectionViewLayout: 333dcb457a5a3bdd9212607ab5756553dcfe06cb
+  BSImagePicker: 07404254f2fcdaf5a2eb403c0f8c337267ce8738
+  BSImageView: a149459433a2687157d034c78e059d30ac7f2544
+  camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
+  connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
+  core_location_fluttify: 24cc9dcd986ac7059916632d2cb3babb1568ff61
+  device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
+  DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
+  fijkplayer: 0c8728bf3b222203e1fddb08f6899719d88b2b6d
+  file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
+  flutter_sound: 1f8dd164cf3ce3f09b148aa2f39c2199e33b879c
+  fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  fluwx: 07a55ed66bf3a4961e836a2a411b02dcada32902
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  foundation_fluttify: 0c45145e3fad1fb99188e4979daed5b24cd9b278
+  image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
+  image_picker: 50e7c7ff960e5f58faa4d1f4af84a771c671bc4a
+  mob_pushsdk: da91cf00e2bc3ac01b5cbd58a204e0a0d1b4c145
+  mob_smssdk: 7dd38a9087980f9dfd74b9b25d87db36b38496c7
+  mobcommonlib: b93924f7a05dfc92c24797dbb00734fd96971d7f
+  MOBFoundation: 2abd23c80c33d1337d30dc4b0018ed914cef8f8e
+  mobile-ffmpeg-full: f17c82219b4ff9e4018b5e21f88b78c28a3475db
+  mobpush_plugin: 7b5a56692c538bc06e0386916cf7b21f77c1eb09
+  mobsms: 141956ad151a39a69a47a2ddf2e186405346c4ef
+  motion_sensors: 03f55b7c637a7e365a0b5f9697a449f9059d5d91
+  multi_image_picker: 443e776a762d7901641854043b60abf88a85d5ef
+  open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  photo_manager: 61cdd6835af271b9ad1bb533fccf71d5db02fff3
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  rongcloud_im_plugin: 6321edcdb75e2a652788875b01f38ec6a294f724
+  RongCloudIM: 0145e194350cc385262fa873a210c79865b2c123
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
+  tau_core: e979fffbc94fae483c585b7ee10c157863f00a2e
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
+  wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
+  webview_flutter: 9f491a9b5a66f2573946a389b2677987b0ff8c0b
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
+  weibo_kit: 4a56eb617b67edb586e294fb52658e67b4285500
+  Weibo_SDK: 7478846cccb43c4785ba76b214115fb7ec9dc0d4
+
+PODFILE CHECKSUM: 5dacfd78a3488483e41cecaa5a6ac0d4d35f5c95
+
+COCOAPODS: 1.10.1

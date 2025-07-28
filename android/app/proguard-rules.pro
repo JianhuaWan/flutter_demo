@@ -1,0 +1,4 @@
+-keep class com.baidu.**{*;}
+-keep class vi.com.gdi.bgl.**{*;}
+-keep class androidx.lifecycle.** {*;}
+-keep class mapsdkvi.com.** {*;}
