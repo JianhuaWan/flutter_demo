@@ -402,7 +402,11 @@ class PageState extends State<PhoneCountryCodePage> {
                   item: (i) {
                     return GestureDetector(
                       onTap: () async {
-                        if (app.sousuoList.indexOf(sousuoResult[i]['name']) == -1) {
+                        var app = context.read<AppProvider>();
+                        // 修复：先检查列表是否为空，再检查元素是否存在
+                        bool itemExists = app.sousuoList.isNotEmpty &&
+                            app.sousuoList.indexOf(sousuoResult[i]['name']) != -1;
+                        if (!itemExists) {
                           app.sousuoList.insert(0, sousuoResult[i]['name']);
                         } else {
                           app.sousuoList.remove(sousuoResult[i]['name']);
@@ -511,10 +515,13 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                           isExp: true,
                           con: widget.textCon ?? textCon,
                           onSubmitted: (v) async {
-                            // widget.onSubmitted(v);
+                            var app = context.read<AppProvider>();
                             if ((widget.textCon ?? textCon).text == '') {
                             } else {
-                              if (app.sousuoList.indexOf((widget.textCon ?? textCon).text) == -1) {
+                              // 修复：先检查列表是否为空，再检查元素是否存在
+                              bool itemExists = app.sousuoList.isNotEmpty &&
+                                  app.sousuoList.indexOf((widget.textCon ?? textCon).text) != -1;
+                              if (!itemExists) {
                                 app.sousuoList.insert(0, (widget.textCon ?? textCon).text);
                               } else {
                                 app.sousuoList.remove((widget.textCon ?? textCon).text);
@@ -537,11 +544,15 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                 ),
                 WidgetTap(
                   onTap: () async {
-                    widget.onSubmitted((widget.textCon ?? textCon).text);
+                    var app = context.read<AppProvider>();
+                    widget.onSubmitted?.call((widget.textCon ?? textCon).text);
                     if ((widget.textCon ?? textCon).text == '') {
                       close();
                     } else {
-                      if (app.sousuoList.indexOf((widget.textCon ?? textCon).text) == -1) {
+                      // 修复：先检查列表是否为空，再检查元素是否存在
+                      bool itemExists = app.sousuoList.isNotEmpty &&
+                          app.sousuoList.indexOf((widget.textCon ?? textCon).text) != -1;
+                      if (!itemExists) {
                         app.sousuoList.insert(0, (widget.textCon ?? textCon).text);
                       } else {
                         app.sousuoList.remove((widget.textCon ?? textCon).text);
@@ -593,7 +604,6 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                   WidgetTap(
                     isElastic: true,
                     onTap: () async {
-                      await getLocation();
                       await Future.delayed(Duration(milliseconds: 1000));
                       close('1');
                     },

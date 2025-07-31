@@ -42,7 +42,7 @@ class BigTitleWidget extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
           SizedBox(width: 8),
-          MyText(title ?? '新鲜资讯', size: 16, isBold: true, color: Common.black),
+          MyText(title ?? '标题', size: 16, isBold: true, color: Common.black),
           Spacer(),
           if (isShowMore ?? false)
             WidgetTap(
@@ -67,47 +67,47 @@ class CaidanWidget extends StatefulWidget {
 class _CaidanWidgetState extends State<CaidanWidget> {
   var caidanList1 = [
     {
-      'img': 'assets/img/home_caidan2.png',
-      'name': '地图找房',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan8.png',
-      'name': '笋盘推荐',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan7.png',
-      'name': '品牌优选',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan3.png',
-      'name': '房贷计算',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan6.png',
-      'name': '帮我找房',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
   ];
 
   var caidanList2 = [
     {
-      'img': 'assets/img/home_caidan9.png',
-      'name': '人气榜',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan10.png',
-      'name': '销售榜',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan1.png',
-      'name': '查成交',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan4.png',
-      'name': '购房资格',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/home_caidan5.png',
-      'name': '购房资料',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
   ];
 

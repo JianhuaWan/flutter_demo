@@ -194,4 +194,44 @@ class UserModel {
     data["token"] = token;
     return data;
   }
+
+  static UserModel generateMockUserData() {
+    return UserModel(
+      userName: "mock_user_001",
+      realName: "模拟用户",
+      nickName: "MockUser",
+      gender: 1, // 0: 未知, 1: 男, 2: 女
+      idCard: "110101199003071234",
+      address: "广东省深圳市南山区虚拟街道123号",
+      birthday: "1990-03-07",
+      portrait: "https://via.placeholder.com/400x400/4A9DF6/FFFFFF?text=Mock+User",
+      email: "mockuser@example.com",
+      mobile: "13800138000",
+      qq: "123456789",
+      wechat: "mock_wechat_id",
+      loginCount: 8,
+      userStatus: 1, // 1: 正常, 2: 禁用
+      isSystem: 2, // 1: 是, 2: 否
+      isOnline: 1, // 1: 在线, 2: 离线
+      firstVisit: DateTime.now().subtract(Duration(days: 90)).toIso8601String(),
+      lastVisit: DateTime.now().subtract(Duration(minutes: 30)).toIso8601String(),
+      remark: "这是模拟用户数据，用于网络请求失败时的展示",
+      chatToken: "MOCK_CHAT_TOKEN_1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      supportId: 987654321,
+      isIdentity: true, // 是否已实名认证
+      totalDeposits: 5000, // 总佣金(分)
+      depositsing: 2000, // 待结算佣金(分)
+      inviteCode: "MOCK123",
+      userLevel: 3, // 用户等级
+      departmentId: "DEPT_001",
+      departmentName: "模拟部门",
+      positionIds: "POS_001",
+      roleIds: "ROLE_USER",
+      baseVersion: 1,
+      baseModifyTime: DateTime.now().subtract(Duration(hours: 2)).toIso8601String(),
+      baseCreateTime: DateTime.now().subtract(Duration(days: 100)).toIso8601String(),
+      id: "mock_user_id_9876543210",
+      token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibW9ja191c2VyX2lkXzk4NzY1NDMyMTAiLCJleHAiOjk5OTk5OTk5OTl9.mock_signature_for_testing",
+    );
+  }
 }

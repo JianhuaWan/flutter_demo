@@ -1,13 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dianliyunwei">
+    package="com.example.test">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
    <application
-        android:label="内当家驻场版"
+        android:label="flutter_app"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/l512">
+        android:icon="@mipmap/ic_launcher">
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

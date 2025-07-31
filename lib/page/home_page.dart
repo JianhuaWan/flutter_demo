@@ -15,7 +15,6 @@ import 'package:kqsc/widget/appbar_widget.dart';
 import 'package:kqsc/widget/my_custom_scroll.dart';
 import 'package:kqsc/widget/tween_widget.dart';
 import 'package:kqsc/widget/widgets.dart';
-import 'package:paixs_utils/config/net/Config.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';
@@ -32,7 +31,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   ScrollController con = ScrollController();
 
   @override
@@ -66,11 +66,33 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   ///轮播图
   var bannerDm = DataModel<List>();
+
   Future<void> getBannerList() async {
     await Request.get(
       '/api/Banner/GetList',
       data: {"city": app.cityCode ?? "-1"},
-      catchError: (v) => bannerDm.toError(v),
+      catchError: (v)  {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, String>> defaultBanners = [
+          {
+            'thumbImage': 'https://via.placeholder.com/800x400/FF0000/FFFFFF?text=Banner+1',
+            'content': '',
+            'title': '默认横幅1'
+          },
+          {
+            'thumbImage': 'https://via.placeholder.com/800x400/00FF00/000000?text=Banner+2',
+            'content': '',
+            'title': '默认横幅2'
+          },
+          {
+            'thumbImage': 'https://via.placeholder.com/800x400/0000FF/FFFFFF?text=Banner+3',
+            'content': '',
+            'title': '默认横幅3'
+          },
+        ];
+        bannerDm.object = defaultBanners;
+        bannerDm.setTime();
+      },
       success: (v) {
         bannerDm.object = v['data'];
         bannerDm.setTime();
@@ -81,11 +103,33 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   ///广告
   var guanggaoDm = DataModel<List>();
+
   Future<void> getGuanggaoList() async {
     await Request.get(
       '/api/Advert/GetList',
       data: {"city": app.cityCode ?? "-1"},
-      catchError: (v) => guanggaoDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, String>> defaultAds = [
+          {
+            'thumbImage': 'https://via.placeholder.com/800x400/FF6B6B/FFFFFF?text=广告1',
+            'content': '',
+            'title': '默认广告1'
+          },
+          {
+            'thumbImage': 'https://via.placeholder.com/800x400/4ECDC4/FFFFFF?text=广告2',
+            'content': '',
+            'title': '默认广告2'
+          },
+          {
+            'thumbImage': 'https://via.placeholder.com/800x400/45B7D1/FFFFFF?text=广告3',
+            'content': '',
+            'title': '默认广告3'
+          },
+        ];
+        guanggaoDm.object = defaultAds;
+        guanggaoDm.setTime();
+      },
       success: (v) {
         guanggaoDm.object = v['data'];
         guanggaoDm.setTime();
@@ -96,11 +140,32 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   ///获取资讯信息列表
   var zixunDm = DataModel(hasNext: false);
+
   Future<int> apiNewsGetPageList({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/News/GetPageList',
       data: {"PageIndex": page, "city": app.cityCode ?? "-1"},
-      catchError: (v) => zixunDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultNews = [
+          {
+            'preview': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=资讯1',
+            'content': '',
+            'title': '默认资讯标题1'
+          },
+          {
+            'preview': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=资讯2',
+            'content': '',
+            'title': '默认资讯标题2'
+          },
+          {
+            'preview': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=资讯3',
+            'content': '',
+            'title': '默认资讯标题3'
+          },
+        ];
+        zixunDm.addList(defaultNews, isRef, defaultNews.length);
+      },
       success: (v) {
         zixunDm.addList(v['data'], isRef, v['total']);
       },
@@ -111,14 +176,33 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   ///获取湾区推荐
   var wanquDm = DataModel(hasNext: false);
-  Future<int> apiBuildingGetRecommend({int page = 1, bool isRef = false}) async {
+
+  Future<int> apiBuildingGetRecommend(
+      {int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/Building/GetRecommend',
       data: {
         "city": app.cityCode ?? "-1",
         "PageIndex": "1",
       },
-      catchError: (v) => wanquDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultBuildings = [
+          {
+            'buildingName': '默认推荐楼盘1',
+            'images': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=楼盘1',
+          },
+          {
+            'buildingName': '默认推荐楼盘2',
+            'images': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=楼盘2',
+          },
+          {
+            'buildingName': '默认推荐楼盘3',
+            'images': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=楼盘3',
+          },
+        ];
+        wanquDm.addList(defaultBuildings, isRef, defaultBuildings.length);
+      },
       success: (v) {
         wanquDm.addList(v['data'], isRef, v['total']);
       },
@@ -141,6 +225,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   ///楼盘列表
   var loupanDm = DataModel();
+
   Future<int> getPageList({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/Building/GetPageList',
@@ -152,7 +237,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         if (area != null) "Area": area,
       },
       catchError: (v) {
-        loupanDm.toError(v);
+        // loupanDm.toError(v);
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultBuildings = [
+          {
+            'buildingName': '默认楼盘1',
+            'images': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=楼盘1',
+            'price': '待定',
+            'areaName': '区域1'
+          },
+          {
+            'buildingName': '默认楼盘2',
+            'images': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=楼盘2',
+            'price': '待定',
+            'areaName': '区域2'
+          },
+          {
+            'buildingName': '默认楼盘3',
+            'images': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=楼盘3',
+            'price': '待定',
+            'areaName': '区域3'
+          },
+        ];
+        loupanDm.addList(defaultBuildings, isRef, defaultBuildings.length);
       },
       success: (v) {
         loupanDm.addList(v['data'], isRef, v['total']);
@@ -179,7 +286,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             zixunDm.flag = 0;
             loupanDm.flag = 0;
             loupanDm.list.clear();
-            
+
             loupanDm.hasNext = false;
             wanquDm.flag = 0;
             setState(() {});
@@ -213,7 +320,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                 bottom: 0,
                 top: v
                     ? 0
-                    : (region != null || totalPrice != null || layout != null || area != null)
+                    : (region != null ||
+                            totalPrice != null ||
+                            layout != null ||
+                            area != null)
                         ? 0
                         : -56,
                 child: HomeSelectoWidget(fun: (v) async {
@@ -290,9 +400,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                     if (list.length == 2) {
                       flog(list);
                       if (list[0].split('=')[1] == 'building') {
-                        jumpPage(LoupanPage(data: {"id": list[1].split('=')[1]}));
+                        jumpPage(
+                            LoupanPage(data: {"id": list[1].split('=')[1]}));
                       } else {
-                        jumpPage(ZixunInfoPage(data: {"id": list[1].split('=')[1]}));
+                        jumpPage(
+                            ZixunInfoPage(data: {"id": list[1].split('=')[1]}));
                       }
                     } else {
                       jumpPage(
@@ -375,7 +487,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
               children: [
                 BigTitleWidget(
                   isShowMore: true,
-                  title: '湾区推荐',
+                  title: '标题',
                   onTap: () {
                     jumpPage(WanquPage());
                   },
@@ -405,7 +517,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                 children: [
                                   Positioned.fill(
                                     child: WrapperImage(
-                                      url: list[i]['images'].toString().split(';').first,
+                                      url: list[i]['images']
+                                          .toString()
+                                          .split(';')
+                                          .first,
                                       height: 100,
                                     ),
                                   ),
@@ -421,7 +536,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                           height: 24,
                                           color: Colors.red,
                                         ),
-                                        MyText('No.${i + 1}', color: Colors.white),
+                                        MyText('No.${i + 1}',
+                                            color: Colors.white),
                                       ],
                                     ),
                                   ),
@@ -442,7 +558,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                         gradient: LinearGradient(
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomCenter,
-                                          colors: [Color(0x00000000), Color(0xff202020)],
+                                          colors: [
+                                            Color(0x00000000),
+                                            Color(0xff202020)
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -503,7 +622,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         noDataView: SizedBox(),
         isAnimatedSize: true,
         listBuilder: (list, p, h) {
-          return BigTitleWidget(title: '新房甄选', isBottom: true);
+          return BigTitleWidget(title: '标题', isBottom: true);
         },
       ),
     ];

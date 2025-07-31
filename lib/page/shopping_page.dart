@@ -57,7 +57,7 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
     return ScaffoldWidget(
       appBar: buildTitle(
         context,
-        title: '推荐',
+        title: '标题',
         color: Colors.white,
         isNoShowLeft: widget.isHome,
       ),
@@ -409,7 +409,30 @@ class _TuijianLoupanState extends State<TuijianLoupan> {
     await Request.get(
       '/api/Building/GetPageList',
       data: {"PageSize": 10, "PageIndex": page, "city": ''},
-      catchError: (v) => loupanDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultBuildings = [
+          {
+            'buildingName': '默认楼盘1',
+            'images': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=楼盘1',
+            'price': '待定',
+            'areaName': '区域1'
+          },
+          {
+            'buildingName': '默认楼盘2',
+            'images': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=楼盘2',
+            'price': '待定',
+            'areaName': '区域2'
+          },
+          {
+            'buildingName': '默认楼盘3',
+            'images': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=楼盘3',
+            'price': '待定',
+            'areaName': '区域3'
+          },
+        ];
+        loupanDm.addList(defaultBuildings, isRef, defaultBuildings.length);
+      },
       success: (v) {
         loupanDm.addList(v['data'], isRef, v['total']);
       },

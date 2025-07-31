@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:kqsc/page/wode/xieyi_page.dart';
@@ -28,6 +29,8 @@ import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
 import 'package:provider/provider.dart';
+
+import '../login_page.dart';
 
 class SetupPage extends StatefulWidget {
   @override
@@ -109,7 +112,11 @@ class _SetupPageState extends State<SetupPage> {
               selectoColor: Color(0xff666666),
               selectoText: '',
               selectoOnTap: () {
-                jumpPage(ModifyUserInfo());
+                if (user == null) {
+                  jumpPage(PassWordLogin(), isMoveBtm: true);
+                } else {
+                  jumpPage(ModifyUserInfo());
+                }
               },
             ),
           ),
@@ -148,7 +155,11 @@ class _SetupPageState extends State<SetupPage> {
                     selectoOnTap: () {
                       switch (i) {
                         case 0:
-                          jumpPage(XiugaiLogin());
+                          if (user == null) {
+                            jumpPage(PassWordLogin(), isMoveBtm: true);
+                          } else {
+                            jumpPage(XiugaiLogin());
+                          }
                           break;
                         case 1:
                           jumpPage(FankuiPage());
@@ -226,7 +237,10 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
     textCon1.text = user.mobile;
     textCon2.text = user.nickName;
     xinbie = user.gender == 0 ? '女' : '男';
-    realName = user.realName == 'null' || user.realName == '' || user.realName == null ? null : user.realName;
+    realName =
+        user.realName == 'null' || user.realName == '' || user.realName == null
+            ? null
+            : user.realName;
   }
 
   @override
@@ -255,7 +269,8 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
               catchError: (v) => showToast(v),
               success: (v) async {
                 showToast('修改成功');
-                chat.changeChatUserInfo(user.id, realName, icon ?? user.portrait);
+                chat.changeChatUserInfo(
+                    user.id, realName, icon ?? user.portrait);
                 userPro.setUserModel(v['data'], user.token);
                 // await userPro.refreshToken();
                 close();
@@ -294,7 +309,9 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
                 textCon: [null, null, textCon1, textCon2, null][i],
                 selectoText: [
                   '',
-                  realName == null ? [user.realName, '请实名'][user.isIdentity ? 0 : 1] : realName,
+                  realName == null
+                      ? [user.realName, '请实名'][user.isIdentity ? 0 : 1]
+                      : realName,
                   '',
                   '',
                   xinbie
@@ -388,7 +405,10 @@ Future<String> uploadImage(path) async {
     'fileModule': 4,
     'file': await MultipartFile.fromFile(path, filename: filename),
   });
-  var options = Options(contentType: 'multipart/form-data', headers: {"Authorization": user.token});
-  var response = await http.post('/api/File/UploadFile', data: formData, options: options);
+  var options = Options(
+      contentType: 'multipart/form-data',
+      headers: {"Authorization": user.token});
+  var response =
+      await http.post('/api/File/UploadFile', data: formData, options: options);
   return response.data['data'];
 }

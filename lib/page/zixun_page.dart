@@ -17,13 +17,15 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 
 class ZixunPage extends StatefulWidget {
   final bool isHome;
+
   const ZixunPage({Key key, this.isHome = true}) : super(key: key);
 
   @override
   _ZixunPageState createState() => _ZixunPageState();
 }
 
-class _ZixunPageState extends State<ZixunPage> with AutomaticKeepAliveClientMixin {
+class _ZixunPageState extends State<ZixunPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     this.initData();
@@ -35,29 +37,13 @@ class _ZixunPageState extends State<ZixunPage> with AutomaticKeepAliveClientMixi
     // await this.apiDataDictGetDropDownList();
   }
 
-  // ///获取字典数据
-  // var zidianDm = DataModel<List>(hasNext: false, object: []);
-  // Future<int> apiDataDictGetDropDownList({int page = 1, bool isRef = false}) async {
-  //   await Request.get(
-  //     '/api/DataDict/GetDropDownList',
-  //     data: {"dictType": "NewsType"},
-  //     catchError: (v) => zidianDm.toError(v),
-  //     success: (v) {
-  //       zidianDm.object = v['data'];
-  //       zidianDm.setTime();
-  //     },
-  //   );
-  //   setState(() {});
-  //   return zidianDm.flag;
-  // }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ScaffoldWidget(
       appBar: buildTitle(
         context,
-        title: '资讯',
+        title: '标题',
         color: Colors.white,
         isNoShowLeft: widget.isHome,
       ),
@@ -68,8 +54,14 @@ class _ZixunPageState extends State<ZixunPage> with AutomaticKeepAliveClientMixi
         objectBuilder: (v) {
           return TabWidget(
             isScrollable: true,
-            tabList: v.where((w) => w['dictType'] == 'NewsType').map<String>((m) => m['dictValue']).toList(),
-            tabPage: v.where((w) => w['dictType'] == 'NewsType').map((m) => ZixunView(m)).toList(),
+            tabList: v
+                .where((w) => w['dictType'] == 'NewsType')
+                .map<String>((m) => m['dictValue'])
+                .toList(),
+            tabPage: v
+                .where((w) => w['dictType'] == 'NewsType')
+                .map((m) => ZixunView(m))
+                .toList(),
           );
         },
       ),
@@ -84,11 +76,13 @@ class ZixunView extends StatefulWidget {
   final Map data;
 
   const ZixunView(this.data, {Key key}) : super(key: key);
+
   @override
   _ZixunViewState createState() => _ZixunViewState();
 }
 
-class _ZixunViewState extends State<ZixunView> with AutomaticKeepAliveClientMixin {
+class _ZixunViewState extends State<ZixunView>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     this.initData();
@@ -102,11 +96,53 @@ class _ZixunViewState extends State<ZixunView> with AutomaticKeepAliveClientMixi
 
   ///获取资讯信息列表
   var zixunDm = DataModel(hasNext: false);
+
   Future<int> apiNewsGetPageList({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/News/GetPageList',
       data: {"PageIndex": page, "Type": widget.data['dictKey']},
-      catchError: (v) => zixunDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultNews = [
+          {
+            'preview':
+                'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=资讯1',
+            'title': '默认标题1',
+            'content': '',
+          },
+          {
+            'preview':
+                'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=资讯2',
+            'title': '默认标题2',
+            'content': '',
+          },
+          {
+            'preview':
+                'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=资讯3',
+            'title': '默认标题3',
+            'content': '',
+          },
+          {
+            'preview':
+                'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=资讯1',
+            'title': '默认标题1',
+            'content': '',
+          },
+          {
+            'preview':
+                'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=资讯2',
+            'title': '默认标题2',
+            'content': '',
+          },
+          {
+            'preview':
+                'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=资讯3',
+            'title': '默认标题3',
+            'content': '',
+          },
+        ];
+        zixunDm.addList(defaultNews, isRef, defaultNews.length);
+      },
       success: (v) {
         zixunDm.addList(v['data'], isRef, v['total']);
       },
@@ -139,7 +175,8 @@ class _ZixunViewState extends State<ZixunView> with AutomaticKeepAliveClientMixi
             itemModelBuilder: (i, v) {
               return WidgetTap(
                 onTap: () {
-                  if (widget.data['dictKey'] == 105 || widget.data['dictKey'] == 106) {
+                  if (widget.data['dictKey'] == 105 ||
+                      widget.data['dictKey'] == 106) {
                     try {
                       jumpPage(
                         VideoApp(videoId: v['content'], data: v),
@@ -164,7 +201,8 @@ class _ZixunViewState extends State<ZixunView> with AutomaticKeepAliveClientMixi
                           height: 250,
                           fit: BoxFit.cover,
                         ),
-                        if (widget.data['dictKey'] == 105 || widget.data['dictKey'] == 106) 
+                        if (widget.data['dictKey'] == 105 ||
+                            widget.data['dictKey'] == 106)
                           Positioned.fill(
                             child: Container(
                               color: Colors.black38,
@@ -228,6 +266,7 @@ class ZixunInfoPage extends StatefulWidget {
   final Map data;
 
   const ZixunInfoPage({Key key, this.data}) : super(key: key);
+
   @override
   _ZixunInfoPageState createState() => _ZixunInfoPageState();
 }
@@ -246,15 +285,27 @@ class _ZixunInfoPageState extends State<ZixunInfoPage> {
 
   ///获取资讯详情
   var zixunInfoDm = DataModel(hasNext: false);
+
   Future<int> apiNewsGetEntity({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/News/GetEntity',
       data: {"id": widget.data['id']},
-      catchError: (v) => zixunInfoDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成默认数据
+        zixunInfoDm.object = {
+          'title': widget.data['title'] ?? '默认资讯标题',
+          'content': '这是默认的资讯内容。',
+          'preview':
+              'https://via.placeholder.com/400x300/CCCCCC/FFFFFF?text=默认资讯',
+        };
+        zixunInfoDm.setTime();
+      },
       success: (v) {
         zixunInfoDm.object = v['data'];
-        if(zixunInfoDm.object==null)zixunInfoDm.toError('暂无数据');else
-        zixunInfoDm.setTime();
+        if (zixunInfoDm.object == null)
+          zixunInfoDm.toError('暂无数据');
+        else
+          zixunInfoDm.setTime();
         print(zixunInfoDm.toJson());
       },
     );
@@ -267,7 +318,7 @@ class _ZixunInfoPageState extends State<ZixunInfoPage> {
     return ScaffoldWidget(
       appBar: buildTitle(
         context,
-        title: widget.data['title']??'1',
+        title: widget.data['title'] ?? '1',
         color: Colors.white,
       ),
       body: AnimatedSwitchBuilder(

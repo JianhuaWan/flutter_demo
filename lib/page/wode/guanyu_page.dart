@@ -84,7 +84,7 @@ class _GuanyuPageState extends State<GuanyuPage> {
             ),
             SizedBox(height: 11),
             MyText(
-              '内当家驻场版',
+              'flutter_app',
               size: 16,
               isBold: true,
               textAlign: TextAlign.center,

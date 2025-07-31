@@ -131,7 +131,28 @@ class AppProvider extends ChangeNotifier {
   Future<int> apiDataDictGetDropDownList() async {
     await Request.get(
       '/api/DataDict/GetDropDownList',
-      catchError: (v) => zidianDm.toError(v),
+      catchError: (v)  {
+      // 当请求失败时，手动生成几条默认数据
+      List<Map<String, dynamic>> defaultDictData = [
+      {
+      'dictType': 'NewsType',
+      'dictValue': 'tab1',
+      'dictKey': 1,
+      },
+      {
+      'dictType': 'NewsType',
+      'dictValue': 'tab2',
+      'dictKey': 2,
+      },
+      {
+      'dictType': 'NewsType',
+      'dictValue': 'tab3',
+      'dictKey': 3,
+      },
+      ];
+        zidianDm.object = defaultDictData;
+        zidianDm.setTime();
+  },
       success: (v) {
         zidianDm.object = v['data'];
         zidianDm.setTime();

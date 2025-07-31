@@ -1,23 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_bmflocation/bdmap_location_flutter_plugin.dart';
-// import 'package:flutter_bmflocation/flutter_baidu_location_android_option.dart';
-// import 'package:flutter_bmflocation/flutter_baidu_location_ios_option.dart';
-// import 'package:flutter_bmflocation/bdmap_location_flutter_plugin.dart' as blf;
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/page/home/loupan_page.dart';
 import 'package:kqsc/page/home_page.dart';
 import 'package:kqsc/page/my_page.dart';
 import 'package:kqsc/page/shopping_page.dart';
-import 'package:kqsc/page/video_page.dart';
-import 'package:kqsc/page/wode/xieyi_page.dart';
-import 'package:kqsc/page/xiaoxi_page.dart';
 import 'package:kqsc/page/zixun_page.dart';
-import 'package:kqsc/provider/chat_provider.dart';
 import 'package:kqsc/provider/provider_config.dart';
 import 'package:kqsc/widget/bnb_widget.dart';
 import 'package:paixs_utils/util/utils.dart';
@@ -29,8 +19,6 @@ import 'package:provider/provider.dart';
 import 'package:weibo_kit/weibo_kit.dart';
 import 'widget/tween_widget.dart';
 import 'widget/widgets.dart';
-// ignore: implementation_imports
-// ignore: implementation_imports
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,10 +63,10 @@ class MyApp extends StatelessWidget {
       toastPositions: StyledToastPosition.center,
       animDuration: Duration(milliseconds: 200),
       child: MaterialApp(
-        title: '内当家驻场版',
+        title: 'flutter_app',
         navigatorKey: navigatorKey,
         // showPerformanceOverlay: true,
-        // debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xffF6F6F6),
           primaryColor: Color(0xFF4A9DF6),
@@ -109,20 +97,13 @@ class _FlashPageState extends State<FlashPage> {
   }
 
   Future<void> init() async {
-    // setIsCanRunAnimation();
     await app.getDropDownList(false);
-    await getLocation();
     await userPro.getUserInfo();
     await app.apiDataDictGetDropDownList();
-    // await app.getLocalLocation();
-    // if (app.lo == null) {
-    // await getLocation();
     var isFtoApp = await userPro.isFirstTimeOpenApp();
     timer = Timer.periodic(Duration(seconds: 1), (v) async {
       flog(v.tick);
       if (v.tick == 1) {
-        // await Future.delayed(Duration(milliseconds: 500));
-        // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
       }
       if (v.tick == 3) {
         if (isFtoApp) {
@@ -155,9 +136,6 @@ class _FlashPageState extends State<FlashPage> {
         }
       }
     });
-    // } else {
-    //   flog('请获取位置信息');
-    // }
   }
 
   @override
@@ -194,7 +172,7 @@ class _FlashPageState extends State<FlashPage> {
                   delayed: 500,
                   curve: ElasticOutCurve(1),
                   child: Image.asset(
-                    'assets/img/l512.png',
+                    'assets/img/ic_launcher.png',
                     width: 106,
                     height: 106,
                   ),
@@ -210,7 +188,7 @@ class _FlashPageState extends State<FlashPage> {
                   delayed: 550,
                   curve: ElasticOutCurve(1),
                   child: MyText(
-                    '内当家',
+                    'flutter_app',
                     size: 16,
                     color: Colors.white,
                   ),
@@ -226,7 +204,7 @@ class _FlashPageState extends State<FlashPage> {
                   delayed: 600,
                   curve: ElasticOutCurve(1),
                   child: MyText(
-                    '现金补贴最高',
+                    '测试文本',
                     size: 20,
                     color: Colors.white,
                   ),
@@ -252,7 +230,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    this.initJPush();
     super.initState();
     WidgetsBinding.instance.addObserver(this);
   }
@@ -273,67 +250,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-  //初始化推送
-  void initJPush() async {
-    bool isLoginin = user != null;
-    // if (isLoginin) {
-    // MobpushPlugin.updatePrivacyPermissionStatus(true);
-    // if (Platform.isIOS) {
-    //   MobpushPlugin.setCustomNotification();
-    //   MobpushPlugin.setAPNsForProduction(true);
-    // }
-    // MobpushPlugin.getRegistrationId().then((Map<String, dynamic> ridMap) {
-    //   String regId = ridMap['res'].toString();
-    //   print('------>#### registrationId: ' + regId);
-    // });
-    // MobpushPlugin.addPushReceiver(
-    //   (v) {
-    //     Map<String, dynamic> eventMap = json.decode(v);
-    //     Map<String, dynamic> result = eventMap['result'];
-    //     int action = eventMap['action'];
-    //     flog(result);
-    //     switch (action) {
-    //       case 1:
-    //         showToast('您有一条新消息!');
-    //         break;
-    //       // case 2:
-    //       case 2:
-    //         var title = json.decode(result['extrasMap']['pushData'].toString())['title'];
-    //         var id = json.decode(result['extrasMap']['pushData'].toString())['Id'];
-    //         var type = json.decode(result['extrasMap']['pushData'].toString())['type'];
-    //         var url = json.decode(result['extrasMap']['pushData'].toString())['url'];
-    //         if (type == '2') {
-    //           jumpPage(VideoApp(videoId: url), isMoveBtm: true);
-    //         } else {
-    //           jumpPage(ZixunInfoPage(data: {'title': title, 'id': id}), isMoveBtm: true);
-    //         }
-    //         // switch (type) {
-    //         //   case "1":
-    //         //     jumpPage(ShopOrderDetail(id: id), isMoveBtm: true);
-    //         //     break;
-    //         //   case "2":
-    //         //     jumpPage(ShopOrderDetail(id: id), isMoveBtm: true);
-    //         //     break;
-    //         //   case "3":
-    //         //     jumpPage(ShopOrderDetail(id: id), isMoveBtm: true);
-    //         //     break;
-    //         // }
-    //         break;
-    //     }
-    //   },
-    //   (e) => flog(e.toString(), '失败'),
-    // );
-    // if (isLoginin) {
-    //   MobpushPlugin.setAlias(user.id).then((Map<String, dynamic> aliasMap) {
-    //     String res = aliasMap['res'];
-    //     String error = aliasMap['error'];
-    //     String errorCode = aliasMap['errorCode'];
-    //     flog(">>>>>>>>>>>>>>>>>>>>>>>>>>> setAlias -> res: $res error: $error errorCode: $errorCode");
-    //   });
-    // }
-    // }
   }
 
   @override
@@ -359,18 +275,11 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 children: <Widget>[
                   Stack(
                     children: [
-                      if (user != null)
                       HomePage(),
                     ],
                   ),
                   ZixunPage(),
                   ShoppingPage(),
-                  // im.HomePage(
-                  //   fun: (v){
-                  //     showToast(v.toString());
-                  //   },
-                  // ),
-                  // [MyPage(), MyPage2()][getTime() % 2],
                   MyPage(),
                 ],
               ),
@@ -465,49 +374,5 @@ class _UserXiayiState extends State<UserXiayi> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-}
-
-///第一次获取定位的时间
-DateTime lastPopTime;
-
-///获取定位
-Future getLocation() async {
-  // 点击返回键的操作
-  if (lastPopTime == null || DateTime.now().difference(lastPopTime) > Duration(seconds: 3)) {
-    lastPopTime = DateTime.now();
-    if (await requestPermission()) {
-      app.setNullLocation();
-      // BmapLocation.instance.listenLocation(mode: LocationAccuracy.High).listen((f) {
-      //   if (app.la == null) {
-      //     flog(f);
-      //     app.la = f.latLng.latitude.toString();
-      //     app.lo = f.latLng.longitude.toString();
-      //     app.province = f.province.toString();
-      //     app.city = f.city.toString();
-      //
-      //     ///百度定位回调有问题
-      //     var list = app.shengshiquDm.object.where((w) => w['name'].toString().contains(f.city)).toList();
-      //     app.cityCode = list.isEmpty ? '-1' : list.first['id'];
-      //     app.area = f.district.toString();
-      //     app.address = f.address.toString();
-      //     app.latLng = f.latLng;
-      //     app.setLocalLocation();
-      //     BmapLocation.instance.stop();
-      //   }
-      // });
-    }
-  } else {
-    lastPopTime = DateTime.now();
-  }
-}
-
-///定位权限
-Future<bool> requestPermission() async {
-  if ((await Permission.location.request()).isGranted) {
-    return true;
-  } else {
-    showToast('请开启定位权限!');
-    return false;
   }
 }

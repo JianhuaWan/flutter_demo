@@ -14,6 +14,7 @@ class BnbWidget extends StatefulWidget {
   final Function(int) callback;
 
   const BnbWidget({Key key, this.callback}) : super(key: key);
+
   @override
   _BnbWidgetState createState() => _BnbWidgetState();
 }
@@ -37,11 +38,10 @@ class _BnbWidgetState extends State<BnbWidget> {
           Container(
             child: Row(
               children: <Widget>[
-                buildBtb('首页', 0),
-                buildBtb('资讯', 1),
-                buildBtb('推荐', 2),
-                buildBtb('消息', 3),
-                buildBtb('我的', 4),
+                buildBtb('tab0', 0),
+                buildBtb('tab1', 1),
+                buildBtb('tab2', 2),
+                buildBtb('tab3', 3),
               ],
             ),
           ),
@@ -56,19 +56,8 @@ class _BnbWidgetState extends State<BnbWidget> {
         isElastic: true,
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          if (_index == 3 || _index == 2) {
-            if (user != null) {
-              widget.callback(_index);
-              app.changeBtmIndex(_index);
-            } else {
-              jumpPage(PassWordLogin(), isMoveBtm: true);
-              showToast('请先登录');
-              return;
-            }
-          } else {
-            widget.callback(_index);
-            app.changeBtmIndex(_index);
-          }
+          widget.callback(_index);
+          app.changeBtmIndex(_index);
         },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 8),
@@ -97,13 +86,9 @@ class _BnbWidgetState extends State<BnbWidget> {
                             'assets/img/dibu/tuijian1.png',
                           ][v == 2 ? 0 : 1],
                           [
-                            'assets/img/dibu/xiaoxi0.png',
-                            'assets/img/dibu/xiaoxi1.png',
-                          ][v == 3 ? 0 : 1],
-                          [
                             'assets/img/dibu/wode0.png',
                             'assets/img/dibu/wode1.png',
-                          ][v == 4 ? 0 : 1],
+                          ][v == 3 ? 0 : 1],
                         ][_index],
                         width: 24,
                         height: 24,
@@ -124,11 +109,14 @@ class _BnbWidgetState extends State<BnbWidget> {
                                       duration: Duration(milliseconds: 250),
                                       opacity: v == 0 ? 0 : 1,
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                        constraints: BoxConstraints(minWidth: 12, minHeight: 12),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 6, vertical: 2),
+                                        constraints: BoxConstraints(
+                                            minWidth: 12, minHeight: 12),
                                         alignment: Alignment.center,
                                         color: Color(0xffe95e58),
-                                        child: MyText(v, color: Colors.white, size: 10),
+                                        child: MyText(v,
+                                            color: Colors.white, size: 10),
                                       ),
                                     );
                                   },
@@ -142,7 +130,9 @@ class _BnbWidgetState extends State<BnbWidget> {
                   SizedBox(height: 4),
                   MyText(
                     text,
-                    color: _index == v ? Theme.of(context).primaryColor : Colors.black,
+                    color: _index == v
+                        ? Theme.of(context).primaryColor
+                        : Colors.black,
                     size: 10,
                   ),
                 ],

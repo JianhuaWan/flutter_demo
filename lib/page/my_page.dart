@@ -38,39 +38,39 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
   var caidanList1 = [
     {
-      'img': 'assets/img/wode_bangzhu.png',
-      'name': '帮助',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/wode_fensi.png',
-      'name': '粉丝',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
-    // {
-    //   'img': 'assets/img/wode_shangxueyuan.png',
-    //   'name': '商学院',
-    // },
     {
-      'img': 'assets/img/wode_baozhang.png',
-      'name': '保障',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
+    },
+    {
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
   ];
 
   var caidanList2 = [
     {
-      'img': 'assets/img/wode_shoucang.png',
-      'name': '收藏',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/wode_dengji.png',
-      'name': '身份等级',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/wode_zhaunshukf.png',
-      'name': '专属客服',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/wode_zhaunshukf.png',
-      'name': '专属客服',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
   ];
 
@@ -99,31 +99,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
       body: Selector<UserProvider, UserModel>(
         selector: (_, k) => k.userModel,
         builder: (_, v, view) {
-          // if (v == null) {
-          //   return Center(
-          //     child: WidgetTap(
-          //       isElastic: true,
-          //       onTap: () {
-          //         jumpPage(PassWordLogin(), isMoveBtm: true);
-          //         // CupertinoPageRoute(
-          //         //   builder: (_) {
-          //         //     return Container(
-          //         //       color: Colors.white,
-          //         //       child: SafeArea(top: false, child: p),
-          //         //     );
-          //         //   },
-          //         // ),
-          //       },
-          //       child: Container(
-          //         margin: EdgeInsets.symmetric(horizontal: 56),
-          //         alignment: Alignment.center,
-          //         height: 56,
-          //         color: Colors.red,
-          //         child: MyText('登录', color: Colors.white, size: 16),
-          //       ),
-          //     ),
-          //   );
-          // } else {
           return Stack(
             children: [
               buildBgView(),
@@ -148,19 +123,8 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                 padding: EdgeInsets.only(top: padd(context).top),
                 physics: BouncingScrollPhysics(),
               ),
-              if (user == null)
-                WidgetTap(
-                  onTap: () {
-                    jumpPage(PassWordLogin(), isMoveBtm: true);
-                    // jumpPage(YaoqingPage(), isMoveBtm: true);
-                  },
-                  child: Container(
-                    color: Colors.transparent,
-                  ),
-                ),
             ],
           );
-          // }
         },
       ),
     );
@@ -169,516 +133,10 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
   List<Widget> get item {
     return [
       buildItem1(20, 20),
-      // buildItem2(40, 40),
-      // buildItem3(60, 60),
-      // buildItem4(80, 80),
-      // buildItem5(100, 100),
       SizedBox(height: 10),
-      buildItem6(100, 100),
+      buildItem3(100, 100),
+      buildItem2(100, 100),
     ];
-  }
-
-  Widget buildItem6(double value, int delayed) {
-    return TweenWidget(
-      axis: Axis.vertical,
-      delayed: delayed,
-      value: value,
-      isOpacity: true,
-      curve: ElasticOutCurve(1),
-      child: Container(
-        margin: EdgeInsets.only(left: 17, right: 17, top: 6, bottom: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 6,
-              color: Color(0xffB0C2CC).withOpacity(0.3),
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MyText('我的客户', size: 14, isBold: true),
-            Divider(height: 24),
-            Selector<UserProvider, Map>(
-              selector: (_, k) => k.myKehuTongjiDm.object,
-              builder: (_, v, view) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 0));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已推荐', isBold: true),
-                            MyText(
-                              v['a'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 1));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已到访', isBold: true),
-                            MyText(
-                              v['c'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 2));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已认筹', isBold: true),
-                            MyText(
-                              v['e'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-            Divider(height: 24),
-            Selector<UserProvider, Map>(
-              selector: (_, k) => k.myKehuTongjiDm.object,
-              builder: (_, v, view) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 3));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已认购', isBold: true),
-                            MyText(
-                              v['f'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 4));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已签约', isBold: true),
-                            MyText(
-                              v['g'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 5));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已成交', isBold: true),
-                            MyText(
-                              v['h'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-            Divider(height: 24),
-            Selector<UserProvider, Map>(
-              selector: (_, k) => k.myKehuTongjiDm.object,
-              builder: (_, v, view) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(index: 6));
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // SizedBox(height: 15),
-                            MyText('已退房', isBold: true),
-                            MyText(
-                              v['i'] ?? '0',
-                              isBold: true,
-                              color: Color(
-                                0xffFD6369,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(child: SizedBox()),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(child: SizedBox()),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildItem5(double value, int delayed) {
-    return TweenWidget(
-      axis: Axis.vertical,
-      delayed: delayed,
-      value: value,
-      isOpacity: true,
-      curve: ElasticOutCurve(1),
-      child: Container(
-        margin: EdgeInsets.only(left: 17, right: 17, top: 6, bottom: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 6,
-              color: Color(0xffB0C2CC).withOpacity(0.3),
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MyText('我的权益', size: 14, isBold: true),
-            Divider(),
-            Selector<UserProvider, Map>(
-              selector: (_, k) => k.myQuanyiTongjiDm.object,
-              builder: (_, v, view) {
-                return Row(
-                  children: [
-                    // Expanded(
-                    //   child: WidgetTap(
-                    //     isElastic: true,
-                    //     onTap: () {
-                    //       jumpPage(QuanyiPage(
-                    //         title: '预发放',
-                    //       ));
-                    //     },
-                    //     child: Column(
-                    //       children: [
-                    //         SizedBox(height: 15),
-                    //         MyText('预发放', isBold: true),
-                    //         MyText(
-                    //           v['totalDeposits'] ?? '0.00',
-                    //           isBold: true,
-                    //           color: Color(0xffFD6369),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   height: 36,
-                    //   width: 1,
-                    //   margin: EdgeInsets.only(top: 15),
-                    //   color: Color(0xffDFDFDF),
-                    // ),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(QuanyiPage(title: '可提现'));
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(height: 15),
-                            MyText('可提现', isBold: true),
-                            AnimatedDigitWidget(
-                              controller: userPro.controller4,
-                              textStyle: TextStyle(color: Color(0xffFD6369), fontWeight: FontWeight.bold),
-                              fractionDigits: 2,
-                              enableDigitSplit: true,
-                            ),
-                            // MyText(
-                            //   v['totalDeposits'] ?? '0.00',
-                            //   isBold: true,
-                            //   color: Color(0xffFD6369),
-                            // ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 36,
-                      width: 1,
-                      margin: EdgeInsets.only(top: 15),
-                      color: Color(0xffDFDFDF),
-                    ),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(QuanyiPage(title: '实际发放'));
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(height: 15),
-                            MyText('实际发放', isBold: true),
-                            AnimatedDigitWidget(
-                              controller: userPro.controller5,
-                              textStyle: TextStyle(color: Color(0xffFD6369), fontWeight: FontWeight.bold),
-                              fractionDigits: 2,
-                              enableDigitSplit: true,
-                            ),
-                            // MyText(
-                            //   v['realDeposits'] ?? '0.00',
-                            //   isBold: true,
-                            //   color: Color(0xffFD6369),
-                            // ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildItem4(double value, int delayed) {
-    return TweenWidget(
-      axis: Axis.vertical,
-      delayed: delayed,
-      value: value,
-      isOpacity: true,
-      curve: ElasticOutCurve(1),
-      child: Container(
-        margin: EdgeInsets.only(left: 17, right: 17, top: 7, bottom: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 6,
-              color: Color(0xffB0C2CC).withOpacity(0.3),
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MyText('我的客户', size: 14, isBold: true),
-            SizedBox(height: 15),
-            Selector<UserProvider, Map>(
-              selector: (_, k) => k.myKehuTongjiDm.object,
-              builder: (_, v, view) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(isUser: true));
-                        },
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/img/wode_kf_yidaofan.png',
-                                width: 15,
-                                height: 15,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 5, right: 8),
-                                child: MyText('已到访', isBold: true),
-                              ),
-                              AnimatedDigitWidget(
-                                controller: userPro.controller1,
-                                textStyle: TextStyle(color: Colors.black54),
-                                fractionDigits: 0,
-                                enableDigitSplit: true,
-                              ),
-                              // MyText(v['c'] ?? '0', color: Colors.black54),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(isUser: true, index: 1));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/img/wode_kf_yirengou.png',
-                              width: 15,
-                              height: 15,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 5, right: 8),
-                              child: MyText('已认购', isBold: true),
-                            ),
-                            AnimatedDigitWidget(
-                              controller: userPro.controller2,
-                              textStyle: TextStyle(color: Colors.black54),
-                              fractionDigits: 0,
-                              enableDigitSplit: true,
-                            ),
-                            // MyText(v['f'] ?? '0', color: Colors.black54),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: WidgetTap(
-                        isElastic: true,
-                        onTap: () {
-                          jumpPage(KehuPage(isUser: true, index: 2));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/img/wode_kf_yiqueren.png',
-                              width: 15,
-                              height: 15,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 5, right: 8),
-                              child: MyText('已确认', isBold: true),
-                            ),
-                            AnimatedDigitWidget(
-                              controller: userPro.controller3,
-                              textStyle: TextStyle(color: Colors.black54),
-                              fractionDigits: 0,
-                              enableDigitSplit: true,
-                            ),
-                            // MyText(v['h'] ?? '0', color: Colors.black54),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   TweenWidget buildItem3(double value, int delayed) {
@@ -698,6 +156,156 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
             width: double.infinity,
             fit: BoxFit.cover,
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildItem1(double value, int delayed) {
+    return TweenWidget(
+      axis: Axis.vertical,
+      delayed: delayed,
+      value: value,
+      isOpacity: true,
+      curve: ElasticOutCurve(1),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: WidgetTap(
+                isElastic: true,
+                onTap: () {
+                  if (user == null) {
+                    jumpPage(PassWordLogin(), isMoveBtm: true);
+                  } else {
+                    jumpPage(ModifyUserInfo());
+                  }
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 17, top: 17),
+                      child: ClipOval(
+                        child: WrapperImage(
+                          width: 64,
+                          urlBuilder: () => user.portrait,
+                          height: 64,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: MyColumn(
+                        children: [
+                          SizedBox(height: 17),
+                          Row(
+                            children: [
+                              MyText(
+                                isNull(user, 'nickName', '登录/注册', true),
+                                size: 16,
+                                isBold: true,
+                                color: Colors.white,
+                              ),
+                              if (user != null) SizedBox(width: 5),
+                              if (user != null)
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(56),
+                                    color: Color(0xffF4CB5A),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 4),
+                                  child: MyText(
+                                    app.zidianDm.object.isNotEmpty
+                                        ? app.zidianDm.object
+                                            .where((w) =>
+                                                w['dictType'] == 'UserLevel')
+                                            .where((w) {
+                                            return w['dictKey'] ==
+                                                (user.userLevel == 0
+                                                    ? 1
+                                                    : user.userLevel);
+                                          }).first['dictValue']
+                                        : '未知身份',
+                                    color: Colors.white,
+                                    size: 12,
+                                    nullValue: '未知身份',
+                                    isBold: true,
+                                  ),
+                                ),
+                            ],
+                          ),
+                          SizedBox(height: 6),
+                          MyText(
+                            isNull(user, 'mobile', '登录后可体验更多服务', true),
+                            isOverflow: false,
+                            color: Colors.white,
+                          ),
+                          // if (user != null) MyText('邀请码：${user.inviteCode}', color: Colors.white),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Row(
+                  children: [
+                    WidgetTap(
+                      isElastic: true,
+                      onTap: () {
+                        jumpPage(SetupPage());
+                      },
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 17, horizontal: 8),
+                        child: Image.asset(
+                          'assets/img/wode_shezhi.png',
+                          width: 15,
+                          height: 15,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8)
+                  ],
+                ),
+                Spacer(),
+                WidgetTap(
+                  isElastic: true,
+                  onTap: () {
+                    jumpPage(YaoqingPage());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.horizontal(left: Radius.circular(56)),
+                    ),
+                    padding:
+                        EdgeInsets.only(top: 2, bottom: 2, left: 13, right: 16),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'assets/img/wode_tuiyou.png',
+                          width: 14,
+                          height: 14,
+                        ),
+                        SizedBox(width: 5),
+                        MyText(
+                          'btnClick',
+                          color: Theme.of(context).primaryColor,
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -727,12 +335,12 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyText('我的服务', size: 14, isBold: true),
+            MyText('标题', size: 14, isBold: true),
             SizedBox(height: 15),
             Column(
               children: [
                 Row(
-                  children: List.generate(3, (i) {
+                  children: List.generate(caidanList1.length, (i) {
                     return Expanded(
                       child: WidgetTap(
                         isElastic: true,
@@ -771,7 +379,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                 ),
                 SizedBox(height: 15),
                 Row(
-                  children: List.generate(caidanList2.length - 1, (i) {
+                  children: List.generate(caidanList2.length, (i) {
                     return Expanded(
                       child: WidgetTap(
                         isElastic: true,
@@ -784,26 +392,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                               jumpPage(DengjiPage());
                               break;
                             default:
-
-                              ///获取专属客服
-                              await Request.get(
-                                '/api/User/Support',
-                                isLoading: true,
-                                catchError: (v) => showToast(v),
-                                success: (v) {
-                                  if (v['data'] != null) {
-                                    showGeneralDialog(
-                                      context: context,
-                                      barrierColor: Colors.transparent,
-                                      pageBuilder: (_, __, ___) {
-                                        return ZhuanShuKefu(v['data']);
-                                      },
-                                    );
-                                  } else {
-                                    showToast('暂无客服');
-                                  }
-                                },
-                              );
                               break;
                           }
                         },
@@ -824,158 +412,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                 ),
               ],
             )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildItem1(double value, int delayed) {
-    return TweenWidget(
-      axis: Axis.vertical,
-      delayed: delayed,
-      value: value,
-      isOpacity: true,
-      curve: ElasticOutCurve(1),
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: WidgetTap(
-                isElastic: true,
-                onTap: () {
-                  jumpPage(ModifyUserInfo());
-                },
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 17, top: 17),
-                      child: ClipOval(
-                        child: WrapperImage(
-                          width: 64,
-                          urlBuilder: () => user.portrait,
-                          height: 64,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: MyColumn(
-                        children: [
-                          SizedBox(height: 17),
-                          Row(
-                            children: [
-                              MyText(
-                                isNull(user, 'nickName', '登录/注册', true),
-                                size: 16,
-                                isBold: true,
-                                color: Colors.white,
-                              ),
-                              if (user != null) SizedBox(width: 5),
-                              if (user != null)
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(56),
-                                    color: Color(0xffF4CB5A),
-                                  ),
-                                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                                  child: MyText(
-                                    app.zidianDm.object.isNotEmpty
-                                        ? app.zidianDm.object.where((w) => w['dictType'] == 'UserLevel').where((w) {
-                                            return w['dictKey'] == (user.userLevel == 0 ? 1 : user.userLevel);
-                                          }).first['dictValue']
-                                        : '未知身份',
-                                    // {
-                                    //   '1': '初级经纪人',
-                                    //   '2': '初级经纪人',
-                                    //   '3': '初级经纪人',
-                                    // }[user?.userLevel],
-                                    color: Colors.white,
-                                    size: 12,
-                                    nullValue: '未知身份',
-                                    isBold: true,
-                                  ),
-                                ),
-                            ],
-                          ),
-                          SizedBox(height: 6),
-                          MyText(
-                            isNull(user, 'mobile', '登录后可体验更多服务', true),
-                            isOverflow: false,
-                            color: Colors.white,
-                          ),
-                          // if (user != null) MyText('邀请码：${user.inviteCode}', color: Colors.white),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    // WidgetTap(
-                    //   isElastic: true,
-                    //   child: Padding(
-                    //     padding: EdgeInsets.symmetric(vertical: 17, horizontal: 8),
-                    //     child: Image.asset(
-                    //       'assets/img/wode_kefu.png',
-                    //       width: 15,
-                    //       height: 15,
-                    //     ),
-                    //   ),
-                    // ),
-                    WidgetTap(
-                      isElastic: true,
-                      onTap: () {
-                        jumpPage(SetupPage());
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 17, horizontal: 8),
-                        child: Image.asset(
-                          'assets/img/wode_shezhi.png',
-                          width: 15,
-                          height: 15,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8)
-                  ],
-                ),
-                Spacer(),
-                WidgetTap(
-                  isElastic: true,
-                  onTap: () {
-                    jumpPage(YaoqingPage());
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.horizontal(left: Radius.circular(56)),
-                    ),
-                    padding: EdgeInsets.only(top: 2, bottom: 2, left: 13, right: 16),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/img/wode_tuiyou.png',
-                          width: 14,
-                          height: 14,
-                        ),
-                        SizedBox(width: 5),
-                        MyText(
-                          '推荐好友',
-                          color: Theme.of(context).primaryColor,
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
           ],
         ),
       ),
@@ -1011,11 +447,13 @@ class ZhuanShuKefu extends StatefulWidget {
   final Map data;
 
   const ZhuanShuKefu(this.data, {Key key}) : super(key: key);
+
   @override
   _ZhuanShuKefuState createState() => _ZhuanShuKefuState();
 }
 
-class _ZhuanShuKefuState extends State<ZhuanShuKefu> with TickerProviderStateMixin {
+class _ZhuanShuKefuState extends State<ZhuanShuKefu>
+    with TickerProviderStateMixin {
   TextEditingController con = TextEditingController();
 
   @override
@@ -1046,7 +484,8 @@ class _ZhuanShuKefuState extends State<ZhuanShuKefu> with TickerProviderStateMix
                       SizedBox(height: 76 / 2 + 4),
                       MyText('您的专属客服', size: 18, isBold: true),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                         child: MyText(
                           '微信号：${widget.data['weChat']}',
                           isOverflow: false,
