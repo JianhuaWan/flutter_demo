@@ -56,7 +56,7 @@ class _BaozhangPageState extends State<BaozhangPage> {
                 ),
               ),
               Image.asset(
-                'assets/img/bz_img1.png',
+                'assets/img/ic_launcher.png',
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

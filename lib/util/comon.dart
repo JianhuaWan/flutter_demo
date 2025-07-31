@@ -30,29 +30,25 @@ class ComonUtil {
     var packageInfo = await PackageInfo.fromPlatform();
     app.packageInfo = packageInfo;
     if (Platform.isIOS) return;
-    await Request.get(
-      '/api/File/Upgrade',
-      isLoading: isToast,
-      data: {"type":"2"},
-      success: (v) {
-        v = v['data'];
-        if (int.parse(v['uNumber']) > int.parse(packageInfo.buildNumber)) {
-          showGeneralDialog(
-            context: context,
-            barrierColor: Colors.transparent,
-            pageBuilder: (_, __, ___) {
-              return UpappWidget(
-                v['remark'],
-                v['fileUrl'],
-                v['version'],
-                packageInfo.version,
-              );
-            },
-          );
-        } else {
-          if (isToast) showToast('已是最新版');
-        }
-      },
-    );
+    await Request.get('/api/File/Upgrade',
+        isLoading: isToast, data: {"type": "2"}, success: (v) {
+      v = v['data'];
+      if (int.parse(v['uNumber']) > int.parse(packageInfo.buildNumber)) {
+        showGeneralDialog(
+          context: context,
+          barrierColor: Colors.transparent,
+          pageBuilder: (_, __, ___) {
+            return UpappWidget(
+              v['remark'],
+              v['fileUrl'],
+              v['version'],
+              packageInfo.version,
+            );
+          },
+        );
+      } else {
+        if (isToast) showToast('已是最新版');
+      }
+    });
   }
 }

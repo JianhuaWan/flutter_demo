@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:flutter_app/page/video_page.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/my_custom_scroll.dart';
@@ -175,19 +174,7 @@ class _ZixunViewState extends State<ZixunView>
             itemModelBuilder: (i, v) {
               return WidgetTap(
                 onTap: () {
-                  if (widget.data['dictKey'] == 105 ||
-                      widget.data['dictKey'] == 106) {
-                    try {
-                      jumpPage(
-                        VideoApp(videoId: v['content'], data: v),
-                        isMoveBtm: true,
-                      );
-                    } catch (e) {
-                      showToast('暂无视频');
-                    }
-                  } else {
                     jumpPage(ZixunInfoPage(data: v));
-                  }
                 },
                 child: TweenWidget(
                   axis: Axis.vertical,

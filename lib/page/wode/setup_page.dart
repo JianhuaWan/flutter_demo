@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widget/upapp_widget.dart';
 
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/page/wode/xieyi_page.dart';
@@ -197,10 +198,21 @@ class _SetupPageState extends State<SetupPage> {
                 isShowDivider: false,
                 titleColor: Color(0xff666666),
                 selectoColor: Color(0xff666666),
-                selectoText: 'V${app.packageInfo.version}',
+                selectoText: 'V${app.packageInfo?.version ?? '1.0.2'}',
                 selectoOnTap: () async {
-                  await ComonUtil.checkUpdateApp(true);
-                  // showToast('已是最新版～');
+                  // await ComonUtil.checkUpdateApp(true);
+                  showGeneralDialog(
+                    context: context,
+                    barrierColor: Colors.transparent,
+                    pageBuilder: (_, __, ___) {
+                      return UpappWidget(
+                        'content',
+                        'https://ar-oss-test.toptechim.com/third-party-app/0d2cce73-2feb-41f6-9a9f-35d248f04ef8.apk?x-oss-date\u003d20250730T064517Z\u0026x-oss-expires\u003d604800\u0026x-oss-signature-version\u003dOSS4-HMAC-SHA256\u0026x-oss-credential\u003dLTAI5tQw8KuvLyS1DT1b5cwQ%2F20250730%2Fcn-guangzhou%2Foss%2Faliyun_v4_request\u0026x-oss-signature\u003d2f0b66c54cf9ba79b691b179c56595a0954465de7746db19732845cb5eb1e409',
+                        'v2.0.0',
+                        '',
+                      );
+                    },
+                  );
                 },
               ),
             ),

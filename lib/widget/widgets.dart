@@ -9,7 +9,6 @@ import 'package:flutter_app/page/home/pinpai_page.dart';
 import 'package:flutter_app/page/home/renqibang_page.dart';
 import 'package:flutter_app/page/home/sunpan_page.dart';
 import 'package:flutter_app/page/home/xiaoshoubang_page.dart';
-import 'package:flutter_app/page/video_page.dart';
 import 'package:flutter_app/view/views.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:paixs_utils/util/utils.dart';
@@ -740,14 +739,6 @@ class _LunboWidgetState extends State<LunboWidget> with TickerProviderStateMixin
                       child: WidgetTap(
                         isElastic: true,
                         onTap: () {
-                          jumpPage(
-                            VideoApp(
-                              videoId: data[i]['fileUrl'],
-                              // videoId:'https://pull-hls-f11.douyincdn.com/stage/stream-108850429236084837_or4.m3u8',
-                              isPlay: true,
-                            ),
-                            isMoveBtm: true,
-                          );
                         },
                         child: Icon(
                           Icons.play_circle_fill_rounded,

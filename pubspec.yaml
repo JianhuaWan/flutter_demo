@@ -106,7 +106,6 @@ flutter:
   assets:
     - package/paixs_utils/assets/svg/
     - assets/img/
-    - assets/svg/
     - data/province.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

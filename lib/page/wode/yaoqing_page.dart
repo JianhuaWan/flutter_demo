@@ -284,18 +284,17 @@ class _YaoqingPageState extends State<YaoqingPage> {
                               SizedBox(height: 16),
                               Image.asset(
                                 [
-                                  'assets/img/yaoqing_wx.png',
-                                  'assets/img/yapqing_pyq.png',
-                                  // 'assets/img/yaoqing_qq.png',
-                                  'assets/img/yaoqing_wb.png',
-                                  'assets/img/yaoqing_save.png',
+                                  'assets/img/yaoqing_qq.png',
+                                  'assets/img/yaoqing_qq.png',
+                                  'assets/img/yaoqing_qq.png',
+                                  'assets/img/yaoqing_qq.png',
                                 ][i],
                                 width: 42,
                                 height: 42,
                               ),
                               SizedBox(height: 8),
                               MyText(
-                                ['微信', '朋友圈', '微博', '保存'][i],
+                                ['item1', 'item2', 'item3', 'save'][i],
                                 size: 12,
                               ),
                               SizedBox(height: 16),

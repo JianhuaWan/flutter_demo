@@ -21,24 +21,24 @@ class ShangxueyuanPage extends StatefulWidget {
 class _ShangxueyuanPageState extends State<ShangxueyuanPage> {
   var caidanList = [
     {
-      'img': 'assets/img/shangxueyuan_icon1.png',
-      'name': '平台介绍',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/shangxueyuan_icon2.png',
-      'name': '房产知识',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/shangxueyuan_icon3.png',
-      'name': '要点必看',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/shangxueyuan_icon4.png',
-      'name': '干货实战',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
     {
-      'img': 'assets/img/shangxueyuan_icon5.png',
-      'name': '学习记录',
+      'img': 'assets/img/yaoqing_qq.png',
+      'name': 'test',
     },
   ];
 

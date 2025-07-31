@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_app/page/home/loupan_page.dart';
 import 'package:flutter_app/page/home/wanqu_page.dart';
 import 'package:flutter_app/page/shaixuan_page.dart';
-import 'package:flutter_app/page/video_page.dart';
 import 'package:flutter_app/page/zixun_page.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:flutter_app/provider/provider_config.dart';
@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage>
     await this.apiNewsGetPageList();
     await this.getPageList(isRef: true);
     await Future.delayed(Duration(milliseconds: 2000));
-    await ComonUtil.checkUpdateApp();
 
     ///是否第一次分享app
     var isFtsApp = await userPro.isFirstTimeShareApp();
@@ -600,14 +599,7 @@ class _HomePageState extends State<HomePage>
                 WidgetTap(
                   isElastic: true,
                   onTap: () {
-                    if (list[0]['content'].toString().contains('mp4')) {
-                      jumpPage(
-                        VideoApp(videoId: list[0]['content'], data: list[0]),
-                        isMoveBtm: true,
-                      );
-                    } else {
                       jumpPage(ZixunInfoPage(data: list[0]));
-                    }
                   },
                   child: ZixunWidget(data: list[0]),
                 ),
@@ -671,6 +663,7 @@ class _ShareAppUiState extends State<ShareAppUi> with TickerProviderStateMixin {
                     onTap: () async {
                       close();
                       userPro.addFirstTimeShareAppFlag();
+                      showToast('onclick');
                     },
                     child: Stack(
                       alignment: Alignment.center,
@@ -680,7 +673,7 @@ class _ShareAppUiState extends State<ShareAppUi> with TickerProviderStateMixin {
                           height: 37,
                         ),
                         MyText(
-                          '一键分享',
+                          '测试版本',
                           size: 15,
                           color: Colors.white,
                         ),

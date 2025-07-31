@@ -32,7 +32,19 @@ class _GuanyuPageState extends State<GuanyuPage> {
     await Request.get(
       '/api/Protocol/GetProtocolType',
       data: {"type": "10"},
-      catchError: (v) => xieyiDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        Map<String, dynamic> defaultProtocolData = {
+          'title': '关于我们',
+          'content': '<p>欢迎使用我们的应用程序。我们致力于为用户提供最优质的服务和体验。</p>'
+              '<p>我们的团队由一群充满激情和创造力的专业人士组成，专注于技术创新和用户体验优化。</p>'
+              '<p>如果您有任何问题或建议，请随时通过客服渠道与我们联系。</p>',
+          'version': 'V${app.packageInfo.version}',
+          'updateTime': DateTime.now().toIso8601String(),
+        };
+        xieyiDm.object = defaultProtocolData;
+        xieyiDm.setTime();
+      },
       success: (v) {
         xieyiDm.object = v['data'];
         xieyiDm.setTime();
@@ -78,7 +90,7 @@ class _GuanyuPageState extends State<GuanyuPage> {
         child: Column(
           children: [
             Image.asset(
-              'assets/img/logo.png',
+              'assets/img/ic_launcher.png',
               width: 70,
               height: 70,
             ),
