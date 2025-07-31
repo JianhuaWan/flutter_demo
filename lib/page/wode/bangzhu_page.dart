@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/util/http.dart';
-import 'package:kqsc/widget/no_sliding_return.dart';
-import 'package:kqsc/widget/tab_widget.dart';
+import 'package:flutter_app/util/http.dart';
+import 'package:flutter_app/widget/no_sliding_return.dart';
+import 'package:flutter_app/widget/tab_widget.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
 
 class BangzhuPage extends StatefulWidget {
   @override

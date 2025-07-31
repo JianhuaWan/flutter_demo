@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kqsc/page/home/city_selecto.dart';
-import 'package:kqsc/page/home/sousuo_page.dart';
-import 'package:kqsc/provider/app_provider.dart';
+import 'package:flutter_app/page/home/city_selecto.dart';
+import 'package:flutter_app/page/home/sousuo_page.dart';
+import 'package:flutter_app/provider/app_provider.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/views.dart';

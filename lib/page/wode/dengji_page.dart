@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/page/wode/dengji_item.dart';
-import 'package:kqsc/widget/no_sliding_return.dart';
-import 'package:kqsc/widget/tab_widget.dart';
+import 'package:flutter_app/page/wode/dengji_item.dart';
+import 'package:flutter_app/widget/no_sliding_return.dart';
+import 'package:flutter_app/widget/tab_widget.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';

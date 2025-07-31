@@ -1,7 +1,7 @@
-import 'package:kqsc/model/user_model.dart';
-import 'package:kqsc/provider/chat_provider.dart';
-import 'package:kqsc/provider/shoping_pro.dart';
-import 'package:kqsc/provider/user_provider.dart';
+import 'package:flutter_app/model/user_model.dart';
+import 'package:flutter_app/provider/chat_provider.dart';
+import 'package:flutter_app/provider/shoping_pro.dart';
+import 'package:flutter_app/provider/user_provider.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';

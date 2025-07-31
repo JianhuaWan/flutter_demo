@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/widget/tween_widget.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:paixs_utils/widget/custom_scroll_physics.dart';
 import 'package:paixs_utils/widget/route.dart';
 

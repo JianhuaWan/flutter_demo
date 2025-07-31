@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:kqsc/widget/tween_widget.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:open_file/open_file.dart';
 import 'package:paixs_utils/config/net/api.dart';
 import 'package:paixs_utils/util/utils.dart';

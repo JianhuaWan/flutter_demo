@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/util/comon.dart';
+import 'package:flutter_app/provider/provider_config.dart';
 import 'package:paixs_utils/config/net/api.dart';
 import 'package:paixs_utils/config/net/pgyer_api.dart';
 import 'package:paixs_utils/model/data_model.dart';

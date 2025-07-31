@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:kqsc/util/http.dart';
+import 'package:flutter_app/util/http.dart';
 import 'package:package_info/package_info.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';

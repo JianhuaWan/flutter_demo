@@ -4,17 +4,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/page/home_page.dart';
-import 'package:kqsc/page/my_page.dart';
-import 'package:kqsc/page/shopping_page.dart';
-import 'package:kqsc/page/zixun_page.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/widget/bnb_widget.dart';
+import 'package:flutter_app/page/home_page.dart';
+import 'package:flutter_app/page/my_page.dart';
+import 'package:flutter_app/page/shopping_page.dart';
+import 'package:flutter_app/page/zixun_page.dart';
+import 'package:flutter_app/provider/provider_config.dart';
+import 'package:flutter_app/widget/bnb_widget.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:weibo_kit/weibo_kit.dart';
 import 'widget/tween_widget.dart';
@@ -154,7 +153,7 @@ class _FlashPageState extends State<FlashPage> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/img/qidongtu.png',
+              'assets/img/baozhang.png',
               fit: BoxFit.cover,
             ),
           ),

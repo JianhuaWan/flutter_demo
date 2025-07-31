@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/widget/my_custom_scroll.dart';
-import 'package:kqsc/widget/no_sliding_return.dart';
-import 'package:kqsc/widget/tab_widget.dart';
-import 'package:kqsc/widget/tween_widget.dart';
-import 'package:kqsc/widget/widgets.dart';
+import 'package:flutter_app/widget/my_custom_scroll.dart';
+import 'package:flutter_app/widget/no_sliding_return.dart';
+import 'package:flutter_app/widget/tab_widget.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/image.dart';
 import 'package:paixs_utils/widget/mylistview.dart';

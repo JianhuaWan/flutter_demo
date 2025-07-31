@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/page/home/loupan_page.dart';
-import 'package:kqsc/util/http.dart';
-import 'package:kqsc/view/views.dart';
-import 'package:kqsc/widget/my_custom_scroll.dart';
-import 'package:kqsc/widget/tween_widget.dart';
-import 'package:kqsc/widget/widgets.dart';
+import 'package:flutter_app/page/home/loupan_page.dart';
+import 'package:flutter_app/util/http.dart';
+import 'package:flutter_app/view/views.dart';
+import 'package:flutter_app/widget/my_custom_scroll.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';

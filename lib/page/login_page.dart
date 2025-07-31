@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/main.dart';
-import 'package:kqsc/model/user_model.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/util/http.dart';
+import 'package:flutter_app/main.dart';
+import 'package:flutter_app/model/user_model.dart';
+import 'package:flutter_app/provider/provider_config.dart';
+import 'package:flutter_app/util/http.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/route.dart';

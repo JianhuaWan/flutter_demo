@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/widget/lazy_data_table.dart' as paixs;
+import 'package:flutter_app/widget/lazy_data_table.dart' as paixs;
 import 'package:lazy_data_table/lazy_data_table.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';

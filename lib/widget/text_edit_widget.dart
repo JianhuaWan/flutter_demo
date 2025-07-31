@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/view/views.dart';
+import 'package:flutter_app/view/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
 
 class TextEditWidget extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/widget/tween_widget.dart';
-import 'package:kqsc/widget/widgets.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/views.dart';
 

@@ -1,11 +1,10 @@
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/util/http.dart';
-import 'package:kqsc/view/views.dart';
-import 'package:kqsc/widget/tween_widget.dart';
-import 'package:kqsc/widget/widgets.dart';
+import 'package:flutter_app/provider/provider_config.dart';
+import 'package:flutter_app/util/http.dart';
+import 'package:flutter_app/view/views.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/widgets.dart';
 import 'package:package_info/package_info.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mylistview.dart';

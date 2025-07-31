@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/util/http.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';

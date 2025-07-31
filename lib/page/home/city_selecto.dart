@@ -2,12 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kqsc/main.dart';
-import 'package:kqsc/model/phone_country_code_data.dart';
-import 'package:kqsc/provider/app_provider.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/view/views.dart';
-import 'package:kqsc/widget/tween_widget.dart';
+import 'package:flutter_app/model/phone_country_code_data.dart';
+import 'package:flutter_app/provider/app_provider.dart';
+import 'package:flutter_app/provider/provider_config.dart';
+import 'package:flutter_app/view/views.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';

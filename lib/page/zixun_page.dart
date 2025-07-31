@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/page/video_page.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/util/http.dart';
-import 'package:kqsc/widget/my_custom_scroll.dart';
-import 'package:kqsc/widget/tab_widget.dart';
-import 'package:kqsc/widget/tween_widget.dart';
+import 'package:flutter_app/page/video_page.dart';
+import 'package:flutter_app/provider/provider_config.dart';
+import 'package:flutter_app/util/http.dart';
+import 'package:flutter_app/widget/my_custom_scroll.dart';
+import 'package:flutter_app/widget/tab_widget.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';
 import 'package:paixs_utils/widget/image.dart';

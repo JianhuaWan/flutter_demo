@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:kqsc/provider/provider_config.dart';
-import 'package:kqsc/view/views.dart';
+import 'package:flutter_app/provider/provider_config.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
 import 'package:paixs_utils/widget/mytext.dart';

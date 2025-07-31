@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/util/http.dart';
+import 'package:flutter_app/util/http.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';
-import 'package:paixs_utils/widget/image.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/route.dart';

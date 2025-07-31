@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kqsc/widget/flutter_luban.dart';
+import 'package:flutter_app/widget/flutter_luban.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';

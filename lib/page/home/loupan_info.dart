@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kqsc/widget/no_sliding_return.dart';
-import 'package:kqsc/widget/tab_link_widget.dart';
-import 'package:kqsc/widget/tween_widget.dart';
-import 'package:kqsc/widget/widgets.dart';
+import 'package:flutter_app/widget/no_sliding_return.dart';
+import 'package:flutter_app/widget/tab_link_widget.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';

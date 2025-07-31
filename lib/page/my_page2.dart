@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/page/wode/kehu_page.dart';
-import 'package:kqsc/page/wode/setup_page.dart';
-import 'package:kqsc/widget/tween_widget.dart';
-import 'package:kqsc/widget/widgets.dart';
+import 'package:flutter_app/page/wode/kehu_page.dart';
+import 'package:flutter_app/page/wode/setup_page.dart';
+import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/image.dart';
 import 'package:paixs_utils/widget/mylistview.dart';

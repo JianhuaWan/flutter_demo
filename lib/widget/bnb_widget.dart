@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:kqsc/page/login_page.dart';
-import 'package:kqsc/page/wode/shiming_page.dart';
-import 'package:kqsc/provider/app_provider.dart';
-import 'package:kqsc/provider/chat_provider.dart';
-import 'package:kqsc/provider/provider_config.dart';
+import 'package:flutter_app/provider/app_provider.dart';
+import 'package:flutter_app/provider/chat_provider.dart';
+import 'package:flutter_app/provider/provider_config.dart';
 import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
 import 'package:provider/provider.dart';
 
@@ -78,16 +74,16 @@ class _BnbWidgetState extends State<BnbWidget> {
                             'assets/img/dibu/home1.png',
                           ][v == 0 ? 0 : 1],
                           [
-                            'assets/img/dibu/zixun0.png',
-                            'assets/img/dibu/zixun1.png',
+                            'assets/img/dibu/home0.png',
+                            'assets/img/dibu/home1.png',
                           ][v == 1 ? 0 : 1],
                           [
-                            'assets/img/dibu/tuijian0.png',
-                            'assets/img/dibu/tuijian1.png',
+                            'assets/img/dibu/home0.png',
+                            'assets/img/dibu/home1.png',
                           ][v == 2 ? 0 : 1],
                           [
-                            'assets/img/dibu/wode0.png',
-                            'assets/img/dibu/wode1.png',
+                            'assets/img/dibu/home0.png',
+                            'assets/img/dibu/home1.png',
                           ][v == 3 ? 0 : 1],
                         ][_index],
                         width: 24,
