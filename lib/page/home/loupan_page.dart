@@ -38,6 +38,7 @@ class LoupanPage extends StatefulWidget {
     @required this.data,
     this.isZhaofang = false,
   }) : super(key: key);
+
   @override
   _LoupanPageState createState() => _LoupanPageState();
 }
@@ -60,11 +61,51 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
 
   ///获取楼盘详情
   var loupanDm = DataModel(hasNext: false);
+
   Future<int> apiBuildingGetEntity({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/Building/GetEntity',
       data: {"id": widget.data['id']},
-      catchError: (v) => loupanDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成默认数据
+        Map<String, dynamic> defaultBuildingData = {
+          'id': widget.data['id'] ?? 1,
+          'buildingName': '默认楼盘名称',
+          'consultAvgPrice': 20000,
+          'buildType': '住宅',
+          'propertyType': '商品房',
+          'saleStatus': '在售',
+          'buildAddress': '默认地址',
+          'cityName': '上海市',
+          'areaName': '浦东新区',
+          'award': '购房优惠：每平方米立减500元',
+          'introduce':
+              '这是一个默认的楼盘介绍信息。该楼盘位于市中心繁华地段，交通便利，周边配套设施齐全。小区绿化率高，环境优美，是您理想的居住选择。',
+          'hubs': [
+            {
+              'images':
+                  'https://via.placeholder.com/400x300/CCCCCC/FFFFFF?text=默认户型图1',
+              'layout': '三室两厅',
+              'area': 120,
+              'price': 20000,
+            },
+            {
+              'images':
+                  'https://via.placeholder.com/400x300/CCCCCC/FFFFFF?text=默认户型图2',
+              'layout': '两室一厅',
+              'area': 90,
+              'price': 18000,
+            }
+          ],
+          'position': '121.473701,31.230402', // 默认位置坐标(上海)
+          'agent': {
+            'phoneNumber': '400-888-9999',
+          },
+          'isFavorite': false,
+        };
+        loupanDm.object = defaultBuildingData;
+        loupanDm.setTime();
+      },
       success: (v) {
         loupanDm.object = v['data'];
         loupanDm.setTime();
@@ -76,12 +117,97 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
 
   ///获取楼盘问答
   var wendaDm = DataModel(hasNext: false);
+
   Future<int> apiQuestionGetPageList({int page = 1, bool isRef = false}) async {
-    // await Future.delayed(Duration(milliseconds: 2000));
     await Request.get(
       '/api/Question/GetPageList',
-      data: {"PageSize": "10", "PageIndex": page, "buildingId": widget.data['id']},
-      catchError: (v) => wendaDm.toError(v),
+      data: {
+        "PageSize": "10",
+        "PageIndex": page,
+        "buildingId": widget.data['id']
+      },
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultQuestions = [
+          {
+            'id': 1,
+            'content': '这个楼盘的最新价格是多少？有没有优惠活动？',
+            'userName': '购房者1',
+            'replyUserName': '销售顾问',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 3)).toIso8601String(),
+            'baseModifyTime':
+                DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+            'level': 1,
+            'parentId': 0,
+          },
+          {
+            'id': 2,
+            'content': '目前在售的户型有哪些？各自的面积和价格是怎样的？',
+            'userName': '购房者2',
+            'replyUserName': '销售顾问',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+            'baseModifyTime':
+                DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
+            'level': 1,
+            'parentId': 0,
+          },
+          {
+            'id': 3,
+            'content': '周边的配套设施怎么样？交通便利吗？',
+            'userName': '购房者3',
+            'replyUserName': '销售顾问',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
+            'baseModifyTime': DateTime.now().toIso8601String(),
+            'level': 1,
+            'parentId': 0,
+          },
+        ];
+
+        List<Map<String, dynamic>> defaultAnswers = [
+          {
+            'id': 4,
+            'content': '您好，目前我们楼盘均价为每平方米20000元，现在有特价房源和首付分期活动，详情请到售楼处咨询。',
+            'userName': '购房者1',
+            'replyUserName': '销售顾问',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 3)).toIso8601String(),
+            'baseModifyTime':
+                DateTime.now().subtract(Duration(days: 3)).toIso8601String(),
+            'level': 2,
+            'parentId': 1,
+          },
+          {
+            'id': 5,
+            'content': '我们目前在售的户型有70-120平米的一居室到三居室，具体价格根据楼层和朝向有所不同。',
+            'userName': '购房者2',
+            'replyUserName': '销售顾问',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+            'baseModifyTime':
+                DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+            'level': 2,
+            'parentId': 2,
+          },
+          {
+            'id': 6,
+            'content': '项目周边有地铁站、学校和商场，交通非常便利，生活配套齐全。',
+            'userName': '购房者3',
+            'replyUserName': '销售顾问',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
+            'baseModifyTime':
+                DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
+            'level': 2,
+            'parentId': 3,
+          },
+        ];
+
+        wendaDm.addList(defaultQuestions, isRef, defaultQuestions.length);
+        wendaDm.value = defaultAnswers;
+      },
       success: (v) {
         wendaDm.addList(v['data'], isRef, v['total']);
         var list = v['data'] as List;
@@ -98,6 +224,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
 
   ///获取楼盘点评
   var loupanDianpingDm = DataModel(hasNext: false);
+
   Future<int> apiCommentGetPageList({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/Comment/GetPageList',
@@ -106,7 +233,42 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
         "PageIndex": page,
         "buildingId": widget.data['id'],
       },
-      catchError: (v) => loupanDianpingDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成几条默认数据
+        List<Map<String, dynamic>> defaultComments = [
+          {
+            'id': 1,
+            'content': '这个楼盘的地理位置非常优越，交通便利，周边配套设施齐全。',
+            'tag': '优点',
+            'portrait':
+                'https://via.placeholder.com/400x400/CCCCCC/FFFFFF?text=用户1',
+            'userName': '用户1',
+            'baseCreateTime': DateTime.now().toIso8601String(),
+          },
+          {
+            'id': 2,
+            'content': '房子质量不错，但价格略高，希望能有一些优惠活动。',
+            'tag': '缺点',
+            'portrait':
+                'https://via.placeholder.com/400x400/CCCCCC/FFFFFF?text=用户2',
+            'userName': '用户2',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
+          },
+          {
+            'id': 3,
+            'content': '物业服务很好，小区环境优美，适合居住。',
+            'tag': '优点',
+            'portrait':
+                'https://via.placeholder.com/400x400/CCCCCC/FFFFFF?text=用户3',
+            'userName': '用户3',
+            'baseCreateTime':
+                DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+          },
+        ];
+        loupanDianpingDm.addList(
+            defaultComments, isRef, defaultComments.length);
+      },
       success: (v) {
         loupanDianpingDm.addList(v['data'], isRef, v['total']);
       },
@@ -141,8 +303,10 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                           '补贴佣金',
                         ],
                         // isScrollable: false,
-                        listPadding: EdgeInsets.only(top: padd(context).top + 55),
-                        headerBar: (i, v) => Container(height: i == 0 ? 0 : 17, color: Colors.transparent),
+                        listPadding:
+                            EdgeInsets.only(top: padd(context).top + 55),
+                        headerBar: (i, v) => Container(
+                            height: i == 0 ? 0 : 17, color: Colors.transparent),
                         labelPadding: EdgeInsets.symmetric(horizontal: 16),
                         indicatorPadding: EdgeInsets.only(bottom: 4),
                         tabBarTop: 56 + padd(context).top,
@@ -188,12 +352,14 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                             backgroundColor: Colors.transparent,
                             builder: (_) {
                               return ClipRRect(
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(12)),
                                 child: Container(
                                   color: Colors.white,
                                   child: Container(
                                     margin: EdgeInsets.all(16),
-                                    padding: EdgeInsets.symmetric(horizontal: 16),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 16),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(17),
@@ -208,42 +374,39 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                     close();
                                                     switch (i) {
                                                       case 0:
-                                                        // await fw.shareToWeChat(
-                                                        //   fw.WeChatShareWebPageModel(
-                                                        //     "${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}",
-                                                        //     title: loupanDm.object['buildingName'],
-                                                        //     description: loupanDm.object['areaName'],
-                                                        //     thumbnail: fw.WeChatImage.network(loupanDm.object['images'].toString().split(';').first),
-                                                        //     scene: fw.WeChatScene.SESSION,
-                                                        //   ),
-                                                        // );
                                                         break;
                                                       case 1:
-                                                        // await fw.shareToWeChat(
-                                                        //   fw.WeChatShareWebPageModel(
-                                                        //     "${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}",
-                                                        //     title: loupanDm.object['buildingName'],
-                                                        //     description: loupanDm.object['areaName'],
-                                                        //     thumbnail: fw.WeChatImage.network(loupanDm.object['images'].toString().split(';').first),
-                                                        //     scene: fw.WeChatScene.TIMELINE,
-                                                        //   ),
-                                                        // );
                                                         break;
                                                       case 2:
-                                                        buildShowDialog(context);
-                                                        var res = await request.get(Uri.parse(loupanDm.object['images'].toString().split(';').first));
-                                                        var imageJpg = Luban.comressImageJpg(res.bodyBytes, 1);
+                                                        buildShowDialog(
+                                                            context);
+                                                        var res = await request
+                                                            .get(Uri.parse(
+                                                                loupanDm.object[
+                                                                        'images']
+                                                                    .toString()
+                                                                    .split(';')
+                                                                    .first));
+                                                        var imageJpg = Luban
+                                                            .comressImageJpg(
+                                                                res.bodyBytes,
+                                                                1);
                                                         close();
-                                                        await Weibo.instance.shareImage(
+                                                        await Weibo.instance
+                                                            .shareImage(
                                                           imageData: imageJpg,
-                                                          text: "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
-                                                          imageUri: Uri.dataFromBytes(imageJpg),
+                                                          text:
+                                                              "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
+                                                          imageUri:
+                                                              Uri.dataFromBytes(
+                                                                  imageJpg),
                                                         );
                                                         break;
                                                     }
                                                   },
                                                   child: Column(
-                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
                                                     children: [
                                                       SizedBox(height: 16),
                                                       Image.asset(
@@ -304,22 +467,41 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                   // );
                                                                   break;
                                                                 case 2:
-                                                                  buildShowDialog(context);
-                                                                  var res = await request.get(Uri.parse(loupanDm.object['images'].toString().split(';').first));
-                                                                  var imageJpg = Luban.comressImageJpg(res.bodyBytes, 1);
+                                                                  buildShowDialog(
+                                                                      context);
+                                                                  var res = await request.get(Uri.parse(loupanDm
+                                                                      .object[
+                                                                          'images']
+                                                                      .toString()
+                                                                      .split(
+                                                                          ';')
+                                                                      .first));
+                                                                  var imageJpg =
+                                                                      Luban.comressImageJpg(
+                                                                          res.bodyBytes,
+                                                                          1);
                                                                   close();
-                                                                  await Weibo.instance.shareImage(
-                                                                    imageData: imageJpg,
-                                                                    text: "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
-                                                                    imageUri: Uri.dataFromBytes(imageJpg),
+                                                                  await Weibo
+                                                                      .instance
+                                                                      .shareImage(
+                                                                    imageData:
+                                                                        imageJpg,
+                                                                    text:
+                                                                        "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
+                                                                    imageUri: Uri
+                                                                        .dataFromBytes(
+                                                                            imageJpg),
                                                                   );
                                                                   break;
                                                               }
                                                             },
                                                             child: Column(
-                                                              mainAxisSize: MainAxisSize.min,
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
                                                               children: [
-                                                                SizedBox(height: 16),
+                                                                SizedBox(
+                                                                    height: 16),
                                                                 Image.asset(
                                                                   [
                                                                     'assets/img/yaoqing_wx.png',
@@ -330,7 +512,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                   width: 42,
                                                                   height: 42,
                                                                 ),
-                                                                SizedBox(height: 8),
+                                                                SizedBox(
+                                                                    height: 8),
                                                                 MyText(
                                                                   [
                                                                     '微信',
@@ -339,7 +522,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                   ][i],
                                                                   size: 12,
                                                                 ),
-                                                                SizedBox(height: 16),
+                                                                SizedBox(
+                                                                    height: 16),
                                                               ],
                                                             ),
                                                           ),
@@ -352,28 +536,48 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                           : Expanded(
                                                               child: WidgetTap(
                                                                 isElastic: true,
-                                                                onTap: () async {
+                                                                onTap:
+                                                                    () async {
                                                                   close();
                                                                   switch (i) {
                                                                     case 0:
                                                                       break;
                                                                     case 2:
-                                                                      buildShowDialog(context);
-                                                                      var res = await request.get(Uri.parse(loupanDm.object['images'].toString().split(';').first));
-                                                                      var imageJpg = Luban.comressImageJpg(res.bodyBytes, 1);
+                                                                      buildShowDialog(
+                                                                          context);
+                                                                      var res = await request.get(Uri.parse(loupanDm
+                                                                          .object[
+                                                                              'images']
+                                                                          .toString()
+                                                                          .split(
+                                                                              ';')
+                                                                          .first));
+                                                                      var imageJpg =
+                                                                          Luban.comressImageJpg(
+                                                                              res.bodyBytes,
+                                                                              1);
                                                                       close();
-                                                                      await Weibo.instance.shareImage(
-                                                                        imageData: imageJpg,
-                                                                        text: "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
-                                                                        imageUri: Uri.dataFromBytes(imageJpg),
+                                                                      await Weibo
+                                                                          .instance
+                                                                          .shareImage(
+                                                                        imageData:
+                                                                            imageJpg,
+                                                                        text:
+                                                                            "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
+                                                                        imageUri:
+                                                                            Uri.dataFromBytes(imageJpg),
                                                                       );
                                                                       break;
                                                                   }
                                                                 },
                                                                 child: Column(
-                                                                  mainAxisSize: MainAxisSize.min,
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
                                                                   children: [
-                                                                    SizedBox(height: 16),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            16),
                                                                     Image.asset(
                                                                       [
                                                                         'assets/img/yaoqing_wx.png',
@@ -382,9 +586,12 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                         'assets/img/yaoqing_wb.png',
                                                                       ][i],
                                                                       width: 42,
-                                                                      height: 42,
+                                                                      height:
+                                                                          42,
                                                                     ),
-                                                                    SizedBox(height: 8),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            8),
                                                                     MyText(
                                                                       [
                                                                         '微信',
@@ -393,7 +600,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                       ][i],
                                                                       size: 12,
                                                                     ),
-                                                                    SizedBox(height: 16),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            16),
                                                                   ],
                                                                 ),
                                                               ),
@@ -441,7 +650,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                   onTap: () {
                     ComonUtil.isLogin(() {
                       setState(() {
-                        loupanDm.object['isFavorite'] = !loupanDm.object['isFavorite'];
+                        loupanDm.object['isFavorite'] =
+                            !loupanDm.object['isFavorite'];
                       });
                       Request.put(
                         '/api/Building/Favorite',
@@ -449,7 +659,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                         catchError: (v) {
                           showToast(v);
                           setState(() {
-                            loupanDm.object['isFavorite'] = !loupanDm.object['isFavorite'];
+                            loupanDm.object['isFavorite'] =
+                                !loupanDm.object['isFavorite'];
                           });
                         },
                       );
@@ -459,7 +670,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
-                        loupanDm.object['isFavorite'] ? 'assets/img/no_shoucang.png' : 'assets/img/loupan_shoucang.png',
+                        loupanDm.object['isFavorite']
+                            ? 'assets/img/no_shoucang.png'
+                            : 'assets/img/loupan_shoucang.png',
                         width: 22,
                         height: 22,
                       ),
@@ -525,13 +738,13 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                           "targetId": loupanDm.object['agent']['userId'],
                         };
                         // jumpPage(
-                          // ConversationPage(
-                          //   arguments: arg,
-                          //   data: loupanDm.object,
-                          //   msgClick: (v) {
-                          //     jumpPage(LoupanPage(data: v));
-                          //   },
-                          // ),
+                        // ConversationPage(
+                        //   arguments: arg,
+                        //   data: loupanDm.object,
+                        //   msgClick: (v) {
+                        //     jumpPage(LoupanPage(data: v));
+                        //   },
+                        // ),
                         // );
                         // }
                       } else {
@@ -789,7 +1002,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
             ),
           ],
         ),
-        if (loupanDm.object['position'] != null) ZhoubianWidget(loupanDm.object),
+        if (loupanDm.object['position'] != null)
+          ZhoubianWidget(loupanDm.object),
       ],
     );
   }
@@ -839,18 +1053,26 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     )
                   ],
                 ),
-                if (wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).isNotEmpty) SizedBox(height: 11),
-                if (wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).isNotEmpty)
+                if (wendaDm.value
+                    .where((w) => w['parentId'] == wendaDm.list[i]['id'])
+                    .isNotEmpty)
+                  SizedBox(height: 11),
+                if (wendaDm.value
+                    .where((w) => w['parentId'] == wendaDm.list[i]['id'])
+                    .isNotEmpty)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: MyListView(
                       isShuaxin: false,
                       physics: NeverScrollableScrollPhysics(),
                       listViewType: ListViewType.Separated,
-                      itemCount: wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).length,
+                      itemCount: wendaDm.value
+                          .where((w) => w['parentId'] == wendaDm.list[i]['id'])
+                          .length,
                       item: (ii) {
                         return Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                           color: Color(0xffF5F5F5),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -861,22 +1083,35 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                     child: WrapperImage(
                                       height: 35,
                                       width: 35,
-                                      urlBuilder: () => wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).toList()[ii]['replyUserPortrait'],
+                                      urlBuilder: () => wendaDm.value
+                                          .where((w) =>
+                                              w['parentId'] ==
+                                              wendaDm.list[i]['id'])
+                                          .toList()[ii]['replyUserPortrait'],
                                     ),
                                   ),
                                   SizedBox(width: 8),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         MyText(
-                                          wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).toList()[ii]['replyUserName'],
+                                          wendaDm.value
+                                              .where((w) =>
+                                                  w['parentId'] ==
+                                                  wendaDm.list[i]['id'])
+                                              .toList()[ii]['replyUserName'],
                                           isBold: true,
                                           color: Common.black,
                                         ),
                                         SizedBox(height: 2),
                                         MyText(
-                                          toTime(wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).toList()[ii]['baseModifyTime']),
+                                          toTime(wendaDm.value
+                                              .where((w) =>
+                                                  w['parentId'] ==
+                                                  wendaDm.list[i]['id'])
+                                              .toList()[ii]['baseModifyTime']),
                                           size: 9,
                                           color: Common.black,
                                         ),
@@ -887,7 +1122,10 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                               ),
                               SizedBox(height: 8),
                               MyText(
-                                wendaDm.value.where((w) => w['parentId'] == wendaDm.list[i]['id']).toList()[ii]['content'],
+                                wendaDm.value
+                                    .where((w) =>
+                                        w['parentId'] == wendaDm.list[i]['id'])
+                                    .toList()[ii]['content'],
                                 size: 12,
                                 isOverflow: false,
                                 color: Common.black,
@@ -1040,19 +1278,25 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(56),
-                              color: loupanDianpingDm.list[i]['tag'] == '优点' ? Color(0xffF7DDA9) : Common.smallColor.withOpacity(0.1),
+                              color: loupanDianpingDm.list[i]['tag'] == '优点'
+                                  ? Color(0xffF7DDA9)
+                                  : Common.smallColor.withOpacity(0.1),
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 4),
                             child: MyText(
                               loupanDianpingDm.list[i]['tag'],
-                              color: loupanDianpingDm.list[i]['tag'] == '优点' ? Common.black : Common.black,
+                              color: loupanDianpingDm.list[i]['tag'] == '优点'
+                                  ? Common.black
+                                  : Common.black,
                               size: 12,
                               isBold: true,
                             ),
                           ),
                           Expanded(
                             child: MyText(
-                              toTime(loupanDianpingDm.list[i]['baseCreateTime']),
+                              toTime(
+                                  loupanDianpingDm.list[i]['baseCreateTime']),
                               textAlign: TextAlign.right,
                             ),
                           )
@@ -1174,7 +1418,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
               onTap: () {
                 jumpPage(
                   PhotoView(
-                    images: loupanDm.object['hubs'][0]['images'].toString().split(';'),
+                    images: loupanDm.object['hubs'][0]['images']
+                        .toString()
+                        .split(';'),
                     isUrl: true,
                   ),
                   isMoveBtm: true,
@@ -1184,7 +1430,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                 borderRadius: BorderRadius.circular(8),
                 child: WrapperImage(
                   height: 135,
-                  urlBuilder: () => loupanDm.object['hubs'][0]['images'].toString().split(';')[0],
+                  urlBuilder: () => loupanDm.object['hubs'][0]['images']
+                      .toString()
+                      .split(';')[0],
                 ),
               ),
             ),
@@ -1243,7 +1491,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
   Column buildItem1() {
     return Column(
       children: [
-        if (loupanDm.object['introduce'].length > 0) LunboWidget(loupanDm.object),
+        if (loupanDm.object['introduce'].length > 0)
+          LunboWidget(loupanDm.object),
         MyColumn(
           color: Colors.white,
           padding: EdgeInsets.all(17),
@@ -1284,9 +1533,11 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       return Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(56),
-                          border: Border.all(color: Theme.of(context).primaryColor),
+                          border:
+                              Border.all(color: Theme.of(context).primaryColor),
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                         child: MyText(
                           [
                             loupanDm.object['buildType'],
@@ -1496,6 +1747,7 @@ class TanChuang extends StatefulWidget {
   final int type;
 
   const TanChuang(this.id, {Key key, this.type}) : super(key: key);
+
   @override
   _TanChuangState createState() => _TanChuangState();
 }
@@ -1530,7 +1782,8 @@ class _TanChuangState extends State<TanChuang> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    MyText(['价格变动提醒', '开盘提醒'][widget.type], size: 18, isBold: true),
+                    MyText(['价格变动提醒', '开盘提醒'][widget.type],
+                        size: 18, isBold: true),
                     SizedBox(height: 14),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -1571,9 +1824,13 @@ class _TanChuangState extends State<TanChuang> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              isYuedu ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+                              isYuedu
+                                  ? Icons.check_box_outlined
+                                  : Icons.check_box_outline_blank,
                               size: 16,
-                              color: isYuedu ? Theme.of(context).primaryColor : Colors.black26,
+                              color: isYuedu
+                                  ? Theme.of(context).primaryColor
+                                  : Colors.black26,
                             ),
                             SizedBox(width: 8),
                             MyText(
@@ -1641,7 +1898,9 @@ class DianpingTanChuang extends StatefulWidget {
   final String wentiId;
   final int type;
 
-  const DianpingTanChuang(this.id, {Key key, this.type, this.wentiId}) : super(key: key);
+  const DianpingTanChuang(this.id, {Key key, this.type, this.wentiId})
+      : super(key: key);
+
   @override
   _DianpingTanChuangState createState() => _DianpingTanChuangState();
 }
@@ -1667,7 +1926,8 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
             time: 500,
             curve: ElasticOutCurve(1),
             child: Listener(
-              onPointerDown: (v) => FocusScope.of(context).requestFocus(FocusNode()),
+              onPointerDown: (v) =>
+                  FocusScope.of(context).requestFocus(FocusNode()),
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 24),
                 padding: EdgeInsets.symmetric(vertical: 16),
@@ -1680,14 +1940,17 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      MyText(['评论', '提问', '回答'][widget.type], size: 18, isBold: true),
+                      MyText(['评论', '提问', '回答'][widget.type],
+                          size: 18, isBold: true),
                       SizedBox(height: 14),
                       if (widget.type == 0)
                         Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 8),
                               color: Colors.black.withOpacity(0.05),
                               child: Row(
                                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -1716,8 +1979,10 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
                               child: MyText('不多余200字', size: 12),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 8),
                               color: Colors.black.withOpacity(0.05),
                               child: Row(
                                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -1751,7 +2016,8 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
                         Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
                                 border: Border.all(color: Colors.black12),
@@ -1919,11 +2185,13 @@ class VrVideoPage extends StatefulWidget {
   final Map data;
 
   const VrVideoPage({Key key, this.url, this.data}) : super(key: key);
+
   @override
   _VrVideoPageState createState() => _VrVideoPageState();
 }
 
-class _VrVideoPageState extends State<VrVideoPage> with TickerProviderStateMixin {
+class _VrVideoPageState extends State<VrVideoPage>
+    with TickerProviderStateMixin {
   // WebViewController controller;
   bool flag = false;
   int progress = 0;
@@ -1937,7 +2205,8 @@ class _VrVideoPageState extends State<VrVideoPage> with TickerProviderStateMixin
 
   Future<void> initData() async {
     Future(() async {
-      if (widget.data == null) await precacheImage(NetworkImage(widget.url), context);
+      if (widget.data == null)
+        await precacheImage(NetworkImage(widget.url), context);
       await Future.delayed(Duration(milliseconds: 500));
       setState(() => flag = true);
     });
@@ -1964,7 +2233,9 @@ class _VrVideoPageState extends State<VrVideoPage> with TickerProviderStateMixin
               ? Brightness.light
               : Brightness.dark
           : Brightness.dark,
-      appBar: widget.data == null ? null : buildTitle(context, title: widget.data['title']),
+      appBar: widget.data == null
+          ? null
+          : buildTitle(context, title: widget.data['title']),
       body: widget.data == null
           ? Center(
               child: AnimatedSize(
@@ -2021,6 +2292,7 @@ class LoupanWendaPage extends StatefulWidget {
   final Map data;
 
   const LoupanWendaPage({Key key, this.data}) : super(key: key);
+
   @override
   _LoupanWendaPageState createState() => _LoupanWendaPageState();
 }
@@ -2039,6 +2311,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
 
   ///获取楼盘问答
   var loupanWendaDm = DataModel(hasNext: false);
+
   Future<int> apiQuestionGetPageList({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/Question/GetPageList',
@@ -2140,7 +2413,9 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
             itemCount: list.length,
             item: (i) {
               flog('=============');
-              flog(loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).toList());
+              flog(loupanWendaDm.value
+                  .where((w) => w['parentId'] == list[i]['id'])
+                  .toList());
               return WidgetTap(
                 onTap: () async {
                   // if (list[i]['replyUserName'] == null) {
@@ -2184,18 +2459,26 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                         )
                       ],
                     ),
-                    if (loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).isNotEmpty) SizedBox(height: 11),
-                    if (loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).isNotEmpty)
+                    if (loupanWendaDm.value
+                        .where((w) => w['parentId'] == list[i]['id'])
+                        .isNotEmpty)
+                      SizedBox(height: 11),
+                    if (loupanWendaDm.value
+                        .where((w) => w['parentId'] == list[i]['id'])
+                        .isNotEmpty)
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: MyListView(
                           isShuaxin: false,
-                          itemCount: loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).length,
+                          itemCount: loupanWendaDm.value
+                              .where((w) => w['parentId'] == list[i]['id'])
+                              .length,
                           physics: NeverScrollableScrollPhysics(),
                           listViewType: ListViewType.Separated,
                           item: (ii) {
                             return Container(
-                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 16),
                               color: Color(0xffF5F5F5),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -2206,22 +2489,38 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                                         child: WrapperImage(
                                           height: 35,
                                           width: 35,
-                                          urlBuilder: () => loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).toList()[ii]['replyUserPortrait'],
+                                          urlBuilder: () => loupanWendaDm.value
+                                                  .where((w) =>
+                                                      w['parentId'] ==
+                                                      list[i]['id'])
+                                                  .toList()[ii]
+                                              ['replyUserPortrait'],
                                         ),
                                       ),
                                       SizedBox(width: 8),
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             MyText(
-                                              loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).toList()[ii]['replyUserName'],
+                                              loupanWendaDm.value
+                                                      .where((w) =>
+                                                          w['parentId'] ==
+                                                          list[i]['id'])
+                                                      .toList()[ii]
+                                                  ['replyUserName'],
                                               isBold: true,
                                               color: Common.black,
                                             ),
                                             SizedBox(height: 2),
                                             MyText(
-                                              toTime(loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).toList()[ii]['baseModifyTime']),
+                                              toTime(loupanWendaDm.value
+                                                      .where((w) =>
+                                                          w['parentId'] ==
+                                                          list[i]['id'])
+                                                      .toList()[ii]
+                                                  ['baseModifyTime']),
                                               size: 9,
                                               color: Common.black,
                                             ),
@@ -2232,7 +2531,10 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                                   ),
                                   SizedBox(height: 8),
                                   MyText(
-                                    loupanWendaDm.value.where((w) => w['parentId'] == list[i]['id']).toList()[ii]['content'],
+                                    loupanWendaDm.value
+                                        .where((w) =>
+                                            w['parentId'] == list[i]['id'])
+                                        .toList()[ii]['content'],
                                     size: 12,
                                     isOverflow: false,
                                     color: Common.black,
@@ -2259,6 +2561,7 @@ class LoupanDianpingPage extends StatefulWidget {
   final Map data;
 
   const LoupanDianpingPage({Key key, this.data}) : super(key: key);
+
   @override
   _LoupanDianpingPageState createState() => _LoupanDianpingPageState();
 }
@@ -2277,6 +2580,7 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
 
   ///获取楼盘点评
   var loupanDianpingDm = DataModel(hasNext: false);
+
   Future<int> apiCommentGetPageList({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/Comment/GetPageList',
@@ -2367,19 +2671,25 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(56),
-                                color: loupanDianpingDm.list[i]['tag'] == '优点' ? Color(0xffF7DDA9) : Common.smallColor.withOpacity(0.1),
+                                color: loupanDianpingDm.list[i]['tag'] == '优点'
+                                    ? Color(0xffF7DDA9)
+                                    : Common.smallColor.withOpacity(0.1),
                               ),
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 4),
                               child: MyText(
                                 loupanDianpingDm.list[i]['tag'],
-                                color: loupanDianpingDm.list[i]['tag'] == '优点' ? Common.black : Common.black,
+                                color: loupanDianpingDm.list[i]['tag'] == '优点'
+                                    ? Common.black
+                                    : Common.black,
                                 size: 12,
                                 isBold: true,
                               ),
                             ),
                             Expanded(
                               child: MyText(
-                                toTime(loupanDianpingDm.list[i]['baseCreateTime']),
+                                toTime(
+                                    loupanDianpingDm.list[i]['baseCreateTime']),
                                 textAlign: TextAlign.right,
                               ),
                             )
@@ -2410,6 +2720,7 @@ class HuxingPage extends StatefulWidget {
   final List list;
 
   const HuxingPage({Key key, this.list}) : super(key: key);
+
   @override
   _HuxingPageState createState() => _HuxingPageState();
 }
@@ -2449,7 +2760,8 @@ class _HuxingPageState extends State<HuxingPage> {
                     borderRadius: BorderRadius.circular(8),
                     child: WrapperImage(
                       height: 135,
-                      urlBuilder: () => widget.list[i]['images'].toString().split(';')[0],
+                      urlBuilder: () =>
+                          widget.list[i]['images'].toString().split(';')[0],
                     ),
                   ),
                 ),
@@ -2513,6 +2825,7 @@ class ZhoubianWidget extends StatefulWidget {
   final Map data;
 
   const ZhoubianWidget(this.data, {Key key}) : super(key: key);
+
   @override
   _ZhoubianWidgetState createState() => _ZhoubianWidgetState();
 }

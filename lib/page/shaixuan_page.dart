@@ -22,8 +22,6 @@ class HomeSelectoWidget extends StatefulWidget {
 }
 
 class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
-  // TextEditingController textCon1 = TextEditingController();
-  // TextEditingController textCon2 = TextEditingController();
   var jiageQujian1, jiageQujian2;
   var list = [
     {'name': '区域', 'state': false},

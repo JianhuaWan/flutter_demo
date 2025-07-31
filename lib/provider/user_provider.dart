@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:animated_digit/animated_digit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rong/other/contacts_page.dart';
 import 'package:flutter_app/model/user_model.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:paixs_utils/model/data_model.dart';
-import 'package:paixs_utils/util/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
@@ -69,7 +67,6 @@ class UserProvider extends ChangeNotifier {
 
   ///清除用户信息
   Future<bool> cleanUserInfo() async {
-    logout(context);
     var sp = await SharedPreferences.getInstance();
     await sp.remove('user');
     userModel = null;

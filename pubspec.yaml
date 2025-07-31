@@ -51,13 +51,6 @@ dependencies:
   waterfall_flow: 3.0.1
   flutter_datetime_picker: 1.5.0
 
-  # 视频播放
-#  fijkplayer: 0.8.7
-
-  # 融云对接
-  flutter_rong:
-    path: package/imkit-flutter-quickstart
-  
   # 加密包，如sha1
   crypto: ^3.0.1
   
@@ -112,13 +105,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - package/paixs_utils/assets/svg/
-    - package/imkit-flutter-quickstart/assets/RCFlutterConf.json
-    - package/imkit-flutter-quickstart/assets/combine.json
-    - package/imkit-flutter-quickstart/assets/
     - assets/img/
-    - assets/img/dibu/
     - assets/svg/
-    - assets/riv/
     - data/province.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
