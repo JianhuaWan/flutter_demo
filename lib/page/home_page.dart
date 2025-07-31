@@ -9,7 +9,6 @@ import 'package:flutter_app/page/shaixuan_page.dart';
 import 'package:flutter_app/page/zixun_page.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/util/comon.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/appbar_widget.dart';
 import 'package:flutter_app/widget/my_custom_scroll.dart';

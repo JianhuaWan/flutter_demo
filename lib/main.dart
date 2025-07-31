@@ -15,7 +15,6 @@ import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:weibo_kit/weibo_kit.dart';
 import 'widget/tween_widget.dart';
 import 'widget/widgets.dart';
 
@@ -40,14 +39,6 @@ Future<void> main() async {
           child: Text("app出故障了～"),
           );
     };
-  // registerWxApi(appId: "wxdbcfb05b07ad1ac3", universalLink: "https://apple.rayt.cc/app/");
-  // FlutterQq.registerQQ('101958688');
-  Weibo.instance.registerApp(
-    appKey: "200851199",
-    redirectUrl: 'http://open.weibo.com/apps/200851199/privilege/oauth',
-    universalLink: "https://your.univerallink.com/link/",
-    scope: [WeiboScope.ALL],
-  );
 }
 
 class MyApp extends StatelessWidget {

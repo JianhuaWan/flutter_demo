@@ -12,7 +12,6 @@ import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
-import 'package:weibo_kit/weibo_kit.dart';
 
 ///密码登录
 class PassWordLogin extends StatefulWidget {
@@ -25,32 +24,6 @@ class _PassWordLoginState extends State<PassWordLogin> {
   var yanzhengmaCon = TextEditingController();
   bool isShowPass = !false;
 
-  StreamSubscription<WeiboAuthResp> auth;
-
-  void _listenAuth(WeiboAuthResp resp) {
-    flog('=============================');
-    if (resp.userId != null) {
-      Request.post(
-        '/api/User/ThirdLogin',
-        data: {"openId": resp.userId},
-        isLoading: true,
-        catchError: (v) => showToast(v.toString()),
-        fail: (v) => showToast(v.toString()),
-        success: (v) {
-          if (v['data'] == null) {
-            jumpPage(RegisterPage(resp.userId));
-          } else {
-            userPro.setUserModel(v['data']);
-            showToast('登录成功');
-            jumpPage(App(), isClose: true, isMoveBtm: true);
-          }
-        },
-      );
-    } else {
-      showToast('用户取消');
-    }
-  }
-
   @override
   void initState() {
     this.initData();
@@ -59,12 +32,10 @@ class _PassWordLoginState extends State<PassWordLogin> {
 
   ///初始化函数
   Future initData() async {
-    auth = Weibo.instance.authResp().listen(_listenAuth);
   }
 
   @override
   void dispose() {
-    auth.cancel();
     super.dispose();
   }
 
@@ -1285,15 +1256,6 @@ class WeChatAndQqLoginWidget extends StatelessWidget {
               WidgetTap(
                 isElastic: true,
                 onTap: () async {
-                  // if (await Weibo.instance.isInstalled()) {
-                    await Weibo.instance.auth(
-                      appKey: '200851199',
-                      redirectUrl: 'http://open.weibo.com/apps/200851199/privilege/oauth',
-                      scope: [WeiboScope.ALL],
-                    );
-                  // } else {
-                  //   showToast('请安装微博客户端');
-                  // }
                 },
                 child: Image.asset(
                   'assets/img/weibo.png',

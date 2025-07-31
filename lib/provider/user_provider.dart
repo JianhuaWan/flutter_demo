@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:animated_digit/animated_digit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/user_model.dart';
 import 'package:flutter_app/util/http.dart';
@@ -85,9 +84,6 @@ class UserProvider extends ChangeNotifier {
         success: (v) {
           if (v['data'] != null) {
             myKehuTongjiDm.object = v['data'];
-            controller1.addValue(myKehuTongjiDm.object['c'] ?? 0);
-            controller2.addValue(myKehuTongjiDm.object['f'] ?? 0);
-            controller3.addValue(myKehuTongjiDm.object['h'] ?? 0);
             myKehuTongjiDm.setTime();
             notifyListeners();
           } else {
@@ -113,8 +109,6 @@ class UserProvider extends ChangeNotifier {
         },
         success: (v) {
           myQuanyiTongjiDm.object = v['data'];
-          controller4.addValue(myQuanyiTongjiDm.object['totalDeposits'] ?? 0.00);
-          controller5.addValue(myQuanyiTongjiDm.object['realDeposits'] ?? 0.00);
           myQuanyiTongjiDm.setTime();
           notifyListeners();
         },
@@ -123,11 +117,6 @@ class UserProvider extends ChangeNotifier {
     return myQuanyiTongjiDm.flag;
   }
 
-  AnimatedDigitController controller1 = AnimatedDigitController(0);
-  AnimatedDigitController controller2 = AnimatedDigitController(0);
-  AnimatedDigitController controller3 = AnimatedDigitController(0);
-  AnimatedDigitController controller4 = AnimatedDigitController(0);
-  AnimatedDigitController controller5 = AnimatedDigitController(0);
 
   ///是否第一次进入app
   Future<bool> isFirstTimeShareApp() async {

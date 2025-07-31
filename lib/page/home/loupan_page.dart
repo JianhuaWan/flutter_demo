@@ -24,8 +24,6 @@ import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
-import 'package:panorama/panorama.dart';
-import 'package:weibo_kit/weibo_kit.dart';
 import 'loupan_info.dart';
 import 'package:http/http.dart' as request;
 
@@ -387,20 +385,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                     .toString()
                                                                     .split(';')
                                                                     .first));
-                                                        var imageJpg = Luban
-                                                            .comressImageJpg(
-                                                                res.bodyBytes,
-                                                                1);
                                                         close();
-                                                        await Weibo.instance
-                                                            .shareImage(
-                                                          imageData: imageJpg,
-                                                          text:
-                                                              "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
-                                                          imageUri:
-                                                              Uri.dataFromBytes(
-                                                                  imageJpg),
-                                                        );
                                                         break;
                                                     }
                                                   },
@@ -411,10 +396,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                       SizedBox(height: 16),
                                                       Image.asset(
                                                         [
-                                                          'assets/img/yaoqing_wx.png',
-                                                          'assets/img/yapqing_pyq.png',
-                                                          // 'assets/img/yaoqing_qq.png',
-                                                          'assets/img/yaoqing_wb.png',
+                                                          'assets/img/yaoqing_qq.png',
+                                                          'assets/img/yaoqing_qq.png',
+                                                          'assets/img/yaoqing_qq.png',
                                                         ][i],
                                                         width: 42,
                                                         height: 42,
@@ -445,26 +429,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                               close();
                                                               switch (i) {
                                                                 case 0:
-                                                                  // await fw.shareToWeChat(
-                                                                  //   fw.WeChatShareWebPageModel(
-                                                                  //     "${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}",
-                                                                  //     title: loupanDm.object['buildingName'],
-                                                                  //     description: loupanDm.object['areaName'],
-                                                                  //     thumbnail: fw.WeChatImage.network(loupanDm.object['images'].toString().split(';').first),
-                                                                  //     scene: fw.WeChatScene.SESSION,
-                                                                  //   ),
-                                                                  // );
                                                                   break;
                                                                 case 1:
-                                                                  // await fw.shareToWeChat(
-                                                                  //   fw.WeChatShareWebPageModel(
-                                                                  //     "${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}",
-                                                                  //     title: loupanDm.object['buildingName'],
-                                                                  //     description: loupanDm.object['areaName'],
-                                                                  //     thumbnail: fw.WeChatImage.network(loupanDm.object['images'].toString().split(';').first),
-                                                                  //     scene: fw.WeChatScene.TIMELINE,
-                                                                  //   ),
-                                                                  // );
                                                                   break;
                                                                 case 2:
                                                                   buildShowDialog(
@@ -481,17 +447,6 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                           res.bodyBytes,
                                                                           1);
                                                                   close();
-                                                                  await Weibo
-                                                                      .instance
-                                                                      .shareImage(
-                                                                    imageData:
-                                                                        imageJpg,
-                                                                    text:
-                                                                        "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
-                                                                    imageUri: Uri
-                                                                        .dataFromBytes(
-                                                                            imageJpg),
-                                                                  );
                                                                   break;
                                                               }
                                                             },
@@ -504,10 +459,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                                     height: 16),
                                                                 Image.asset(
                                                                   [
-                                                                    'assets/img/yaoqing_wx.png',
-                                                                    'assets/img/yapqing_pyq.png',
-                                                                    // 'assets/img/yaoqing_qq.png',
-                                                                    'assets/img/yaoqing_wb.png',
+                                                                    'assets/img/yaoqing_qq.png',
+                                                                    'assets/img/yaoqing_qq.png',
+                                                                    'assets/img/yaoqing_qq.png',
                                                                   ][i],
                                                                   width: 42,
                                                                   height: 42,
@@ -530,87 +484,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                         );
                                                 })
                                               : true
-                                                  ? List.generate(3, (i) {
-                                                      return i == 0 || i == 1
-                                                          ? SizedBox()
-                                                          : Expanded(
-                                                              child: WidgetTap(
-                                                                isElastic: true,
-                                                                onTap:
-                                                                    () async {
-                                                                  close();
-                                                                  switch (i) {
-                                                                    case 0:
-                                                                      break;
-                                                                    case 2:
-                                                                      buildShowDialog(
-                                                                          context);
-                                                                      var res = await request.get(Uri.parse(loupanDm
-                                                                          .object[
-                                                                              'images']
-                                                                          .toString()
-                                                                          .split(
-                                                                              ';')
-                                                                          .first));
-                                                                      var imageJpg =
-                                                                          Luban.comressImageJpg(
-                                                                              res.bodyBytes,
-                                                                              1);
-                                                                      close();
-                                                                      await Weibo
-                                                                          .instance
-                                                                          .shareImage(
-                                                                        imageData:
-                                                                            imageJpg,
-                                                                        text:
-                                                                            "#\t内当家\t#\t${loupanDm.object['buildingName']}\t${Config.BaseUrl}/building/houseDetail.html#/houseDetail?id=${loupanDm.object['id']}\n来自\t@内当家",
-                                                                        imageUri:
-                                                                            Uri.dataFromBytes(imageJpg),
-                                                                      );
-                                                                      break;
-                                                                  }
-                                                                },
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                        height:
-                                                                            16),
-                                                                    Image.asset(
-                                                                      [
-                                                                        'assets/img/yaoqing_wx.png',
-                                                                        'assets/img/yapqing_pyq.png',
-                                                                        // 'assets/img/yaoqing_qq.png',
-                                                                        'assets/img/yaoqing_wb.png',
-                                                                      ][i],
-                                                                      width: 42,
-                                                                      height:
-                                                                          42,
-                                                                    ),
-                                                                    SizedBox(
-                                                                        height:
-                                                                            8),
-                                                                    MyText(
-                                                                      [
-                                                                        '微信',
-                                                                        '朋友圈',
-                                                                        '微博',
-                                                                      ][i],
-                                                                      size: 12,
-                                                                    ),
-                                                                    SizedBox(
-                                                                        height:
-                                                                            16),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            );
-                                                    })
-                                                  : [
-                                                      Container(),
-                                                    ],
+                                                 ,
                                     ),
                                   ),
                                 ),
@@ -2247,13 +2121,6 @@ class _VrVideoPageState extends State<VrVideoPage>
                         child: Container(
                           height: size(context).height,
                           width: size(context).width,
-                          child: Panorama(
-                            // maxZoom: 20.0,
-                            sensitivity: 2,
-                            child: Image.network(
-                              widget.url,
-                            ),
-                          ),
                         ),
                       )
                     : Container(

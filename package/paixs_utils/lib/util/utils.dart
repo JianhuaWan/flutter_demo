@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:system_info/system_info.dart';
 import '../config/net/pgyer_api.dart';
 import '../widget/custom_route.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -400,16 +399,6 @@ int toDay(DateTime a, int millisecondsSinceEpoch) {
 void flog(v, [String name]) => log(v.toString(), name: name ?? 'flog');
 
 bool isCanRunAnimation = false;
-
-///是否可以运行动画
-Future<void> setIsCanRunAnimation() async {
-  ///手机内存大于4gb以上的设备均可体验动画
-  try {
-    isCanRunAnimation = (SysInfo.getVirtualMemorySize() / 1024 / 1024 / 1024) >= 4.0;
-  } catch (e) {
-    isCanRunAnimation = false;
-  }
-}
 
 ///非空判断
 isNull(v, [dynamic value, String nullStr = '暂无', bool isUserModel = false]) {

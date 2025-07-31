@@ -18,7 +18,6 @@ import 'package:paixs_utils/widget/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:weibo_kit/weibo_kit.dart';
 
 class YaoqingPage extends StatefulWidget {
   @override
@@ -254,16 +253,10 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                 close();
                                 break;
                               case 2:
-                                // handleShareToQQ();
                                 buildShowDialog(context);
                                 var uint8list = await _capturePng();
                                 var imageJpg = Luban.comressImageJpg(uint8list, 50);
                                 close();
-                                await Weibo.instance.shareImage(
-                                  imageData: imageJpg,
-                                  text: '邀请新朋友，注册得好礼',
-                                  imageUri: Uri.dataFromBytes(imageJpg),
-                                );
                                 break;
                               case 3:
                                 if ((await Permission.storage.request()).isGranted) {

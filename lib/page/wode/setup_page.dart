@@ -7,12 +7,10 @@ import 'package:flutter_app/widget/upapp_widget.dart';
 
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/page/wode/xieyi_page.dart';
-import 'package:flutter_app/util/comon.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/model/user_model.dart';
 import 'package:flutter_app/page/wode/fankui_page.dart';
 import 'package:flutter_app/page/wode/guanyu_page.dart';
-import 'package:flutter_app/page/wode/shiming_page.dart';
 import 'package:flutter_app/page/wode/xiugai_login.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/provider/user_provider.dart';
@@ -280,8 +278,6 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
               catchError: (v) => showToast(v),
               success: (v) async {
                 showToast('修改成功');
-                chat.changeChatUserInfo(
-                    user.id, realName, icon ?? user.portrait);
                 userPro.setUserModel(v['data'], user.token);
                 // await userPro.refreshToken();
                 close();
@@ -359,35 +355,8 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
                 selectoOnTap: () async {
                   switch (i) {
                     case 0:
-                      // var imgList = await pickImages(maxImages: 1);
-                      // flog(imgList);
-                      // if (imgList.isNotEmpty) {
-                      //   buildShowDialog(context, isClose: false);
-                      //   try {
-                      //     var file = await imgList.first.file;
-                      //     var data = await uploadImage(file.path);
-                      //     setState(() => icon = data);
-                      //   } catch (e) {
-                      //     showToast('系统异常');
-                      //   } finally {
-                      //     Navigator.pop(context);
-                      //   }
-                      // }
                       break;
                     case 1:
-                      if (user.isIdentity) {
-                        showToast('您已经实名认证了！');
-                        return;
-                      }
-                      jumpPage(
-                        ShimingPage(),
-                        callback: (v) {
-                          if (v != null) {
-                            setState(() => realName = v);
-                            userPro.refreshToken();
-                          }
-                        },
-                      );
                       break;
                     case 4:
                       showSelecto(context, texts: ['男', '女'], callback: (v, i) {

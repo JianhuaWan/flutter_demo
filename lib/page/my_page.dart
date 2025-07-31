@@ -79,11 +79,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
 
   ///初始化函数
   Future initData() async {
-    userPro.controller1.resetValue(0);
-    userPro.controller2.resetValue(0);
-    userPro.controller3.resetValue(0);
-    userPro.controller4.resetValue(0);
-    userPro.controller5.resetValue(0);
     userPro.apiCustomerStatistics();
     userPro.apiUserRightsStatistics();
   }
@@ -106,11 +101,6 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                   color: Colors.white,
                 ),
                 onRefresh: () async {
-                  userPro.controller1.resetValue(0);
-                  userPro.controller2.resetValue(0);
-                  userPro.controller3.resetValue(0);
-                  userPro.controller4.resetValue(0);
-                  userPro.controller5.resetValue(0);
                   await userPro.refreshToken();
                   await userPro.apiCustomerStatistics();
                   return userPro.apiUserRightsStatistics();

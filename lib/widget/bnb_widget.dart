@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/app_provider.dart';
-import 'package:flutter_app/provider/chat_provider.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
@@ -89,38 +88,6 @@ class _BnbWidgetState extends State<BnbWidget> {
                         width: 24,
                         height: 24,
                       ),
-                      if (_index == 3)
-                        Positioned(
-                          right: -6,
-                          top: -2,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(56),
-                                child: Selector<ChatProvider, int>(
-                                  selector: (_, k) => k.totalUnreadCount,
-                                  builder: (_, v, view) {
-                                    return AnimatedOpacity(
-                                      duration: Duration(milliseconds: 250),
-                                      opacity: v == 0 ? 0 : 1,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 6, vertical: 2),
-                                        constraints: BoxConstraints(
-                                            minWidth: 12, minHeight: 12),
-                                        alignment: Alignment.center,
-                                        color: Color(0xffe95e58),
-                                        child: MyText(v,
-                                            color: Colors.white, size: 10),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                     ],
                   ),
                   SizedBox(height: 4),
