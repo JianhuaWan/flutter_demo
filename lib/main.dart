@@ -105,22 +105,18 @@ class _FlashPageState extends State<FlashPage> {
             if (v != null) {
               await Future.delayed(Duration(milliseconds: 500));
               if (user == null) {
-                // jumpPage(PassWordLogin(), isMove: false, isClose: true);
                 jumpPage(App(), isMove: false, isClose: true);
               } else {
                 await userPro.refreshToken();
-                // jumpPage(PassWordLogin(), isMove: false, isClose: true);
                 jumpPage(App(), isMove: false, isClose: true);
               }
             }
           });
         } else {
           if (user == null) {
-            // jumpPage(PassWordLogin(), isMove: false, isClose: true);
             jumpPage(App(), isMove: false, isClose: true);
           } else {
             await userPro.refreshToken();
-            // jumpPage(PassWordLogin(), isMove: false, isClose: true);
             jumpPage(App(), isMove: false, isClose: true);
           }
         }

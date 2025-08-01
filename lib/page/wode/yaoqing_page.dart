@@ -255,9 +255,6 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                 break;
                               case 2:
                                 buildShowDialog(context);
-                                var uint8list = await _capturePng();
-                                var imageJpg = Luban.comressImageJpg
-                                  (uint8list!, 50);
                                 close();
                                 break;
                               case 3:

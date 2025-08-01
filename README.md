@@ -19,7 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 ## 运行项目
 1. flutter clean
 2. flutter pub get
-3. flutter run
+3. flutter build apk
 
 ## 运行环境
 flutter 3.24.5

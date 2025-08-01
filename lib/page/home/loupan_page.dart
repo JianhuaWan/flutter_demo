@@ -6,7 +6,6 @@ import 'package:flutter_app/config/common_config.dart';
 import 'package:flutter_app/page/shopping_page.dart';
 import 'package:flutter_app/util/comon.dart';
 import 'package:flutter_app/util/http.dart';
-import 'package:flutter_app/widget/flutter_luban.dart';
 import 'package:flutter_app/widget/no_sliding_return.dart';
 import 'package:flutter_app/widget/tab_link_widget.dart';
 import 'package:flutter_app/widget/tween_widget.dart';

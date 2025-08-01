@@ -34,7 +34,7 @@ dependencies:
   open_file: ^3.0.3
   sn_progress_dialog: ^1.2.0
   permission_handler: ^7.1.0  #权限
-  path_provider: 2.0.1
+  path_provider: 2.1.4
   # 轮播图
   card_swiper: 3.0.1
   flutter_datetime_picker: 1.5.1
@@ -54,6 +54,7 @@ dependencies:
 
   # 保存图片
   image_gallery_saver: 1.6.9
+  platform: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -99,5 +100,3 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
