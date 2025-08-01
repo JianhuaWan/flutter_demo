@@ -39,7 +39,7 @@ class _GuanyuPageState extends State<GuanyuPage> {
           'content': '<p>欢迎使用我们的应用程序。我们致力于为用户提供最优质的服务和体验。</p>'
               '<p>我们的团队由一群充满激情和创造力的专业人士组成，专注于技术创新和用户体验优化。</p>'
               '<p>如果您有任何问题或建议，请随时通过客服渠道与我们联系。</p>',
-          'version': 'V${app.packageInfo.version}',
+          'version': 'V${app.packageInfo?.version}',
           'updateTime': DateTime.now().toIso8601String(),
         };
         xieyiDm.object = defaultProtocolData;
@@ -51,7 +51,7 @@ class _GuanyuPageState extends State<GuanyuPage> {
       },
     );
     setState(() {});
-    return xieyiDm.flag;
+    return xieyiDm.flag!;
   }
 
   @override
@@ -104,7 +104,7 @@ class _GuanyuPageState extends State<GuanyuPage> {
             ),
             SizedBox(height: 5),
             MyText(
-              '版本V${app.packageInfo.version}',
+              '版本V${app.packageInfo?.version}',
               size: 13,
               textAlign: TextAlign.center,
               color: Color(0xff333333),

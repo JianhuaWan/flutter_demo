@@ -29,7 +29,7 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
   TextEditingController textCon4 = TextEditingController();
   TextEditingController textCon5 = TextEditingController();
   TextEditingController textCon6 = TextEditingController();
-  TabController tabCon;
+  TabController? tabCon;
 
   @override
   void initState() {
@@ -145,7 +145,7 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
             showToast('已重置');
           },
           () {
-            switch (tabCon.index) {
+            switch (tabCon!.index) {
               case 0:
                 Interface.handle(
                   context,
@@ -216,7 +216,7 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
   var tuijianDm = DataModel(hasNext: false);
   Future<int> apiCustomerRecommend() async {
     tuijianDm.setTime();
-    return tuijianDm.flag;
+    return tuijianDm.flag!;
   }
 
   List<Widget> get item1 {
@@ -236,9 +236,11 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
         selectoOnTap: () {
           switch (i) {
             case 1:
-              showSelecto(context, texts: app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').map<String>((m) => m['dictValue']).toList(), callback: (v, i) {
+              showSelecto(context!, texts: app.zidianDm.object!.where((w) =>
+              w['dictType'] == 'LayoutType').map<String>((m) => m['dictValue']).toList(), callback: (v, i) {
                 setState(() {
-                  jushi = app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').toList()[i];
+                  jushi = app.zidianDm.object!.where((w) => w['dictType'] ==
+                      'LayoutType').toList()[i];
                 });
               });
               break;
@@ -248,9 +250,9 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
               //     suozaidi = v;
               //   });
               // });
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(context!).requestFocus(FocusNode());
               CityPicker.showCityPicker(
-                context,
+                context!,
                 selectProvince: (province) {},
                 selectCity: (city) => suozaidiCode = city['code'],
                 selectArea: (area) {},
@@ -284,17 +286,19 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
         selectoOnTap: () {
           switch (i) {
             case 1:
-              showSelecto(context, texts: app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').map<String>((m) => m['dictValue']).toList(), callback: (v, i) {
+              showSelecto(context!, texts: app.zidianDm.object!.where((w) =>
+              w['dictType'] == 'LayoutType').map<String>((m) => m['dictValue']).toList(), callback: (v, i) {
                 setState(() {
-                  jushi = app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').toList()[i];
+                  jushi = app.zidianDm.object!.where((w) => w['dictType'] ==
+                      'LayoutType').toList()[i];
                 });
               });
               break;
             case 2:
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(context!).requestFocus(FocusNode());
               //  var str;
               CityPicker.showCityPicker(
-                context,
+                context!,
                 selectProvince: (province) {},
                 selectCity: (city) => suozaidiCode = city['code'],
                 selectArea: (area) {},
@@ -322,8 +326,9 @@ class _BangniPageState extends State<BangniPage> with NoSlidingReturn, TickerPro
           switch (i) {
             case 0:
               showSelecto(
-                context,
-                texts: app.zidianDm.object.where((w) => w['dictType'] == 'AwardType').map<String>((m) => m['dictValue']).toList(),
+                context!,
+                texts: app.zidianDm.object!.where((w) => w['dictType'] == 'Aw'
+                    'ardType').map<String>((m) => m['dictValue']).toList(),
                 callback: (v, i) => setState(() => fangwei = v),
               );
               break;

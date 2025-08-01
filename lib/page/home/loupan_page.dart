@@ -11,7 +11,6 @@ import 'package:flutter_app/widget/no_sliding_return.dart';
 import 'package:flutter_app/widget/tab_link_widget.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:flutter_app/widget/widgets.dart';
-import 'package:paixs_utils/config/net/Config.dart';
 import 'package:paixs_utils/config/net/api.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
@@ -32,8 +31,8 @@ class LoupanPage extends StatefulWidget {
   final bool isZhaofang;
 
   const LoupanPage({
-    Key key,
-    @required this.data,
+    Key? key,
+    required this.data,
     this.isZhaofang = false,
   }) : super(key: key);
 
@@ -110,7 +109,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
       },
     );
     setState(() {});
-    return loupanDm.flag;
+    return loupanDm.flag!;
   }
 
   ///获取楼盘问答
@@ -217,7 +216,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
     );
     flog(wendaDm.toJson());
     setState(() {});
-    return wendaDm.flag;
+    return wendaDm.flag!;
   }
 
   ///获取楼盘点评
@@ -272,7 +271,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
       },
     );
     setState(() {});
-    return loupanDianpingDm.flag;
+    return loupanDianpingDm.flag!;
   }
 
   @override
@@ -363,129 +362,57 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                       borderRadius: BorderRadius.circular(17),
                                     ),
                                     child: Row(
-                                      children: (true && true)
-                                          ? List.generate(3, (i) {
-                                              return Expanded(
-                                                child: WidgetTap(
-                                                  isElastic: true,
-                                                  onTap: () async {
-                                                    close();
-                                                    switch (i) {
-                                                      case 0:
-                                                        break;
-                                                      case 1:
-                                                        break;
-                                                      case 2:
-                                                        buildShowDialog(
-                                                            context);
-                                                        var res = await request
-                                                            .get(Uri.parse(
-                                                                loupanDm.object[
-                                                                        'images']
-                                                                    .toString()
-                                                                    .split(';')
-                                                                    .first));
-                                                        close();
-                                                        break;
-                                                    }
-                                                  },
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      SizedBox(height: 16),
-                                                      Image.asset(
-                                                        [
-                                                          'assets/img/yaoqing_qq.png',
-                                                          'assets/img/yaoqing_qq.png',
-                                                          'assets/img/yaoqing_qq.png',
-                                                        ][i],
-                                                        width: 42,
-                                                        height: 42,
-                                                      ),
-                                                      SizedBox(height: 8),
-                                                      MyText(
-                                                        [
-                                                          '微信',
-                                                          '朋友圈',
-                                                          '微博',
-                                                        ][i],
-                                                        size: 12,
-                                                      ),
-                                                      SizedBox(height: 16),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
-                                            })
-                                          : true
-                                              ? List.generate(3, (i) {
-                                                  return i == 2
-                                                      ? SizedBox()
-                                                      : Expanded(
-                                                          child: WidgetTap(
-                                                            isElastic: true,
-                                                            onTap: () async {
-                                                              close();
-                                                              switch (i) {
-                                                                case 0:
-                                                                  break;
-                                                                case 1:
-                                                                  break;
-                                                                case 2:
-                                                                  buildShowDialog(
-                                                                      context);
-                                                                  var res = await request.get(Uri.parse(loupanDm
-                                                                      .object[
-                                                                          'images']
-                                                                      .toString()
-                                                                      .split(
-                                                                          ';')
-                                                                      .first));
-                                                                  var imageJpg =
-                                                                      Luban.comressImageJpg(
-                                                                          res.bodyBytes,
-                                                                          1);
-                                                                  close();
-                                                                  break;
-                                                              }
-                                                            },
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              children: [
-                                                                SizedBox(
-                                                                    height: 16),
-                                                                Image.asset(
-                                                                  [
-                                                                    'assets/img/yaoqing_qq.png',
-                                                                    'assets/img/yaoqing_qq.png',
-                                                                    'assets/img/yaoqing_qq.png',
-                                                                  ][i],
-                                                                  width: 42,
-                                                                  height: 42,
-                                                                ),
-                                                                SizedBox(
-                                                                    height: 8),
-                                                                MyText(
-                                                                  [
-                                                                    '微信',
-                                                                    '朋友圈',
-                                                                    '微博',
-                                                                  ][i],
-                                                                  size: 12,
-                                                                ),
-                                                                SizedBox(
-                                                                    height: 16),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
-                                                })
-                                              : true
-                                                 ,
-                                    ),
+                                        children: List.generate(3, (i) {
+                                      return Expanded(
+                                        child: WidgetTap(
+                                          isElastic: true,
+                                          onTap: () async {
+                                            close();
+                                            switch (i) {
+                                              case 0:
+                                                break;
+                                              case 1:
+                                                break;
+                                              case 2:
+                                                buildShowDialog(context);
+                                                var res = await request.get(
+                                                    Uri.parse(loupanDm
+                                                        .object['images']
+                                                        .toString()
+                                                        .split(';')
+                                                        .first));
+                                                close();
+                                                break;
+                                            }
+                                          },
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SizedBox(height: 16),
+                                              Image.asset(
+                                                [
+                                                  'assets/img/yaoqing_qq.png',
+                                                  'assets/img/yaoqing_qq.png',
+                                                  'assets/img/yaoqing_qq.png',
+                                                ][i],
+                                                width: 42,
+                                                height: 42,
+                                              ),
+                                              SizedBox(height: 8),
+                                              MyText(
+                                                [
+                                                  '微信',
+                                                  '朋友圈',
+                                                  '微博',
+                                                ][i],
+                                                size: 12,
+                                              ),
+                                              SizedBox(height: 16),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    })),
                                   ),
                                 ),
                               );
@@ -1067,7 +994,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
           isElastic: true,
           onTap: () async {
             ComonUtil.isLogin(() async {
-              showSelecto(context, texts: [
+              showSelecto(context!, texts: [
                 "房子现在什么价格?",
                 "最新有什么优惠政策?",
                 "最高返佣多少?",
@@ -1197,7 +1124,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
           onTap: () {
             ComonUtil.isLogin(() async {
               var res = await showGeneralDialog(
-                context: context,
+                context: context!,
                 barrierColor: Colors.transparent,
                 pageBuilder: (_, __, ___) {
                   return DianpingTanChuang(widget.data['id'], type: 0);
@@ -1407,8 +1334,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       return Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(56),
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
+                          border: Border.all(
+                              color: Theme.of(context!).primaryColor),
                         ),
                         padding:
                             EdgeInsets.symmetric(horizontal: 7, vertical: 2),
@@ -1517,7 +1444,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     onTap: () {
                       ComonUtil.isLogin(() {
                         showGeneralDialog(
-                          context: context,
+                          context: context!,
                           barrierColor: Colors.transparent,
                           pageBuilder: (_, __, ___) {
                             return TanChuang(widget.data['id'], type: 0);
@@ -1528,7 +1455,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      color: Theme.of(context!).primaryColor.withOpacity(0.1),
                       child: MyText(
                         '价格变动提醒',
                         isBold: true,
@@ -1543,7 +1470,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     onTap: () {
                       ComonUtil.isLogin(() {
                         showGeneralDialog(
-                          context: context,
+                          context: context!,
                           barrierColor: Colors.transparent,
                           pageBuilder: (_, __, ___) {
                             return TanChuang(widget.data['id'], type: 1);
@@ -1578,7 +1505,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context!).primaryColor,
                       child: MyText(
                         '项目奖金规则',
                         isBold: true,
@@ -1618,9 +1545,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
 
 class TanChuang extends StatefulWidget {
   final String id;
-  final int type;
+  final int? type;
 
-  const TanChuang(this.id, {Key key, this.type}) : super(key: key);
+  const TanChuang(this.id, {Key? key, this.type}) : super(key: key);
 
   @override
   _TanChuangState createState() => _TanChuangState();
@@ -1656,7 +1583,7 @@ class _TanChuangState extends State<TanChuang> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    MyText(['价格变动提醒', '开盘提醒'][widget.type],
+                    MyText(['价格变动提醒', '开盘提醒'][widget.type!],
                         size: 18, isBold: true),
                     SizedBox(height: 14),
                     Padding(
@@ -1665,7 +1592,7 @@ class _TanChuangState extends State<TanChuang> {
                         [
                           '设置后将在楼盘发生价格波动时通过短息实时推送给您,帮您看准买房时机',
                           '设置后将在楼盘开盘时通过短息实时推送给您,帮您看准买房时机',
-                        ][widget.type],
+                        ][widget.type!],
                         size: 14,
                         color: Colors.black45,
                         isOverflow: false,
@@ -1736,7 +1663,7 @@ class _TanChuangState extends State<TanChuang> {
                                 data: {
                                   "buildingId": widget.id,
                                   "phoneNumber": con.text,
-                                  "subscribeType": widget.type + 1,
+                                  "subscribeType": widget.type! + 1,
                                 },
                                 isLoading: true,
                                 dialogText: '正在订阅...',
@@ -1769,10 +1696,10 @@ class _TanChuangState extends State<TanChuang> {
 
 class DianpingTanChuang extends StatefulWidget {
   final String id;
-  final String wentiId;
-  final int type;
+  final String? wentiId;
+  final int? type;
 
-  const DianpingTanChuang(this.id, {Key key, this.type, this.wentiId})
+  const DianpingTanChuang(this.id, {Key? key, this.type, this.wentiId})
       : super(key: key);
 
   @override
@@ -1814,7 +1741,7 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      MyText(['评论', '提问', '回答'][widget.type],
+                      MyText(['评论', '提问', '回答'][widget.type!],
                           size: 18, isBold: true),
                       SizedBox(height: 14),
                       if (widget.type == 0)
@@ -1903,7 +1830,7 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
                                   '请输入你的评论',
                                   '请输入你的问题',
                                   '请输入你的回答',
-                                ][widget.type],
+                                ][widget.type!],
                                 con: con,
                                 borderColor: Colors.transparent,
                               ),
@@ -2055,10 +1982,10 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
 
 ///vr视频
 class VrVideoPage extends StatefulWidget {
-  final String url;
-  final Map data;
+  final String? url;
+  final Map? data;
 
-  const VrVideoPage({Key key, this.url, this.data}) : super(key: key);
+  const VrVideoPage({Key? key, this.url, this.data}) : super(key: key);
 
   @override
   _VrVideoPageState createState() => _VrVideoPageState();
@@ -2080,7 +2007,7 @@ class _VrVideoPageState extends State<VrVideoPage>
   Future<void> initData() async {
     Future(() async {
       if (widget.data == null)
-        await precacheImage(NetworkImage(widget.url), context);
+        await precacheImage(NetworkImage(widget.url!), context!);
       await Future.delayed(Duration(milliseconds: 500));
       setState(() => flag = true);
     });
@@ -2109,11 +2036,10 @@ class _VrVideoPageState extends State<VrVideoPage>
           : Brightness.dark,
       appBar: widget.data == null
           ? null
-          : buildTitle(context, title: widget.data['title']),
+          : buildTitle(context, title: widget.data!['title']),
       body: widget.data == null
           ? Center(
               child: AnimatedSize(
-                vsync: this,
                 duration: Duration(milliseconds: 500),
                 curve: Curves.easeOutCubic,
                 child: flag
@@ -2156,9 +2082,9 @@ class _VrVideoPageState extends State<VrVideoPage>
 
 ///楼盘问答
 class LoupanWendaPage extends StatefulWidget {
-  final Map data;
+  final Map? data;
 
-  const LoupanWendaPage({Key key, this.data}) : super(key: key);
+  const LoupanWendaPage({Key? key, this.data}) : super(key: key);
 
   @override
   _LoupanWendaPageState createState() => _LoupanWendaPageState();
@@ -2184,7 +2110,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
       '/api/Question/GetPageList',
       data: {
         "PageIndex": page,
-        "buildingId": widget.data['id'],
+        "buildingId": widget.data!['id'],
       },
       catchError: (v) => loupanWendaDm.toError(v),
       success: (v) {
@@ -2196,7 +2122,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
       },
     );
     setState(() {});
-    return loupanWendaDm.flag;
+    return loupanWendaDm.flag!;
   }
 
   @override
@@ -2222,9 +2148,9 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
               Request.post(
                 '/api/Question/Create',
                 data: {
-                  "buildingId": widget.data['id'],
+                  "buildingId": widget.data!['id'],
                   "content": v,
-                  "buildingName": widget.data['buildingName'],
+                  "buildingName": widget.data!['buildingName'],
                   "questionType": 0,
                   "baseIsDelete": true,
                   "level": 0,
@@ -2425,9 +2351,9 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
 
 ///楼盘点评
 class LoupanDianpingPage extends StatefulWidget {
-  final Map data;
+  final Map? data;
 
-  const LoupanDianpingPage({Key key, this.data}) : super(key: key);
+  const LoupanDianpingPage({Key? key, this.data}) : super(key: key);
 
   @override
   _LoupanDianpingPageState createState() => _LoupanDianpingPageState();
@@ -2453,7 +2379,7 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
       '/api/Comment/GetPageList',
       data: {
         "PageIndex": page,
-        "buildingId": widget.data['id'],
+        "buildingId": widget.data!['id'],
       },
       catchError: (v) => loupanDianpingDm.toError(v),
       success: (v) {
@@ -2461,7 +2387,7 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
       },
     );
     setState(() {});
-    return loupanDianpingDm.flag;
+    return loupanDianpingDm.flag!;
   }
 
   @override
@@ -2482,7 +2408,7 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
               context: context,
               barrierColor: Colors.transparent,
               pageBuilder: (_, __, ___) {
-                return DianpingTanChuang(widget.data['id'], type: 0);
+                return DianpingTanChuang(widget.data!['id'], type: 0);
               },
             );
             if (res != null) {
@@ -2584,9 +2510,9 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
 }
 
 class HuxingPage extends StatefulWidget {
-  final List list;
+  final List? list;
 
-  const HuxingPage({Key key, this.list}) : super(key: key);
+  const HuxingPage({Key? key, this.list}) : super(key: key);
 
   @override
   _HuxingPageState createState() => _HuxingPageState();
@@ -2605,7 +2531,7 @@ class _HuxingPageState extends State<HuxingPage> {
         padding: EdgeInsets.all(16),
         divider: Divider(height: 32),
         listViewType: ListViewType.Separated,
-        itemCount: widget.list.length,
+        itemCount: widget.list!.length,
         item: (i) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -2617,7 +2543,7 @@ class _HuxingPageState extends State<HuxingPage> {
                   onTap: () {
                     jumpPage(
                       PhotoView(
-                        images: widget.list[i]['images'].toString().split(';'),
+                        images: widget.list![i]['images'].toString().split(';'),
                         isUrl: true,
                       ),
                       isMoveBtm: true,
@@ -2628,7 +2554,7 @@ class _HuxingPageState extends State<HuxingPage> {
                     child: WrapperImage(
                       height: 135,
                       urlBuilder: () =>
-                          widget.list[i]['images'].toString().split(';')[0],
+                          widget.list![i]['images'].toString().split(';')[0],
                     ),
                   ),
                 ),
@@ -2643,7 +2569,7 @@ class _HuxingPageState extends State<HuxingPage> {
                       color: Common.black,
                       children: [
                         MyText.ts(
-                          '${widget.list[i]['layout']}',
+                          '${widget.list![i]['layout']}',
                           isBold: true,
                           color: Common.black,
                         ),
@@ -2658,7 +2584,7 @@ class _HuxingPageState extends State<HuxingPage> {
                       color: Common.black,
                       children: [
                         MyText.ts(
-                          '${widget.list[i]['area']}㎡',
+                          '${widget.list![i]['area']}㎡',
                           isBold: true,
                           color: Common.black,
                         ),
@@ -2674,7 +2600,7 @@ class _HuxingPageState extends State<HuxingPage> {
                 color: Common.black,
                 children: [
                   MyText.ts(
-                    '${widget.list[i]['price']}',
+                    '${widget.list![i]['price']}',
                     isBold: true,
                     color: Color(0xffFF781D),
                   ),
@@ -2691,7 +2617,7 @@ class _HuxingPageState extends State<HuxingPage> {
 class ZhoubianWidget extends StatefulWidget {
   final Map data;
 
-  const ZhoubianWidget(this.data, {Key key}) : super(key: key);
+  const ZhoubianWidget(this.data, {Key? key}) : super(key: key);
 
   @override
   _ZhoubianWidgetState createState() => _ZhoubianWidgetState();

@@ -14,14 +14,14 @@ import 'mytext.dart';
 class PhotoView extends StatefulWidget {
   final List images;
   final int index;
-  final String tag;
+  final String? tag;
   final double flag;
   final bool isUrl;
   final bool isByte;
-  final String imgUrl;
+  final String? imgUrl;
 
   const PhotoView({
-    Key key,
+    Key? key,
     this.images = const [],
     this.index = 0,
     this.tag,
@@ -37,7 +37,7 @@ class PhotoView extends StatefulWidget {
 
 class _PhotoViewState extends State<PhotoView> {
   int currentIndex = 0;
-  PageController controller;
+  PageController? controller;
 
   // var imgUrl = Config.ImgBaseUrl;
 
@@ -83,7 +83,7 @@ class _PhotoViewState extends State<PhotoView> {
                             ? MemoryImage(Uint8List.fromList(List.castFrom<dynamic, int>(widget.images[index])))
                             : CachedNetworkImageProvider(
                                 widget.isUrl ? '${widget.images[index]}' : '${widget.imgUrl ?? Config.ImgBaseUrl1}${widget.images[index]}',
-                              ),
+                              )as ImageProvider<Object>,
                       );
                     },
                     itemCount: widget.images.length,

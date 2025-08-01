@@ -6,14 +6,14 @@ import 'views.dart';
 
 class AnimatedSwitchBuilder<T> extends StatefulWidget {
   const AnimatedSwitchBuilder({
-    Key key,
-    @required this.value,
+    Key? key,
+    required this.value,
     this.initialState,
     this.builder,
     this.animationTime = 250,
     this.alignment = Alignment.center,
     this.isExd = false,
-    @required this.errorOnTap,
+    required this.errorOnTap,
     this.noDataText = '暂无数据',
     this.noDataView,
     this.errorView,
@@ -34,28 +34,28 @@ class AnimatedSwitchBuilder<T> extends StatefulWidget {
   final int animationTime;
 
   ///初始化状态
-  final Widget initialState;
+  final Widget? initialState;
 
   /**
    * [四个builder]
    */
 
   ///包含所有的成功状态
-  final Widget Function(List<dynamic>, T, List<T>, int, bool) builder;
+  final Widget Function(List<dynamic>, T, List<T>, int, bool)? builder;
 
   ///对象成功状态
-  final Widget Function(T) objectBuilder;
+  final Widget Function(T)? objectBuilder;
 
   ///value成功状态
-  final Widget Function(List<dynamic>) valueBuilder;
+  final Widget Function(List<dynamic>)? valueBuilder;
 
   ///对象的成功状态
-  final Widget Function(List<dynamic>, T) valueAndObjBuilder;
+  final Widget Function(List<dynamic>, T)? valueAndObjBuilder;
 
   ///列表成功状态
-  final Widget Function(List<T>, int, bool) listBuilder;
+  final Widget Function(List<T>, int, bool)? listBuilder;
 
-  final Widget Function() defaultBuilder;
+  final Widget Function()? defaultBuilder;
 
   ///对齐方式
   final AlignmentGeometry alignment;
@@ -69,8 +69,8 @@ class AnimatedSwitchBuilder<T> extends StatefulWidget {
   ///没有数据的提示文字
   final String noDataText;
 
-  final Widget noDataView;
-  final Widget errorView;
+  final Widget? noDataView;
+  final Widget? errorView;
 
   ///是否取消其他状态
   final bool isCancelOtherState;
@@ -97,17 +97,17 @@ class _AnimatedSwitchBuilderState<T> extends State<AnimatedSwitchBuilder<T>> wit
       case 1:
         if (widget.isCancelOtherState) {
           if (widget.defaultBuilder != null) {
-            view = widget.defaultBuilder();
+            view = widget.defaultBuilder!();
           } else if (widget.valueBuilder != null) {
-            view = widget.valueBuilder(widget.value.value);
+            view = widget.valueBuilder!(widget.value.value);
           } else if (widget.objectBuilder != null) {
-            view = widget.objectBuilder(widget.value.object);
+            view = widget.objectBuilder!(widget.value.object!);
           } else if (widget.valueAndObjBuilder != null) {
-            view = widget.valueAndObjBuilder(widget.value.value, widget.value.object);
+            view = widget.valueAndObjBuilder!(widget.value.value, widget.value.object!);
           } else if (widget.listBuilder != null) {
-            view = widget.listBuilder(widget.value.list, widget.value.page, widget.value.hasNext);
+            view = widget.listBuilder!(widget.value.list, widget.value.page!, widget.value.hasNext!);
           } else {
-            view = widget.builder(widget.value.value, widget.value.object, widget.value.list, widget.value.page, widget.value.hasNext);
+            view = widget.builder!(widget.value.value, widget.value.object!, widget.value.list, widget.value.page!, widget.value.hasNext!);
           }
         } else {
           view = widget.errorView ??
@@ -125,17 +125,17 @@ class _AnimatedSwitchBuilderState<T> extends State<AnimatedSwitchBuilder<T>> wit
       case 2:
         if (widget.isCancelOtherState) {
           if (widget.defaultBuilder != null) {
-            view = widget.defaultBuilder();
+            view = widget.defaultBuilder!();
           } else if (widget.valueBuilder != null) {
-            view = widget.valueBuilder(widget.value.value);
+            view = widget.valueBuilder!(widget.value.value);
           } else if (widget.objectBuilder != null) {
-            view = widget.objectBuilder(widget.value.object);
+            view = widget.objectBuilder!(widget.value.object!);
           } else if (widget.valueAndObjBuilder != null) {
-            view = widget.valueAndObjBuilder(widget.value.value, widget.value.object);
+            view = widget.valueAndObjBuilder!(widget.value.value, widget.value.object!);
           } else if (widget.listBuilder != null) {
-            view = widget.listBuilder(widget.value.list, widget.value.page, widget.value.hasNext);
+            view = widget.listBuilder!(widget.value.list, widget.value.page!, widget.value.hasNext!);
           } else {
-            view = widget.builder(widget.value.value, widget.value.object, widget.value.list, widget.value.page, widget.value.hasNext);
+            view = widget.builder!(widget.value.value, widget.value.object!, widget.value.list, widget.value.page!, widget.value.hasNext!);
           }
         } else {
           view = widget.noDataView ??
@@ -148,17 +148,20 @@ class _AnimatedSwitchBuilderState<T> extends State<AnimatedSwitchBuilder<T>> wit
         break;
       default:
         if (widget.defaultBuilder != null) {
-          view = widget.defaultBuilder();
+          view = widget.defaultBuilder!();
         } else if (widget.valueBuilder != null) {
-          view = widget.valueBuilder(widget.value.value);
+          view = widget.valueBuilder!(widget.value.value);
         } else if (widget.objectBuilder != null) {
-          view = widget.objectBuilder(widget.value.object);
+          view = widget.objectBuilder!(widget.value.object!);
         } else if (widget.valueAndObjBuilder != null) {
-          view = widget.valueAndObjBuilder(widget.value.value, widget.value.object);
+          view = widget.valueAndObjBuilder!(widget.value.value, widget.value
+              .object!);
         } else if (widget.listBuilder != null) {
-          view = widget.listBuilder(widget.value.list, widget.value.page, widget.value.hasNext);
+          view = widget.listBuilder!(widget.value.list, widget.value.page!,
+              widget.value.hasNext!);
         } else {
-          view = widget.builder(widget.value.value, widget.value.object, widget.value.list, widget.value.page, widget.value.hasNext);
+          view = widget.builder!(widget.value.value, widget.value.object!,
+              widget.value.list, widget.value.page!, widget.value.hasNext!);
         }
         break;
     }
@@ -171,7 +174,6 @@ class _AnimatedSwitchBuilderState<T> extends State<AnimatedSwitchBuilder<T>> wit
               ? AnimatedSize(
                   duration: Duration(milliseconds: 500),
                   curve: Curves.easeOutCubic,
-                  vsync: this,
                   child: view,
                 )
               : view,
@@ -185,7 +187,6 @@ class _AnimatedSwitchBuilderState<T> extends State<AnimatedSwitchBuilder<T>> wit
             ? AnimatedSize(
                 duration: Duration(milliseconds: 500),
                 curve: Curves.easeOutCubic,
-                vsync: this,
                 child: view,
               )
             : view,

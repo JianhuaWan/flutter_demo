@@ -44,7 +44,7 @@ class _SunpanPageState extends State<SunpanPage> {
       },
     );
     setState(() {});
-    return sunpanDm.flag;
+    return sunpanDm.flag!;
   }
 
   @override

@@ -11,16 +11,16 @@ class DataModel<T> {
   ///2：数据集是空
   ///
   ///其他：成功拿到数据
-  int flag;
+  int? flag;
 
   ///异常的错误信息
-  String msg;
+  String? msg;
 
   ///数据分页
-  int page;
+  int? page;
 
   ///是否有下一页
-  bool hasNext;
+  bool? hasNext;
 
   ///页面上的各类值的集合
   List<dynamic> value = <dynamic>[];
@@ -29,9 +29,9 @@ class DataModel<T> {
   List<T> list = <T>[];
 
   ///对象
-  T object;
+  T? object;
 
-  bool isRef;
+  bool? isRef;
 
   ///错误状态处理
   void toError(dynamic v, [bool isRef = false]) {
@@ -51,7 +51,7 @@ class DataModel<T> {
   }
 
   ///添加list集合数据
-  void addList(dynamic data, bool isRef, total, [T Function(dynamic) fun]) {
+  void addList(dynamic data, bool isRef, total, [T Function(dynamic)? fun]) {
     if (isRef) this.page = 1;
     if (isRef) this.list.clear();
     list.addAll(data);
@@ -62,9 +62,10 @@ class DataModel<T> {
   ///分页状态处理
   void addPage([dynamic data]) {
     try {
-      this.hasNext = this.page * 10 < data;
+      this.hasNext = (this.page ?? 1) * 10 < data;
       this.flag = this.list.isEmpty ? (this.page == 1 ? 2 : -2) : getTime();
-      if (this.hasNext) this.page++;
+      if (this.hasNext!) this.page = (this.page ?? 1) + 1;
+      ;
     } catch (e) {}
   }
 
@@ -97,7 +98,7 @@ class DataModel<T> {
   }
 
   ///Objiect成功状态处理
-  void toObject(Response<dynamic> res, [T Function(dynamic) fun]) {
+  void toObject(Response<dynamic> res, [T Function(dynamic)? fun]) {
     if (res != null) {
       this.object = fun == null ? res.data : fun.call(res.data);
       this.flag = getTime();
@@ -115,6 +116,7 @@ class DataModel<T> {
     this.hasNext = true,
     this.object,
   });
+
   DataModel.fromJson(Map<String, dynamic> json) {
     flag = json["flag"]?.toInt();
     msg = json["msg"]?.toString();
@@ -134,6 +136,7 @@ class DataModel<T> {
     }
     object = json["object"];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data["flag"] = flag;

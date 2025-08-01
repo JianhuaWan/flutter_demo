@@ -23,13 +23,14 @@ class KehuPage extends StatefulWidget {
   final bool isUser;
   final int index;
 
-  const KehuPage({Key key, this.isUser = false, this.index = 0}) : super(key: key);
+  const KehuPage({Key? key, this.isUser = false, this.index = 0}) : super
+      (key: key);
   @override
   _KehuPageState createState() => _KehuPageState();
 }
 
 class _KehuPageState extends State<KehuPage> with NoSlidingReturn, TickerProviderStateMixin {
-  TabController tabCon;
+  TabController? tabCon;
 
   var kehuUiList = [
     {'key': '1', 'value': '待审核'},
@@ -94,7 +95,7 @@ class _KehuPageState extends State<KehuPage> with NoSlidingReturn, TickerProvide
         isShowBorder: true,
       ),
       body: Selector<UserProvider, Map>(
-        selector: (_, k) => k.myKehuTongjiDm.object,
+        selector: (_, k) => k.myKehuTongjiDm.object!,
         builder: (_, v, view) {
           return TabWidget(
             tabCon: tabCon,
@@ -111,7 +112,7 @@ class _KehuPageState extends State<KehuPage> with NoSlidingReturn, TickerProvide
 class KehuItem extends StatefulWidget {
   final Map m;
 
-  const KehuItem(this.m, {Key key}) : super(key: key);
+  const KehuItem(this.m, {Key? key}) : super(key: key);
   @override
   _KehuItemState createState() => _KehuItemState();
 }
@@ -146,7 +147,7 @@ class _KehuItemState extends State<KehuItem> {
       success: (v) => kehuListDm.addList(v['data'], isRef, v['total']),
     );
     setState(() {});
-    return kehuListDm.flag;
+    return kehuListDm.flag!;
   }
 
   @override
@@ -401,7 +402,7 @@ class _KehuItemState extends State<KehuItem> {
                                         '已认购': '签约',
                                         '已签约': '成交',
                                         '已成交': '退房',
-                                      }[widget.m['value']],
+                                      }[widget.m['value']]!,
                                       fun: () async {
                                         await Request.put(
                                           '/api/Customer/ChangeStatus',
@@ -516,13 +517,14 @@ class _KehuItemState extends State<KehuItem> {
     );
   }
 
-  Widget buildMaskView(Map<String, String> m, isShowShadow) {
+  Widget buildMaskView(Map m, isShowShadow) {
     return Container(
       height: 48,
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.only(left: 15),
       width: double.infinity,
-      child: MyText(m['value'] + '客户：${userPro.myKehuTongjiDm.object[m['key2']]}个'),
+      child: MyText(m['value']! + '客户：${userPro.myKehuTongjiDm
+          .object![m['key2']]}个'),
       decoration: BoxDecoration(
         color: isShowShadow ? Colors.white : Colors.transparent,
         boxShadow: !isShowShadow
@@ -566,9 +568,9 @@ class _KehuItemState extends State<KehuItem> {
 
 class KehuTanchuang extends StatefulWidget {
   final String title;
-  final Function fun;
+  final Function? fun;
 
-  const KehuTanchuang(this.title, {Key key, this.fun}) : super(key: key);
+  const KehuTanchuang(this.title, {Key? key, this.fun}) : super(key: key);
   @override
   _KehuTanchuangState createState() => _KehuTanchuangState();
 }
@@ -627,7 +629,7 @@ class _KehuTanchuangState extends State<KehuTanchuang> with TickerProviderStateM
                     onTap: [
                       () => close(),
                       () async {
-                        widget.fun();
+                        widget.fun!()!;
                         close();
                       },
                     ],

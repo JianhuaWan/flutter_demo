@@ -54,7 +54,7 @@ class _SetupPageState extends State<SetupPage> {
       ),
       brightness: Brightness.dark,
       btnBar: Selector<UserProvider, UserModel>(
-        selector: (_, k) => k.userModel,
+        selector: (_, k) => k.userModel!,
         builder: (_, v, view) {
           return v == null
               ? SizedBox()
@@ -229,11 +229,11 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
   TextEditingController textCon1 = TextEditingController();
   TextEditingController textCon2 = TextEditingController();
 
-  String xinbie;
+  String? xinbie;
 
-  String icon;
+  String? icon;
 
-  String realName;
+  String? realName;
 
   @override
   void initState() {
@@ -243,8 +243,8 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
 
   ///初始化函数
   Future initData() async {
-    textCon1.text = user.mobile;
-    textCon2.text = user.nickName;
+    textCon1.text = user.mobile!;
+    textCon2.text = user.nickName!;
     xinbie = user.gender == 0 ? '女' : '男';
     realName =
         user.realName == 'null' || user.realName == '' || user.realName == null
@@ -317,7 +317,7 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
                 selectoText: [
                   '',
                   realName == null
-                      ? [user.realName, '请实名'][user.isIdentity ? 0 : 1]
+                      ? [user.realName, '请实名'][user.isIdentity! ? 0 : 1]
                       : realName,
                   '',
                   '',

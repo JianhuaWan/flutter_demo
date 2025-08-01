@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class _ChildEntry {
   _ChildEntry({
-    @required this.controller,
-    @required this.animation,
-    @required this.transition,
-    @required this.widgetChild,
+    required this.controller,
+    required this.animation,
+    required this.transition,
+    required this.widgetChild,
   })  : assert(animation != null),
         assert(transition != null),
         assert(controller != null);
@@ -31,9 +31,9 @@ typedef AnimatedSwitcherLayoutBuilder = Widget Function(
 
 class AnimatedSwitcherWidget extends StatefulWidget {
   const AnimatedSwitcherWidget({
-    Key key,
+    Key? key,
     this.child,
-    @required this.duration,
+    required this.duration,
     this.reverseDuration,
     this.switchInCurve = Curves.linear,
     this.switchOutCurve = Curves.linear,
@@ -46,9 +46,9 @@ class AnimatedSwitcherWidget extends StatefulWidget {
         assert(transitionBuilder != null),
         assert(layoutBuilder != null),
         super(key: key);
-  final Widget child;
+  final Widget? child;
   final Duration duration;
-  final Duration reverseDuration;
+  final Duration? reverseDuration;
   final Curve switchInCurve;
   final AlignmentGeometry alignment;
   final Curve switchOutCurve;
@@ -87,9 +87,9 @@ class AnimatedSwitcherWidget extends StatefulWidget {
 }
 
 class _AnimatedSwitcherState extends State<AnimatedSwitcherWidget> with TickerProviderStateMixin {
-  _ChildEntry _currentEntry;
+  _ChildEntry? _currentEntry;
   final Set<_ChildEntry> _outgoingEntries = <_ChildEntry>{};
-  List<Widget> _outgoingWidgets = const <Widget>[];
+  List<Widget>? _outgoingWidgets = const <Widget>[];
   int _childNumber = 0;
 
   @override
@@ -103,31 +103,32 @@ class _AnimatedSwitcherState extends State<AnimatedSwitcherWidget> with TickerPr
     super.didUpdateWidget(oldWidget);
     if (widget.transitionBuilder != oldWidget.transitionBuilder) {
       _outgoingEntries.forEach(_updateTransitionForEntry);
-      if (_currentEntry != null) _updateTransitionForEntry(_currentEntry);
+      if (_currentEntry != null) _updateTransitionForEntry(_currentEntry!);
       _markChildWidgetCacheAsDirty();
     }
 
     final bool hasNewChild = widget.child != null;
     final bool hasOldChild = _currentEntry != null;
-    if (hasNewChild != hasOldChild || hasNewChild && !Widget.canUpdate(widget.child, _currentEntry.widgetChild)) {
+    if (hasNewChild != hasOldChild || hasNewChild && !Widget.canUpdate(widget
+        .child!, _currentEntry!.widgetChild)) {
       _childNumber += 1;
       _addEntryForNewChild(animate: true);
     } else if (_currentEntry != null) {
       assert(hasOldChild && hasNewChild);
-      assert(Widget.canUpdate(widget.child, _currentEntry.widgetChild));
-      _currentEntry.widgetChild = widget.child;
-      _updateTransitionForEntry(_currentEntry); // uses entry.widgetChild
+      assert(Widget.canUpdate(widget.child!, _currentEntry!.widgetChild));
+      _currentEntry!.widgetChild = widget.child!;
+      _updateTransitionForEntry(_currentEntry!); // uses entry.widgetChild
       _markChildWidgetCacheAsDirty();
     }
   }
 
-  void _addEntryForNewChild({@required bool animate}) {
+  void _addEntryForNewChild({required bool animate}) {
     assert(animate || _currentEntry == null);
     if (_currentEntry != null) {
       assert(animate);
       assert(!_outgoingEntries.contains(_currentEntry));
-      _outgoingEntries.add(_currentEntry);
-      _currentEntry.controller.reverse();
+      _outgoingEntries.add(_currentEntry!);
+      _currentEntry!.controller.reverse();
       _markChildWidgetCacheAsDirty();
       _currentEntry = null;
     }
@@ -143,7 +144,7 @@ class _AnimatedSwitcherState extends State<AnimatedSwitcherWidget> with TickerPr
       reverseCurve: widget.switchOutCurve,
     );
     _currentEntry = _newEntry(
-      child: widget.child,
+      child: widget.child!,
       controller: controller,
       animation: animation,
       builder: widget.transitionBuilder,
@@ -157,10 +158,10 @@ class _AnimatedSwitcherState extends State<AnimatedSwitcherWidget> with TickerPr
   }
 
   _ChildEntry _newEntry({
-    @required Widget child,
-    @required AnimatedSwitcherTransitionBuilder builder,
-    @required AnimationController controller,
-    @required Animation<double> animation,
+    required Widget child,
+    required AnimatedSwitcherTransitionBuilder builder,
+    required AnimationController controller,
+    required Animation<double> animation,
   }) {
     final _ChildEntry entry = _ChildEntry(
       widgetChild: child,
@@ -197,13 +198,13 @@ class _AnimatedSwitcherState extends State<AnimatedSwitcherWidget> with TickerPr
     _outgoingWidgets ??= List<Widget>.unmodifiable(
       _outgoingEntries.map<Widget>((_ChildEntry entry) => entry.transition),
     );
-    assert(_outgoingEntries.length == _outgoingWidgets.length);
-    assert(_outgoingEntries.isEmpty || _outgoingEntries.last.transition == _outgoingWidgets.last);
+    assert(_outgoingEntries.length == _outgoingWidgets?.length);
+    assert(_outgoingEntries.isEmpty || _outgoingEntries.last.transition == _outgoingWidgets?.last);
   }
 
   @override
   void dispose() {
-    if (_currentEntry != null) _currentEntry.controller.dispose();
+    if (_currentEntry != null) _currentEntry!.controller.dispose();
     for (final _ChildEntry entry in _outgoingEntries) entry.controller.dispose();
     super.dispose();
   }
@@ -211,6 +212,7 @@ class _AnimatedSwitcherState extends State<AnimatedSwitcherWidget> with TickerPr
   @override
   Widget build(BuildContext context) {
     _rebuildOutgoingWidgetsIfNeeded();
-    return widget.layoutBuilder(widget.alignment, _currentEntry?.transition, _outgoingWidgets);
+    return widget.layoutBuilder(widget.alignment, _currentEntry!.transition,
+        _outgoingWidgets!);
   }
 }

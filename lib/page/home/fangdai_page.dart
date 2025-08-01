@@ -39,7 +39,7 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
   var anjieQixian, lilvFangshi, huankuanTime2;
   var gongjijinQixian, huankuanTime3;
 
-  TabController tabCon;
+  TabController? tabCon;
 
   @override
   void initState() {
@@ -162,8 +162,8 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
             showToast('已重置');
           },
           () {
-            flog(tabCon.index);
-            switch (tabCon.index) {
+            flog(tabCon!.index);
+            switch (tabCon!.index) {
               case 0:
                 if (textCon1.text == '') {
                   showToast('请输入商贷金额');
@@ -303,14 +303,14 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
           switch (i) {
             case 1:
               showSelecto(
-                context,
+                context!,
                 texts: List.generate(30, (i) => '${i + 1}年'),
                 callback: (v, i) => setState(() => daikuanQixian = i),
               );
               break;
             case 2:
               showSelecto(
-                context,
+                context!,
                 texts: [
                   [0.7, '最新基准利率7折'][1],
                   [0.8, '最新基准利率8折'][1],
@@ -326,7 +326,7 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
               break;
             case 4:
               DatePicker.showDatePicker(
-                context,
+                context!,
                 minTime: DateTime.now(),
                 maxTime: DateTime.now().add(Duration(days: 365 * 10)),
                 onConfirm: (date) {
@@ -394,14 +394,14 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
           switch (i) {
             case 2:
               showSelecto(
-                context,
+                context!,
                 texts: List.generate(30, (i) => '${i + 1}年'),
                 callback: (v, i) => setState(() => anjieQixian = i),
               );
               break;
             case 3:
               showSelecto(
-                context,
+                context!,
                 texts: [
                   [0.7, '最新基准利率7折'][1],
                   [0.8, '最新基准利率8折'][1],
@@ -444,7 +444,7 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
           switch (i) {
             case 1:
               showSelecto(
-                context,
+                context!,
                 texts: List.generate(30, (i) => '${i + 1}年'),
                 callback: (v, i) => setState(() => gongjijinQixian = i),
               );
@@ -457,11 +457,11 @@ class _FangdaiPageState extends State<FangdaiPage> with NoSlidingReturn, TickerP
 }
 
 class FangdaiResult extends StatefulWidget {
-  final Map data;
+  final Map? data;
   final bool isGjj;
 
   const FangdaiResult({
-    Key key,
+    Key? key,
     this.data,
     this.isGjj = false,
   }) : super(key: key);
@@ -491,10 +491,10 @@ class _FangdaiResultState extends State<FangdaiResult> {
     var url = 'http://fangd.sinaapp.com/home/calc';
     await Future.delayed(Duration(milliseconds: 1000));
     var res = await Dio().get(url, queryParameters: {
-      "com_amount": widget.data['jine'],
-      "fund_amount": widget.data['gongjijin'],
-      "year": widget.data['qixian'] + 1,
-      "com_rate_percent": widget.data['suanfa'],
+      "com_amount": widget.data!['jine'],
+      "fund_amount": widget.data!['gongjijin'],
+      "year": widget.data!['qixian'] + 1,
+      "com_rate_percent": widget.data!['suanfa'],
       "fund_rate_percent": "4.00",
       "pay_method": "same_all",
     }).catchError((v) {
@@ -510,7 +510,7 @@ class _FangdaiResultState extends State<FangdaiResult> {
     } else {
       dataDm.toError('服务器响应错误');
     }
-    return dataDm.flag;
+    return dataDm.flag!;
   }
 
   ///数据模型
@@ -519,10 +519,10 @@ class _FangdaiResultState extends State<FangdaiResult> {
     var url = 'http://fangd.sinaapp.com/home/calc';
     await Future.delayed(Duration(milliseconds: 1000));
     var res = await Dio().get(url, queryParameters: {
-      "com_amount": widget.data['jine'],
-      "fund_amount": widget.data['gongjijin'],
-      "year": widget.data['qixian'] + 1,
-      "com_rate_percent": widget.data['suanfa'],
+      "com_amount": widget.data!['jine'],
+      "fund_amount": widget.data!['gongjijin'],
+      "year": widget.data!['qixian'] + 1,
+      "com_rate_percent": widget.data!['suanfa'],
       "fund_rate_percent": "4.00",
       "pay_method": "same_base",
     }).catchError((v) {
@@ -538,7 +538,7 @@ class _FangdaiResultState extends State<FangdaiResult> {
     } else {
       dataDm1.toError('服务器响应错误');
     }
-    return dataDm1.flag;
+    return dataDm1.flag!;
   }
 
   @override
@@ -549,7 +549,7 @@ class _FangdaiResultState extends State<FangdaiResult> {
         value: dataDm,
         errorOnTap: () async {
           await this.sendRequest();
-          return this.sendRequest1();
+          await this.sendRequest1();
         },
         isAnimatedSize: true,
         objectBuilder: (v) {

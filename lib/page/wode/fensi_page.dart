@@ -44,7 +44,7 @@ class _FensiPageState extends State<FensiPage> {
       },
     );
     setState(() {});
-    return fensiDm.flag;
+    return fensiDm.flag!;
   }
 
   @override
@@ -173,7 +173,7 @@ class _FensiPageState extends State<FensiPage> {
 class FensiInfoPage extends StatefulWidget {
   final String id;
 
-  const FensiInfoPage(this.id, {Key key}) : super(key: key);
+  const FensiInfoPage(this.id, {Key? key}) : super(key: key);
   @override
   _FensiInfoPageState createState() => _FensiInfoPageState();
 }
@@ -203,7 +203,7 @@ class _FensiInfoPageState extends State<FensiInfoPage> {
       },
     );
     setState(() {});
-    return fensiInfoDm.flag;
+    return fensiInfoDm.flag!;
   }
 
   @override

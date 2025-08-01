@@ -10,7 +10,7 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
 class UpappWidget extends StatefulWidget {
   final String content;
@@ -18,7 +18,10 @@ class UpappWidget extends StatefulWidget {
   final String banben;
   final String pgkVer;
 
-  const UpappWidget(this.content, this.url, this.banben, this.pgkVer, {Key key}) : super(key: key);
+  const UpappWidget(this.content, this.url, this.banben, this.pgkVer, {Key?
+  key})
+      : super(key: key);
+
   @override
   _UpappWidgetState createState() => _UpappWidgetState();
 }
@@ -27,36 +30,28 @@ class _UpappWidgetState extends State<UpappWidget> {
   String apkName = 'app.apk';
   String appPath = '';
   String updateReason = '';
-  ProgressDialog pr;
+  late ProgressDialog pd;
 
   /// 下载最新apk包
   Future<void> _executeDownload(BuildContext context, url) async {
-    pr = new ProgressDialog(
-      context,
-      type: ProgressDialogType.Download,
-      isDismissible: true,
-      showLogs: true,
-    );
-    pr.style(message: '准备下载...');
-    if (!pr.isShowing()) {
-      pr.show();
-    }
+    pd = ProgressDialog(context: context);
+    pd.show(max: 100, msg: 'File Downloading...');
     final path = await _apkLocalPath;
     Dio dio = new Dio();
-    await dio.download(url, path + '/' + apkName, onReceiveProgress: (received, total) async {
+    await dio.download(url, path + '/' + apkName,
+        onReceiveProgress: (received, total) async {
       if (total != -1) {
         ///当前下载的百分比例
         print((received / total * 100).toStringAsFixed(0) + "%");
         double currentProgress = received / total;
         setState(() {
-          pr.update(
-            progress: double.parse((currentProgress * 100.0).toStringAsExponential(1)),
-            maxProgress: 100,
-            message: "正在下载...",
+          pd.update(
+            value: (currentProgress * 100).toInt(),
+            msg: "正在下载...",
           );
         });
         if (currentProgress == 1.0) {
-          pr.dismiss();
+          pd.close();
           if (await Permission.storage.request().isGranted) {
             _installApk();
           }
@@ -73,7 +68,7 @@ class _UpappWidgetState extends State<UpappWidget> {
   /// 获取apk存储位置
   Future<String> get _apkLocalPath async {
     final directory = await getExternalStorageDirectory();
-    String path = directory.path + Platform.pathSeparator + 'Download';
+    String path = directory!.path + Platform.pathSeparator + 'Download';
     final savedDir = Directory(path);
     bool hasExisted = await savedDir.exists();
     if (!hasExisted) {
@@ -152,7 +147,10 @@ class _UpappWidgetState extends State<UpappWidget> {
                                 height: 44,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [Color(0xFF1684FF), Color(0xFF3FA9FF)],
+                                    colors: [
+                                      Color(0xFF1684FF),
+                                      Color(0xFF3FA9FF)
+                                    ],
                                     stops: [0, 1],
                                     begin: Alignment(-0.64, 1),
                                     end: Alignment(0.64, -1),

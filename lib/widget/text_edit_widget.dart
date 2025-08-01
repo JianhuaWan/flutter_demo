@@ -3,13 +3,13 @@ import 'package:flutter_app/view/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
 
 class TextEditWidget extends StatefulWidget {
-  final String hint;
-  final Function(String) onSubmitted;
+  final String? hint;
+  final Function(String)? onSubmitted;
   final Color bgColor;
-  final TextEditingController textCon;
+  final TextEditingController? textCon;
 
   const TextEditWidget({
-    Key key,
+    Key? key,
     this.hint,
     this.onSubmitted,
     this.bgColor = const Color(0x10000000),
@@ -54,7 +54,7 @@ class _TextEditWidgetState extends State<TextEditWidget> {
             onChanged: (v) => setState(() {}),
             con: widget.textCon ?? textCon,
             textInputAction: TextInputAction.search,
-            onSubmitted: (v) => widget.onSubmitted(v),
+            onSubmitted: (v) => widget.onSubmitted!(v),
           ),
           WidgetTap(
             isElastic: textCon.text != '',
@@ -62,7 +62,7 @@ class _TextEditWidgetState extends State<TextEditWidget> {
               if (textCon.text != '') {
                 setState(() => textCon.clear());
                 FocusScope.of(context).requestFocus(FocusNode());
-                widget.onSubmitted(textCon.text);
+                widget.onSubmitted!(textCon.text);
               }
             },
             child: AnimatedOpacity(
@@ -76,7 +76,7 @@ class _TextEditWidgetState extends State<TextEditWidget> {
             onTap: () {
               if (textCon.text != '') {
                 FocusScope.of(context).requestFocus(FocusNode());
-                widget.onSubmitted(textCon.text);
+                widget.onSubmitted!(textCon.text);
               }
             },
             child: AnimatedOpacity(

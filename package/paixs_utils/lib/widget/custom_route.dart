@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class CustomRoute extends PageRouteBuilder {
   final Widget widget;
-  final Object arguments;
+  final Object? arguments;
   final Duration duration;
-  final bool isMove;
-  final bool isMoveBtm;
+  final bool? isMove;
+  final bool? isMoveBtm;
   final bool opaque;
 
   CustomRoute(
@@ -18,8 +18,10 @@ class CustomRoute extends PageRouteBuilder {
     this.isMoveBtm,
     this.duration = const Duration(milliseconds: 1000),
   }) : super(
-          transitionDuration: duration, //过渡时间
-          opaque: opaque ?? false, //禁止路由跳转时Rebuild页面
+          transitionDuration: duration,
+          //过渡时间
+          opaque: opaque ?? false,
+          //禁止路由跳转时Rebuild页面
           settings: RouteSettings(
             name: '${widget.runtimeType}',
             arguments: arguments,
@@ -37,10 +39,10 @@ class CustomRoute extends PageRouteBuilder {
             Animation<double> animation2,
             Widget child,
           ) {
-            if (isMove)
+            if (isMove ?? false)
               return SlideTransition(
                 position: Tween<Offset>(
-                  begin: isMoveBtm ? Offset(0, 1) : Offset(1, 0),
+                  begin: isMoveBtm! ? Offset(0, 1) : Offset(1, 0),
                   end: Offset(0, 0),
                 ).animate(
                   CurvedAnimation(
@@ -64,7 +66,8 @@ class CustomRoute extends PageRouteBuilder {
             else
               return FadeTransition(
                 opacity: Tween(begin: 0.0, end: 1.0).animate(
-                  CurvedAnimation(parent: animation1, curve: Curves.fastOutSlowIn),
+                  CurvedAnimation(
+                      parent: animation1, curve: Curves.fastOutSlowIn),
                 ),
                 child: child,
               );

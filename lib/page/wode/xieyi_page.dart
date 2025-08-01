@@ -6,9 +6,9 @@ import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
 
 class XieyiPage extends StatefulWidget {
-  final String type;
+  final String? type;
 
-  const XieyiPage({Key key, this.type}) : super(key: key);
+  const XieyiPage({Key? key, this.type}) : super(key: key);
   @override
   _XieyiPageState createState() => _XieyiPageState();
 }
@@ -38,7 +38,7 @@ class _XieyiPageState extends State<XieyiPage> {
       },
     );
     setState(() {});
-    return xieyiDm.flag;
+    return xieyiDm.flag!;
   }
 
   @override
@@ -49,7 +49,7 @@ class _XieyiPageState extends State<XieyiPage> {
         title: {
           '11': '隐私政策',
           '12': '用户协议',
-        }[widget.type],
+        }[widget.type]!,
         color: Colors.white,
       ),
       bgColor: Colors.white,

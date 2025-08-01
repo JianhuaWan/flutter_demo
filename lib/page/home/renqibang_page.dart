@@ -38,7 +38,7 @@ class _RenqibangPageState extends State<RenqibangPage> {
       success: (v) => renqibangDm.addList(v['data'], isRef, v['total']),
     );
     setState(() {});
-    return renqibangDm.flag;
+    return renqibangDm.flag!;
   }
 
   @override

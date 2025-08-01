@@ -10,9 +10,9 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 import 'package:provider/provider.dart';
 
 class AppbarWidget extends StatelessWidget {
-  final Function callback;
+  final Function? callback;
   const AppbarWidget({
-    Key key,
+    Key? key,
     this.callback,
   }) : super(key: key);
 
@@ -43,7 +43,8 @@ class AppbarWidget extends StatelessWidget {
               WidgetTap(
                 isElastic: true,
                 onTap: () {
-                  jumpPage(PhoneCountryCodePage(), callback: (v) => callback(v));
+                  jumpPage(PhoneCountryCodePage(), callback: (v) => callback!
+                    (v));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -59,7 +60,7 @@ class AppbarWidget extends StatelessWidget {
                       ),
                       SizedBox(width: 9),
                       Selector<AppProvider, String>(
-                        selector: (_, k) => k.city,
+                        selector: (_, k) => k.city!,
                         builder: (_, v, view) {
                           return MyText(v ?? '请稍后', size: 13);
                           // if (v == null) {

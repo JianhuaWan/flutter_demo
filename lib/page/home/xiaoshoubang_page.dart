@@ -38,7 +38,7 @@ class _XiaoshoubangPageState extends State<XiaoshoubangPage> {
       success: (v) => renqibangDm.addList(v['data'], isRef, v['total']),
     );
     setState(() {});
-    return renqibangDm.flag;
+    return renqibangDm.flag!;
   }
 
   @override

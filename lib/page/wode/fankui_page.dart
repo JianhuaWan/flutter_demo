@@ -5,7 +5,7 @@ import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/view/views.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:flutter_app/widget/widgets.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
 import 'package:paixs_utils/widget/mytext.dart';
@@ -19,7 +19,7 @@ class FankuiPage extends StatefulWidget {
 
 class _FankuiPageState extends State<FankuiPage> {
   var textCon = TextEditingController();
-  String version;
+  String? version;
 
   @override
   void initState() {
@@ -109,13 +109,12 @@ class _FankuiPageState extends State<FankuiPage> {
         child: Container(
           color: Colors.black.withOpacity(0.05),
           child: buildTFView(
-            context,
+            context!,
             con: textCon,
             hintText: '请写下问题和建议，以便于为你提供更好的服务',
             hintColor: Color(0xffB7B7B7),
             padding: EdgeInsets.all(16),
             maxLines: 10,
-            height: null,
           ),
         ),
       ),

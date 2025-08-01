@@ -12,29 +12,32 @@ typedef List<Widget> CreateWidgetList();
 class CityPicker {
   static void showCityPicker(
     BuildContext context, {
-    ChangeData selectProvince,
-    ChangeData selectCity,
-    ChangeData selectArea,
-    ChangeData selectAll,
+    ChangeData? selectProvince,
+    ChangeData? selectCity,
+    ChangeData? selectArea,
+    ChangeData? selectAll,
   }) {
     rootBundle.loadString('data/province.json').then((v) {
       List data = json.decode(v);
       Navigator.push(
         context,
-        _CityPickerRoute(data: data, selectProvince: selectProvince, selectCity: selectCity, selectArea: selectArea, selectAll: selectAll, theme: Theme.of(context), barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel),
+        _CityPickerRoute(data: data, selectProvince: selectProvince!,
+            selectCity: selectCity!, selectArea: selectArea!, selectAll:
+            selectAll!, theme: Theme.of(context), barrierLabel:
+            MaterialLocalizations.of(context).modalBarrierDismissLabel),
       );
     });
   }
 }
 
 class _CityPickerRoute<T> extends PopupRoute<T> {
-  final ThemeData theme;
-  final String barrierLabel;
-  final List data;
-  final ChangeData selectProvince;
-  final ChangeData selectCity;
-  final ChangeData selectArea;
-  final ChangeData selectAll;
+  final ThemeData? theme;
+  final String? barrierLabel;
+  final List? data;
+  final ChangeData? selectProvince;
+  final ChangeData? selectCity;
+  final ChangeData? selectArea;
+  final ChangeData? selectAll;
   _CityPickerRoute({
     this.theme,
     this.barrierLabel,
@@ -55,13 +58,13 @@ class _CityPickerRoute<T> extends PopupRoute<T> {
   @override
   bool get barrierDismissible => true;
 
-  AnimationController _animationController;
+  AnimationController? _animationController;
 
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController = BottomSheet.createAnimationController(navigator.overlay);
-    return _animationController;
+    _animationController = BottomSheet.createAnimationController(navigator?.overlay as TickerProvider);
+    return _animationController!;
   }
 
   @override
@@ -71,15 +74,15 @@ class _CityPickerRoute<T> extends PopupRoute<T> {
       context: context,
       child: _CityPickerWidget(
         route: this,
-        data: data,
-        selectProvince: selectProvince,
-        selectCity: selectCity,
-        selectArea: selectArea,
-        selectAll: selectAll,
+        data: data!,
+        selectProvince: selectProvince!,
+        selectCity: selectCity!,
+        selectArea: selectArea!,
+        selectAll: selectAll!,
       ),
     );
     if (theme != null) {
-      bottomSheet = Theme(data: theme, child: bottomSheet);
+      bottomSheet = Theme(data: theme!, child: bottomSheet);
     }
     return bottomSheet;
   }
@@ -87,16 +90,16 @@ class _CityPickerRoute<T> extends PopupRoute<T> {
 
 class _CityPickerWidget extends StatefulWidget {
   final _CityPickerRoute route;
-  final List data;
-  final ChangeData selectProvince;
-  final ChangeData selectCity;
-  final ChangeData selectArea;
-  final ChangeData selectAll;
+  final List? data;
+  final ChangeData? selectProvince;
+  final ChangeData? selectCity;
+  final ChangeData? selectArea;
+  final ChangeData? selectAll;
 
   _CityPickerWidget({
     // ignore: unused_element
-    Key key,
-    @required this.route,
+    Key? key,
+    required this.route,
     this.data,
     this.selectProvince,
     this.selectCity,
@@ -111,9 +114,9 @@ class _CityPickerWidget extends StatefulWidget {
 }
 
 class _CityPickerState extends State<_CityPickerWidget> {
-  FixedExtentScrollController provinceController;
-  FixedExtentScrollController cityController;
-  FixedExtentScrollController areaController;
+  FixedExtentScrollController? provinceController;
+  FixedExtentScrollController? cityController;
+  FixedExtentScrollController? areaController;
   int provinceIndex = 0, cityIndex = 0, areaIndex = 0;
   List province = [];
   List city = [];
@@ -127,9 +130,9 @@ class _CityPickerState extends State<_CityPickerWidget> {
     areaController = FixedExtentScrollController();
     if (mounted)
       setState(() {
-        province = widget.data;
-        city = widget.data[provinceIndex]['cities'];
-        area = widget.data[provinceIndex]['cities'][cityIndex]['district'];
+        province = widget.data!;
+        city = widget.data![provinceIndex]['cities'];
+        area = widget.data![provinceIndex]['cities'][cityIndex]['district'];
       });
   }
 
@@ -153,7 +156,7 @@ class _CityPickerState extends State<_CityPickerWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Navigator.pop(context!),
                       child: Text(
                         '取消',
                         style: TextStyle(
@@ -170,26 +173,26 @@ class _CityPickerState extends State<_CityPickerWidget> {
                         Map<String, dynamic> allMap = {"name": province[provinceIndex]['province'] + province[provinceIndex]['cities'][cityIndex]['city'] + province[provinceIndex]['cities'][cityIndex]['district'][areaIndex]['area']};
 
                         if (widget.selectProvince != null) {
-                          widget.selectProvince(provinceMap);
+                          widget.selectProvince!(provinceMap);
                         }
                         if (widget.selectCity != null) {
-                          widget.selectCity(cityMap);
+                          widget.selectCity!(cityMap);
                         }
                         if (widget.selectArea != null) {
-                          widget.selectArea(areaMap);
+                          widget.selectArea!(areaMap);
                         }
 
                         if (widget.selectAll != null) {
-                          widget.selectAll(allMap);
+                          widget.selectAll!(allMap);
                         }
 
-                        Navigator.pop(context);
+                        Navigator.pop(context!);
                       },
                       child: Text(
                         '确认',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context!).primaryColor,
                         ),
                       ),
                     ),
@@ -201,7 +204,7 @@ class _CityPickerState extends State<_CityPickerWidget> {
                   children: <Widget>[
                     _MyCityPicker(
                       key: Key('province'),
-                      controller: provinceController,
+                      controller: provinceController!,
                       createWidgetList: () {
                         return province.map((v) {
                           return Align(
@@ -221,16 +224,17 @@ class _CityPickerState extends State<_CityPickerWidget> {
                             provinceIndex = index;
                             cityIndex = 0;
                             areaIndex = 0;
-                            cityController.jumpToItem(0);
-                            areaController.jumpToItem(0);
-                            city = widget.data[provinceIndex]['cities'];
-                            area = widget.data[provinceIndex]['cities'][cityIndex]['district'];
+                            cityController!.jumpToItem(0);
+                            areaController!.jumpToItem(0);
+                            city = widget.data![provinceIndex]['cities'];
+                            area = widget
+                                .data![provinceIndex]['cities'][cityIndex]['district'];
                           });
                       },
                     ),
                     _MyCityPicker(
                       key: Key('city'),
-                      controller: cityController,
+                      controller: cityController!,
                       createWidgetList: () {
                         return city.map((v) {
                           return Align(
@@ -249,14 +253,15 @@ class _CityPickerState extends State<_CityPickerWidget> {
                           setState(() {
                             cityIndex = index;
                             areaIndex = 0;
-                            areaController.jumpToItem(0);
-                            area = widget.data[provinceIndex]['cities'][cityIndex]['district'];
+                            areaController!.jumpToItem(0);
+                            area = widget
+                                .data![provinceIndex]['cities'][cityIndex]['district'];
                           });
                       },
                     ),
                     _MyCityPicker(
                       key: Key('area'),
-                      controller: areaController,
+                      controller: areaController!,
                       createWidgetList: () {
                         return area.map((v) {
                           return Align(
@@ -290,16 +295,16 @@ class _CityPickerState extends State<_CityPickerWidget> {
     return GestureDetector(
       child: AnimatedBuilder(
         animation: CurvedAnimation(
-          parent: widget.route.animation,
+          parent: widget.route.animation!,
           curve: Curves.easeOutCubic,
           reverseCurve: Curves.easeOutCubic,
         ),
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext context, Widget? child) {
           return ClipRect(
             child: CustomSingleChildLayout(
               delegate: _BottomPickerLayout(
                 CurvedAnimation(
-                  parent: widget.route.animation,
+                  parent: widget.route.animation!,
                   curve: Curves.easeOutCubic,
                   reverseCurve: Curves.easeOutCubic,
                 ).value,
@@ -323,10 +328,10 @@ class _CityPickerState extends State<_CityPickerWidget> {
 }
 
 class _MyCityPicker extends StatefulWidget {
-  final CreateWidgetList createWidgetList;
-  final Key key;
-  final FixedExtentScrollController controller;
-  final ValueChanged<int> changed;
+  final CreateWidgetList? createWidgetList;
+  final Key? key;
+  final FixedExtentScrollController? controller;
+  final ValueChanged<int>? changed;
 
   _MyCityPicker({this.createWidgetList, this.key, this.controller, this.changed});
 
@@ -337,7 +342,7 @@ class _MyCityPicker extends StatefulWidget {
 }
 
 class _MyCityPickerState extends State<_MyCityPicker> {
-  List<Widget> children;
+  List<Widget>? children;
 
   @override
   Widget build(BuildContext context) {
@@ -353,10 +358,11 @@ class _MyCityPickerState extends State<_MyCityPicker> {
           itemExtent: 30.0,
           onSelectedItemChanged: (index) {
             if (widget.changed != null) {
-              widget.changed(index);
+              widget.changed!(index);
             }
           },
-          children: widget.createWidgetList().length > 0 ? widget.createWidgetList() : [Text('')],
+          children: widget.createWidgetList!().length > 0 ? widget
+              .createWidgetList!() : [Text('')],
         ),
       ),
       flex: 1,
@@ -368,8 +374,8 @@ class _BottomPickerLayout extends SingleChildLayoutDelegate {
   _BottomPickerLayout(this.progress, {this.itemCount, this.showTitleActions});
 
   final double progress;
-  final int itemCount;
-  final bool showTitleActions;
+  final int? itemCount;
+  final bool? showTitleActions;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {

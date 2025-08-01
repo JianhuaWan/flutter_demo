@@ -13,7 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:crypto/crypto.dart';
 
 ///上传file
-Future<String> uploadFile(PickedFile file) async {
+Future<String?> uploadFile(PickedFile file) async {
   List<int> byteData = await file.readAsBytes();
   List paths = file.path.split("/");
   MultipartFile multipartFile = MultipartFile.fromBytes(
@@ -40,7 +40,7 @@ Future<String> uploadFile(PickedFile file) async {
 // }
 
 ///上传un8
-Future<String> uploadUn8(Uint8List img) async {
+Future<String?> uploadUn8(Uint8List img) async {
   MultipartFile multipartFile = MultipartFile.fromBytes(
     img,
     filename: img.length.toString(),
@@ -105,7 +105,7 @@ Future toPage(
 }) async {
   if (isNoClose) {
     return Navigator.push(
-      context,
+      context!,
       CustomRoute(
         isSlideBack ? page : WillPopScope(onWillPop: () async => await Future.value(false), child: page),
         opaque: opaque,
@@ -116,7 +116,7 @@ Future toPage(
     );
   } else {
     return Navigator.pushAndRemoveUntil(
-      context,
+      context!,
       CustomRoute(
         isSlideBack ? page : WillPopScope(onWillPop: () async => await Future.value(false), child: page),
         opaque: opaque,
@@ -146,7 +146,7 @@ pop(BuildContext context, [map]) async {
 
 ///退出当前路由栈
 close([map]) async {
-  return Navigator.pop(context, map);
+  return Navigator.pop(context!, map);
 }
 
 ///异常处理
@@ -155,13 +155,13 @@ error(e, Function(dynamic, int, int) callback) {
   switch (error.type) {
     case DioErrorType.response:
       try {
-        if (error.response.data['msg'] == null) {
-          callback('服务器连接失败', 1, error.response.statusCode);
+        if (error.response?.data['msg'] == null) {
+          callback('服务器连接失败', 1, error.response!.statusCode!);
         } else {
-          callback(error.response.data['msg'], 1, error.response.statusCode);
+          callback(error.response?.data['msg'], 1, error.response!.statusCode!);
         }
       } catch (e) {
-        callback('服务器连接失败', 1, error.response.statusCode);
+        callback('服务器连接失败', 1, error.response!.statusCode!);
       }
       break;
     case DioErrorType.other:
@@ -230,7 +230,7 @@ void lunTelURL(String type) async {
 ///去除滑动水波纹
 bool handleGlowNotification(OverscrollIndicatorNotification notification) {
   if ((notification.leading && true) || (!notification.leading && true)) {
-    notification.disallowGlow();
+    notification.disallowIndicator();
     return true;
   }
   return false;
@@ -354,7 +354,7 @@ String toTime(date, [bool isParse = true]) {
 int getTime() => DateTime.now().millisecondsSinceEpoch;
 
 ///获取iso8601
-String getIso8601String([DateTime time]) {
+String getIso8601String([DateTime? time]) {
   return DateTime.fromMillisecondsSinceEpoch(
     time == null ? DateTime.now().millisecondsSinceEpoch : time.millisecondsSinceEpoch,
     isUtc: true,
@@ -376,7 +376,7 @@ String toDate(milliseconds) {
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
-final context = navigatorKey.currentState.overlay.context;
+final context = navigatorKey.currentState?.overlay?.context;
 
 int daysBetween(DateTime a, DateTime b, [bool ignoreTime = false]) {
   if (ignoreTime) {
@@ -396,7 +396,7 @@ int toDay(DateTime a, int millisecondsSinceEpoch) {
   ).toInt();
 }
 
-void flog(v, [String name]) => log(v.toString(), name: name ?? 'flog');
+void flog(v, [String? name]) => log(v.toString(), name: name ?? 'flog');
 
 bool isCanRunAnimation = false;
 

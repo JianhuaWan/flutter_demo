@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
   ///用户信息(全局)
-  UserModel userModel;
+  UserModel? userModel;
 
   ///保存用户信息到内存
-  void setUserModel(data, [String token]) {
-    userModel = UserModel.fromJson(data, token);
-    this.saveUserInfo(userModel);
+  void setUserModel(data, [String? token]) {
+    userModel = UserModel.fromJson(data, token!);
+    this.saveUserInfo(userModel!);
     notifyListeners();
   }
 
@@ -93,7 +93,7 @@ class UserProvider extends ChangeNotifier {
         },
       );
     }
-    return myKehuTongjiDm.flag;
+    return myKehuTongjiDm.flag!;
   }
 
   ///获取我的权益统计
@@ -114,7 +114,7 @@ class UserProvider extends ChangeNotifier {
         },
       );
     }
-    return myQuanyiTongjiDm.flag;
+    return myQuanyiTongjiDm.flag!;
   }
 
 

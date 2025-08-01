@@ -6,18 +6,18 @@ import '../util/utils.dart';
 import '../widget/views.dart';
 
 class ScaffoldWidget extends StatefulWidget {
-  final Widget appBar;
-  final String title;
-  final Widget body;
-  final Widget btnBar;
-  final Widget drawer;
-  final Widget bottomSheet;
+  final Widget? appBar;
+  final String? title;
+  final Widget? body;
+  final Widget? btnBar;
+  final Widget? drawer;
+  final Widget? bottomSheet;
   final Brightness brightness;
-  final Color bgColor;
+  final Color? bgColor;
   final bool resizeToAvoidBottomInset;
 
   const ScaffoldWidget({
-    Key key,
+    Key? key,
     this.appBar,
     this.body,
     this.btnBar,
@@ -48,7 +48,9 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
           backgroundColor: widget.bgColor ?? Theme.of(context).scaffoldBackgroundColor,
           body: Column(
             children: <Widget>[
-              if (widget.appBar == null) widget.title != null ? buildTitle(context, title: widget.title, isNoShowLeft: true) : SizedBox() else widget.appBar,
+              if (widget.appBar == null) widget.title != null ? buildTitle
+                (context, title: widget.title!, isNoShowLeft: true) :
+              SizedBox() else widget.appBar!,
               Expanded(child: widget.body ?? SizedBox()),
             ],
           ),

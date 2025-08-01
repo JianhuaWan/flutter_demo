@@ -3,10 +3,10 @@ import 'package:flutter/physics.dart';
 
 ///页面滑动物理
 class PagePhysics extends PageScrollPhysics {
-  const PagePhysics({ScrollPhysics parent}) : super(parent: parent);
+  const PagePhysics({ScrollPhysics? parent}) : super(parent: parent);
 
   @override
-  PagePhysics applyTo(ScrollPhysics ancestor) {
+  PagePhysics applyTo(ScrollPhysics? ancestor) {
     return PagePhysics(parent: buildParent(ancestor));
   }
 

@@ -14,11 +14,11 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 import 'loupan_page.dart';
 
 class SousuoPage extends StatefulWidget {
-  final Map data;
+  final Map? data;
   final bool isZhaofang;
 
   const SousuoPage({
-    Key key,
+    Key? key,
     this.data,
     this.isZhaofang = false,
   }) : super(key: key);
@@ -47,12 +47,12 @@ class _SousuoPageState extends State<SousuoPage> {
       '/api/Building/GetPageList',
       data: {
         "PageIndex": page,
-        if (widget.data != null) "City": widget.data['city'] ?? '',
-        if (widget.data != null) "Budget": widget.data['shoufu'] ?? '',
-        if (widget.data != null) "Layout": widget.data['jushi'] ?? '',
-        if (widget.data != null) "Area": widget.data['mianji'] ?? '',
-        if (widget.data != null) "TotalPrice": widget.data['zongjia'] ?? '',
-        if (widget.data != null) "Commission": widget.data['fangwei'] ?? '',
+        if (widget.data != null) "City": widget.data!['city'] ?? '',
+        if (widget.data != null) "Budget": widget.data!['shoufu'] ?? '',
+        if (widget.data != null) "Layout": widget.data!['jushi'] ?? '',
+        if (widget.data != null) "Area": widget.data!['mianji'] ?? '',
+        if (widget.data != null) "TotalPrice": widget.data!['zongjia'] ?? '',
+        if (widget.data != null) "Commission": widget.data!['fangwei'] ?? '',
         if (name != null) "Name": name,
       },
       catchError: (v) => sousuoDm.toError(v),
@@ -61,7 +61,7 @@ class _SousuoPageState extends State<SousuoPage> {
       },
     );
     setState(() {});
-    return sousuoDm.flag;
+    return sousuoDm.flag!;
   }
 
   @override

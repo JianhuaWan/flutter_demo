@@ -27,9 +27,9 @@ class PhoneCountryCodePage extends StatefulWidget {
 class PageState extends State<PhoneCountryCodePage> {
   List<String> letters = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
   ScrollController _scrollController = ScrollController();
-  double value;
+  double? value;
   bool flag = false;
-  String editText;
+  String? editText;
   var sousuoResult = [];
   TextEditingController textCon = TextEditingController();
 
@@ -51,12 +51,12 @@ class PageState extends State<PhoneCountryCodePage> {
   Future getPhoneCodeDataList() async {
     var sp = await SharedPreferences.getInstance();
     app.sousuoList = sp.getStringList('sousuoList') ?? [];
-    if (app.shengshiquDm.object.isEmpty) await app.getDropDownList(false);
+    if (app.shengshiquDm.object!.isEmpty) await app.getDropDownList(false);
     letters.forEach((f) {
-      cityDm.object.add(
+      cityDm.object!.add(
         PhoneCountryCodeData(
           name: f,
-          listData: app.shengshiquDm.object.where((w) {
+          listData: app.shengshiquDm.object!.where((w) {
             return w['code'] == (f == '#' ? null : f);
           }).map((e) {
             return PhoneCountryCodeDataListdata(code: e['code'], name: e['name'], id: int.parse(e['id']));
@@ -65,14 +65,14 @@ class PageState extends State<PhoneCountryCodePage> {
       );
     });
     this.setState(() {
-      cityDm.object.insert(
+      cityDm.object!.insert(
         0,
         PhoneCountryCodeData.fromJson({
           "listData": [],
           "name": "热门城市",
         }),
       );
-      cityDm.object.insert(
+      cityDm.object!.insert(
         0,
         PhoneCountryCodeData.fromJson({
           "listData": [],
@@ -87,7 +87,7 @@ class PageState extends State<PhoneCountryCodePage> {
   }
 
   void suggestionSearch(v) async {
-    var where = app.shengshiquDm.object.where((f) {
+    var where = app.shengshiquDm.object!.where((f) {
       return (f['name'].toString().indexOf(v) == 0);
     }).toList();
     setState(() {
@@ -121,7 +121,7 @@ class PageState extends State<PhoneCountryCodePage> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          PhoneCodeIndexName(obj[index].name.toUpperCase()),
+                          PhoneCodeIndexName(obj[index].name!.toUpperCase()),
                           if (index == 0)
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -136,7 +136,7 @@ class PageState extends State<PhoneCountryCodePage> {
                                         onTap: () {
                                           setState(() {
                                             editText = app.sousuoList[i];
-                                            textCon.text = editText;
+                                            textCon.text = editText!;
                                           });
                                         },
                                         child: Container(
@@ -200,7 +200,7 @@ class PageState extends State<PhoneCountryCodePage> {
                               child: MyListView(
                                 isShuaxin: false,
                                 flag: !false,
-                                itemCount: obj[index].listData.length,
+                                itemCount: obj[index].listData!.length,
                                 padding: EdgeInsets.symmetric(horizontal: 15),
                                 listViewType: ListViewType.Separated,
                                 physics: NeverScrollableScrollPhysics(),
@@ -209,12 +209,16 @@ class PageState extends State<PhoneCountryCodePage> {
                                   return GestureDetector(
                                     onTap: () {
                                       showTc(
-                                        title: '确定切换到${obj[index].listData[i].name}吗？',
+                                        title: '确定切换到${obj[index]
+                                            .listData![i].name}吗？',
                                         onPressed: () {
-                                          app.city = obj[index].listData[i].name;
-                                          app.cityCode = obj[index].listData[i].id.toString();
+                                          app.city = obj[index].listData![i]
+                                              .name;
+                                          app.cityCode = obj[index]
+                                              .listData![i].id.toString();
                                           app.setState();
-                                          Navigator.of(context).pop(obj[index].listData[i].toJson());
+                                          Navigator.of(context).pop
+                                            (obj[index].listData![i].toJson());
                                         },
                                       );
                                     },
@@ -223,7 +227,7 @@ class PageState extends State<PhoneCountryCodePage> {
                                       height: 46,
                                       alignment: Alignment.centerLeft,
                                       child: MyText(
-                                        "${obj[index].listData[i].name}",
+                                        "${obj[index].listData![i].name}",
                                         size: 16,
                                         isBold: true,
                                       ),
@@ -287,7 +291,7 @@ class PageState extends State<PhoneCountryCodePage> {
                       },
                       onPointerMove: (v) {
                         try {
-                          int ii = v.localPosition.dy ~/ value;
+                          int ii = v.localPosition.dy ~/ value!;
                           app.changeCityListIndex(letters[ii]);
                           if (ii == letters.length - 1 || ii > letters.length - 1) {
                             _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
@@ -307,7 +311,7 @@ class PageState extends State<PhoneCountryCodePage> {
                                 if (app.sousuoList.isEmpty) {
                                   var height = ii * 45.0;
                                   for (int i = 0; i < ii; i++) {
-                                    height += obj[i].listData.length * 46.0;
+                                    height += obj[i].listData!.length * 46.0;
                                   }
                                   var ceil = (app.sousuoList.length / 3).ceil();
                                   var value = 45.0 + ceil * 30 + (ceil - 1) * 16 + 1 + 46;
@@ -315,7 +319,7 @@ class PageState extends State<PhoneCountryCodePage> {
                                 } else {
                                   var height = ii * 45.0;
                                   for (int i = 0; i < ii; i++) {
-                                    height += obj[i].listData.length * 46.0;
+                                    height += obj[i].listData!.length * 46.0;
                                   }
                                   var ceil = (app.sousuoList.length / 3).ceil();
                                   var value = 45.0 + ceil * 30 + (ceil - 1) * 16 - 15 + 46;
@@ -359,7 +363,8 @@ class PageState extends State<PhoneCountryCodePage> {
                                       if (app.sousuoList.isEmpty) {
                                         var height = ii * 45.0;
                                         for (int i = 0; i < ii; i++) {
-                                          height += obj[i].listData.length * 46.0;
+                                          height += obj[i].listData!.length *
+                                              46.0;
                                         }
                                         var ceil = (app.sousuoList.length / 3).ceil();
                                         var value = 45.0 + ceil * 30 + (ceil - 1) * 16 + 1 + 46;
@@ -367,7 +372,8 @@ class PageState extends State<PhoneCountryCodePage> {
                                       } else {
                                         var height = ii * 45.0;
                                         for (int i = 0; i < ii; i++) {
-                                          height += obj[i].listData.length * 46.0;
+                                          height += obj[i].listData!.length *
+                                              46.0;
                                         }
                                         var ceil = (app.sousuoList.length / 3).ceil();
                                         var value = 45.0 + ceil * 30 + (ceil - 1) * 16 - 15 + 46;
@@ -447,7 +453,7 @@ class PageState extends State<PhoneCountryCodePage> {
 class PhoneCodeIndexName extends StatelessWidget {
   final String indexName;
 
-  const PhoneCodeIndexName(this.indexName, {Key key}) : super(key: key);
+  const PhoneCodeIndexName(this.indexName, {Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Container(
@@ -473,10 +479,11 @@ class PhoneCodeIndexName extends StatelessWidget {
 }
 
 class SousuoAppbar extends StatefulWidget {
-  final Function(dynamic) onSubmitted;
-  final String text;
-  final TextEditingController textCon;
-  const SousuoAppbar({Key key, this.onSubmitted, this.text, this.textCon}) : super(key: key);
+  final Function(dynamic)? onSubmitted;
+  final String? text;
+  final TextEditingController? textCon;
+  const SousuoAppbar({Key? key, this.onSubmitted, this.text, this.textCon}) :
+        super(key: key);
   @override
   _SousuoAppbarState createState() => _SousuoAppbarState();
 }
@@ -531,7 +538,7 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                             }
                           },
                           onChanged: (v) {
-                            widget.onSubmitted(v);
+                            widget.onSubmitted!(v);
                             // this.setState(() {});
                           },
                           hintColor: Color(0xFFB7B7B7),
@@ -579,7 +586,7 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                 children: [
                   Expanded(
                     child: Selector<AppProvider, String>(
-                      selector: (_, k) => k.city,
+                      selector: (_, k) => k.city!,
                       builder: (_, v, view) {
                         return MyText(
                           v ?? '请稍后',

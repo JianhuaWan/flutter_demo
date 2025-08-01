@@ -6,7 +6,7 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/page/login_page.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/widget/upapp_widget.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/route.dart';
 
@@ -35,7 +35,7 @@ class ComonUtil {
       v = v['data'];
       if (int.parse(v['uNumber']) > int.parse(packageInfo.buildNumber)) {
         showGeneralDialog(
-          context: context,
+          context: context!,
           barrierColor: Colors.transparent,
           pageBuilder: (_, __, ___) {
             return UpappWidget(

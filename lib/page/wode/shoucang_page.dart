@@ -40,7 +40,7 @@ class _ShoucangPageState extends State<ShoucangPage> {
       },
     );
     setState(() {});
-    return shoucangDm.flag;
+    return shoucangDm.flag!;
   }
 
   @override

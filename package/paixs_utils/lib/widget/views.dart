@@ -40,15 +40,15 @@ Size size(context) => MediaQuery.of(context).size;
 EdgeInsets padd(context) => MediaQuery.of(context).padding;
 
 ///屏幕宽高
-Size get pmSize => MediaQuery.of(context).size;
+Size get pmSize => MediaQuery.of(context!).size;
 
 ///屏幕顶部和底部
-EdgeInsets get pmPadd => MediaQuery.of(context).padding;
+EdgeInsets get pmPadd => MediaQuery.of(context!).padding;
 
 ///选择器
 Future showSelecto(
   BuildContext context, {
-  void Function(String, int) callback,
+  void Function(String, int)? callback,
   List texts = const ['不限', '1~3', '3~5'],
 }) {
   var value = texts.first;
@@ -91,7 +91,7 @@ Future showSelecto(
                         Navigator.pop(context);
                         print(index);
                         print(value.toString());
-                        callback(value.toString(), index);
+                        callback!(value.toString(), index);
                       },
                       child: Text(
                         '确认',
@@ -131,7 +131,7 @@ Future showSelecto(
 ///选择器
 Future showSelectoBtn(
   BuildContext context, {
-  void Function(String, int) callback,
+  void Function(String, int)? callback,
   List texts = const ['不限', '1~3', '3~5'],
 }) {
   // var value = texts.first;
@@ -160,7 +160,7 @@ Future showSelectoBtn(
                   return WidgetTap(
                     isElastic: true,
                     onTap: () {
-                      callback(texts[i], i);
+                      callback!(texts[i], i);
                       close();
                     },
                     child: Container(
@@ -194,8 +194,8 @@ Future showSelectoBtn(
 ///选择器
 Future showPopup(
   BuildContext context, {
-  void Function(List) callback,
-  List<Widget> children,
+  void Function(List)? callback,
+  List<Widget>? children,
 }) {
   FocusScope.of(context).requestFocus(FocusNode());
   return showSheetWidget(
@@ -222,7 +222,7 @@ Future showPopup(
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: children,
+                  children: children!,
                 ),
               ),
             ),
@@ -236,7 +236,7 @@ Future showPopup(
 ///选择器
 Future showSelectoindex(
   BuildContext context, {
-  void Function(String) callback,
+  void Function(String)? callback,
   List texts = const ['不限', '1~3', '3~5'],
 }) {
   var value = 0;
@@ -267,7 +267,7 @@ Future showSelectoindex(
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      callback(value.toString());
+                      callback!(value.toString());
                     },
                     child: Text(
                       '确认',
@@ -308,7 +308,7 @@ Future showSelectoindex(
 showSheet(
   BuildContext context, {
   List<Widget> children = const <Widget>[],
-  Widget builder,
+  Widget? builder,
 }) {
   return showSheetWidget(
     context: context,
@@ -337,7 +337,7 @@ showSheet(
 buildShowDialog(
   context, {
   isClose = false,
-  String text,
+  String? text,
 }) {
   FocusScope.of(context).requestFocus(FocusNode());
   return showDialog(
@@ -349,7 +349,7 @@ buildShowDialog(
         SizedBox(
           height: 40,
           child: LoadingIndicator(
-            color: Colors.white,
+            colors: [Colors.white],
             indicatorType: Indicator.ballPulse,
           ),
         ),
@@ -373,7 +373,7 @@ Widget buildLoad({
   bool isCenter = true,
 
   ///颜色
-  Color color,
+  Color? color,
 }) {
   if (isCenter) {
     // return Center(
@@ -384,7 +384,7 @@ Widget buildLoad({
         height: size,
         alignment: Alignment.center,
         child: LoadingIndicator(
-          color: color ?? Colors.black26,
+          colors: [color ?? Colors.black26],
           indicatorType: Indicator.ballPulse,
         ),
       ),
@@ -395,7 +395,7 @@ Widget buildLoad({
       height: size,
       alignment: Alignment.center,
       child: LoadingIndicator(
-        color: color ?? Colors.black26,
+        colors: [color ?? Colors.black26],
         indicatorType: Indicator.ballPulse,
       ),
     );
@@ -409,7 +409,7 @@ Widget buildBallPulse({
   return SizedBox(
     height: height,
     child: LoadingIndicator(
-      color: color,
+      colors: [color],
       indicatorType: Indicator.ballPulse,
     ),
   );
@@ -417,17 +417,20 @@ Widget buildBallPulse({
 
 ///上拉加载更多的底部
 CustomFooter buildCustomFooter({
-  Color color,
+  Color? color,
 }) {
   color = color ?? Colors.black26;
   var dataModel = DataModel(flag: 3);
   return CustomFooter(
-    builder: (BuildContext context, LoadStatus mode) {
-      Widget body;
+    builder: (BuildContext? context, LoadStatus? mode) {
+      Widget? body;
       if (mode == LoadStatus.idle) {
         body = Text("上拉加载更多", style: TextStyle(color: color), key: ValueKey(1));
       } else if (mode == LoadStatus.loading) {
-        body = Container(height: 32, child: LoadingIndicator(color: color, indicatorType: Indicator.ballPulse));
+        body = Container(
+            height: 32,
+            child: LoadingIndicator(
+                colors: [color!], indicatorType: Indicator.ballPulse));
       } else if (mode == LoadStatus.canLoading) {
         body = Text("松开", style: TextStyle(color: color), key: ValueKey(2));
       } else if (mode == LoadStatus.failed) {
@@ -440,7 +443,7 @@ CustomFooter buildCustomFooter({
         child: AnimatedSwitchBuilder(
           value: dataModel,
           alignment: Alignment.center,
-          defaultBuilder: () => body,
+          defaultBuilder: () => body!,
           errorOnTap: () {},
         ),
       );
@@ -450,26 +453,21 @@ CustomFooter buildCustomFooter({
 
 ///下拉刷新的头部
 myh.MyClassicHeader buildClassicHeader({
-  Color color,
+  Color? color,
 }) {
   color = color ?? Colors.black26;
   return myh.MyClassicHeader(
     height: 56.0,
     textStyle: TextStyle(color: color),
     releaseText: '松开刷新',
-    releaseIcon: null,
     completeText: '刷新成功',
-    completeIcon: null,
     failedText: '刷新失败',
-    failedIcon: null,
     idleText: '下拉刷新',
-    idleIcon: null,
-    refreshingText: null,
     refreshStyle: RefreshStyle.Follow,
     refreshingIcon: Container(
       height: 32,
       child: LoadingIndicator(
-        color: color,
+        colors: [color],
         indicatorType: Indicator.ballPulse,
       ),
     ),
@@ -501,7 +499,11 @@ Center buildNoDataOrInitView(isInit, [text = '暂无数据', key]) {
 }
 
 ///初始化显示的试图
-Center buildNoDataOrInitView2(isInit, Function callbackgowuche, [text = '暂无数据', key]) {
+Center buildNoDataOrInitView2(isInit, Function() callbackgowuche,
+    [text = ''
+        '暂无数'
+        '据',
+    key]) {
   return Center(
     key: ValueKey(key),
     child: Column(
@@ -546,7 +548,9 @@ Center buildNoDataOrInitView2(isInit, Function callbackgowuche, [text = '暂无�
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 100),
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              decoration: BoxDecoration(color: Color(0xffE7011D), borderRadius: BorderRadius.all(Radius.circular(20))),
+              decoration: BoxDecoration(
+                  color: Color(0xffE7011D),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: MyText("马上去购物", color: Colors.white),
             ),
           )
@@ -560,16 +564,16 @@ Widget buildTitle(
   BuildContext context, {
   Color bwColor = const Color(0x20ffffff),
   Color widgetColor = Colors.black,
-  Widget rigthWidget,
-  Widget leftIcon,
+  Widget? rigthWidget,
+  Widget? leftIcon,
   String title = '标题',
-  Function rightCallback,
-  Function leftCallback,
+  Function()? rightCallback,
+  Function? leftCallback,
   bool isHongBao = false,
   bool isNoShowLeft = !true,
   bool isTitleBold = true,
   int s = 0,
-  Color color,
+  Color? color,
   bool isShowBorder = false,
   bool isAnima = false,
   double sigma = 0.0,
@@ -641,26 +645,27 @@ Widget buildTitle(
                               bottom: 0,
                               child: IconButton(
                                 splashColor: bwColor,
-                                icon: leftIcon ?? RouteState.isFromDown
-                                    ? TweenWidget(
-                                        delayed: 300,
-                                        time: 750,
-                                        axis: Axis.vertical,
-                                        curve: ElasticOutCurve(1),
-                                        child: Icon(Icons.close),
-                                      )
-                                    : TweenWidget(
-                                        delayed: 300,
-                                        time: 750,
-                                        value: 50,
-                                        curve: ElasticOutCurve(1),
-                                        child: SvgPicture.asset(
-                                          'package/paixs_utils/assets/svg/back.svg',
-                                          width: 20,
-                                          height: 20,
-                                          color: widgetColor,
-                                        ),
-                                      ),
+                                icon: leftIcon ??
+                                    (RouteState.isFromDown
+                                        ? TweenWidget(
+                                            delayed: 300,
+                                            time: 750,
+                                            axis: Axis.vertical,
+                                            curve: ElasticOutCurve(1),
+                                            child: Icon(Icons.close),
+                                          )
+                                        : TweenWidget(
+                                            delayed: 300,
+                                            time: 750,
+                                            value: 50,
+                                            curve: ElasticOutCurve(1),
+                                            child: SvgPicture.asset(
+                                              'package/paixs_utils/assets/svg/back.svg',
+                                              width: 20,
+                                              height: 20,
+                                              color: widgetColor,
+                                            ),
+                                          )),
                                 onPressed: () {
                                   if (leftCallback == null) {
                                     Navigator.pop(context);
@@ -699,9 +704,12 @@ Widget buildTitle(
                             physics: BouncingScrollPhysics(),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
-                              children: List.generate(title.split('').length, (i) {
+                              children:
+                                  List.generate(title.split('').length, (i) {
                                 return TweenWidget(
-                                  delayed: RouteState.isFromDown ? 200 + 10 * i : 50 + 10 * i,
+                                  delayed: RouteState.isFromDown
+                                      ? 200 + 10 * i
+                                      : 50 + 10 * i,
                                   time: 750,
                                   value: RouteState.isFromDown ? 100 : 8,
                                   axis: Axis.vertical,
@@ -713,7 +721,9 @@ Widget buildTitle(
                                     style: TextStyle(
                                       fontSize: 20,
                                       color: widgetColor,
-                                      fontWeight: isTitleBold ? FontWeight.bold : FontWeight.normal,
+                                      fontWeight: isTitleBold
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
                                     ),
                                   ),
                                 );
@@ -731,11 +741,15 @@ Widget buildTitle(
                             physics: BouncingScrollPhysics(),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
-                              children: List.generate(title.split('').length, (i) {
+                              children:
+                                  List.generate(title.split('').length, (i) {
                                 return TweenWidget(
-                                  delayed: 200 + (title.split('').length <= 2 ? 50 : 20) * i,
+                                  delayed: 200 +
+                                      (title.split('').length <= 2 ? 50 : 20) *
+                                          i,
                                   time: 750,
-                                  value: (title.split('').length <= 2 ? 48 : 24),
+                                  value:
+                                      (title.split('').length <= 2 ? 48 : 24),
                                   curve: ElasticOutCurve(1),
                                   child: Text(
                                     title.split('')[i],
@@ -744,7 +758,9 @@ Widget buildTitle(
                                     style: TextStyle(
                                       fontSize: 20,
                                       color: widgetColor,
-                                      fontWeight: isTitleBold ? FontWeight.bold : FontWeight.normal,
+                                      fontWeight: isTitleBold
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
                                     ),
                                   ),
                                 );
@@ -788,7 +804,9 @@ Widget buildTitle(
                       border: Border(
                         bottom: BorderSide(
                           width: 1,
-                          color: isShowBorder ? Colors.black12 : Colors.transparent,
+                          color: isShowBorder
+                              ? Colors.black12
+                              : Colors.transparent,
                         ),
                       ),
                     ),
@@ -841,27 +859,28 @@ Widget buildTitle(
                                   bottom: 0,
                                   child: IconButton(
                                     splashColor: bwColor,
-                                    icon: leftIcon ?? RouteState.isFromDown
-                                        ? TweenWidget(
-                                            delayed: 100,
-                                            time: 1000,
-                                            value: 50,
-                                            axis: Axis.vertical,
-                                            curve: ElasticOutCurve(1),
-                                            child: Icon(Icons.close),
-                                          )
-                                        : TweenWidget(
-                                            delayed: 100,
-                                            time: 1000,
-                                            value: 50,
-                                            curve: ElasticOutCurve(1),
-                                            child: SvgPicture.asset(
-                                              'package/paixs_utils/assets/svg/back.svg',
-                                              width: 20,
-                                              height: 20,
-                                              color: widgetColor,
-                                            ),
-                                          ),
+                                    icon: leftIcon ??
+                                        (RouteState.isFromDown
+                                            ? TweenWidget(
+                                                delayed: 100,
+                                                time: 1000,
+                                                value: 50,
+                                                axis: Axis.vertical,
+                                                curve: ElasticOutCurve(1),
+                                                child: Icon(Icons.close),
+                                              )
+                                            : TweenWidget(
+                                                delayed: 100,
+                                                time: 1000,
+                                                value: 50,
+                                                curve: ElasticOutCurve(1),
+                                                child: SvgPicture.asset(
+                                                  'package/paixs_utils/assets/svg/back.svg',
+                                                  width: 20,
+                                                  height: 20,
+                                                  color: widgetColor,
+                                                ),
+                                              )),
                                     onPressed: () {
                                       if (leftCallback == null) {
                                         Navigator.pop(context);
@@ -897,7 +916,8 @@ Widget buildTitle(
                               padding: EdgeInsets.symmetric(horizontal: 56),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: List.generate(title.split('').length, (i) {
+                                children:
+                                    List.generate(title.split('').length, (i) {
                                   return TweenWidget(
                                     delayed: 50 + 50 * i,
                                     time: 750,
@@ -911,7 +931,9 @@ Widget buildTitle(
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: widgetColor,
-                                        fontWeight: isTitleBold ? FontWeight.bold : FontWeight.normal,
+                                        fontWeight: isTitleBold
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                       ),
                                     ),
                                   );
@@ -925,7 +947,8 @@ Widget buildTitle(
                               padding: EdgeInsets.symmetric(horizontal: 56),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: List.generate(title.split('').length, (i) {
+                                children:
+                                    List.generate(title.split('').length, (i) {
                                   return TweenWidget(
                                     delayed: 50 + 50 * i,
                                     time: 750,
@@ -938,7 +961,9 @@ Widget buildTitle(
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: widgetColor,
-                                        fontWeight: isTitleBold ? FontWeight.bold : FontWeight.normal,
+                                        fontWeight: isTitleBold
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                       ),
                                     ),
                                   );
@@ -985,19 +1010,19 @@ Widget buildTitle(
 }
 
 Future showTc({
-  String title,
-  Widget titleView,
-  String content,
+  String? title,
+  Widget? titleView,
+  String? content,
   String cancelText = '取消',
   String okText = '确定',
-  Color okColor,
+  Color? okColor,
   bool isClose = true,
   bool isNoCancel = false,
-  @required Function() onPressed,
-  Function() onCancel,
+  required Function() onPressed,
+  Function()? onCancel,
 }) {
   return showGeneralDialog(
-    context: context,
+    context: context!,
     barrierLabel: "你好",
     barrierColor: Colors.black45,
     // transitionDuration: Duration(milliseconds: 500),
@@ -1015,7 +1040,7 @@ Future showTc({
         onWillPop: () => Future(() => isClose),
         child: GestureDetector(
           onTap: () {
-            if (isClose) pop(context);
+            if (isClose) pop(context!);
           },
           child: Material(
             color: Colors.transparent,
@@ -1035,13 +1060,21 @@ Future showTc({
                           if (titleView != null)
                             Padding(
                               // padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16)
-                              padding: EdgeInsets.only(left: 16, right: 16, top: 32, bottom: content == null ? 32 : 16),
+                              padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                  top: 32,
+                                  bottom: content == null ? 32 : 16),
                               child: titleView,
                             ),
                           if (title != null)
                             Padding(
                               // padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16)
-                              padding: EdgeInsets.only(left: 16, right: 16, top: 32, bottom: content == null ? 32 : 16),
+                              padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                  top: 32,
+                                  bottom: content == null ? 32 : 16),
                               child: MyText(
                                 title,
                                 size: 18,
@@ -1053,7 +1086,11 @@ Future showTc({
                             ),
                           if (content != null)
                             Padding(
-                              padding: EdgeInsets.only(left: 16, right: 16, bottom: 32, top: title == null ? 32 : 0),
+                              padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                  bottom: 32,
+                                  top: title == null ? 32 : 0),
                               child: MyText(
                                 content,
                                 size: 16,
@@ -1075,21 +1112,28 @@ Future showTc({
                                   child: Button(
                                     height: 40,
                                     onPressed: () {
-                                      pop(context);
+                                      pop(context!);
                                       if (onCancel != null) onCancel();
                                     },
-                                    child: MyText(cancelText, color: Colors.black),
+                                    child:
+                                        MyText(cancelText, color: Colors.black),
                                   ),
                                 ),
-                              Container(height: 32, width: 1, color: Color(0x10000000)),
+                              Container(
+                                  height: 32,
+                                  width: 1,
+                                  color: Color(0x10000000)),
                               Expanded(
                                 child: Button(
                                   height: 40,
                                   onPressed: () {
-                                    pop(context);
+                                    pop(context!);
                                     onPressed();
                                   },
-                                  child: MyText(okText, color: Theme.of(context).accentColor),
+                                  child: MyText(okText,
+                                      color: Theme.of(context!)
+                                          .colorScheme
+                                          .secondary),
                                 ),
                               ),
                             ],
@@ -1115,44 +1159,34 @@ String getSmall([w = 100]) => ''; //?x-oss-process=image/resize,w_$w
 String getBig([w = 500]) => ''; //?x-oss-process=image/resize,w_$w
 
 Future showTc1({
-  String title,
-  String content,
+  String? title,
+  String? content,
   String cancelText = '取消',
   String okText = '确定',
-  Color okColor,
+  Color? okColor,
   bool isClose = true,
   bool isNoCancel = false,
   List<Widget> children = const [],
-  String image,
-  double imgHeight,
-  double imgWidth,
+  String? image,
+  double? imgHeight,
+  double? imgWidth,
   int type = 0, //0：带图片的弹窗，1：纯文本弹窗
   bool isExp = false,
   bool isCenter = false,
-  EdgeInsets padding,
+  EdgeInsets? padding,
   bool isImg = false,
-  Function() onPressed,
+  Function()? onPressed,
 }) {
   return showGeneralDialog(
-    context: context,
+    context: context!,
     barrierLabel: "你好",
     barrierColor: Colors.black45,
     barrierDismissible: !isClose,
-    // transitionDuration: Duration(milliseconds: 500),
-    // transitionBuilder: (_, a1, a2, child) {
-    //   return FadeTransition(
-    //     opacity: a1.drive(CurveTween(curve: Interval(0.25, 0.5))),
-    //     child: ScaleTransition(
-    //       scale: a1.drive(CurveTween(curve: ElasticOutCurve(1.75))),
-    //       child: child,
-    //     ),
-    //   );
-    // },
     pageBuilder: (_, __, ___) {
       return Scaffold(
         backgroundColor: Colors.transparent,
         body: GestureDetector(
-          onTap: () => pop(context),
+          onTap: () => pop(context!),
           child: Material(
             color: Colors.black.withOpacity(0.0),
             child: Center(
@@ -1174,30 +1208,42 @@ Future showTc1({
                                 child: Container(
                                   color: Colors.white,
                                   width: double.infinity,
-                                  padding: EdgeInsets.symmetric(horizontal: isImg ? 0 : 15),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: isImg ? 0 : 15),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       MyListView(
                                         isShuaxin: false,
                                         itemCount: children.length,
-                                        listViewType: ListViewType.SeparatedExpanded,
-                                        padding: padding ?? onlyEdgeInset(0, type == 0 ? imgHeight / 3 + 16 : 16, 0, type == 0 ? 40 : 16),
+                                        listViewType:
+                                            ListViewType.SeparatedExpanded,
+                                        padding: padding ??
+                                            onlyEdgeInset(
+                                                0,
+                                                type == 0
+                                                    ? imgHeight! / 3 + 16
+                                                    : 16,
+                                                0,
+                                                type == 0 ? 40 : 16),
                                         // physics: NeverScrollableScrollPhysics(),
-                                        divider: Divider(height: 16, color: Colors.transparent),
+                                        divider: Divider(
+                                            height: 16,
+                                            color: Colors.transparent),
                                         item: (i) => children[i],
                                       ),
                                       if (type == 0)
                                         Button(
                                           onPressed: () {
                                             close();
-                                            onPressed();
+                                            onPressed!();
                                           },
                                           isFill: true,
                                           radius: 56,
                                           width: double.infinity,
                                           fillColor: Color(0xffFFD102),
-                                          child: MyText(okText, size: 15, isBold: true),
+                                          child: MyText(okText,
+                                              size: 15, isBold: true),
                                         ),
                                       if (type == 0) SizedBox(height: 16),
                                     ],
@@ -1214,7 +1260,8 @@ Future showTc1({
                               child: Container(
                                 color: Colors.white,
                                 width: double.infinity,
-                                padding: EdgeInsets.symmetric(horizontal: isImg ? 0 : 15),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: isImg ? 0 : 15),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
@@ -1224,7 +1271,9 @@ Future showTc1({
                                       listViewType: ListViewType.Separated,
                                       // padding: padding ?? onlyEdgeInset(0, type == 0 ? imgHeight / 3 + 16 : 16, 0, type == 0 ? 40 : 16),
                                       // physics: NeverScrollableScrollPhysics(),
-                                      divider: Divider(height: 16, color: Colors.transparent),
+                                      divider: Divider(
+                                          height: 16,
+                                          color: Colors.transparent),
                                       item: (i) {
                                         if (isCenter) {
                                           return Center(child: children[i]);
@@ -1254,11 +1303,11 @@ Future showTc1({
 ////标题点击查看更多/双向标题
 Widget buildTitleRight({
   String text = '月销售排行',
-  Function onTap,
+  Function()? onTap,
   bool isBold = true,
-  Widget rightChild,
-  Widget leftChild,
-  Color bgColor,
+  Widget? rightChild,
+  Widget? leftChild,
+  Color? bgColor,
   double topheight = 16.0,
   double height = 16.0,
   double width = 16.0,
@@ -1271,7 +1320,8 @@ Widget buildTitleRight({
     child: Container(
       alignment: Alignment.center,
       color: bgColor,
-      padding: EdgeInsets.only(top: height, bottom: height, left: leftPadd, right: rightPadd),
+      padding: EdgeInsets.only(
+          top: height, bottom: height, left: leftPadd, right: rightPadd),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -1330,25 +1380,25 @@ Widget buildTextField({
   bool enabled = true,
   Color bgColor = const Color(0x10000000),
   String hint = '请输入',
-  TextEditingController con,
+  TextEditingController? con,
   bool isExd = true,
   bool isBig = false,
   bool isRight = false,
   bool isLeft = false,
   bool isTran = false,
   int maxLines = 10,
-  double fontSize,
+  double? fontSize,
   Color borderColor = const Color(0x10000000),
-  void Function() onEditingComplete,
-  void Function(String) onSubmitted,
-  void Function(String) onChanged,
-  TextInputAction textInputAction,
-  List<TextInputFormatter> inputFormatters,
-  int maxLength,
-  TextInputType keyboardType,
-  FocusNode focusNode,
-  TextStyle textStyle,
-  EdgeInsetsGeometry contentPadding,
+  void Function()? onEditingComplete,
+  void Function(String)? onSubmitted,
+  void Function(String)? onChanged,
+  TextInputAction? textInputAction,
+  List<TextInputFormatter>? inputFormatters,
+  int? maxLength,
+  TextInputType? keyboardType,
+  FocusNode? focusNode,
+  TextStyle? textStyle,
+  EdgeInsetsGeometry? contentPadding,
 }) {
   if (isLeft) {
     return Expanded(
@@ -1500,19 +1550,19 @@ Widget buildTextField2({
   bool enabled = true,
   Color bgColor = const Color(0x10000000),
   String hint = '请输入',
-  TextEditingController con,
+  TextEditingController? con,
   bool isExd = true,
   bool isBig = false,
   bool isRight = false,
   int maxLines = 10,
   double fontSize = 16,
   Color borderColor = const Color(0x10000000),
-  void Function() onEditingComplete,
-  void Function(String) onSubmitted,
-  TextInputAction textInputAction,
-  List<TextInputFormatter> inputFormatters,
-  int maxLength,
-  TextInputType keyboardType,
+  void Function()? onEditingComplete,
+  void Function(String)? onSubmitted,
+  TextInputAction? textInputAction,
+  List<TextInputFormatter>? inputFormatters,
+  int? maxLength,
+  TextInputType? keyboardType,
 }) {
   // con = TextEditingController();
   if (isRight) {
@@ -1649,15 +1699,39 @@ Widget buildTextField2({
   }
 }
 
-RichText buildRow(String title, var content, {Color titleColor, Color contentColor, double titlesize, double contentsize, bool titleisbold, bool contentisbold}) {
+RichText buildRow(String title, var content,
+    {Color? titleColor,
+    Color? contentColor,
+    double? titlesize,
+    double? contentsize,
+    bool? titleisbold,
+    bool? contentisbold}) {
   return RichText(
-    text: TextSpan(text: title, style: TextStyle(color: titleColor ?? Color(0xff333333), fontSize: titlesize ?? 12, fontWeight: titleisbold == true ? FontWeight.bold : FontWeight.normal), children: <InlineSpan>[
-      TextSpan(text: content, style: TextStyle(color: contentColor ?? Color(0xff666666), fontSize: contentsize ?? 12, fontWeight: contentisbold == true ? FontWeight.bold : FontWeight.normal)),
-    ]),
+    text: TextSpan(
+        text: title,
+        style: TextStyle(
+            color: titleColor ?? Color(0xff333333),
+            fontSize: titlesize ?? 12,
+            fontWeight:
+                titleisbold == true ? FontWeight.bold : FontWeight.normal),
+        children: <InlineSpan>[
+          TextSpan(
+              text: content,
+              style: TextStyle(
+                  color: contentColor ?? Color(0xff666666),
+                  fontSize: contentsize ?? 12,
+                  fontWeight: contentisbold == true
+                      ? FontWeight.bold
+                      : FontWeight.normal)),
+        ]),
   );
 }
 
-Row buildRow1(String title, var content, {Color titleColor, Color contentColor, double titlesize, double contentsize}) {
+Row buildRow1(String title, var content,
+    {Color? titleColor,
+    Color? contentColor,
+    double? titlesize,
+    double? contentsize}) {
   return Row(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
     Container(
       padding: EdgeInsets.only(bottom: 3),
@@ -1691,15 +1765,34 @@ Widget buildDefText([text = '暂无回复']) {
   );
 }
 
-RichText buildRow4(String title, var content, {Color titleColor, Color contentColor, double titlesize, double contentsize}) {
+RichText buildRow4(String title, var content,
+    {Color? titleColor,
+    Color? contentColor,
+    double? titlesize,
+    double? contentsize}) {
   return RichText(
-    text: TextSpan(text: title, style: TextStyle(fontWeight: FontWeight.bold, color: titleColor ?? Color(0xff333333), fontSize: titlesize ?? 12), children: <InlineSpan>[
-      TextSpan(text: content, style: TextStyle(fontWeight: FontWeight.bold, color: contentColor ?? Color(0xff666666), fontSize: contentsize ?? 12)),
-    ]),
+    text: TextSpan(
+        text: title,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: titleColor ?? Color(0xff333333),
+            fontSize: titlesize ?? 12),
+        children: <InlineSpan>[
+          TextSpan(
+              text: content,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: contentColor ?? Color(0xff666666),
+                  fontSize: contentsize ?? 12)),
+        ]),
   );
 }
 
-Row buildRow2(String title, var content, {Color titleColor, Color contentColor, Size titlesize, Size contentsize}) {
+Row buildRow2(String title, var content,
+    {Color? titleColor,
+    Color? contentColor,
+    Size? titlesize,
+    Size? contentsize}) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -1707,7 +1800,7 @@ Row buildRow2(String title, var content, {Color titleColor, Color contentColor, 
         padding: EdgeInsets.only(bottom: 3),
         child: MyText(
           title,
-          size: titlesize ?? 12,
+          size: titlesize != null ? (titlesize as num).toDouble() : 12.0,
           color: titleColor ?? Color(0xff333333),
         ),
       ),
@@ -1715,7 +1808,7 @@ Row buildRow2(String title, var content, {Color titleColor, Color contentColor, 
       Expanded(
         child: MyText(
           content,
-          size: contentsize ?? 12,
+          size: contentsize != null ? (titlesize as num).toDouble() : 12.0,
           isOverflow: true,
           maxLines: 50,
           color: contentColor ?? Color(0xff666666),
@@ -1752,5 +1845,5 @@ BorderRadius allRadius([double radius = 8]) => BorderRadius.circular(radius);
 @protected
 Future<void> showLoad(VoidFutureCallBack fn) async {
   buildShowDialog(context);
-  fn.call().then((value) => pop(context)).catchError((v) => pop(context));
+  fn.call().then((value) => pop(context!)).catchError((v) => pop(context!));
 }

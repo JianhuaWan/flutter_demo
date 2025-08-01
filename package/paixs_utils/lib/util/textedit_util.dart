@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 enum TextEditType { Controller, Text, Phone, List }
 
 class TextEditUtil {
-  List<Map<String, dynamic>> controllers;
-  String text;
+  late List<Map<String, dynamic>> controllers;
+  late String text;
   // 添加文本框控制器
   void addController(List<Map<String, dynamic>> cons) {
     this.controllers = cons;

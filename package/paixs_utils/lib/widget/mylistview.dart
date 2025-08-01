@@ -15,31 +15,31 @@ enum ListViewType {
 
 class MyListView<T> extends StatefulWidget {
   ///列表属性
-  final Function(int) item;
-  final int itemCount;
+  final Function(int)? item;
+  final int? itemCount;
   final ListViewType listViewType;
   final EdgeInsets padding;
-  final ScrollPhysics physics;
-  final Divider divider;
+  final ScrollPhysics? physics;
+  final Divider? divider;
   final bool flag;
   final bool reverse;
-  final ScrollController controller;
-  final DataModel<T> value;
-  final Widget Function(T) itemWidget;
+  final ScrollController? controller;
+  final DataModel<T>? value;
+  final Widget Function(T)? itemWidget;
   final int expCount;
 
   ///刷新属性
-  final Widget header;
-  final Widget footer;
+  final Widget? header;
+  final Widget? footer;
   final bool isShuaxin;
   final bool isGengduo;
   final bool isOnlyMore;
-  final Widget expView;
-  final Future<int> Function() onLoading;
-  final Future<int> Function() onRefresh;
+  final Widget? expView;
+  final Future<int> Function()? onLoading;
+  final Future<int> Function()? onRefresh;
 
   const MyListView({
-    Key key,
+    Key? key,
     this.item,
     this.listViewType = ListViewType.Builder,
     this.itemCount,
@@ -50,7 +50,7 @@ class MyListView<T> extends StatefulWidget {
     this.controller,
     this.header,
     this.footer,
-    @required this.isShuaxin,
+    required this.isShuaxin,
     this.isGengduo = false,
     this.onLoading,
     this.onRefresh,
@@ -70,7 +70,7 @@ class _MyListViewState<T> extends State<MyListView<T>> {
   Map<ListViewType, Widget> listviews = {};
 
   ///底部条
-  var container = Container(
+  Widget container = Container(
     alignment: Alignment.center,
     padding: EdgeInsets.symmetric(vertical: 24),
     child: Row(
@@ -103,7 +103,7 @@ class _MyListViewState<T> extends State<MyListView<T>> {
       ListViewType.SeparatedExpanded: buildListViewSeparatedExpanded(),
     };
     return NotificationListener<OverscrollIndicatorNotification>(
-      child: listviews[widget.listViewType],
+      child: listviews[widget.listViewType]!,
       onNotification: handleGlowNotification,
     );
   }
@@ -124,27 +124,27 @@ class _MyListViewState<T> extends State<MyListView<T>> {
           physics: widget.physics,
           reverse: widget.reverse,
           padding: widget.padding,
-          itemCount: widget.itemCount == null ? widget.value.list.length + 1 : widget.itemCount + 1,
+          itemCount: widget.itemCount == null ? widget.value!.list.length + 1 : widget.itemCount! + 1,
           itemBuilder: (_, i) {
             if (widget.itemCount != null) {
               if (i == widget.itemCount) {
                 return widget.isGengduo
                     ? SizedBox()
-                    : widget.itemCount >= widget.expCount
+                    : widget.itemCount! >= widget.expCount
                         ? container
                         : SizedBox();
               } else {
-                return widget.item(i);
+                return widget.item!(i);
               }
             } else {
-              if (i == widget.value.list.length) {
+              if (i == widget.value?.list.length) {
                 return widget.isGengduo
                     ? SizedBox()
-                    : widget.value.list.length >= widget.expCount
+                    : widget.value!.list.length >= widget.expCount
                         ? container
                         : SizedBox();
               } else {
-                return widget.itemWidget(widget.value.list[i]);
+                return widget.itemWidget!(widget.value!.list[i]);
               }
             }
           },
@@ -164,27 +164,27 @@ class _MyListViewState<T> extends State<MyListView<T>> {
           physics: widget.physics,
           padding: widget.padding,
           reverse: widget.reverse,
-          itemCount: widget.itemCount == null ? widget.value.list.length + 1 : widget.itemCount + 1,
+          itemCount: widget.itemCount == null ? widget.value!.list.length + 1 : widget.itemCount! + 1,
           itemBuilder: (_, i) {
             if (widget.itemCount != null) {
               if (i == widget.itemCount) {
                 return widget.isGengduo
                     ? SizedBox()
-                    : widget.itemCount >= widget.expCount
+                    : widget.itemCount! >= widget.expCount
                         ? container
                         : SizedBox();
               } else {
-                return widget.item(i);
+                return widget.item!(i);
               }
             } else {
-              if (i == widget.value.list.length) {
+              if (i == widget.value?.list.length) {
                 return widget.isGengduo
                     ? SizedBox()
-                    : widget.value.list.length >= widget.expCount
+                    : widget.value!.list.length >= widget.expCount
                         ? container
                         : SizedBox();
               } else {
-                return widget.itemWidget(widget.value.list[i]);
+                return widget.itemWidget!(widget.value!.list[i]);
               }
             }
           },
@@ -196,7 +196,7 @@ class _MyListViewState<T> extends State<MyListView<T>> {
         shrinkWrap: widget.flag,
         physics: widget.physics,
         padding: widget.padding,
-        itemBuilder: (_, i) => widget.item(i),
+        itemBuilder: (_, i) => widget.item!(i),
         itemCount: widget.itemCount,
       );
     }
@@ -218,27 +218,28 @@ class _MyListViewState<T> extends State<MyListView<T>> {
                 physics: widget.physics,
                 padding: widget.padding,
                 reverse: widget.reverse,
-                itemCount: widget.itemCount == null ? widget.value.list.length + 1 : widget.itemCount + 1,
+                itemCount: widget.itemCount == null ? widget.value!.list
+                    .length + 1 : widget.itemCount! + 1,
                 itemBuilder: (_, i) {
                   if (widget.itemCount != null) {
                     if (i == widget.itemCount) {
                       return widget.isGengduo
                           ? SizedBox()
-                          : widget.itemCount >= widget.expCount
+                          : widget.itemCount! >= widget.expCount
                               ? container
                               : SizedBox();
                     } else {
-                      return widget.item(i);
+                      return widget.item!(i);
                     }
                   } else {
-                    if (i == widget.value.list.length) {
+                    if (i == widget.value!.list.length) {
                       return widget.isGengduo
                           ? SizedBox()
-                          : widget.value.list.length >= widget.expCount
+                          : widget.value!.list.length >= widget.expCount
                               ? container
                               : SizedBox();
                     } else {
-                      return widget.itemWidget(widget.value.list[i]);
+                      return widget.itemWidget!(widget.value!.list[i]);
                     }
                   }
                 },
@@ -249,7 +250,7 @@ class _MyListViewState<T> extends State<MyListView<T>> {
               physics: widget.physics,
               padding: widget.padding,
               reverse: widget.reverse,
-              itemBuilder: (_, i) => widget.item(i),
+              itemBuilder: (_, i) => widget.item!(i),
               itemCount: widget.itemCount,
             ),
     );
@@ -271,12 +272,15 @@ class _MyListViewState<T> extends State<MyListView<T>> {
           controller: widget.controller,
           physics: widget.physics,
           reverse: widget.reverse,
-          itemCount: widget.itemCount == null ? widget.value.list.length + 1 : widget.itemCount + 1,
+          itemCount: widget.itemCount == null ? widget.value!.list.length + 1
+              : widget.itemCount! + 1,
           separatorBuilder: (_, i) {
             if (widget.itemCount != null) {
-              return i == widget.itemCount - 1 ? SizedBox() : widget.divider ?? divider;
+              return i == widget.itemCount! - 1 ? SizedBox() : widget.divider
+                  ?? divider;
             } else {
-              return i == widget.value.list.length - 1 ? SizedBox() : widget.divider ?? divider;
+              return i == widget.value!.list.length - 1 ? SizedBox() : widget
+                  .divider ?? divider;
             }
           },
           itemBuilder: (_, i) {
@@ -284,21 +288,21 @@ class _MyListViewState<T> extends State<MyListView<T>> {
               if (i == widget.itemCount) {
                 return widget.isGengduo
                     ? SizedBox()
-                    : widget.itemCount >= widget.expCount
+                    : widget.itemCount! >= widget.expCount
                         ? container
                         : SizedBox();
               } else {
-                return widget.item(i);
+                return widget.item!(i);
               }
             } else {
-              if (i == widget.value.list.length) {
+              if (i == widget.value!.list.length) {
                 return widget.isGengduo
                     ? SizedBox()
-                    : widget.value.list.length >= widget.expCount
+                    : widget.value!.list.length >= widget.expCount
                         ? container
                         : SizedBox();
               } else {
-                return widget.itemWidget(widget.value.list[i]);
+                return widget.itemWidget!(widget.value!.list[i]);
               }
             }
           },
@@ -311,9 +315,9 @@ class _MyListViewState<T> extends State<MyListView<T>> {
         controller: widget.controller,
         physics: widget.physics,
         reverse: widget.reverse,
-        itemBuilder: (_, i) => widget.item(i),
+        itemBuilder: (_, i) => widget.item!(i),
         separatorBuilder: (_, i) => widget.divider ?? divider,
-        itemCount: widget.itemCount,
+        itemCount: widget.itemCount!,
       );
     }
   }
@@ -334,12 +338,15 @@ class _MyListViewState<T> extends State<MyListView<T>> {
                 padding: widget.padding,
                 physics: widget.physics,
                 reverse: widget.reverse,
-                itemCount: widget.itemCount == null ? widget.value.list.length + 1 : widget.itemCount + 1,
+                itemCount: widget.itemCount == null ? widget.value!.list
+                    .length + 1 : widget.itemCount! + 1,
                 separatorBuilder: (_, i) {
                   if (widget.itemCount != null) {
-                    return i == widget.itemCount - 1 ? SizedBox() : widget.divider ?? divider;
+                    return i == widget.itemCount! - 1 ? SizedBox() : widget
+                        .divider ?? divider;
                   } else {
-                    return i == widget.value.list.length - 1 ? SizedBox() : widget.divider ?? divider;
+                    return i == widget.value!.list.length - 1 ? SizedBox() :
+                    widget.divider ?? divider;
                   }
                 },
                 itemBuilder: (_, i) {
@@ -347,21 +354,21 @@ class _MyListViewState<T> extends State<MyListView<T>> {
                     if (i == widget.itemCount) {
                       return widget.isGengduo
                           ? SizedBox()
-                          : widget.itemCount >= widget.expCount
+                          : widget.itemCount! >= widget.expCount
                               ? container
                               : SizedBox();
                     } else {
-                      return widget.item(i);
+                      return widget.item!(i);
                     }
                   } else {
-                    if (i == widget.value.list.length) {
+                    if (i == widget.value!.list.length) {
                       return widget.isGengduo
                           ? SizedBox()
-                          : widget.value.list.length >= widget.expCount
+                          : widget.value!.list.length >= widget.expCount
                               ? container
                               : SizedBox();
                     } else {
-                      return widget.itemWidget(widget.value.list[i]);
+                      return widget.itemWidget!(widget.value!.list[i]);
                     }
                   }
                 },
@@ -372,9 +379,9 @@ class _MyListViewState<T> extends State<MyListView<T>> {
               padding: widget.padding,
               physics: widget.physics,
               reverse: widget.reverse,
-              itemBuilder: (_, i) => widget.item(i),
+              itemBuilder: (_, i) => widget.item!(i),
               separatorBuilder: (_, i) => widget.divider ?? divider,
-              itemCount: widget.itemCount,
+              itemCount: widget.itemCount!,
             ),
     );
   }

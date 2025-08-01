@@ -15,14 +15,16 @@ enum IconPosition { left, right, top, bottom }
 typedef Widget OuterBuilder(Widget child);
 
 class MyClassicHeader extends pr.RefreshIndicator {
-  final OuterBuilder outerBuilder;
-  final String releaseText, idleText, refreshingText, completeText, failedText, canTwoLevelText;
-  final Widget releaseIcon, idleIcon, refreshingIcon, completeIcon, failedIcon, canTwoLevelIcon, twoLevelView;
+  final OuterBuilder? outerBuilder;
+  final String? releaseText, idleText, refreshingText, completeText,
+      failedText, canTwoLevelText;
+  final Widget? releaseIcon, idleIcon, refreshingIcon, completeIcon,
+      failedIcon, canTwoLevelIcon, twoLevelView;
   final double spacing;
   final IconPosition iconPos;
   final TextStyle textStyle;
   const MyClassicHeader({
-    Key key,
+    Key? key,
     pr.RefreshStyle refreshStyle: pr.RefreshStyle.Follow,
     double height: 60.0,
     Duration completeDuration: const Duration(milliseconds: 600),
@@ -54,7 +56,7 @@ class MyClassicHeader extends pr.RefreshIndicator {
 class _MyClassicHeaderState extends pr.RefreshIndicatorState<MyClassicHeader> {
   var dataModel = DataModel(flag: 3);
   Widget _buildText(mode) {
-    pr.RefreshString strings = pr.RefreshLocalizations.of(context)?.currentLocalization ?? pr.EnRefreshString();
+    pr.RefreshString strings = pr.RefreshLocalizations.of(context!)?.currentLocalization ?? pr.EnRefreshString();
     dataModel.flag = getTime();
     return AnimatedSwitchBuilder(
       value: dataModel,
@@ -63,17 +65,18 @@ class _MyClassicHeaderState extends pr.RefreshIndicatorState<MyClassicHeader> {
       defaultBuilder: () {
         return Text(
           mode == pr.RefreshStatus.canRefresh
-              ? widget.releaseText ?? strings.canRefreshText
+              ? widget.releaseText ?? strings.canRefreshText ?? ""
               : mode == pr.RefreshStatus.completed
-                  ? widget.completeText ?? strings.refreshCompleteText
+                  ? widget.completeText ?? strings.refreshCompleteText ?? ""
                   : mode == pr.RefreshStatus.failed
-                      ? widget.failedText ?? strings.refreshFailedText
+                      ? widget.failedText ?? strings.refreshFailedText ?? ""
                       : mode == pr.RefreshStatus.refreshing
                           ? widget.refreshingText ?? ''
                           : mode == pr.RefreshStatus.idle
-                              ? widget.idleText ?? strings.idleRefreshText
+                              ? widget.idleText ?? strings.idleRefreshText ?? ""
                               : mode == pr.RefreshStatus.canTwoLevel
-                                  ? widget.canTwoLevelText ?? strings.canTwoLevelText
+                                  ? widget.canTwoLevelText ?? strings
+              .canTwoLevelText ?? ""
                                   : "",
           style: widget.textStyle,
           key: ValueKey(Random().nextInt(99)),
@@ -83,7 +86,7 @@ class _MyClassicHeaderState extends pr.RefreshIndicatorState<MyClassicHeader> {
   }
 
   Widget _buildIcon(mode) {
-    Widget icon = mode == pr.RefreshStatus.canRefresh
+    Widget? icon = mode == pr.RefreshStatus.canRefresh
         ? widget.releaseIcon
         : mode == pr.RefreshStatus.idle
             ? widget.idleIcon
@@ -123,27 +126,27 @@ class _MyClassicHeaderState extends pr.RefreshIndicatorState<MyClassicHeader> {
       alignment: WrapAlignment.center,
       children: children,
     );
-    Widget icon = mode == pr.RefreshStatus.canRefresh
+    Widget? icon = mode == pr.RefreshStatus.canRefresh
         ? Text(
-            widget.releaseText,
+            widget.releaseText!,
             style: widget.textStyle,
             key: ValueKey(Random().nextInt(99)),
           )
         : mode == pr.RefreshStatus.idle
             ? Text(
-                widget.idleText,
+                widget.idleText!,
                 style: widget.textStyle,
                 key: ValueKey(Random().nextInt(99)),
               )
             : mode == pr.RefreshStatus.completed
                 ? Text(
-                    widget.completeText,
+                    widget.completeText!,
                     style: widget.textStyle,
                     key: ValueKey(Random().nextInt(99)),
                   )
                 : mode == pr.RefreshStatus.failed
                     ? Text(
-                        widget.failedText,
+                        widget.failedText!,
                         style: widget.textStyle,
                         key: ValueKey(Random().nextInt(99)),
                       )
@@ -156,13 +159,13 @@ class _MyClassicHeaderState extends pr.RefreshIndicatorState<MyClassicHeader> {
                             )
                         : widget.twoLevelView;
     return widget.outerBuilder != null
-        ? widget.outerBuilder(container)
+        ? widget.outerBuilder!(container)
         : Container(
             height: 56,
             child: AnimatedSwitchBuilder(
               value: dataModel,
               alignment: Alignment.center,
-              defaultBuilder: () => icon,
+              defaultBuilder: () => icon!,
               errorOnTap: () {},
             ),
           );
@@ -170,11 +173,11 @@ class _MyClassicHeaderState extends pr.RefreshIndicatorState<MyClassicHeader> {
 }
 
 class ClassicFooter extends pr.LoadIndicator {
-  final String idleText, loadingText, noDataText, failedText, canLoadingText;
+  final String? idleText, loadingText, noDataText, failedText, canLoadingText;
 
-  final OuterBuilder outerBuilder;
+  final OuterBuilder? outerBuilder;
 
-  final Widget idleIcon, loadingIcon, noMoreIcon, failedIcon, canLoadingIcon;
+  final Widget? idleIcon, loadingIcon, noMoreIcon, failedIcon, canLoadingIcon;
 
   final double spacing;
 
@@ -185,8 +188,8 @@ class ClassicFooter extends pr.LoadIndicator {
   final Duration completeDuration;
 
   const ClassicFooter({
-    Key key,
-    VoidCallback onClick,
+    Key? key,
+    VoidCallback? onClick,
     pr.LoadStyle loadStyle: pr.LoadStyle.ShowAlways,
     double height: 60.0,
     this.outerBuilder,
@@ -219,23 +222,23 @@ class ClassicFooter extends pr.LoadIndicator {
 
 class _ClassicFooterState extends pr.LoadIndicatorState<ClassicFooter> {
   Widget _buildText(pr.LoadStatus mode) {
-    pr.RefreshString strings = pr.RefreshLocalizations.of(context)?.currentLocalization ?? pr.EnRefreshString();
+    pr.RefreshString strings = pr.RefreshLocalizations.of(context!)?.currentLocalization ?? pr.EnRefreshString();
     return Text(
       mode == pr.LoadStatus.loading
-          ? widget.loadingText ?? strings.loadingText
+          ? widget.loadingText ?? strings.loadingText ?? ""
           : pr.LoadStatus.noMore == mode
-              ? widget.noDataText ?? strings.noMoreText
+              ? widget.noDataText ?? strings.noMoreText ?? ""
               : pr.LoadStatus.failed == mode
-                  ? widget.failedText ?? strings.loadFailedText
+                  ? widget.failedText ?? strings.loadFailedText ??""
                   : pr.LoadStatus.canLoading == mode
-                      ? widget.canLoadingText ?? strings.canLoadingText
-                      : widget.idleText ?? strings.idleLoadingText,
+                      ? widget.canLoadingText ?? strings.canLoadingText ?? ""
+                      : widget.idleText ?? strings.idleLoadingText?? "",
       style: widget.textStyle,
     );
   }
 
   Widget _buildIcon(pr.LoadStatus mode) {
-    Widget icon = mode == pr.LoadStatus.loading
+    Widget? icon = mode == pr.LoadStatus.loading
         ? widget.loadingIcon ??
             SizedBox(
               width: 25.0,
@@ -272,7 +275,7 @@ class _ClassicFooterState extends pr.LoadIndicatorState<ClassicFooter> {
       children: children,
     );
     return widget.outerBuilder != null
-        ? widget.outerBuilder(container)
+        ? widget.outerBuilder!(container)
         : Container(
             height: widget.height,
             child: Center(

@@ -116,7 +116,7 @@ class _XiugaiLoginState extends State<XiugaiLogin> {
                   controller: phoneCon,
                   style: TextStyle(fontSize: 14),
                   maxLength: 11,
-                  cursorColor: Theme.of(context).primaryColor,
+                  cursorColor: Theme.of(context!).primaryColor,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero,
                     counterText: '',
@@ -131,7 +131,7 @@ class _XiugaiLoginState extends State<XiugaiLogin> {
                   controller: phoneCon1,
                   style: TextStyle(fontSize: 14),
                   maxLength: 11,
-                  cursorColor: Theme.of(context).primaryColor,
+                  cursorColor: Theme.of(context!).primaryColor,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero,
                     counterText: '',
@@ -146,7 +146,7 @@ class _XiugaiLoginState extends State<XiugaiLogin> {
                   controller: phoneCon2,
                   style: TextStyle(fontSize: 14),
                   maxLength: 11,
-                  cursorColor: Theme.of(context).primaryColor,
+                  cursorColor: Theme.of(context!).primaryColor,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero,
                     counterText: '',

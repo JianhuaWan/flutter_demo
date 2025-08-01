@@ -12,8 +12,8 @@ class Luban {
   Luban._();
 
   static List<int> comressImageJpg(List<int> bytes, int quality) {
-    Image image = decodeImage(bytes);
-    return encodeJpg(image, quality: quality);
+    Image? image = decodeImage(bytes);
+    return encodeJpg(image!, quality: quality);
   }
 
 //
@@ -32,7 +32,7 @@ class Luban {
 
   static Future<List<String>> compressImageList(
       List<CompressObject> objects) async {
-    return compute(_lubanCompressList, objects);
+    return compute(_lubanCompressList as ComputeCallback<List<CompressObject>, List<String>>, objects);
   }
 
   static void _lubanCompressQueue(SendPort port) {
@@ -45,7 +45,7 @@ class Luban {
     });
   }
 
-  static List<String> _lubanCompressList(List<CompressObject> objects) {
+  static List _lubanCompressList(List<CompressObject> objects) {
     var results = [];
     objects.forEach((_o) {
       results.add(_lubanCompress(_o));
@@ -65,19 +65,19 @@ class Luban {
   }
 
   static String _lubanCompress(CompressObject object) {
-    Image image = decodeImage(object.imageFile.readAsBytesSync());
-    var length = object.imageFile.lengthSync();
-    print(object.imageFile.path);
+    Image? image = decodeImage(object.imageFile!.readAsBytesSync());
+    var length = object.imageFile!.lengthSync();
+    print(object.imageFile!.path);
     bool isLandscape = false;
     const List<String> jpgSuffix = ["jpg", "jpeg", "JPG", "JPEG"];
     const List<String> pngSuffix = ["png", "PNG"];
-    bool isJpg = _parseType(object.imageFile.path, jpgSuffix);
+    bool isJpg = _parseType(object.imageFile!.path, jpgSuffix);
     bool isPng = false;
 
-    if (!isJpg) isPng = _parseType(object.imageFile.path, pngSuffix);
+    if (!isJpg) isPng = _parseType(object.imageFile!.path, pngSuffix);
 
     double size;
-    int fixelW = image.width;
+    int fixelW = image!.width;
     int fixelH = image.height;
     double thumbW = (fixelW % 2 == 1 ? fixelW + 1 : fixelW).toDouble();
     double thumbH = (fixelH % 2 == 1 ? fixelH + 1 : fixelH).toDouble();
@@ -95,10 +95,10 @@ class Luban {
     var decodedImageFile;
     if (isJpg)
       decodedImageFile = new File(
-          object.path + '/img_${DateTime.now().millisecondsSinceEpoch}.jpg');
+          object.path! + '/img_${DateTime.now().millisecondsSinceEpoch}.jpg');
     else if (isPng)
       decodedImageFile = new File(
-          object.path + '/img_${DateTime.now().millisecondsSinceEpoch}.png');
+          object.path! + '/img_${DateTime.now().millisecondsSinceEpoch}.png');
     else
       throw Exception("flutter_luban don't support this image type");
 
@@ -212,15 +212,15 @@ class Luban {
   }
 
   static _large2SmallCompressImage({
-    Image image,
-    File file,
+    Image? image,
+    File? file,
     quality,
     targetSize,
     step,
     bool isJpg: true,
   }) {
     if (isJpg) {
-      var im = encodeJpg(image, quality: quality);
+      var im = encodeJpg(image!, quality: quality);
       var tempImageSize = Uint8List.fromList(im).lengthInBytes;
       if (tempImageSize / 1024 > targetSize && quality > step) {
         quality -= step;
@@ -233,11 +233,11 @@ class Luban {
         );
         return;
       }
-      file.writeAsBytesSync(im);
+      file?.writeAsBytesSync(im);
     } else {
       _compressPng(
-        image: image,
-        file: file,
+        image: image!,
+        file: file!,
         targetSize: targetSize,
         large2Small: true,
       );
@@ -245,15 +245,15 @@ class Luban {
   }
 
   static _small2LargeCompressImage({
-    Image image,
-    File file,
+    Image? image,
+    File? file,
     quality,
     targetSize,
     step,
     bool isJpg: true,
   }) {
     if (isJpg) {
-      var im = encodeJpg(image, quality: quality);
+      var im = encodeJpg(image!, quality: quality);
       var tempImageSize = Uint8List.fromList(im).lengthInBytes;
       if (tempImageSize / 1024 < targetSize && quality <= 100) {
         quality += step;
@@ -267,11 +267,11 @@ class Luban {
         );
         return;
       }
-      file.writeAsBytesSync(im);
+      file?.writeAsBytesSync(im);
     } else {
       _compressPng(
-        image: image,
-        file: file,
+        image: image!,
+        file: file!,
         targetSize: targetSize,
         large2Small: false,
       );
@@ -280,19 +280,19 @@ class Luban {
 
   ///level 1~9  level++ -> image--
   static void _compressPng({
-    Image image,
-    File file,
+    Image? image,
+    File? file,
     level,
     targetSize,
-    bool large2Small,
+    bool? large2Small,
   }) {
     var _level;
-    if (large2Small) {
+    if (large2Small!) {
       _level = level ?? 1;
     } else {
       _level = level ?? 9;
     }
-    List<int> im = encodePng(image, level: _level);
+    List<int> im = encodePng(image!, level: _level);
     if (_level > 9 || _level < 1) {
     } else {
       var tempImageSize = Uint8List.fromList(im).lengthInBytes;
@@ -308,7 +308,7 @@ class Luban {
       }
     }
 
-    file.writeAsBytesSync(im);
+    file?.writeAsBytesSync(im);
   }
 }
 
@@ -319,8 +319,8 @@ enum CompressMode {
 }
 
 class CompressObject {
-  final File imageFile;
-  final String path;
+  final File? imageFile;
+  final String? path;
   final CompressMode mode;
   final int quality;
   final int step;

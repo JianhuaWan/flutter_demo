@@ -15,7 +15,7 @@ const double _kForegroundScreenOpacityFraction = 0.7;
 
 class CPickerWidget extends StatefulWidget {
   CPickerWidget({
-    Key key,
+    Key? key,
     this.diameterRatio = _kDefaultDiameterRatio,
     this.backgroundColor = Colors.white,
     this.offAxisFraction = 0.0,
@@ -24,25 +24,28 @@ class CPickerWidget extends StatefulWidget {
     this.scrollController,
     this.squeeze = _kSqueeze,
     this.itemExtent = 56,
-    @required this.onSelectedItemChanged,
-    @required List<Widget> children,
+    required this.onSelectedItemChanged,
+    required List<Widget> children,
     bool looping = false,
   })  : assert(children != null),
         assert(diameterRatio != null),
-        assert(diameterRatio > 0.0, RenderListWheelViewport.diameterRatioZeroMessage),
+        assert(diameterRatio > 0.0,
+            RenderListWheelViewport.diameterRatioZeroMessage),
         assert(magnification > 0),
         assert(itemExtent != null),
         assert(itemExtent > 0),
         assert(squeeze != null),
         assert(squeeze > 0),
         childDelegate = looping
-            ? ListWheelChildLoopingListDelegate(children: children.map((f) => Center(child: f)).toList())
+            ? ListWheelChildLoopingListDelegate(
+                children: children.map((f) => Center(child: f)).toList())
             : ListWheelChildListDelegate(
                 children: children.map((f) => Center(child: f)).toList(),
               ),
         super(key: key);
+
   CPickerWidget.builder({
-    Key key,
+    Key? key,
     this.diameterRatio = _kDefaultDiameterRatio,
     this.backgroundColor = Colors.white,
     this.offAxisFraction = 0.0,
@@ -51,36 +54,39 @@ class CPickerWidget extends StatefulWidget {
     this.scrollController,
     this.squeeze = _kSqueeze,
     this.itemExtent = 56,
-    @required this.onSelectedItemChanged,
-    @required IndexedWidgetBuilder itemBuilder,
-    int childCount,
+    required this.onSelectedItemChanged,
+    required IndexedWidgetBuilder itemBuilder,
+    int? childCount,
   })  : assert(itemBuilder != null),
         assert(diameterRatio != null),
-        assert(diameterRatio > 0.0, RenderListWheelViewport.diameterRatioZeroMessage),
+        assert(diameterRatio > 0.0,
+            RenderListWheelViewport.diameterRatioZeroMessage),
         assert(magnification > 0),
         assert(itemExtent != null),
         assert(itemExtent > 0),
         assert(squeeze != null),
         assert(squeeze > 0),
-        childDelegate = ListWheelChildBuilderDelegate(builder: itemBuilder, childCount: childCount),
+        childDelegate = ListWheelChildBuilderDelegate(
+            builder: itemBuilder, childCount: childCount),
         super(key: key);
   final double diameterRatio;
   final Color backgroundColor;
   final double offAxisFraction;
   final bool useMagnifier;
   final double magnification;
-  final FixedExtentScrollController scrollController;
+  final FixedExtentScrollController? scrollController;
   final double itemExtent;
   final double squeeze;
   final ValueChanged<int> onSelectedItemChanged;
   final ListWheelChildDelegate childDelegate;
+
   @override
   State<StatefulWidget> createState() => _CupertinoPickerState();
 }
 
 class _CupertinoPickerState extends State<CPickerWidget> {
-  int _lastHapticIndex;
-  FixedExtentScrollController _controller;
+  int? _lastHapticIndex;
+  FixedExtentScrollController? _controller;
 
   @override
   void initState() {
@@ -94,7 +100,8 @@ class _CupertinoPickerState extends State<CPickerWidget> {
   void didUpdateWidget(CPickerWidget oldWidget) {
     if (widget.scrollController != null && oldWidget.scrollController == null) {
       _controller = null;
-    } else if (widget.scrollController == null && oldWidget.scrollController != null) {
+    } else if (widget.scrollController == null &&
+        oldWidget.scrollController != null) {
       assert(_controller == null);
       _controller = FixedExtentScrollController();
     }
@@ -141,9 +148,11 @@ class _CupertinoPickerState extends State<CPickerWidget> {
   }
 
   Widget _buildGradientScreen() {
-    if (widget.backgroundColor != null && widget.backgroundColor.alpha < 255) return Container();
+    if (widget.backgroundColor != null && widget.backgroundColor.alpha < 255)
+      return Container();
 
-    final Color widgetBackgroundColor = widget.backgroundColor ?? const Color(0xFFFFFFFF);
+    final Color widgetBackgroundColor =
+        widget.backgroundColor ?? const Color(0xFFFFFFFF);
     return Positioned.fill(
       child: IgnorePointer(
         child: Container(
@@ -179,7 +188,9 @@ class _CupertinoPickerState extends State<CPickerWidget> {
   }
 
   Widget _buildMagnifierScreen() {
-    final Color foreground = widget.backgroundColor?.withAlpha((widget.backgroundColor.alpha * _kForegroundScreenOpacityFraction).toInt());
+    final Color? foreground = widget.backgroundColor?.withAlpha(
+        (widget.backgroundColor.alpha * _kForegroundScreenOpacityFraction)
+            .toInt());
 
     return IgnorePointer(
       child: Column(
@@ -204,7 +215,9 @@ class _CupertinoPickerState extends State<CPickerWidget> {
   }
 
   Widget _buildUnderMagnifierScreen() {
-    final Color foreground = widget.backgroundColor?.withAlpha((widget.backgroundColor.alpha * _kForegroundScreenOpacityFraction).toInt());
+    final Color? foreground = widget.backgroundColor?.withAlpha(
+        (widget.backgroundColor.alpha * _kForegroundScreenOpacityFraction)
+            .toInt());
 
     return Column(
       children: <Widget>[
@@ -237,7 +250,7 @@ class _CupertinoPickerState extends State<CPickerWidget> {
         children: <Widget>[
           Positioned.fill(
             child: _CupertinoPickerSemantics(
-              scrollController: widget.scrollController ?? _controller,
+              scrollController: widget.scrollController ?? _controller!,
               child: ListWheelScrollView.useDelegate(
                 controller: widget.scrollController ?? _controller,
                 physics: const FixedExtentScrollPhysics(),
@@ -274,18 +287,21 @@ class _CupertinoPickerState extends State<CPickerWidget> {
 
 class _CupertinoPickerSemantics extends SingleChildRenderObjectWidget {
   const _CupertinoPickerSemantics({
-    Key key,
-    Widget child,
-    @required this.scrollController,
+    Key? key,
+    Widget? child,
+    required this.scrollController,
   }) : super(key: key, child: child);
 
   final FixedExtentScrollController scrollController;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderCupertinoPickerSemantics(scrollController, Directionality.of(context));
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderCupertinoPickerSemantics(
+          scrollController, Directionality.of(context));
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderCupertinoPickerSemantics renderObject) {
+  void updateRenderObject(BuildContext context,
+      covariant _RenderCupertinoPickerSemantics renderObject) {
     renderObject
       ..textDirection = Directionality.of(context)
       ..controller = scrollController;
@@ -293,12 +309,14 @@ class _CupertinoPickerSemantics extends SingleChildRenderObjectWidget {
 }
 
 class _RenderCupertinoPickerSemantics extends RenderProxyBox {
-  _RenderCupertinoPickerSemantics(FixedExtentScrollController controller, this._textDirection) {
+  _RenderCupertinoPickerSemantics(
+      FixedExtentScrollController controller, this._textDirection) {
     this.controller = controller;
   }
 
   FixedExtentScrollController get controller => _controller;
-  FixedExtentScrollController _controller;
+  late FixedExtentScrollController _controller;
+
   set controller(FixedExtentScrollController value) {
     if (value == _controller) return;
     if (_controller != null)
@@ -311,6 +329,7 @@ class _RenderCupertinoPickerSemantics extends RenderProxyBox {
 
   TextDirection get textDirection => _textDirection;
   TextDirection _textDirection;
+
   set textDirection(TextDirection value) {
     if (textDirection == value) return;
     _textDirection = value;
@@ -342,21 +361,23 @@ class _RenderCupertinoPickerSemantics extends RenderProxyBox {
   }
 
   @override
-  void assembleSemanticsNode(SemanticsNode node, SemanticsConfiguration config, Iterable<SemanticsNode> children) {
-    if (children.isEmpty) return super.assembleSemanticsNode(node, config, children);
+  void assembleSemanticsNode(SemanticsNode node, SemanticsConfiguration config,
+      Iterable<SemanticsNode> children) {
+    if (children.isEmpty)
+      return super.assembleSemanticsNode(node, config, children);
     final SemanticsNode scrollable = children.first;
     final Map<int, SemanticsNode> indexedChildren = <int, SemanticsNode>{};
     scrollable.visitChildren((SemanticsNode child) {
       assert(child.indexInParent != null);
-      indexedChildren[child.indexInParent] = child;
+      indexedChildren[child.indexInParent!] = child;
       return true;
     });
     if (indexedChildren[_currentIndex] == null) {
       return node.updateWith(config: config);
     }
-    config.value = indexedChildren[_currentIndex].label;
-    final SemanticsNode previousChild = indexedChildren[_currentIndex - 1];
-    final SemanticsNode nextChild = indexedChildren[_currentIndex + 1];
+    config.value = indexedChildren[_currentIndex]!.label;
+    final SemanticsNode? previousChild = indexedChildren[_currentIndex - 1];
+    final SemanticsNode? nextChild = indexedChildren[_currentIndex + 1];
     if (nextChild != null) {
       config.increasedValue = nextChild.label;
       config.onIncrease = _handleIncrease;

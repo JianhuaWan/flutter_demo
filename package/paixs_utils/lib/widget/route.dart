@@ -79,25 +79,25 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
 
   String get title;
 
-  bool isMoveBtm;
+  bool? isMoveBtm;
 
-  ValueNotifier<String> _previousTitle;
+  ValueNotifier<String>? _previousTitle;
 
   ValueListenable<String> get previousTitle {
     assert(
       _previousTitle != null,
       'Cannot read the previousTitle for a route that has not yet been installed',
     );
-    return _previousTitle;
+    return _previousTitle!;
   }
 
   @override
-  void didChangePrevious(Route<dynamic> previousRoute) {
-    final String previousTitleString = previousRoute is CupertinoRouteTransitionMixin ? previousRoute.title : null;
+  void didChangePrevious(Route<dynamic>? previousRoute) {
+    final String? previousTitleString = previousRoute is CupertinoRouteTransitionMixin ? previousRoute.title : null;
     if (_previousTitle == null) {
-      _previousTitle = ValueNotifier<String>(previousTitleString);
+      _previousTitle = ValueNotifier<String>(previousTitleString!);
     } else {
-      _previousTitle.value = previousTitleString;
+      _previousTitle?.value = previousTitleString!;
     }
     super.didChangePrevious(previousRoute);
   }
@@ -106,10 +106,10 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
   Duration get transitionDuration => Duration(milliseconds: RouteState.isTransparent ? 400 : 400);
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   bool canTransitionTo(TransitionRoute<dynamic> nextRoute) {
@@ -117,7 +117,7 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
   }
 
   static bool isPopGestureInProgress(p.PageRoute<dynamic> route) {
-    return route.navigator.userGestureInProgress;
+    return route.navigator!.userGestureInProgress;
   }
 
   bool get popGestureInProgress => isPopGestureInProgress(this);
@@ -133,9 +133,9 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
 
     if (route.fullscreenDialog) return false;
 
-    if (route.animation.status != AnimationStatus.completed) return false;
+    if (route.animation?.status != AnimationStatus.completed) return false;
 
-    if (route.secondaryAnimation.status != AnimationStatus.dismissed) return false;
+    if (route.secondaryAnimation?.status != AnimationStatus.dismissed) return false;
 
     if (isPopGestureInProgress(route)) return false;
 
@@ -166,8 +166,8 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
     assert(_isPopGestureEnabled(route));
 
     return _CupertinoBackGestureController<T>(
-      navigator: route.navigator,
-      controller: route.controller,
+      navigator: route.navigator!,
+      controller: route.controller!,
     );
   }
 
@@ -210,7 +210,7 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
   Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return buildPageTransitions<T>(
       this,
-      isMoveBtm,
+      isMoveBtm!,
       title,
       context,
       animation,
@@ -222,10 +222,10 @@ mixin CupertinoRouteTransitionMixin<T> on p.PageRoute<T> {
 
 class CupertinoPageRoute<T> extends p.PageRoute<T> with CupertinoRouteTransitionMixin<T> {
   CupertinoPageRoute({
-    @required this.builder,
-    this.title,
+    required this.builder,
+    this.title='',
     this.isMoveBtm = false,
-    RouteSettings settings,
+    RouteSettings? settings,
     this.maintainState = true,
     bool fullscreenDialog = false,
   })  : assert(builder != null),
@@ -233,7 +233,7 @@ class CupertinoPageRoute<T> extends p.PageRoute<T> with CupertinoRouteTransition
         assert(fullscreenDialog != null),
         assert(isMoveBtm != null),
         super(
-          settings: settings,
+          settings: settings!,
           fullscreenDialog: fullscreenDialog,
         );
 
@@ -255,47 +255,48 @@ class CupertinoPageRoute<T> extends p.PageRoute<T> with CupertinoRouteTransition
 
 class CupertinoPageTransition extends StatelessWidget {
   CupertinoPageTransition({
-    Key key,
-    // @required Animation<double> primaryRouteAnimation,
-    // @required Animation<double> secondaryRouteAnimation,
-    @required this.child,
-    @required this.linearTransition,
-    @required this.isMoveBtm,
-    @required this.title,
+    Key? key,
+    required this.child,
+    required this.linearTransition,
+    required this.isMoveBtm,
+    required this.title,
     this.primaryRouteAnimation,
     this.secondaryRouteAnimation,
   })  : assert(linearTransition != null),
         _primaryPositionAnimation = (linearTransition
-                ? primaryRouteAnimation
-                : CurvedAnimation(
-                    parent: primaryRouteAnimation,
-                    curve: Curves.easeOutCubic,
-                    reverseCurve: Curves.easeInCubic,
-                  ))
-            .drive(RouteState.isFromDown ? _kRightMiddleTween1 : _kRightMiddleTween),
+            ? primaryRouteAnimation
+            : CurvedAnimation(
+          parent: primaryRouteAnimation!,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        ))
+            !.drive(RouteState.isFromDown ? _kRightMiddleTween1 :
+        _kRightMiddleTween),
         _secondaryPositionAnimation = (linearTransition
-                ? secondaryRouteAnimation
-                : CurvedAnimation(
-                    parent: secondaryRouteAnimation,
-                    curve: Curves.easeOutCubic,
-                    reverseCurve: Curves.easeInCubic,
-                  ))
-            .drive(RouteState.isFromDown ? _kMiddleLeftTween1 : _kMiddleLeftTween),
+            ? secondaryRouteAnimation
+            : CurvedAnimation(
+          parent: secondaryRouteAnimation!,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        ))
+            !.drive(RouteState.isFromDown ? _kMiddleLeftTween1 :
+        _kMiddleLeftTween),
         _primaryShadowAnimation = (linearTransition
-                ? primaryRouteAnimation
-                : CurvedAnimation(
-                    parent: primaryRouteAnimation,
-                    curve: Curves.linear,
-                  ))
-            .drive(RouteState.isFromDown ? _kGradientShadowTween1 : _kGradientShadowTween),
+            ? primaryRouteAnimation
+            : CurvedAnimation(
+          parent: primaryRouteAnimation!,
+          curve: Curves.linear,
+        ))
+            !.drive(RouteState.isFromDown ? _kGradientShadowTween1 :
+        _kGradientShadowTween),
         super(key: key);
 
   final Animation<Offset> _primaryPositionAnimation;
   final Animation<Offset> _secondaryPositionAnimation;
   final Animation<Decoration> _primaryShadowAnimation;
 
-  final Animation<double> primaryRouteAnimation;
-  final Animation<double> secondaryRouteAnimation;
+  final Animation<double>? primaryRouteAnimation;
+  final Animation<double>? secondaryRouteAnimation;
   final bool linearTransition;
 
   final Widget child;
@@ -311,29 +312,29 @@ class CupertinoPageTransition extends StatelessWidget {
         opacity: (linearTransition
                 ? secondaryRouteAnimation
                 : CurvedAnimation(
-                    parent: secondaryRouteAnimation,
+                    parent: secondaryRouteAnimation!,
                     curve: Curves.linear,
                     reverseCurve: Curves.linear,
                   ))
-            .drive(Tween(begin: 1, end: 1)),
+            !.drive(Tween(begin: 1, end: 1)),
         child: FadeTransition(
           opacity: (linearTransition
                   ? primaryRouteAnimation
                   : CurvedAnimation(
-                      parent: primaryRouteAnimation,
+                      parent: primaryRouteAnimation!,
                       curve: Curves.linear,
                       reverseCurve: Curves.linear,
                     ))
-              .drive(Tween(begin: 0, end: 1)),
+              !.drive(Tween(begin: 0, end: 1)),
           child: FadeTransition(
             opacity: (linearTransition
                     ? primaryRouteAnimation
                     : CurvedAnimation(
-                        parent: primaryRouteAnimation,
+                        parent: primaryRouteAnimation!,
                         curve: Curves.linear,
                         reverseCurve: Curves.linear,
                       ))
-                .drive(Tween(begin: 0, end: 1)),
+                !.drive(Tween(begin: 0, end: 1)),
             child: child,
           ),
         ),
@@ -345,20 +346,20 @@ class CupertinoPageTransition extends StatelessWidget {
             scale: (linearTransition
                     ? secondaryRouteAnimation
                     : CurvedAnimation(
-                        parent: secondaryRouteAnimation,
+                        parent: secondaryRouteAnimation!,
                         curve: Curves.easeOutCubic,
                         reverseCurve: Curves.easeInCubic,
                       ))
-                .drive(Tween(begin: 1.0, end: RouteState.scaleValue ?? 0.9)),
+                !.drive(Tween(begin: 1.0, end: RouteState.scaleValue ?? 0.9)),
             child: SlideTransition(
               position: (linearTransition
                       ? secondaryRouteAnimation
                       : CurvedAnimation(
-                          parent: secondaryRouteAnimation,
+                          parent: secondaryRouteAnimation!,
                           curve: Curves.easeOutCubic,
                           reverseCurve: Curves.easeInCubic,
                         ))
-                  .drive(
+                  !.drive(
                 Tween(
                   begin: Offset(0, 0),
                   end: Offset(RouteState.isFromDown ? 0 : -0.15, RouteState.isFromDown ? -0.1 : 0),
@@ -370,22 +371,22 @@ class CupertinoPageTransition extends StatelessWidget {
                     opacity: (linearTransition
                             ? primaryRouteAnimation
                             : CurvedAnimation(
-                                parent: primaryRouteAnimation,
+                                parent: primaryRouteAnimation!,
                                 curve: Curves.easeOutCubic,
                                 reverseCurve: Curves.easeInCubic,
                               ))
-                        .drive(Tween(begin: 0.0, end: 0.5)),
+                        !.drive(Tween(begin: 0.0, end: 0.5)),
                     child: Container(color: Colors.black),
                   ),
                   SlideTransition(
                     position: (linearTransition
                             ? primaryRouteAnimation
                             : CurvedAnimation(
-                                parent: primaryRouteAnimation,
+                                parent: primaryRouteAnimation!,
                                 curve: Curves.easeOutCubic,
                                 reverseCurve: Curves.easeInCubic,
                               ))
-                        .drive(
+                        !.drive(
                       Tween(
                         begin: RouteState.isFromDown ? Offset(0, 1) : Offset(1, 0),
                         end: Offset(0, 0),
@@ -396,17 +397,18 @@ class CupertinoPageTransition extends StatelessWidget {
                             ? Stack(
                                 children: [
                                   Visibility(
-                                    visible: secondaryRouteAnimation.value <= 0.0,
+                                    visible: secondaryRouteAnimation!.value <= 0.0,
                                     child: child,
                                     maintainState: true,
                                   ),
                                   Visibility(
-                                    visible: secondaryRouteAnimation.value > 0.0,
+                                    visible: secondaryRouteAnimation!.value >
+                                        0.0,
                                     child: Container(
                                       color: Colors.white,
                                       alignment: Alignment.center,
                                       child: Opacity(
-                                        opacity: secondaryRouteAnimation.value,
+                                        opacity: secondaryRouteAnimation!.value,
                                         child: RouteState.recycleStr == null ? CupertinoActivityIndicator() : MyText(RouteState.recycleStr),
                                       ),
                                     ),
@@ -428,33 +430,33 @@ class CupertinoPageTransition extends StatelessWidget {
             scale: (linearTransition
                     ? secondaryRouteAnimation
                     : CurvedAnimation(
-                        parent: secondaryRouteAnimation,
+                        parent: secondaryRouteAnimation!,
                         curve: Curves.easeOutCubic,
                         reverseCurve: Curves.easeInCubic,
                       ))
-                .drive(Tween(begin: 1.0, end: RouteState.scaleValue ?? 0.9)),
+                !.drive(Tween(begin: 1.0, end: RouteState.scaleValue ?? 0.9)),
             child: Stack(
               children: [
                 FadeTransition(
                   opacity: (linearTransition
                           ? primaryRouteAnimation
                           : CurvedAnimation(
-                              parent: primaryRouteAnimation,
+                              parent: primaryRouteAnimation!,
                               curve: Curves.easeOutCubic,
                               reverseCurve: Curves.easeInCubic,
                             ))
-                      .drive(Tween(begin: 0.0, end: 0.5)),
+                      !.drive(Tween(begin: 0.0, end: 0.5)),
                   child: Container(color: Colors.black),
                 ),
                 SlideTransition(
                   position: (linearTransition
                           ? primaryRouteAnimation
                           : CurvedAnimation(
-                              parent: primaryRouteAnimation,
+                              parent: primaryRouteAnimation!,
                               curve: Curves.easeOutCubic,
                               reverseCurve: Curves.easeInCubic,
                             ))
-                      .drive(
+                      !.drive(
                     Tween(
                       begin: RouteState.isFromDown ? Offset(0, 1) : Offset(1, 0),
                       end: Offset(0, 0),
@@ -463,41 +465,24 @@ class CupertinoPageTransition extends StatelessWidget {
                   child: RouteState.radiusValue == 0.0
                       ? DecoratedBoxTransition(
                           decoration: _primaryShadowAnimation,
-                          // child: AnimatedSwitcher(
-                          //   duration: Duration(milliseconds: 250),
-                          //   switchInCurve: Curves.ease,
-                          //   switchOutCurve: Curves.ease,
-                          //   transitionBuilder: (v, a) {
-                          //     return SlideTransition(
-                          //       position: a.drive(
-                          //         Tween(begin: Offset(0,0.01), end: Offset(0,0)),
-                          //       ),
-                          //       child: v,
-                          //     );
-                          //   },
-                          //   child: secondaryRouteAnimation.value <= 0.0
-                          //       ? KeepAlive(keepAlive: true, child: child)
-                          //       : Container(
-                          //           color: Colors.white,
-                          //           alignment: Alignment.center,
-                          //           child: CupertinoActivityIndicator(),
-                          //         ),
-                          // ),
                           child: RouteState.isRecycle
                               ? Stack(
                                   children: [
                                     Visibility(
-                                      visible: secondaryRouteAnimation.value <= 0.0,
+                                      visible: secondaryRouteAnimation!.value
+                                      <= 0.0,
                                       child: child,
                                       maintainState: true,
                                     ),
                                     Visibility(
-                                      visible: secondaryRouteAnimation.value > 0.0,
+                                      visible: secondaryRouteAnimation!.value
+                                          > 0.0,
                                       child: Container(
                                         color: Colors.white,
                                         alignment: Alignment.center,
                                         child: Opacity(
-                                          opacity: secondaryRouteAnimation.value,
+                                          opacity: secondaryRouteAnimation!
+                                              .value,
                                           child: RouteState.recycleStr == null ? CupertinoActivityIndicator() : MyText(RouteState.recycleStr),
                                         ),
                                       ),
@@ -527,11 +512,11 @@ class CupertinoPageTransition extends StatelessWidget {
                       opacity: (linearTransition
                               ? primaryRouteAnimation
                               : CurvedAnimation(
-                                  parent: primaryRouteAnimation,
+                                  parent: primaryRouteAnimation!,
                                   curve: Curves.easeOutCubic,
                                   reverseCurve: Curves.easeInCubic,
                                 ))
-                          .drive(Tween(begin: 0.0, end: 0.5)),
+                          !.drive(Tween(begin: 0.0, end: 0.5)),
                       child: Container(color: Colors.black),
                     ),
                     SlideTransition(
@@ -562,29 +547,29 @@ class CupertinoPageTransition extends StatelessWidget {
           scale: (linearTransition
                   ? secondaryRouteAnimation
                   : CurvedAnimation(
-                      parent: secondaryRouteAnimation,
+                      parent: secondaryRouteAnimation!,
                       curve: Curves.easeOutCubic,
                       reverseCurve: Curves.easeInCubic,
                     ))
-              .drive(Tween(begin: 1.0, end: 1.1)),
+              !.drive(Tween(begin: 1.0, end: 1.1)),
           child: ScaleTransition(
             scale: (linearTransition
                     ? primaryRouteAnimation
                     : CurvedAnimation(
-                        parent: primaryRouteAnimation,
+                        parent: primaryRouteAnimation!,
                         curve: Curves.easeOutCubic,
                         reverseCurve: Curves.easeInCubic,
                       ))
-                .drive(Tween(begin: 0.9, end: 1)),
+                !.drive(Tween(begin: 0.9, end: 1)),
             child: FadeTransition(
               opacity: (linearTransition
                       ? primaryRouteAnimation
                       : CurvedAnimation(
-                          parent: primaryRouteAnimation,
+                          parent: primaryRouteAnimation!,
                           curve: Curves.easeOutExpo,
                           reverseCurve: Curves.easeInExpo,
                         ))
-                  .drive(Tween(begin: 0, end: 1)),
+                  !.drive(Tween(begin: 0, end: 1)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(RouteState.radiusValue),
                 child: child,
@@ -598,29 +583,29 @@ class CupertinoPageTransition extends StatelessWidget {
         scale: (linearTransition
                 ? secondaryRouteAnimation
                 : CurvedAnimation(
-                    parent: secondaryRouteAnimation,
+                    parent: secondaryRouteAnimation!,
                     curve: Curves.easeOutCubic,
                     reverseCurve: Curves.easeInCubic,
                   ))
-            .drive(Tween(begin: 1.0, end: 1.1)),
+            !.drive(Tween(begin: 1.0, end: 1.1)),
         child: ScaleTransition(
           scale: (linearTransition
                   ? primaryRouteAnimation
                   : CurvedAnimation(
-                      parent: primaryRouteAnimation,
+                      parent: primaryRouteAnimation!,
                       curve: Curves.easeOutCubic,
                       reverseCurve: Curves.easeInCubic,
                     ))
-              .drive(Tween(begin: 0.9, end: 1)),
+              !.drive(Tween(begin: 0.9, end: 1)),
           child: FadeTransition(
             opacity: (linearTransition
                     ? primaryRouteAnimation
                     : CurvedAnimation(
-                        parent: primaryRouteAnimation,
+                        parent: primaryRouteAnimation!,
                         curve: Curves.easeOutExpo,
                         reverseCurve: Curves.easeInExpo,
                       ))
-                .drive(Tween(begin: 0, end: 1)),
+                !.drive(Tween(begin: 0, end: 1)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(RouteState.radiusValue),
               child: child,
@@ -635,10 +620,10 @@ class CupertinoPageTransition extends StatelessWidget {
 ///手势
 class _CupertinoBackGestureDetector<T> extends StatefulWidget {
   const _CupertinoBackGestureDetector({
-    Key key,
-    @required this.enabledCallback,
-    @required this.onStartPopGesture,
-    @required this.child,
+    Key? key,
+    required this.enabledCallback,
+    required this.onStartPopGesture,
+    required this.child,
   })  : assert(enabledCallback != null),
         assert(onStartPopGesture != null),
         assert(child != null),
@@ -655,15 +640,15 @@ class _CupertinoBackGestureDetector<T> extends StatefulWidget {
 }
 
 class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureDetector<T>> {
-  _CupertinoBackGestureController<T> _backGestureController;
+  _CupertinoBackGestureController<T>? _backGestureController;
 
-  HorizontalDragGestureRecognizer _recognizer1;
-  HorizontalDragGestureRecognizer _recognizer2;
+  HorizontalDragGestureRecognizer? _recognizer1;
+  HorizontalDragGestureRecognizer? _recognizer2;
 
   var localPosition = Offset.zero;
   var localPosition1 = Offset.zero;
   var localPosition2 = Offset.zero;
-  DateTime dateTime;
+  DateTime? dateTime;
   double a1 = 0.0;
   var left = 0.0;
 
@@ -684,8 +669,8 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
 
   @override
   void dispose() {
-    _recognizer1.dispose();
-    _recognizer2.dispose();
+    _recognizer1?.dispose();
+    _recognizer2?.dispose();
     super.dispose();
   }
 
@@ -702,8 +687,8 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
     assert(_backGestureController != null);
     var d = details.localPosition.dx - localPosition.dx;
     if (isSlide || isSliding) {
-      _backGestureController.dragUpdate(_convertToLogical(
-        details.primaryDelta / context.size.width,
+      _backGestureController?.dragUpdate(_convertToLogical(
+        details.primaryDelta! / context!.size!.width,
       ));
     }
     localPosition1 = details.localPosition;
@@ -718,7 +703,7 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
     }
     a1 = a1 * 180 / pi;
     if (d >= 0) {
-      if (DateTime.now().difference(dateTime).inMilliseconds <= 250) {
+      if (DateTime.now().difference(dateTime!).inMilliseconds <= 250) {
         if (a1 < 10) {
           isSlide = true;
         }
@@ -730,8 +715,9 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
     assert(mounted);
     assert(_backGestureController != null);
     // if (isSlide) {
-    _backGestureController.dragEnd(
-      _convertToLogical(details.velocity.pixelsPerSecond.dx / context.size.width),
+    _backGestureController?.dragEnd(
+      _convertToLogical(details.velocity.pixelsPerSecond.dx / context!.size!
+          .width),
     );
     _backGestureController = null;
     // }
@@ -741,16 +727,17 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
   void _handleDragUpdate2(DragUpdateDetails details) {
     assert(mounted);
     assert(_backGestureController != null);
-    _backGestureController.dragUpdate(-_convertToLogical(
-      details.primaryDelta / context.size.width,
+    _backGestureController?.dragUpdate(-_convertToLogical(
+      details.primaryDelta! / context!.size!.width,
     ));
   }
 
   void _handleDragEnd2(DragEndDetails details) {
     assert(mounted);
     assert(_backGestureController != null);
-    _backGestureController.dragEnd(
-      -_convertToLogical(details.velocity.pixelsPerSecond.dx / context.size.width),
+    _backGestureController?.dragEnd(
+      -_convertToLogical(details.velocity.pixelsPerSecond.dx / context!.size!
+          .width),
     );
     _backGestureController = null;
   }
@@ -762,21 +749,21 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
   }
 
   void _handlePointerDown1(PointerDownEvent event) {
-    if (widget.enabledCallback()) _recognizer1.addPointer(event);
+    if (widget.enabledCallback()) _recognizer1?.addPointer(event);
   }
 
   void _handlePointerDown2(PointerDownEvent event) {
-    if (widget.enabledCallback()) _recognizer2.addPointer(event);
+    if (widget.enabledCallback()) _recognizer2?.addPointer(event);
   }
 
   double _convertToLogical(double value) {
-    switch (Directionality.of(context)) {
+    switch (Directionality.of(context!)) {
       case TextDirection.rtl:
         return -value;
       case TextDirection.ltr:
         return value;
     }
-    return null;
+    // return null;
   }
 
   @override
@@ -817,8 +804,8 @@ class _CupertinoBackGestureDetectorState<T> extends State<_CupertinoBackGestureD
 
 class _CupertinoBackGestureController<T> {
   _CupertinoBackGestureController({
-    @required this.navigator,
-    @required this.controller,
+    required this.navigator,
+    required this.controller,
   })  : assert(navigator != null),
         assert(controller != null) {
     navigator.didStartUserGesture();
@@ -856,7 +843,7 @@ class _CupertinoBackGestureController<T> {
     }
 
     if (controller.isAnimating) {
-      AnimationStatusListener animationStatusCallback;
+      AnimationStatusListener? animationStatusCallback;
       animationStatusCallback = (AnimationStatus status) {
         isSlide = false;
         // switch (status) {
@@ -870,7 +857,7 @@ class _CupertinoBackGestureController<T> {
         //     break;
         // }
         navigator.didStopUserGesture();
-        controller.removeStatusListener(animationStatusCallback);
+        controller.removeStatusListener(animationStatusCallback!);
       };
       controller.addStatusListener(animationStatusCallback);
     } else {
@@ -911,15 +898,15 @@ class RouteState {
   static double radiusValue = 16;
 
   ///缩放值
-  static double scaleValue;
+  static double? scaleValue;
 
   static bool isRecycle = false;
-  static String recycleStr;
+  static String? recycleStr;
 
   ///状态列表
   static List<bool> stateList = [];
 
-  static DateTime dateTime;
+  static DateTime? dateTime;
 
   ///设置路由为原生状态
   static setNativeState([double value = 16.0]) {
@@ -963,10 +950,10 @@ jumpPage(
   bool isRecycle = false,
 
   ///回收提示文字
-  String recycleStr,
+  String? recycleStr,
 
   ///回调函数
-  Function(dynamic) callback,
+  Function(dynamic)? callback,
 }) async {
   RouteState.isFromDown = isMoveBtm;
   RouteState.stateList.insert(0, isMoveBtm);
@@ -976,7 +963,7 @@ jumpPage(
   if (isMove) {
     if (isClose) {
       return Navigator.pushAndRemoveUntil(
-        context,
+        context!,
         CupertinoPageRoute(
           builder: (_) => Container(
             color: Colors.white,
@@ -987,7 +974,7 @@ jumpPage(
       );
     } else {
       return Navigator.push(
-        context,
+        context!,
         CupertinoPageRoute(
           builder: (_) {
             return Container(
@@ -1018,7 +1005,7 @@ jumpPage(
         RouteState.isTransparent = false;
       });
       return Navigator.pushAndRemoveUntil(
-        context,
+        context!,
         CupertinoPageRoute(
           builder: (_) => Container(
             color: Colors.white,
@@ -1037,7 +1024,7 @@ jumpPage(
       );
     } else {
       return Navigator.push(
-        context,
+        context!,
         // CustomRoute(
         //   Container(
         //     color: Colors.white,
@@ -1078,21 +1065,21 @@ void closePage({
 }) {
   switch (count) {
     case 1:
-      Navigator.pop(context, data);
+      Navigator.pop(context!, data);
       break;
     case 2:
       RouteState.isPop = false;
       RouteState.isFromDown = RouteState.stateList[1];
-      Navigator.pop(context);
-      Navigator.pop(context, data);
+      Navigator.pop(context!);
+      Navigator.pop(context!, data);
       Future(() => RouteState.isPop = true);
       break;
     case 3:
       RouteState.isPop = false;
       RouteState.isFromDown = RouteState.stateList[2];
-      Navigator.pop(context);
-      Navigator.pop(context);
-      Navigator.pop(context, data);
+      Navigator.pop(context!);
+      Navigator.pop(context!);
+      Navigator.pop(context!, data);
       Future(() => RouteState.isPop = true);
       break;
     default:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class PageRoute<T> extends ModalRoute<T> {
   PageRoute({
-    RouteSettings settings,
+    RouteSettings? settings,
     this.fullscreenDialog = false,
   }) : super(settings: settings);
 
@@ -27,8 +27,8 @@ Widget _defaultTransitionsBuilder(BuildContext context, Animation<double> animat
 
 class PageRouteBuilder<T> extends PageRoute<T> {
   PageRouteBuilder({
-    RouteSettings settings,
-    @required this.pageBuilder,
+    RouteSettings? settings,
+    required this.pageBuilder,
     this.transitionsBuilder = _defaultTransitionsBuilder,
     this.transitionDuration = const Duration(milliseconds: 300),
     this.reverseTransitionDuration = const Duration(milliseconds: 300),
@@ -64,10 +64,10 @@ class PageRouteBuilder<T> extends PageRoute<T> {
   final bool barrierDismissible;
 
   @override
-  final Color barrierColor;
+  final Color? barrierColor;
 
   @override
-  final String barrierLabel;
+  final String? barrierLabel;
 
   @override
   final bool maintainState;

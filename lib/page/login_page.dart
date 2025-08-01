@@ -80,7 +80,7 @@ class _PassWordLoginState extends State<PassWordLogin> {
                 controller: phoneCon,
                 style: TextStyle(fontSize: 14),
                 maxLength: 11,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Theme.of(context!).primaryColor,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   counterText: '',
@@ -98,7 +98,7 @@ class _PassWordLoginState extends State<PassWordLogin> {
                       controller: yanzhengmaCon,
                       style: TextStyle(fontSize: 14),
                       obscureText: isShowPass,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -170,7 +170,7 @@ class _PassWordLoginState extends State<PassWordLogin> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context!).primaryColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14),
@@ -212,7 +212,7 @@ class _PassWordLoginState extends State<PassWordLogin> {
                     },
                     child: MyText(
                       '手机快捷登录',
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context!).primaryColor,
                     ),
                   ),
                 ],
@@ -279,7 +279,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                 controller: phoneCon,
                 style: TextStyle(fontSize: 14),
                 maxLength: 11,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Theme.of(context!).primaryColor,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   counterText: '',
@@ -297,7 +297,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       controller: yanzhengmaCon,
                       style: TextStyle(fontSize: 14),
                       maxLength: 11,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -415,7 +415,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context!).primaryColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14),
@@ -441,7 +441,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                     onTap: () => close(),
                     child: MyText(
                       '密码登录',
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context!).primaryColor,
                     ),
                   ),
                 ],
@@ -460,7 +460,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
 class RegisterPage extends StatefulWidget {
   final String openId;
 
-  const RegisterPage(this.openId, {Key key}) : super(key: key);
+  const RegisterPage(this.openId, {Key? key}) : super(key: key);
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -514,7 +514,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: phoneCon,
                 style: TextStyle(fontSize: 14),
                 maxLength: 11,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Theme.of(context!).primaryColor,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   counterText: '',
@@ -532,7 +532,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: yanzhengmaCon,
                       style: TextStyle(fontSize: 14),
                       maxLength: 11,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -625,7 +625,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: passwordCon,
                       style: TextStyle(fontSize: 14),
                       obscureText: isShowPass,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -663,7 +663,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: yaoqingmaCon,
                 style: TextStyle(fontSize: 14),
                 maxLength: 11,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Theme.of(context!).primaryColor,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   counterText: '',
@@ -719,7 +719,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context!).primaryColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14),
@@ -745,7 +745,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     onTap: () => close(),
                     child: MyText(
                       '密码登录',
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context!).primaryColor,
                     ),
                   ),
                 ],
@@ -812,7 +812,7 @@ class _FindPassState extends State<FindPass> {
                 controller: phoneCon,
                 style: TextStyle(fontSize: 14),
                 maxLength: 11,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Theme.of(context!).primaryColor,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   counterText: '',
@@ -830,7 +830,7 @@ class _FindPassState extends State<FindPass> {
                       controller: yanzhengmaCon,
                       style: TextStyle(fontSize: 14),
                       maxLength: 11,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -923,7 +923,7 @@ class _FindPassState extends State<FindPass> {
                       controller: passwordCon,
                       style: TextStyle(fontSize: 14),
                       obscureText: isShowPass,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -992,7 +992,7 @@ class _FindPassState extends State<FindPass> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context!).primaryColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14),
@@ -1018,7 +1018,7 @@ class _FindPassState extends State<FindPass> {
                     onTap: () => close(),
                     child: MyText(
                       '密码登录',
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context!).primaryColor,
                     ),
                   ),
                 ],
@@ -1084,7 +1084,7 @@ class _BindAccountState extends State<BindAccount> {
                 controller: phoneCon,
                 style: TextStyle(fontSize: 14),
                 maxLength: 11,
-                cursorColor: Theme.of(context).primaryColor,
+                cursorColor: Theme.of(context!).primaryColor,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   counterText: '',
@@ -1102,7 +1102,7 @@ class _BindAccountState extends State<BindAccount> {
                       controller: yanzhengmaCon,
                       style: TextStyle(fontSize: 14),
                       maxLength: 11,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: Theme.of(context!).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         counterText: '',
@@ -1193,7 +1193,7 @@ class _BindAccountState extends State<BindAccount> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context!).primaryColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14),
@@ -1220,7 +1220,7 @@ class _BindAccountState extends State<BindAccount> {
 
 class WeChatAndQqLoginWidget extends StatelessWidget {
   const WeChatAndQqLoginWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -1315,7 +1315,7 @@ class WeChatAndQqLoginWidget extends StatelessWidget {
 class LoginTitleWidget extends StatelessWidget {
   final bool isZhuche;
 
-  const LoginTitleWidget({Key key, this.isZhuche = true}) : super(key: key);
+  const LoginTitleWidget({Key? key, this.isZhuche = true}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return buildTitle(

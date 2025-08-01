@@ -67,7 +67,7 @@ class _ShangxueyuanPageState extends State<ShangxueyuanPage> {
                   child: Column(
                     children: [
                       Image.asset(
-                        caidanList[i]['img'],
+                        caidanList[i]['img']!,
                         height: 38,
                       ),
                       SizedBox(height: 8),
@@ -168,10 +168,11 @@ class _ShangxueyuanPageState extends State<ShangxueyuanPage> {
 }
 
 class ShangxueyuanList extends StatefulWidget {
-  final List tabList;
-  final int index;
+  final List<String>? tabList;
+  final int? index;
 
-  const ShangxueyuanList({Key key, this.tabList, this.index}) : super(key: key);
+  const ShangxueyuanList({Key? key, this.tabList, this.index}) : super(key:
+  key);
 
   @override
   _ShangxueyuanListState createState() => _ShangxueyuanListState();
@@ -183,14 +184,14 @@ class _ShangxueyuanListState extends State<ShangxueyuanList> with NoSlidingRetur
     return ScaffoldWidget(
       appBar: buildTitle(
         context,
-        title: widget.tabList[widget.index],
+        title: widget.tabList![widget.index!],
         color: Colors.white,
       ),
       body: TabWidget(
         isScrollable: true,
         tabList: widget.tabList,
         isPadding: false,
-        tabPage: widget.tabList.map((e) {
+        tabPage: widget.tabList!.map((e) {
           return MyListView(
             isShuaxin: false,
             item: (i) {

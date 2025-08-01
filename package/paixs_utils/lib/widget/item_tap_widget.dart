@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ItemTapWidget extends StatelessWidget {
-  final Widget child;
-  final void Function() onTap;
-  final void Function() onLongPress;
+  final Widget? child;
+  final void Function()? onTap;
+  final void Function()? onLongPress;
   final Color bgColor;
   final double padding;
 
   const ItemTapWidget({
-    Key key,
+    Key? key,
     this.child,
     this.onTap,
     this.onLongPress,

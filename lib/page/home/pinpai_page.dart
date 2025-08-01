@@ -43,7 +43,7 @@ class _PinpaiPageState extends State<PinpaiPage> {
       success: (v) => pinpaiDm.addList(v['data'], isRef, v['total']),
     );
     setState(() {});
-    return pinpaiDm.flag;
+    return pinpaiDm.flag!;
   }
 
   @override
@@ -137,9 +137,9 @@ class _PinpaiPageState extends State<PinpaiPage> {
 }
 
 class LoupanList extends StatefulWidget {
-  final Map data;
+  final Map? data;
 
-  const LoupanList({Key key, this.data}) : super(key: key);
+  const LoupanList({Key? key, this.data}) : super(key: key);
   @override
   _LoupanListState createState() => _LoupanListState();
 }
@@ -162,18 +162,19 @@ class _LoupanListState extends State<LoupanList> {
     flog(widget.data);
     await Request.get(
       '/api/Brand/GetBuildingPageList',
-      data: {"brandType": widget.data['type'], "PageIndex": page},
+      data: {"brandType": widget.data!['type'], "PageIndex": page},
       catchError: (v) => pinpaiListDm.toError(v),
       success: (v) => pinpaiListDm.addList(v['data'], isRef, v['total']),
     );
     setState(() {});
-    return pinpaiListDm.flag;
+    return pinpaiListDm.flag!;
   }
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      appBar: buildTitle(context, title: widget.data['dictValue'], color: Colors.white, isShowBorder: true),
+      appBar: buildTitle(context, title: widget.data!['dictValue'], color:
+      Colors.white, isShowBorder: true),
       bgColor: Colors.white,
       body: AnimatedSwitchBuilder(
         value: pinpaiListDm,

@@ -45,7 +45,7 @@ class _WanquPageState extends State<WanquPage> {
       },
     );
     setState(() {});
-    return wanquDm.flag;
+    return wanquDm.flag!;
   }
 
   @override

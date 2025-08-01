@@ -89,7 +89,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
     return ScaffoldWidget(
       brightness: Brightness.light,
       body: Selector<UserProvider, UserModel>(
-        selector: (_, k) => k.userModel,
+        selector: (_, k) => k.userModel!,
         builder: (_, v, view) {
           return Stack(
             children: [
@@ -204,9 +204,9 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 4),
                                   child: MyText(
-                                    app.zidianDm.object.isNotEmpty
+                                    app.zidianDm.object!.isNotEmpty
                                         ? app.zidianDm.object
-                                            .where((w) =>
+                                            !.where((w) =>
                                                 w['dictType'] == 'UserLevel')
                                             .where((w) {
                                             return w['dictKey'] ==
@@ -284,7 +284,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                         SizedBox(width: 5),
                         MyText(
                           'btnClick',
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context!).primaryColor,
                         )
                       ],
                     ),
@@ -352,7 +352,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                         child: Column(
                           children: [
                             Image.asset(
-                              caidanList1[i]['img'],
+                              caidanList1[i]['img']!,
                               width: 24,
                               height: 24,
                             ),
@@ -385,7 +385,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                         child: Column(
                           children: [
                             Image.asset(
-                              caidanList2[i]['img'],
+                              caidanList2[i]['img']!,
                               width: 24,
                               height: 24,
                             ),
@@ -433,7 +433,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
 class ZhuanShuKefu extends StatefulWidget {
   final Map data;
 
-  const ZhuanShuKefu(this.data, {Key key}) : super(key: key);
+  const ZhuanShuKefu(this.data, {Key? key}) : super(key: key);
 
   @override
   _ZhuanShuKefuState createState() => _ZhuanShuKefuState();

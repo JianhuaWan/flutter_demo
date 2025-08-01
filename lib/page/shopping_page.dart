@@ -19,9 +19,10 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 
 class ShoppingPage extends StatefulWidget {
   final bool isHome;
-  final Map data;
+  final Map? data;
 
-  const ShoppingPage({Key key, this.isHome = true, this.data}) : super(key: key);
+  const ShoppingPage({Key? key, this.isHome = true, this.data}) : super(key:
+  key);
   @override
   _ShoppingPageState createState() => _ShoppingPageState();
 }
@@ -45,8 +46,8 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
 
   ///初始化函数
   Future initData() async {
-    tuijianLoupan = widget.data == null ? null : widget.data['buildingName'];
-    tuijianLoupanId = widget.data == null ? null : widget.data['id'];
+    tuijianLoupan = widget.data == null ? null : widget.data!['buildingName'];
+    tuijianLoupanId = widget.data == null ? null : widget.data!['id'];
   }
 
   @override
@@ -123,8 +124,10 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
                 setState(() {
                   kehuXinbie = null;
                   kehuType = null;
-                  tuijianLoupan = widget.data == null ? null : widget.data['buildingName'];
-                  tuijianLoupanId = widget.data == null ? null : widget.data['id'];
+                  tuijianLoupan = widget.data == null ? null : widget
+                      .data!['buildingName'];
+                  tuijianLoupanId = widget.data == null ? null : widget
+                      .data!['id'];
                   daofangTime = DateTime.now().add(Duration(hours: 1));
                   peitongZhuchang = null;
                   textCon1.clear();
@@ -167,7 +170,7 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
         tuijianDm.setTime();
       },
     );
-    return tuijianDm.flag;
+    return tuijianDm.flag!;
   }
 
   List<Widget> get item {
@@ -203,7 +206,7 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
         selectoOnTap: () {
           switch (i) {
             case 2:
-              showSelecto(context, texts: ['男', '女'], callback: (v, i) {
+              showSelecto(context!, texts: ['男', '女'], callback: (v, i) {
                 setState(() {
                   kehuXinbie = v;
                 });
@@ -227,7 +230,7 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
               break;
             case 6:
               DatePicker.showDateTimePicker(
-                context,
+                context!,
                 minTime: DateTime.now().add(Duration(hours: 1)),
                 maxTime: DateTime.now().add(Duration(days: 365 * 10)),
                 onConfirm: (date) {
@@ -388,7 +391,7 @@ class TuijianLoupan extends StatefulWidget {
 }
 
 class _TuijianLoupanState extends State<TuijianLoupan> {
-  int index;
+  late int index;
 
   @override
   void initState() {
@@ -436,7 +439,7 @@ class _TuijianLoupanState extends State<TuijianLoupan> {
       },
     );
     setState(() {});
-    return loupanDm.flag;
+    return loupanDm.flag!;
   }
 
   @override

@@ -9,16 +9,16 @@ import '../util/textedit_util.dart';
 class ValueModel {
   final String text;
   final dynamic con;
-  final String tips;
-  final bool isPhone;
+  final String? tips;
+  final bool? isPhone;
   ValueModel(this.text, this.con, [this.tips, this.isPhone]);
 }
 
 class CheckModel {
   final String text;
   final dynamic con;
-  final String tips;
-  final bool isPhone;
+  final String? tips;
+  final bool? isPhone;
   CheckModel(this.text, this.con, {this.tips, this.isPhone});
 }
 
@@ -26,10 +26,10 @@ class Interface {
   ///接口请求与非空验证统一处理
   static handle(
     BuildContext context, {
-    @required DataModel dataModel,
-    @required Future<void> Function() event,
+    required DataModel dataModel,
+    required Future<void> Function() event,
     List<ValueModel> valueChecking = const [],
-    void Function(DataModel) success,
+    void Function(DataModel)? success,
     bool isShowDialog = true,
   }) async {
     Future(() async {
@@ -40,7 +40,7 @@ class Interface {
         if (isShowDialog) buildShowDialog(context);
         await event();
         if (isShowDialog) pop(context);
-        if (dataModel.flag >= 2) {
+        if (dataModel.flag! >= 2) {
           if (success != null) success(dataModel);
         } else {
           showToast(dataModel.msg);
@@ -54,12 +54,12 @@ class Interface {
   ///接口请求与非空验证统一处理2
   static request(
     BuildContext context, {
-    DataModel dataModel,
-    @required String path,
-    @required dynamic data,
+    DataModel? dataModel,
+    required String path,
+    required dynamic data,
     List<CheckModel> checking = const [],
-    void Function() success,
-    void Function() error,
+    void Function()? success,
+    void Function()? error,
     bool isShowDialog = true,
   }) async {
     Future(() async {
@@ -70,12 +70,12 @@ class Interface {
       var check = teUtil.check();
       if (check == null) {
         if (isShowDialog) buildShowDialog(context);
-        await _toObjectApi(path, data, dataModel);
+        await _toObjectApi(path, data, dataModel!);
         if (isShowDialog) pop(context);
-        if (dataModel.flag >= 2) {
+        if (dataModel!.flag! >= 2) {
           if (success != null) success();
         } else {
-          showToast(dataModel.msg);
+          showToast(dataModel?.msg);
           if (error != null) error();
         }
       } else {

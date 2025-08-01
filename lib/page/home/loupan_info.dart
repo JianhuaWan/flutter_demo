@@ -9,9 +9,9 @@ import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
 
 class LoupanInfo extends StatefulWidget {
-  final Map data;
+  final Map? data;
 
-  const LoupanInfo({Key key, this.data}) : super(key: key);
+  const LoupanInfo({Key? key, this.data}) : super(key: key);
   @override
   _LoupanInfoState createState() => _LoupanInfoState();
 }
@@ -40,16 +40,16 @@ class _LoupanInfoState extends State<LoupanInfo> with SlidingReturn, TickerProvi
                   curve: ElasticOutCurve(0.5),
                   child: ItemEditWidget(
                     text: [
-                      widget.data['buildingName'],
-                      widget.data['buildingFeature'],
-                      doubleToYuan(widget.data['consultAvgPrice']),
-                      doubleToWan(widget.data['consultTotalPrice']),
-                      widget.data['propertyType'],
-                      '${widget.data['buildType']}',
-                      '${widget.data['propertyRight']}年',
-                      widget.data['developer'],
-                      '${widget.data['city']}-${widget.data['area']}',
-                      widget.data['buildAddress'],
+                      widget.data!['buildingName'],
+                      widget.data!['buildingFeature'],
+                      doubleToYuan(widget.data!['consultAvgPrice']),
+                      doubleToWan(widget.data!['consultTotalPrice']),
+                      widget.data!['propertyType'],
+                      '${widget.data!['buildType']}',
+                      '${widget.data!['propertyRight']}年',
+                      widget.data!['developer'],
+                      '${widget.data!['city']}-${widget.data!['area']}',
+                      widget.data!['buildAddress'],
                     ][i],
                     title: [
                       '楼盘别名',
@@ -81,18 +81,18 @@ class _LoupanInfoState extends State<LoupanInfo> with SlidingReturn, TickerProvi
               item: (i) {
                 return ItemEditWidget(
                   text: [
-                    '${widget.data['floorSapce']}㎡',
-                    '${widget.data['buildingArea']}㎡',
-                    '${widget.data['reservedLand']}',
-                    '${widget.data['packingUnit']}',
-                    '${widget.data['packtingRatio']}',
-                    '${widget.data['planBuildings']}',
-                    '${widget.data['planHubs']}',
-                    '${widget.data['propertyName']}',
-                    '${widget.data['propertyPrice']}元',
-                    '${widget.data['powerWay']}',
-                    '${widget.data['heatingWay']}',
-                    '${widget.data['wateringWay']}',
+                    '${widget.data!['floorSapce']}㎡',
+                    '${widget.data!['buildingArea']}㎡',
+                    '${widget.data!['reservedLand']}',
+                    '${widget.data!['packingUnit']}',
+                    '${widget.data!['packtingRatio']}',
+                    '${widget.data!['planBuildings']}',
+                    '${widget.data!['planHubs']}',
+                    '${widget.data!['propertyName']}',
+                    '${widget.data!['propertyPrice']}元',
+                    '${widget.data!['powerWay']}',
+                    '${widget.data!['heatingWay']}',
+                    '${widget.data!['wateringWay']}',
                   ][i],
                   title: [
                     '占地面积',
@@ -125,8 +125,8 @@ class _LoupanInfoState extends State<LoupanInfo> with SlidingReturn, TickerProvi
               item: (i) {
                 return ItemEditWidget(
                   text: [
-                    widget.data['presellingCertificate'],
-                    widget.data['certificateDate'],
+                    widget.data!['presellingCertificate'],
+                    widget.data!['certificateDate'],
                     // widget.data['bindBuilding'],
                   ][i],
                   title: [

@@ -19,14 +19,14 @@ enum ShimmerType {
 
 class ShimmerWidget extends StatelessWidget {
   final ShimmerType type;
-  final String text;
+  final String? text;
   final Color textColor;
   final String redText;
-  final Function callBack;
+  final Function()? callBack;
   final Color color;
 
   const ShimmerWidget({
-    Key key,
+    Key? key,
     this.type = ShimmerType.loupanInfo,
     this.text,
     this.callBack,
@@ -62,18 +62,22 @@ class ShimmerWidget extends StatelessWidget {
         duration: Duration(milliseconds: 250),
         child: text == null
             ? Shimmer.fromColors(
-                child: views[type],
+                child: views[type]!,
                 baseColor: Colors.grey,
                 highlightColor: Colors.white,
               )
             : Container(
                 // height: 56,
                 // ignore: deprecated_member_use
-                child: FlatButton(
+                child: TextButton(
                   onPressed: callBack,
-                  splashColor: Color(0x05000000),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  style: TextButton.styleFrom(
+                    splashFactory: NoSplash.splashFactory,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: Colors.transparent,
+                    padding: EdgeInsets.zero,
                   ),
                   child: MyText(
                     text,

@@ -5,22 +5,22 @@ import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/views.dart';
 
 class TabLinkWidget extends StatefulWidget {
-  final List<String> headers;
-  final List<Widget> listBar;
-  final Widget Function(int, dynamic) headerBar;
-  final double cacheExtent;
-  final bool isScrollable;
-  final bool isBottom;
-  final EdgeInsetsGeometry listPadding;
-  final EdgeInsetsGeometry indicatorPadding;
-  final EdgeInsetsGeometry labelPadding;
-  final double tabBarTop;
-  final double dividerHeight;
+  final List<String>? headers;
+  final List<Widget>? listBar;
+  final Widget Function(int, dynamic)? headerBar;
+  final double? cacheExtent;
+  final bool? isScrollable;
+  final bool? isBottom;
+  final EdgeInsetsGeometry? listPadding;
+  final EdgeInsetsGeometry? indicatorPadding;
+  final EdgeInsetsGeometry? labelPadding;
+  final double? tabBarTop;
+  final double? dividerHeight;
   final bool isShadow;
-  final ScrollController con;
+  final ScrollController? con;
 
   const TabLinkWidget({
-    Key key,
+    Key? key,
     this.headers,
     this.listBar,
     this.headerBar,
@@ -40,12 +40,13 @@ class TabLinkWidget extends StatefulWidget {
   _TabLinkWidgetState createState() => _TabLinkWidgetState();
 }
 
-class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateMixin {
-  TabController tabCon;
+class _TabLinkWidgetState extends State<TabLinkWidget>
+    with TickerProviderStateMixin {
+  TabController? tabCon;
   ScrollController con = ScrollController();
   List<Widget> children = [];
-  List<GlobalKey<State<StatefulWidget>>> keyList1;
-  List<GlobalKey<State<StatefulWidget>>> keyList2;
+  List<GlobalKey<State<StatefulWidget>>>? keyList1;
+  List<GlobalKey<State<StatefulWidget>>>? keyList2;
   List<double> keyHeight = [];
   bool flag = true;
 
@@ -61,25 +62,32 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
   Future initData() async {
     con = widget.con ?? ScrollController();
     if (widget.tabBarTop != null) isNoShowTabBar = true;
-    tabCon = TabController(length: widget.headers.length, vsync: this);
-    keyList1 = widget.headers.map((_) => GlobalKey()).toList();
-    keyList2 = widget.headers.map((_) => GlobalKey()).toList();
+    tabCon = TabController(length: widget.headers!.length, vsync: this);
+    keyList1 = widget.headers?.map((_) => GlobalKey()).toList();
+    keyList2 = widget.headers?.map((_) => GlobalKey()).toList();
     Future(() {
-      List.generate(widget.headers.length, (i) => keyHeight.add(keyList1[i].currentContext.size.height + keyList2[i].currentContext.size.height));
-      keyHeight = List.generate(keyHeight.length, (i) => keyHeight[i] + keyHeight.sublist(0, i).fold(0, (p, e) => p + e));
+      List.generate(
+          widget.headers!.length,
+          (i) => keyHeight.add(
+              (keyList1![i].currentContext?.size?.height ?? 0) +
+                  (keyList2![i].currentContext?.size?.height ?? 0)));
+      keyHeight = List.generate(
+          keyHeight.length,
+          (i) =>
+              keyHeight[i] + keyHeight.sublist(0, i).fold(0, (p, e) => p + e));
     });
-    List.generate(widget.headers.length, (i) {
+    List.generate(widget.headers!.length, (i) {
       if (widget.headerBar != null) {
         children.add(
           Container(
-            key: keyList2[i],
-            child: widget.headerBar(i, widget.headers[i]),
+            key: keyList2![i],
+            child: widget.headerBar!(i, widget.headers![i]),
           ),
         );
       } else {
         children.add(
           Container(
-            key: keyList2[i],
+            key: keyList2![i],
             child: container(i),
           ),
         );
@@ -87,14 +95,14 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
       if (widget.listBar != null) {
         children.add(
           Container(
-            key: keyList1[i],
-            child: widget.listBar[i],
+            key: keyList1![i],
+            child: widget.listBar![i],
           ),
         );
       } else {
         children.add(
           Container(
-            key: keyList1[i],
+            key: keyList1![i],
             height: 256,
             color: Colors.red,
           ),
@@ -104,7 +112,12 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
     setState(() {});
     con.addListener(() {
       if (widget.tabBarTop != null) {
-        if (con.offset + widget.tabBarTop - widget.dividerHeight * 2 - padd(context).top + 2 > keyHeight.first) {
+        if (con.offset +
+                widget.tabBarTop! -
+                widget.dividerHeight! * 2 -
+                padd(context).top +
+                2 >
+            keyHeight.first) {
           if (isNoShowTabBar != false)
             setState(() {
               isNoShowTabBar = false;
@@ -119,23 +132,42 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
       }
       if (flag) {
         int indexWhere;
-        if (widget.isBottom) {
+        if (widget.isBottom!) {
           if (widget.tabBarTop == null) {
-            indexWhere = keyHeight.lastIndexWhere((w) => con.offset + (size(context).height - 56 - 40) - padd(context).top - 48 >= w) + 1;
+            indexWhere = keyHeight.lastIndexWhere((w) =>
+                    con.offset +
+                        (size(context).height - 56 - 40) -
+                        padd(context).top -
+                        48 >=
+                    w) +
+                1;
           } else {
-            indexWhere = keyHeight.lastIndexWhere((w) => con.offset + (size(context).height - 56 - 40 - widget.tabBarTop * 2) >= w) + 1;
+            indexWhere = keyHeight.lastIndexWhere((w) =>
+                    con.offset +
+                        (size(context).height -
+                            56 -
+                            40 -
+                            widget.tabBarTop! * 2) >=
+                    w) +
+                1;
           }
         } else {
           if (widget.tabBarTop == null) {
             indexWhere = keyHeight.lastIndexWhere((w) => con.offset >= w) + 1;
           } else {
-            indexWhere = keyHeight.lastIndexWhere((w) => con.offset + widget.tabBarTop - widget.dividerHeight * 2 + 2 >= w) + 1;
+            indexWhere = keyHeight.lastIndexWhere((w) =>
+                    con.offset +
+                        widget.tabBarTop! -
+                        widget.dividerHeight! * 2 +
+                        2 >=
+                    w) +
+                1;
           }
         }
-        if (indexWhere > widget.headers.length - 1) {
-          tabCon.animateTo(widget.headers.length - 1);
+        if (indexWhere > widget.headers!.length - 1) {
+          tabCon?.animateTo(widget.headers!.length - 1);
         } else {
-          tabCon.animateTo(indexWhere);
+          tabCon?.animateTo(indexWhere);
         }
       }
     });
@@ -145,13 +177,14 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
     return Container(
       height: 48,
       padding: EdgeInsets.only(left: 17),
-      child: BigTitleWidget(title: widget.headers[i], isPadding: false),
+      child: BigTitleWidget(title: widget.headers![i], isPadding: false),
     );
   }
 
   Future conAnimateTo(double v) async {
     flag = false;
-    await con.animateTo(v, duration: Duration(milliseconds: 250), curve: Curves.ease);
+    await con.animateTo(v,
+        duration: Duration(milliseconds: 250), curve: Curves.ease);
     flag = true;
   }
 
@@ -160,21 +193,28 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
     children = [];
     keyHeight = [];
     Future(() {
-      List.generate(widget.headers.length, (i) => keyHeight.add(keyList1[i].currentContext.size.height + keyList2[i].currentContext.size.height));
-      keyHeight = List.generate(keyHeight.length, (i) => keyHeight[i] + keyHeight.sublist(0, i).fold(0, (p, e) => p + e));
+      List.generate(
+          widget.headers!.length,
+          (i) => keyHeight.add(
+              (keyList1?[i].currentContext?.size?.height ?? 0) +
+                  (keyList2![i].currentContext?.size?.height ?? 0)));
+      keyHeight = List.generate(
+          keyHeight.length,
+          (i) =>
+              keyHeight[i] + keyHeight.sublist(0, i).fold(0, (p, e) => p + e));
     });
-    List.generate(widget.headers.length, (i) {
+    List.generate(widget.headers!.length, (i) {
       if (widget.headerBar != null) {
         children.add(
           Container(
-            key: keyList2[i],
-            child: widget.headerBar(i, widget.headers[i]),
+            key: keyList2![i],
+            child: widget.headerBar!(i, widget.headers![i]),
           ),
         );
       } else {
         children.add(
           Container(
-            key: keyList2[i],
+            key: keyList2![i],
             child: container(i),
           ),
         );
@@ -182,14 +222,14 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
       if (widget.listBar != null) {
         children.add(
           Container(
-            key: keyList1[i],
-            child: widget.listBar[i],
+            key: keyList1![i],
+            child: widget.listBar![i],
           ),
         );
       } else {
         children.add(
           Container(
-            key: keyList1[i],
+            key: keyList1![i],
             height: 256,
             color: Colors.red,
           ),
@@ -237,20 +277,30 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
               onTap: (i) {
                 if (i == 0) {
                   conAnimateTo(0);
-                } else if (i == widget.headers.length - 1) {
+                } else if (i == widget.headers!.length - 1) {
                   conAnimateTo(con.position.maxScrollExtent);
                 } else {
-                  if (widget.isBottom) {
+                  if (widget.isBottom!) {
                     if (widget.tabBarTop == null) {
-                      conAnimateTo(keyHeight[i - 1] - (size(context).height - 56 - 40) + 48 + padd(context).top);
+                      conAnimateTo(keyHeight[i - 1] -
+                          (size(context).height - 56 - 40) +
+                          48 +
+                          padd(context).top);
                     } else {
-                      conAnimateTo(keyHeight[i - 1] - ((size(context).height - 56 - 40)) + 48 - widget.tabBarTop);
+                      conAnimateTo(keyHeight[i - 1] -
+                          ((size(context).height - 56 - 40)) +
+                          48 -
+                          widget.tabBarTop!);
                     }
                   } else {
                     if (widget.tabBarTop == null) {
                       conAnimateTo(keyHeight[i - 1]);
                     } else {
-                      conAnimateTo(keyHeight[i - 1] - widget.tabBarTop + widget.dividerHeight * 2 + padd(context).top - 1);
+                      conAnimateTo(keyHeight[i - 1] -
+                          widget.tabBarTop! +
+                          widget.dividerHeight! * 2 +
+                          padd(context).top -
+                          1);
                     }
                   }
                 }
@@ -258,15 +308,17 @@ class _TabLinkWidgetState extends State<TabLinkWidget> with TickerProviderStateM
               indicatorColor: Theme.of(context).primaryColor,
               unselectedLabelColor: Color(0xff666666),
               labelColor: Theme.of(context).primaryColor,
-              indicatorPadding: widget.indicatorPadding ?? EdgeInsets.only(bottom: 10, left: 8, right: 8),
-              labelPadding: widget.labelPadding ?? EdgeInsets.only(bottom: 10, left: 8, right: 8),
+              indicatorPadding: widget.indicatorPadding ??
+                  EdgeInsets.only(bottom: 10, left: 8, right: 8),
+              labelPadding: widget.labelPadding ??
+                  EdgeInsets.only(bottom: 10, left: 8, right: 8),
               // tabs: widget.headers.map((m) {
               //   return Tab(text: m);
               // }).toList(),
-              tabs: List.generate(widget.headers.length, (i) {
+              tabs: List.generate(widget.headers!.length, (i) {
                 return TweenWidget(
                   delayed: 50 + 100 * i,
-                  child: Tab(text: widget.headers[i]),
+                  child: Tab(text: widget.headers![i]),
                 );
               }),
             ),

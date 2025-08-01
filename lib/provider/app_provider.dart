@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/http.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/views.dart';
@@ -10,8 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppProvider extends ChangeNotifier {
   ///全局位置坐标数据
-  String la, lo, address, province, city, area;
-  String provinceCode, cityCode, areaCode;
+  String? la, lo, address, province, city, area;
+  String? provinceCode, cityCode, areaCode;
 
   ///设置位置未空
   void setNullLocation() {
@@ -79,7 +79,7 @@ class AppProvider extends ChangeNotifier {
   var allQuyuDm = DataModel<List>(object: []);
 
   Future<void> getDropDownList1([isLoading = true]) async {
-    if (allQuyuDm.object.isEmpty)
+    if (allQuyuDm.object!.isEmpty)
       await Request.get(
         '/api/Area/GetDropDownList',
         isLoading: isLoading,
@@ -92,10 +92,10 @@ class AppProvider extends ChangeNotifier {
 
   ///弹出省市区数据的选择器
   Future<void> showCitySelecto(fun) async {
-    if (shengshiquDm.object.isEmpty) await getDropDownList();
+    if (shengshiquDm.object!.isEmpty) await getDropDownList();
     await showSelecto(
-      context,
-      texts: shengshiquDm.object.map((m) => m['name']).toList(),
+      context!,
+      texts: shengshiquDm.object!.map((m) => m['name']).toList(),
       callback: fun,
     );
   }
@@ -133,7 +133,7 @@ class AppProvider extends ChangeNotifier {
         zidianDm.setTime();
       },
     );
-    return zidianDm.flag;
+    return zidianDm.flag!;
   }
 
   ///首页pageview控制器
@@ -150,7 +150,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   // app包信息
-  PackageInfo packageInfo;
+  PackageInfo? packageInfo;
 
   // 生成中国所有省市区的默认数据
   List<Map<String, dynamic>> generateDefaultChinaAreaData() {

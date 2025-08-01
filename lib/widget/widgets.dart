@@ -20,13 +20,14 @@ import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
 
 class BigTitleWidget extends StatelessWidget {
-  final String title;
-  final bool isShowMore;
-  final Function onTap;
-  final bool isBottom;
-  final bool isPadding;
+  final String? title;
+  final bool? isShowMore;
+  final Function()? onTap;
+  final bool? isBottom;
+  final bool? isPadding;
 
-  const BigTitleWidget({Key key, this.title, this.isShowMore, this.onTap, this.isBottom, this.isPadding}) : super(key: key);
+  const BigTitleWidget({Key? key, this.title, this.isShowMore, this.onTap,
+    this.isBottom, this.isPadding}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -155,7 +156,7 @@ class _CaidanWidgetState extends State<CaidanWidget> {
                       //   ),
                       // ),
                       Image.asset(
-                        caidanList1[i]['img'],
+                        caidanList1[i]['img']!,
                         width: 40,
                         height: 40,
                       ),
@@ -211,7 +212,7 @@ class _CaidanWidgetState extends State<CaidanWidget> {
                       //   ),
                       // ),
                       Image.asset(
-                        caidanList2[i]['img'],
+                        caidanList2[i]['img']!,
                         width: 40,
                         height: 40,
                       ),
@@ -230,8 +231,8 @@ class _CaidanWidgetState extends State<CaidanWidget> {
 }
 
 class ZixunWidget extends StatelessWidget {
-  final Map data;
-  const ZixunWidget({Key key, this.data}) : super(key: key);
+  final Map? data;
+  const ZixunWidget({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +246,7 @@ class ZixunWidget extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: WrapperImage(
-                  url: data['preview'],
+                  url: data!['preview'],
                   height: 100,
                 ),
               ),
@@ -267,7 +268,7 @@ class ZixunWidget extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: 12),
                   child: MyText(
-                    data['title'] ?? '深圳湾科技生态园',
+                    data!['title'] ?? '深圳湾科技生态园',
                     size: 13,
                     color: Colors.white,
                   ),
@@ -290,21 +291,21 @@ class ZixunWidget extends StatelessWidget {
 
 class BtnWidget extends StatelessWidget {
   final List<String> titles;
-  final List<Function> onTap;
+  final List<Function()> onTap;
   final List<Axis> axis;
   final List<bool> isScale;
   final List<int> time;
   final List<double> value;
   final List<Curve> curve;
-  final List<int> delayed;
+  final List<int>? delayed;
   final List<double> btnHeight;
   final bool isShowOnlyOne;
   final bool isShowShadow;
-  final Color bgColor;
-  final EdgeInsetsGeometry padding;
+  final Color? bgColor;
+  final EdgeInsetsGeometry? padding;
 
   const BtnWidget({
-    Key key,
+    Key? key,
     this.titles = const [],
     this.onTap = const [],
     this.isShowOnlyOne = false,
@@ -314,7 +315,7 @@ class BtnWidget extends StatelessWidget {
     this.time = const [400, 400],
     this.value = const [100, 100],
     this.curve = const [Curves.easeOutCubic, Curves.easeOutCubic],
-    this.delayed = const [null, null],
+    this.delayed = const [0, 0],
     this.padding,
     this.bgColor,
     this.btnHeight = const [12, 14],
@@ -338,7 +339,7 @@ class BtnWidget extends StatelessWidget {
                 time: time[0],
                 value: value[0],
                 curve: curve[0],
-                delayed: delayed[0],
+                delayed: delayed![0],
                 isOpacity: true,
                 child: WidgetTap(
                   isElastic: true,
@@ -363,7 +364,7 @@ class BtnWidget extends StatelessWidget {
               time: time[1],
               value: value[1],
               curve: curve[1],
-              delayed: delayed[1],
+              delayed: delayed![1],
               isOpacity: true,
               child: WidgetTap(
                 isElastic: true,
@@ -386,34 +387,34 @@ class BtnWidget extends StatelessWidget {
 }
 
 class ItemEditWidget extends StatefulWidget {
-  final EdgeInsetsGeometry padding;
-  final String title;
-  final Color titleColor;
-  final Color color;
-  final Color selectoColor;
-  final double titleWidth;
-  final TextEditingController textCon;
-  final String hint;
+  final EdgeInsetsGeometry? padding;
+  final String? title;
+  final Color? titleColor;
+  final Color? color;
+  final Color? selectoColor;
+  final double? titleWidth;
+  final TextEditingController? textCon;
+  final String? hint;
   final bool isInt;
   final bool isDouble;
   final bool isAz;
   final bool isEditText;
   final bool isSelecto;
   final bool isShowDivider;
-  final String selectoText;
-  final Function selectoOnTap;
-  final Function(bool) othrOntap;
+  final String? selectoText;
+  final Function()? selectoOnTap;
+  final Function(bool)? othrOntap;
   final bool isText;
   final dynamic text;
   final bool isNoShowTitle;
   final bool isCheck;
   final bool isBoldTitle;
   final bool isShowJt;
-  final MainAxisAlignment selectoMainAxisAlignment;
-  final Widget rightChild;
+  final MainAxisAlignment? selectoMainAxisAlignment;
+  final Widget? rightChild;
 
   const ItemEditWidget({
-    Key key,
+    Key? key,
     this.padding,
     this.title,
     this.titleWidth,
@@ -458,7 +459,7 @@ class _ItemEditWidgetState extends State<ItemEditWidget> {
           children: [
             if (!widget.isNoShowTitle)
               if (widget.isShowDivider)
-                if (widget.title.contains('*'))
+                if (widget.title!.contains('*'))
                   SizedBox(
                     width: widget.titleWidth ?? 100,
                     child: MyText(
@@ -502,7 +503,7 @@ class _ItemEditWidgetState extends State<ItemEditWidget> {
             if (widget.isEditText)
               buildTFView(
                 context,
-                hintText: widget.hint ?? '请输入${widget.title.replaceAll('*', '')}',
+                hintText: widget.hint ?? '请输入${widget.title?.replaceAll('*', '')}',
                 hintColor: Colors.black.withOpacity(0.25),
                 isExp: true,
                 isInt: widget.isInt,
@@ -510,7 +511,7 @@ class _ItemEditWidgetState extends State<ItemEditWidget> {
                 isAz: widget.isAz,
                 textAlign: TextAlign.right,
                 onChanged: (v) => setState(() {}),
-                con: widget.textCon,
+                con: widget.textCon!,
                 textInputAction: TextInputAction.search,
                 // onSubmitted: (v) => widget.onSubmitted(v),
               ),
@@ -549,7 +550,7 @@ class _ItemEditWidgetState extends State<ItemEditWidget> {
                     setState(() {
                       isBenren = !isBenren;
                     });
-                    widget.othrOntap(isBenren);
+                    widget.othrOntap!(isBenren);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -565,7 +566,7 @@ class _ItemEditWidgetState extends State<ItemEditWidget> {
                   ),
                 ),
               ),
-            if (widget.rightChild != null) widget.rightChild,
+            if (widget.rightChild != null) widget.rightChild!,
           ],
         ),
       ),
@@ -574,14 +575,15 @@ class _ItemEditWidgetState extends State<ItemEditWidget> {
 }
 
 class MyColumn extends StatelessWidget {
-  final EdgeInsetsGeometry padding;
-  final List<Widget> children;
-  final MainAxisSize mainAxisSize;
-  final CrossAxisAlignment crossAxisAlignment;
-  final MainAxisAlignment mainAxisAlignment;
-  final Color color;
+  final EdgeInsetsGeometry? padding;
+  final List<Widget>? children;
+  final MainAxisSize? mainAxisSize;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final MainAxisAlignment? mainAxisAlignment;
+  final Color? color;
 
-  const MyColumn({Key key, this.padding, this.children, this.mainAxisSize, this.crossAxisAlignment, this.mainAxisAlignment, this.color}) : super(key: key);
+  const MyColumn({Key? key, this.padding, this.children, this.mainAxisSize,
+    this.crossAxisAlignment, this.mainAxisAlignment, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -600,7 +602,7 @@ class MyColumn extends StatelessWidget {
 
 class LunboWidget extends StatefulWidget {
   final Map data;
-  const LunboWidget(this.data, {Key key}) : super(key: key);
+  const LunboWidget(this.data, {Key? key}) : super(key: key);
 
   @override
   _LunboWidgetState createState() => _LunboWidgetState();
@@ -608,7 +610,7 @@ class LunboWidget extends StatefulWidget {
 
 class _LunboWidgetState extends State<LunboWidget> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   var pageIndex = 1;
-  TabController tabCon;
+  TabController? tabCon;
   PageController pageCon = PageController();
 
   List<String> imgList = [];
@@ -659,8 +661,8 @@ class _LunboWidgetState extends State<LunboWidget> with TickerProviderStateMixin
       }
     });
     tabCon = TabController(length: 3, vsync: this);
-    tabCon.addListener(() {
-      setState(() => pageIndex = tabCon.index + 1);
+    tabCon?.addListener(() {
+      setState(() => pageIndex = tabCon!.index + 1);
     });
   }
 
@@ -810,11 +812,12 @@ class _LunboWidgetState extends State<LunboWidget> with TickerProviderStateMixin
 }
 
 class LoupanItem extends StatelessWidget {
-  final int i;
-  final Map data;
-  final bool isNoShowTherOther;
-  final int index;
-  const LoupanItem({Key key, this.i, this.data, this.isNoShowTherOther = false, this.index}) : super(key: key);
+  final int? i;
+  final Map? data;
+  final bool? isNoShowTherOther;
+  final int? index;
+  const LoupanItem({Key? key, this.i, this.data, this.isNoShowTherOther =
+  false, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -826,7 +829,7 @@ class LoupanItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: WrapperImage(
-                urlBuilder: () => data['images'].toString().split(';').first,
+                urlBuilder: () => data!['images'].toString().split(';').first,
                 height: 95,
                 width: 106,
               ),
@@ -848,7 +851,7 @@ class LoupanItem extends StatelessWidget {
                           isBold: true,
                         ),
                       ),
-                      if (!isNoShowTherOther)
+                      if (!isNoShowTherOther!)
                         Container(
                           padding: EdgeInsets.only(
                             left: 12,
@@ -879,7 +882,7 @@ class LoupanItem extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (!isNoShowTherOther)
+                      if (!isNoShowTherOther!)
                         Row(
                           children: [
                             Image.asset(
@@ -909,10 +912,11 @@ class LoupanItem extends StatelessWidget {
                         ),
                       Expanded(
                         child: MyText(
-                          '${data['consultAvgPrice']}元/㎡',
+                          '${data!['consultAvgPrice']}元/㎡',
                           color: Color(0xffFF6904),
                           isBold: true,
-                          textAlign: isNoShowTherOther ? null : TextAlign.right,
+                          textAlign: isNoShowTherOther! ? null : TextAlign
+                              .right,
                         ),
                       ),
                     ],
@@ -920,7 +924,7 @@ class LoupanItem extends StatelessWidget {
                 ],
               ),
             ),
-            if (isNoShowTherOther)
+            if (isNoShowTherOther!)
               Icon(
                 i == index ? Icons.check_circle_outline_rounded : Icons.check,
                 size: 16,

@@ -6,9 +6,9 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 import 'package:provider/provider.dart';
 
 class BnbWidget extends StatefulWidget {
-  final Function(int) callback;
+  final Function(int)? callback;
 
-  const BnbWidget({Key key, this.callback}) : super(key: key);
+  const BnbWidget({Key? key, this.callback}) : super(key: key);
 
   @override
   _BnbWidgetState createState() => _BnbWidgetState();
@@ -51,7 +51,7 @@ class _BnbWidgetState extends State<BnbWidget> {
         isElastic: true,
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          widget.callback(_index);
+          widget.callback!(_index);
           app.changeBtmIndex(_index);
         },
         child: Container(

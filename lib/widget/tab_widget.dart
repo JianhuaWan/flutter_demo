@@ -4,22 +4,23 @@ import 'package:paixs_utils/widget/custom_scroll_physics.dart';
 import 'package:paixs_utils/widget/route.dart';
 
 class TabWidget extends StatefulWidget {
-  final List<String> tabList;
-  final List<Widget> tabPage;
-  final bool isScrollable;
-  final ScrollPhysics pagePhysics;
-  final bool isShadow;
-  final bool isPadding;
-  final bool isNoShowTab;
-  final TabController tabCon;
+  final List<String>? tabList;
+  final List<Widget>? tabPage;
+  final bool? isScrollable;
+  final ScrollPhysics? pagePhysics;
+  final bool? isShadow;
+  final bool? isPadding;
+  final bool? isNoShowTab;
+  final TabController? tabCon;
 
-  const TabWidget({Key key, this.tabList, this.tabPage, this.isScrollable, this.pagePhysics, this.isShadow, this.isPadding, this.isNoShowTab = false, this.tabCon}) : super(key: key);
+  const TabWidget({Key? key, this.tabList, this.tabPage, this.isScrollable,
+    this.pagePhysics, this.isShadow, this.isPadding, this.isNoShowTab = false, this.tabCon}) : super(key: key);
   @override
   _TabWidgetState createState() => _TabWidgetState();
 }
 
 class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
-  TabController tabCon;
+  TabController? tabCon;
 
   @override
   void initState() {
@@ -29,7 +30,8 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
 
   ///初始化函数
   Future initData() async {
-    tabCon = widget.tabCon ?? TabController(vsync: this, length: widget.tabList.length);
+    tabCon = widget.tabCon ?? TabController(vsync: this, length: widget
+        .tabList!.length);
   }
 
   @override
@@ -37,14 +39,15 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
     return Stack(
       children: [
         Padding(
-          padding: EdgeInsets.only(top: !widget.isNoShowTab ? 40 : 0),
+          padding: EdgeInsets.only(top: !widget.isNoShowTab! ? 40 : 0),
           child: TabBarView(
-            physics: widget.pagePhysics ?? !widget.isNoShowTab ? PagePhysics() : NeverScrollableScrollPhysics(),
+            physics: widget.pagePhysics ?? (!widget.isNoShowTab! ? PagePhysics
+              () : NeverScrollableScrollPhysics()),
             controller: tabCon,
-            children: widget.tabPage,
+            children: widget.tabPage!,
           ),
         ),
-        if (!widget.isNoShowTab)
+        if (!widget.isNoShowTab!)
           Container(
             height: 40,
             alignment: Alignment.center,
@@ -73,11 +76,11 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
               // // tabs: widget.tabList.map((m) {
               //   return
               // // }).toList(),
-              tabs: List.generate(widget.tabList.length, (i) {
+              tabs: List.generate(widget.tabList!.length, (i) {
                 return TweenWidget(
                   delayed: (RouteState.isFromDown ? 100 : 50) + 100 * i,
                   axis: RouteState.isFromDown ? Axis.vertical : Axis.horizontal,
-                  child: Tab(text: widget.tabList[i]),
+                  child: Tab(text: widget.tabList![i]),
                 );
               }),
             ),

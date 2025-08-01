@@ -29,9 +29,9 @@ class _BangzhuPageState extends State<BangzhuPage> with NoSlidingReturn {
       body: TabWidget(
         isScrollable: true,
         isPadding: false,
-        tabList: kehuUiList.map((m) => m['value']).toList(),
+        tabList: kehuUiList.map((m) => m['value']as String).toList(),
         tabPage: kehuUiList.map((m) {
-          return BangzhuItem(m['key']);
+          return BangzhuItem(m['key']!);
         }).toList(),
       ),
     );
@@ -41,7 +41,7 @@ class _BangzhuPageState extends State<BangzhuPage> with NoSlidingReturn {
 class BangzhuItem extends StatefulWidget {
   final String mKey;
 
-  const BangzhuItem(this.mKey, {Key key}) : super(key: key);
+  const BangzhuItem(this.mKey, {Key? key}) : super(key: key);
   @override
   _BangzhuItemState createState() => _BangzhuItemState();
 }
@@ -70,7 +70,7 @@ class _BangzhuItemState extends State<BangzhuItem> with AutomaticKeepAliveClient
       },
     );
     setState(() {});
-    return bangzhuItemDm.flag;
+    return bangzhuItemDm.flag!;
   }
 
   @override

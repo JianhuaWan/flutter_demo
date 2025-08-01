@@ -20,11 +20,11 @@ class Request {
     dynamic data,
     bool isToken = true,
     bool isLoading = false,
-    Function(dynamic) success,
-    Function(dynamic) fail,
-    Function(dynamic) catchError,
-    String dialogText,
-    Options option,
+    Function(dynamic)? success,
+    Function(dynamic)? fail,
+    Function(dynamic)? catchError,
+    String? dialogText,
+    Options? option,
   }) async {
     await Future(() async {
       if (isLoading) buildShowDialog(context, text: dialogText);
@@ -91,10 +91,10 @@ class Request {
     dynamic data,
     bool isToken = true,
     bool isLoading = false,
-    Function(dynamic) success,
-    Function(dynamic) fail,
-    Function(dynamic) catchError,
-    String dialogText,
+    Function(dynamic)? success,
+    Function(dynamic)? fail,
+    Function(dynamic)? catchError,
+    String? dialogText,
   }) async {
     await Future(() async {
       if (isLoading) buildShowDialog(context, text: dialogText);
@@ -119,10 +119,10 @@ class Request {
     dynamic data,
     bool isToken = true,
     bool isLoading = false,
-    Function(dynamic) success,
-    Function(dynamic) fail,
-    Function(dynamic) catchError,
-    String dialogText,
+    Function(dynamic)? success,
+    Function(dynamic)? fail,
+    Function(dynamic)? catchError,
+    String? dialogText,
   }) async {
     await Future(() async {
       if (isLoading) buildShowDialog(context, text: dialogText);
@@ -177,10 +177,10 @@ class Request {
     dynamic data,
     bool isToken = true,
     bool isLoading = false,
-    Function(dynamic) success,
-    Function(dynamic) fail,
-    Function(dynamic) catchError,
-    String dialogText,
+    Function(dynamic)? success,
+    Function(dynamic)? fail,
+    Function(dynamic)? catchError,
+    String? dialogText,
   }) async {
     await Future(() async {
       if (isLoading) buildShowDialog(context, text: dialogText);
@@ -210,13 +210,13 @@ class Request {
     dynamic data,
     bool isToken = true,
     bool isLoading = false,
-    Function(dynamic) success,
-    Function(dynamic) fail,
-    Function(dynamic) catchError,
-    String dialogText,
+    Function(dynamic)? success,
+    Function(dynamic)? fail,
+    Function(dynamic)? catchError,
+    String? dialogText,
   }) async {
     await Future(() async {
-      Map<String, dynamic> map;
+      Map<String, dynamic>? map;
       if (isLoading) buildShowDialog(context, text: dialogText);
       if (data != null) {
         map = Map.from(data);
@@ -278,34 +278,34 @@ class Request {
   ///返回用户token
   static String get getUserToken {
     if (user == null) return '';
-    return user.token;
+    return user.token!;
   }
 }
 
 class Http {
-  static Future<int> requestList(
+  static Future<int?> requestList(
     String url, {
-    DataModel dataModel,
+    DataModel? dataModel,
     dynamic data,
-    bool isLoading,
-    String dialogText,
+    bool? isLoading,
+    String? dialogText,
     bool isRef = false,
-    Function(dynamic) listFun,
-    Function(dynamic) totalFun,
-    Function() then,
+    Function(dynamic)? listFun,
+    Function(dynamic)? totalFun,
+    Function()? then,
   }) async {
     await Request.post(
       url,
       data: data,
-      catchError: (v) => dataModel.toError(v),
+      catchError: (v) => dataModel?.toError(v),
       isLoading: isLoading ?? false,
       dialogText: dialogText,
-      success: (v) => dataModel.addList(
+      success: (v) => dataModel?.addList(
         listFun != null ? listFun(v) : v['data']['list'],
         isRef,
         totalFun != null ? totalFun(v) : v['data']['totalSize'],
       ),
-    ).then((value) => then());
-    return dataModel.flag;
+    ).then((value) => then!());
+    return dataModel!.flag!;
   }
 }

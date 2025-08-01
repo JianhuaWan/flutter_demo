@@ -17,7 +17,7 @@ import 'package:paixs_utils/widget/widget_tap.dart';
 class ZixunPage extends StatefulWidget {
   final bool isHome;
 
-  const ZixunPage({Key key, this.isHome = true}) : super(key: key);
+  const ZixunPage({Key? key, this.isHome = true}) : super(key: key);
 
   @override
   _ZixunPageState createState() => _ZixunPageState();
@@ -74,7 +74,7 @@ class _ZixunPageState extends State<ZixunPage>
 class ZixunView extends StatefulWidget {
   final Map data;
 
-  const ZixunView(this.data, {Key key}) : super(key: key);
+  const ZixunView(this.data, {Key? key}) : super(key: key);
 
   @override
   _ZixunViewState createState() => _ZixunViewState();
@@ -147,7 +147,7 @@ class _ZixunViewState extends State<ZixunView>
       },
     );
     setState(() {});
-    return zixunDm.flag;
+    return zixunDm.flag!;
   }
 
   @override
@@ -250,9 +250,9 @@ class _ZixunViewState extends State<ZixunView>
 }
 
 class ZixunInfoPage extends StatefulWidget {
-  final Map data;
+  final Map? data;
 
-  const ZixunInfoPage({Key key, this.data}) : super(key: key);
+  const ZixunInfoPage({Key? key, this.data}) : super(key: key);
 
   @override
   _ZixunInfoPageState createState() => _ZixunInfoPageState();
@@ -276,11 +276,11 @@ class _ZixunInfoPageState extends State<ZixunInfoPage> {
   Future<int> apiNewsGetEntity({int page = 1, bool isRef = false}) async {
     await Request.get(
       '/api/News/GetEntity',
-      data: {"id": widget.data['id']},
+      data: {"id": widget.data!['id']},
       catchError: (v) {
         // 当请求失败时，手动生成默认数据
         zixunInfoDm.object = {
-          'title': widget.data['title'] ?? '默认资讯标题',
+          'title': widget.data!['title'] ?? '默认资讯标题',
           'content': '这是默认的资讯内容。',
           'preview':
               'https://via.placeholder.com/400x300/CCCCCC/FFFFFF?text=默认资讯',
@@ -297,7 +297,7 @@ class _ZixunInfoPageState extends State<ZixunInfoPage> {
       },
     );
     setState(() {});
-    return zixunInfoDm.flag;
+    return zixunInfoDm.flag!;
   }
 
   @override
@@ -305,7 +305,7 @@ class _ZixunInfoPageState extends State<ZixunInfoPage> {
     return ScaffoldWidget(
       appBar: buildTitle(
         context,
-        title: widget.data['title'] ?? '1',
+        title: widget.data!['title'] ?? '1',
         color: Colors.white,
       ),
       body: AnimatedSwitchBuilder(

@@ -5,18 +5,18 @@ class MyText extends StatefulWidget {
   final String nullValue;
   final Color color;
   final bool isBold;
-  final double size;
-  final int maxLines;
+  final double? size;
+  final int? maxLines;
   final bool isOverflow;
   final bool isXieTi;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final List<InlineSpan> children;
-  final TextDecoration decoration;
-  final double height;
+  final TextDecoration? decoration;
+  final double? height;
 
   const MyText(
     this.text, {
-    Key key,
+    Key? key,
     this.color = Colors.black,
     this.isBold = false,
     this.size,
@@ -36,10 +36,10 @@ class MyText extends StatefulWidget {
   static TextSpan ts(
     dynamic text, {
     String nullValue = '暂无',
-    Color color,
-    double size,
+    Color? color,
+    double? size,
     bool isBold = false,
-    TextDecoration decoration,
+    TextDecoration? decoration,
   }) {
     return TextSpan(
       text: text.toString() == 'null' ? nullValue : text,

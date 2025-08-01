@@ -13,11 +13,11 @@ List<SingleChildWidget> pros = <SingleChildWidget>[
   ChangeNotifierProvider.value(value: ShopingPro()),
 ];
 
-UserProvider get userPro => Provider.of<UserProvider>(context, listen: false);
+UserProvider get userPro => Provider.of<UserProvider>(context!, listen: false);
 
 ///用户信息
-UserModel get user => userPro.userModel;
+UserModel get user => userPro.userModel!;
 
-AppProvider get app => Provider.of<AppProvider>(context, listen: false);
+AppProvider get app => Provider.of<AppProvider>(context!, listen: false);
 
-ShopingPro get shoping => Provider.of<ShopingPro>(context, listen: false);
+ShopingPro get shoping => Provider.of<ShopingPro>(context!, listen: false);

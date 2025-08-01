@@ -144,7 +144,7 @@ class _BaozhangPageState extends State<BaozhangPage> {
           ),
           AnimatedSwitchBuilder(
             value: data,
-            errorOnTap: null,
+            errorOnTap: (){},
             initialState: Center(
               child: Container(
                 color: Colors.white,

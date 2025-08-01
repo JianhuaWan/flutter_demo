@@ -13,8 +13,8 @@ class HomeSelectoWidget extends StatefulWidget {
   final Function(Map) fun;
 
   const HomeSelectoWidget({
-    Key key,
-    @required this.fun,
+    Key? key,
+    required this.fun,
   }) : super(key: key);
 
   @override
@@ -48,6 +48,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
     ['800-1000万', '800-1000'],
     ['1000万以上', '1000-2147483647'],
   ];
+
   // var huxingList = ['一室', '二室', '三室', '四室', '五室', '五室以上'];
   var jianzhuList = [
     ['50㎡', '0-50'],
@@ -67,6 +68,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
     '过去1个月',
     '过去3个月',
   ];
+
   @override
   void initState() {
     // this.initData();
@@ -77,7 +79,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
   Future initData() async {
     flog(app.city);
     await app.getDropDownList1(true);
-    var list = app.allQuyuDm.object.where((w) => w['level'] == 3).toList();
+    var list = app.allQuyuDm.object!.where((w) => w['level'] == 3).toList();
     var quyuList = list.where((w) => w['parentId'] == app.cityCode).toList();
     setState(() => cityList = quyuList);
     // var v = await rootBundle.loadString('data/province.json');
@@ -120,7 +122,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
           curve: Curves.easeOutCubic,
           left: 0,
           right: 0,
-          top: list[0]['state'] ? 36 : -300 + 36.0,
+          top: list[0]['state'] != null ? 36 : -300 + 36.0,
           child: ClipRRect(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
             child: Container(
@@ -139,12 +141,15 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                             setState(() => quyu = i);
                           },
                           child: Container(
-                            color: quyu == i ? Colors.white : Colors.transparent,
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            color:
+                                quyu == i ? Colors.white : Colors.transparent,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 12),
                             child: MyText(
                               i == 0 ? '不限' : cityList[i - 1]['name'],
                               size: 12,
-                              color: quyu == i ? Color(0xFF2B8FFC) : Colors.black,
+                              color:
+                                  quyu == i ? Color(0xFF2B8FFC) : Colors.black,
                             ),
                           ),
                         );
@@ -181,10 +186,16 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                               list[6]['state'] = false;
                               isShowMask = !isShowMask;
                               widget.fun({
-                                'quyu': quyu == 0 ? null : cityList[quyu - 1]['id'],
-                                'zongjia': zongjia == null ? null : zongjiaList[zongjia][1],
-                                'huxing': huxing == null ? null : huxing['dictKey'],
-                                'jianzhu': jianzhu == null ? null : jianzhuList[jianzhu][1],
+                                'quyu':
+                                    quyu == 0 ? null : cityList[quyu - 1]['id'],
+                                'zongjia': zongjia == null
+                                    ? null
+                                    : zongjiaList[zongjia][1],
+                                'huxing':
+                                    huxing == null ? null : huxing['dictKey'],
+                                'jianzhu': jianzhu == null
+                                    ? null
+                                    : jianzhuList[jianzhu][1],
                               });
                             });
                           },
@@ -208,7 +219,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
           curve: Curves.easeOutCubic,
           left: 0,
           right: 0,
-          top: list[2]['state'] ? 36 : -250 + 36.0,
+          top: list[2]['state'] != null ? 36 : -250 + 36.0,
           child: ClipRRect(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
             child: Container(
@@ -291,15 +302,21 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(color: Color(0xFF2B8FFC).withOpacity(zongjia == i ? 1 : 0)),
+                                      border: Border.all(
+                                          color: Color(0xFF2B8FFC).withOpacity(
+                                              zongjia == i ? 1 : 0)),
                                     ),
-                                    width: size(context).width / 4 - (8 * 3 + 32) / 4,
+                                    width: size(context).width / 4 -
+                                        (8 * 3 + 32) / 4,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 6),
                                     child: MyText(
                                       zongjiaList[i][0],
                                       size: 12,
-                                      color: zongjia == i ? Color(0xFF2B8FFC) : Colors.black,
+                                      color: zongjia == i
+                                          ? Color(0xFF2B8FFC)
+                                          : Colors.black,
                                     ),
                                   ),
                                 ),
@@ -339,10 +356,16 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                               list[6]['state'] = false;
                               isShowMask = !isShowMask;
                               widget.fun({
-                                'quyu': quyu == 0 ? null : cityList[quyu - 1]['id'],
-                                'zongjia': zongjia == null ? null : zongjiaList[zongjia][1],
-                                'huxing': huxing == null ? null : huxing['dictKey'],
-                                'jianzhu': jianzhu == null ? null : jianzhuList[jianzhu][1],
+                                'quyu':
+                                    quyu == 0 ? null : cityList[quyu - 1]['id'],
+                                'zongjia': zongjia == null
+                                    ? null
+                                    : zongjiaList[zongjia][1],
+                                'huxing':
+                                    huxing == null ? null : huxing['dictKey'],
+                                'jianzhu': jianzhu == null
+                                    ? null
+                                    : jianzhuList[jianzhu][1],
                               });
                             });
                           },
@@ -366,7 +389,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
           curve: Curves.easeOutCubic,
           left: 0,
           right: 0,
-          top: list[4]['state'] ? 36 : -200 + 36.0,
+          top: list[4]['state'] != null ? 36 : -200 + 36.0,
           child: ClipRRect(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
             child: Container(
@@ -388,26 +411,55 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                           Wrap(
                             runSpacing: 8,
                             spacing: 8,
-                            children: List.generate(app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').toList().length, (i) {
+                            children: List.generate(
+                                app.zidianDm.object!
+                                    .where((w) => w['dictType'] == 'LayoutType')
+                                    .toList()
+                                    .length, (i) {
                               return WidgetTap(
                                 onTap: () {
                                   setState(() {
-                                    huxing = app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').toList()[i];
+                                    huxing = app.zidianDm.object!
+                                        .where((w) =>
+                                            w['dictType'] == 'LayoutType')
+                                        .toList()[i];
                                   });
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(color: Color(0xFF2B8FFC).withOpacity(huxing == app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').toList()[i] ? 1 : 0)),
+                                    border: Border.all(
+                                        color: Color(0xFF2B8FFC).withOpacity(
+                                            huxing ==
+                                                    app.zidianDm.object!
+                                                        .where((w) =>
+                                                            w['dictType'] ==
+                                                            'LayoutType')
+                                                        .toList()[i]
+                                                ? 1
+                                                : 0)),
                                   ),
-                                  width: size(context).width / 4 - (8 * 3 + 32) / 4,
+                                  width: size(context).width / 4 -
+                                      (8 * 3 + 32) / 4,
                                   alignment: Alignment.center,
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 6),
                                   child: MyText(
-                                    app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').map<String>((m) => m['dictValue']).toList()[i],
+                                    app.zidianDm.object!
+                                        .where((w) =>
+                                            w['dictType'] == 'LayoutType')
+                                        .map<String>((m) => m['dictValue'])
+                                        .toList()[i],
                                     size: 12,
-                                    color: huxing == app.zidianDm.object.where((w) => w['dictType'] == 'LayoutType').toList()[i] ? Color(0xFF2B8FFC) : Colors.black,
+                                    color: huxing ==
+                                            app.zidianDm.object!
+                                                .where((w) =>
+                                                    w['dictType'] ==
+                                                    'LayoutType')
+                                                .toList()[i]
+                                        ? Color(0xFF2B8FFC)
+                                        : Colors.black,
                                   ),
                                 ),
                               );
@@ -446,10 +498,16 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                               list[6]['state'] = false;
                               isShowMask = !isShowMask;
                               widget.fun({
-                                'quyu': quyu == 0 ? null : cityList[quyu - 1]['id'],
-                                'zongjia': zongjia == null ? null : zongjiaList[zongjia][1],
-                                'huxing': huxing == null ? null : huxing['dictKey'],
-                                'jianzhu': jianzhu == null ? null : jianzhuList[jianzhu][1],
+                                'quyu':
+                                    quyu == 0 ? null : cityList[quyu - 1]['id'],
+                                'zongjia': zongjia == null
+                                    ? null
+                                    : zongjiaList[zongjia][1],
+                                'huxing':
+                                    huxing == null ? null : huxing['dictKey'],
+                                'jianzhu': jianzhu == null
+                                    ? null
+                                    : jianzhuList[jianzhu][1],
                               });
                             });
                           },
@@ -473,7 +531,7 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
           curve: Curves.easeOutCubic,
           left: 0,
           right: 0,
-          top: list[6]['state'] ? 36 : -300 + 36.0,
+          top: list[6]['state'] != null ? 36 : -300 + 36.0,
           child: ClipRRect(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
             child: Container(
@@ -506,15 +564,21 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(color: Color(0xFF2B8FFC).withOpacity(jianzhu == i ? 1 : 0)),
+                                    border: Border.all(
+                                        color: Color(0xFF2B8FFC)
+                                            .withOpacity(jianzhu == i ? 1 : 0)),
                                   ),
-                                  width: size(context).width / 4 - (8 * 3 + 32) / 4,
+                                  width: size(context).width / 4 -
+                                      (8 * 3 + 32) / 4,
                                   alignment: Alignment.center,
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 6),
                                   child: MyText(
                                     jianzhuList[i][0].toString(),
                                     size: 12,
-                                    color: jianzhu == i ? Color(0xFF2B8FFC) : Colors.black,
+                                    color: jianzhu == i
+                                        ? Color(0xFF2B8FFC)
+                                        : Colors.black,
                                   ),
                                 ),
                               );
@@ -584,10 +648,16 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                               list[6]['state'] = false;
                               isShowMask = !isShowMask;
                               widget.fun({
-                                'quyu': quyu == 0 ? null : cityList[quyu - 1]['id'],
-                                'zongjia': zongjia == null ? null : zongjiaList[zongjia][1],
-                                'huxing': huxing == null ? null : huxing['dictKey'],
-                                'jianzhu': jianzhu == null ? null : jianzhuList[jianzhu][1],
+                                'quyu':
+                                    quyu == 0 ? null : cityList[quyu - 1]['id'],
+                                'zongjia': zongjia == null
+                                    ? null
+                                    : zongjiaList[zongjia][1],
+                                'huxing':
+                                    huxing == null ? null : huxing['dictKey'],
+                                'jianzhu': jianzhu == null
+                                    ? null
+                                    : jianzhuList[jianzhu][1],
                               });
                             });
                           },
@@ -631,8 +701,8 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                         case 0:
                           await this.initData();
                           setState(() => isCloseMask = false);
-                          if (list[0]['state']) isShowMask = false;
-                          list[0]['state'] = !list[0]['state'];
+                          if (list[0]['state'] != null) isShowMask = false;
+                          list[0]['state'] = !(list[0]['state'] as bool);
                           list[2]['state'] = false;
                           list[4]['state'] = false;
                           list[6]['state'] = false;
@@ -641,8 +711,8 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                         case 2:
                           setState(() => isCloseMask = false);
                           list[0]['state'] = false;
-                          if (list[2]['state']) isShowMask = false;
-                          list[2]['state'] = !list[2]['state'];
+                          if (list[2]['state'] != null) isShowMask = false;
+                          list[2]['state'] = !(list[2]['state'] as bool);
                           list[4]['state'] = false;
                           list[6]['state'] = false;
                           setState(() {});
@@ -651,8 +721,8 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                           setState(() => isCloseMask = false);
                           list[0]['state'] = false;
                           list[2]['state'] = false;
-                          if (list[4]['state']) isShowMask = false;
-                          list[4]['state'] = !list[4]['state'];
+                          if (list[4]['state'] != null) isShowMask = false;
+                          list[4]['state'] = !(list[4]['state'] as bool);
                           list[6]['state'] = false;
                           setState(() {});
                           break;
@@ -661,8 +731,8 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                           list[0]['state'] = false;
                           list[2]['state'] = false;
                           list[4]['state'] = false;
-                          if (list[6]['state']) isShowMask = false;
-                          list[6]['state'] = !list[6]['state'];
+                          if (list[6]['state'] != null) isShowMask = false;
+                          list[6]['state'] = !(list[6]['state'] as bool);
                           setState(() {});
                           break;
                       }
@@ -687,18 +757,32 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                                     : quyu == 0
                                         ? list[i]['name']
                                         : cityList[quyu - 1]['name'],
-                                zongjia == null ? list[i]['name'] : zongjiaList[zongjia][0],
-                                zongjia == null ? list[i]['name'] : zongjiaList[zongjia][0],
-                                huxing == null ? list[i]['name'] : huxing['dictValue'],
-                                huxing == null ? list[i]['name'] : huxing['dictValue'],
-                                jianzhu == null ? list[i]['name'] : jianzhuList[jianzhu][0],
-                                jianzhu == null ? list[i]['name'] : jianzhuList[jianzhu][0],
+                                zongjia == null
+                                    ? list[i]['name']
+                                    : zongjiaList[zongjia][0],
+                                zongjia == null
+                                    ? list[i]['name']
+                                    : zongjiaList[zongjia][0],
+                                huxing == null
+                                    ? list[i]['name']
+                                    : huxing['dictValue'],
+                                huxing == null
+                                    ? list[i]['name']
+                                    : huxing['dictValue'],
+                                jianzhu == null
+                                    ? list[i]['name']
+                                    : jianzhuList[jianzhu][0],
+                                jianzhu == null
+                                    ? list[i]['name']
+                                    : jianzhuList[jianzhu][0],
                               ][i],
                               textAlign: TextAlign.right,
                               size: 12,
                               color: [
                                 Theme.of(context).primaryColor,
-                                list[i]['state'] ? Theme.of(context).primaryColor : Color(0xFF0C0C0C),
+                                list[i]['state'] != null
+                                    ? Theme.of(context).primaryColor
+                                    : Color(0xFF0C0C0C),
                               ][[
                                 quyu == 0 ? 1 : 0,
                                 quyu == 0 ? 1 : 0,
@@ -711,11 +795,15 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                               ][i]],
                             ),
                             Icon(
-                              list[i]['state'] ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+                              list[i]['state'] != null
+                                  ? Icons.keyboard_arrow_up_rounded
+                                  : Icons.keyboard_arrow_down_rounded,
                               size: 20,
                               color: [
                                 Theme.of(context).primaryColor,
-                                list[i]['state'] ? Theme.of(context).primaryColor : Color(0xFF0C0C0C),
+                                list[i]['state'] != null
+                                    ? Theme.of(context).primaryColor
+                                    : Color(0xFF0C0C0C),
                               ][[
                                 quyu == 0 ? 1 : 0,
                                 quyu == 0 ? 1 : 0,

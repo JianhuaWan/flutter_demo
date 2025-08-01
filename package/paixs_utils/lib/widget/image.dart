@@ -10,18 +10,18 @@ enum ImageType {
 }
 
 class WrapperImage extends StatelessWidget {
-  final String url;
+  final String? url;
   final double width;
-  final double height;
+  final double? height;
   final BoxFit fit;
   final ImageType imageType;
   final int w;
-  final Color color;
-  static double _rwidth;
+  final Color? color;
+  static double? _rwidth;
   final bool isBlack;
-  final String imgUrl;
-  final Function urlBuilder;
-  final AlignmentGeometry alignment;
+  final String? imgUrl;
+  final Function? urlBuilder;
+  final Alignment? alignment;
 
   WrapperImage({
     this.url,
@@ -59,9 +59,11 @@ class WrapperImage extends StatelessWidget {
             imageUrl: imageUrl,
             width: width,
             height: height,
-            alignment: alignment,
-            placeholder: (_, __) => ImageHelper.placeHolder(width: width, height: height),
-            errorWidget: (_, __, ___) => ImageHelper.error(width: width, height: height, color: color ?? Colors.black26),
+            alignment: alignment!,
+            placeholder: (_, __) => ImageHelper.placeHolder(width: width,
+                height: height!),
+            errorWidget: (_, __, ___) => ImageHelper.error(width: width,
+                height: height!, color: color ?? Colors.black26),
             fit: fit,
             colorBlendMode: BlendMode.hue,
             color: Colors.black87,
@@ -71,14 +73,16 @@ class WrapperImage extends StatelessWidget {
             imageUrl: imageUrl,
             width: width,
             height: height,
-            alignment: alignment,
-            placeholder: (_, __) => ImageHelper.placeHolder(width: width, height: height),
-            errorWidget: (_, __, ___) => ImageHelper.error(width: width, height: height, color: color ?? Colors.black26),
+            alignment: alignment!,
+            placeholder: (_, __) => ImageHelper.placeHolder(width: width,
+                height: height!),
+            errorWidget: (_, __, ___) => ImageHelper.error(width: width,
+                height: height!, color: color ?? Colors.black26),
             fit: fit,
           );
         }
       } else {
-        if (urlBuilder.call() == null || urlBuilder.call() == '')
+        if (urlBuilder?.call() == null || urlBuilder?.call() == '')
           return Image.asset(
             'assets/img/no_loupan_cover.png',
             width: width,
@@ -95,9 +99,11 @@ class WrapperImage extends StatelessWidget {
             imageUrl: imageUrl,
             width: width,
             height: height,
-            alignment: alignment,
-            placeholder: (_, __) => ImageHelper.placeHolder(width: width, height: height),
-            errorWidget: (_, __, ___) => ImageHelper.error(width: width, height: height, color: color ?? Colors.black26),
+            alignment: alignment ?? Alignment.center,
+            placeholder: (_, __) => ImageHelper.placeHolder(width: width,
+                height: height!),
+            errorWidget: (_, __, ___) => ImageHelper.error(width: width,
+                height: height!, color: color ?? Colors.black26),
             fit: fit,
             colorBlendMode: BlendMode.hue,
             color: Colors.black87,
@@ -107,9 +113,11 @@ class WrapperImage extends StatelessWidget {
             imageUrl: imageUrl,
             width: width,
             height: height,
-            alignment: alignment,
-            placeholder: (_, __) => ImageHelper.placeHolder(width: width, height: height),
-            errorWidget: (_, __, ___) => ImageHelper.error(width: width, height: height, color: color ?? Colors.black26),
+            alignment: alignment ?? Alignment.center,
+            placeholder: (_, __) => ImageHelper.placeHolder(width: width,
+                height: height!),
+            errorWidget: (_, __, ___) => ImageHelper.error(width: width,
+                height: height!, color: color ?? Colors.black26),
             fit: fit,
           );
         }
@@ -132,12 +140,15 @@ class WrapperImage extends StatelessWidget {
   String get imageUrl {
     switch (imageType) {
       case ImageType.random:
-        return ImageHelper.randomUrl(key: url, width: width == double.infinity ? _rwidth.toInt() : width.toInt(), height: height.toInt());
+        return ImageHelper.randomUrl(key: url!, width: width == double
+            .infinity ? _rwidth!.toInt() : width.toInt(), height: height!
+            .toInt());
       case ImageType.assets:
-        return ImageHelper.wrapAssets(url);
+        return ImageHelper.wrapAssets(url!);
       case ImageType.normal:
-        return ImageHelper.wrapUrl(urlBuilder != null ? urlBuilder.call() : url, w: w, imgUrl: imgUrl);
+        return ImageHelper.wrapUrl(urlBuilder != null ? urlBuilder!.call() :
+        url, w: w, imgUrl: imgUrl!);
     }
-    return url;
+    return url!;
   }
 }

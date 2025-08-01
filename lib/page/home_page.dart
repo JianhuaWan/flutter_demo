@@ -1,8 +1,8 @@
 import 'dart:ui';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_app/page/home/loupan_page.dart';
 import 'package:flutter_app/page/home/wanqu_page.dart';
 import 'package:flutter_app/page/shaixuan_page.dart';
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage>
     var isFtsApp = await userPro.isFirstTimeShareApp();
     if (isFtsApp) {
       showGeneralDialog(
-        context: context,
+        context: context!,
         barrierColor: Colors.transparent,
         pageBuilder: (_, __, ___) => ShareAppUi(),
       );
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage>
       },
     );
     setState(() {});
-    return zixunDm.flag;
+    return zixunDm.flag!;
   }
 
   ///获取湾区推荐
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage>
       },
     );
     setState(() {});
-    return wanquDm.flag;
+    return wanquDm.flag!;
   }
 
   ///地区
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage>
       },
     );
     setState(() {});
-    return loupanDm.flag;
+    return loupanDm.flag!;
   }
 
   @override
@@ -381,20 +381,20 @@ class _HomePageState extends State<HomePage>
               key: ValueKey(2),
               child: Swiper(
                 // itemCount: obj.map((f) => f['picUrl']).toList().length,
-                itemCount: bannerDm.object.length,
+                itemCount: bannerDm.object!.length,
                 pagination: SwiperPagination(
                   margin: EdgeInsets.only(bottom: 24),
                   builder: DotSwiperPaginationBuilder(
                     size: 8,
                     activeSize: 8,
                     // space: 8,
-                    activeColor: Theme.of(context).primaryColor,
+                    activeColor: Theme.of(context!).primaryColor,
                   ),
                 ),
                 itemBuilder: (_, i) => WidgetTap(
                   isElastic: true,
                   onTap: () {
-                    var list = '${bannerDm.object[i]['content']}'.split('&');
+                    var list = '${bannerDm.object![i]['content']}'.split('&');
                     if (list.length == 2) {
                       flog(list);
                       if (list[0].split('=')[1] == 'building') {
@@ -407,7 +407,7 @@ class _HomePageState extends State<HomePage>
                     } else {
                       jumpPage(
                         VrVideoPage(
-                          data: {'title': bannerDm.object[i]['title']},
+                          data: {'title': bannerDm.object![i]['title']},
                           url: list.first,
                         ),
                       );
@@ -424,7 +424,7 @@ class _HomePageState extends State<HomePage>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: WrapperImage(
-                          urlBuilder: () => bannerDm.object[i]['thumbImage'],
+                          urlBuilder: () => bannerDm.object![i]['thumbImage'],
                           height: 160,
                           fit: BoxFit.cover,
                         ),

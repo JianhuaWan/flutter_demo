@@ -9,7 +9,7 @@ class ImageHelper {
   // static const String baseUrl = Config.ImgBaseUrl;
   // static const String imagePrefix = '$baseUrl/';
 
-  static String wrapUrl(String url, {int w = 0, String imgUrl}) {
+  static String wrapUrl(String url, {int w = 0, String? imgUrl}) {
     if (url.startsWith('http')) {
       return url;
     }
@@ -24,7 +24,7 @@ class ImageHelper {
     return url;
   }
 
-  static Widget placeHolder({double width, double height}) {
+  static Widget placeHolder({double? width, double? height}) {
     // return Container(width: width, height: height, color: Colors.white);
     return ColoredBox(
       color: Colors.black.withOpacity(0.05),
@@ -33,7 +33,7 @@ class ImageHelper {
           width: 16,
           height: 16,
           child: LoadingIndicator(
-            color: Colors.black26,
+            colors: [Colors.black26],
             indicatorType: Indicator.lineSpinFadeLoader,
           ),
         ),
@@ -42,10 +42,10 @@ class ImageHelper {
   }
 
   static Widget error({
-    double width,
-    double height,
-    double size,
-    Color color,
+    double? width,
+    double? height,
+    double? size,
+    Color? color,
   }) {
     // return SizedBox(
     //   width: width,

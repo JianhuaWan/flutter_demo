@@ -3,20 +3,20 @@ import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/views.dart';
 
 class TweenWidget extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
   final bool isScale;
   final bool isOpacity;
   final Axis axis;
-  final int time;
+  final int? time;
   final double value;
   final Curve curve;
   final Curve scaleCurve;
   final Curve offsetCurve;
-  final int delayed;
+  final int? delayed;
   final bool isOpen;
 
   const TweenWidget({
-    Key key,
+    Key? key,
     this.child,
     this.isScale = false,
     this.axis = Axis.horizontal,
@@ -45,7 +45,7 @@ class _TweenWidgetState extends State<TweenWidget> {
 
   Future initData() async {
     if (widget.delayed != null) {
-      await Future.delayed(Duration(milliseconds: widget.delayed));
+      await Future.delayed(Duration(milliseconds: widget.delayed!));
       if (mounted) Future(() => setState(() => flag = true));
     }
   }
@@ -120,7 +120,7 @@ class _TweenWidgetState extends State<TweenWidget> {
         }
       }
     } else {
-      return widget.child;
+      return widget.child!;
     }
   }
 }

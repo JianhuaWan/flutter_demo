@@ -11,7 +11,7 @@ import 'package:paixs_utils/widget/views.dart';
 class GoufangZiliao extends StatefulWidget {
   final bool isZige;
 
-  const GoufangZiliao({Key key, this.isZige = false}) : super(key: key);
+  const GoufangZiliao({Key? key, this.isZige = false}) : super(key: key);
   @override
   _GoufangZiliaoState createState() => _GoufangZiliaoState();
 }

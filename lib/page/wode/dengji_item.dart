@@ -4,9 +4,9 @@ import 'package:paixs_utils/widget/anima_switch_widget.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 
 class DengjiItemPage extends StatefulWidget {
-  final String userLevel;
+  final String? userLevel;
 
-  const DengjiItemPage({Key key, this.userLevel}) : super(key: key);
+  const DengjiItemPage({Key? key, this.userLevel}) : super(key: key);
   @override
   _DengjiItemPageState createState() => _DengjiItemPageState();
 }
@@ -29,7 +29,7 @@ class _DengjiItemPageState extends State<DengjiItemPage> with AutomaticKeepAlive
     await Future.delayed(Duration(milliseconds: 500));
     dengjiItemDm.setTime();
     setState(() {});
-    return dengjiItemDm.flag;
+    return dengjiItemDm.flag!;
   }
 
   @override
@@ -47,7 +47,7 @@ class _DengjiItemPageState extends State<DengjiItemPage> with AutomaticKeepAlive
                 Image.asset('assets/img/dengji_01.png'),
                 Image.asset('assets/img/dengji_01.png'),
                 Image.asset('assets/img/dengji_01.png'),
-              ][int.parse(widget.userLevel) - 1],
+              ][int.parse(widget.userLevel!) - 1],
             ],
           );
         },

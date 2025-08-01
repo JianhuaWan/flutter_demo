@@ -40,13 +40,14 @@ class _YaoqingPageState extends State<YaoqingPage> {
   }
 
   ///截屏
-  Future<Uint8List> _capturePng() async {
+  Future<Uint8List?> _capturePng() async {
     try {
-      RenderRepaintBoundary boundary = rootWidgetKey.currentContext.findRenderObject();
+      RenderRepaintBoundary boundary = rootWidgetKey.currentContext
+          ?.findRenderObject() as RenderRepaintBoundary;
       await Future.delayed(Duration(milliseconds: 500));
       var image = await boundary.toImage(pixelRatio: 5.0);
-      ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
-      Uint8List pngBytes = byteData.buffer.asUint8List();
+      ByteData? byteData = await image.toByteData(format: ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
       return pngBytes;
     } catch (e) {
       flog(e);
@@ -255,14 +256,16 @@ class _YaoqingPageState extends State<YaoqingPage> {
                               case 2:
                                 buildShowDialog(context);
                                 var uint8list = await _capturePng();
-                                var imageJpg = Luban.comressImageJpg(uint8list, 50);
+                                var imageJpg = Luban.comressImageJpg
+                                  (uint8list!, 50);
                                 close();
                                 break;
                               case 3:
                                 if ((await Permission.storage.request()).isGranted) {
                                   buildShowDialog(context);
                                   var uint8list = await _capturePng();
-                                  var flag = await ImageGallerySaver.saveImage(uint8list, name: '${user?.inviteCode}_${Random().nextInt(9999)}');
+                                  var flag = await ImageGallerySaver
+                                      .saveImage(uint8list!, name: '${user?.inviteCode}_${Random().nextInt(9999)}');
                                   flog(flag);
                                   close();
                                   showToast('保存成功');

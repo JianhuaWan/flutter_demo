@@ -1,7 +1,7 @@
 class PhoneCountryCodeEntity {
-  int code;
-  List<PhoneCountryCodeData> data;
-  String message;
+  int? code;
+  List<PhoneCountryCodeData>? data;
+  String? message;
 
   PhoneCountryCodeEntity({this.code, this.data, this.message});
 
@@ -10,7 +10,7 @@ class PhoneCountryCodeEntity {
     if (json['data'] != null) {
       data = <PhoneCountryCodeData>[];
       (json['data'] as List).forEach((v) {
-        data.add(new PhoneCountryCodeData.fromJson(v));
+        data?.add(new PhoneCountryCodeData.fromJson(v));
       });
     }
     message = json['message'];
@@ -20,7 +20,7 @@ class PhoneCountryCodeEntity {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['code'] = this.code;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     data['message'] = this.message;
     return data;
@@ -28,8 +28,8 @@ class PhoneCountryCodeEntity {
 }
 
 class PhoneCountryCodeData {
-  List<PhoneCountryCodeDataListdata> listData;
-  String name;
+  List<PhoneCountryCodeDataListdata>? listData;
+  String? name;
 
   PhoneCountryCodeData({this.listData, this.name});
 
@@ -37,7 +37,7 @@ class PhoneCountryCodeData {
     if (json['listData'] != null) {
       listData = <PhoneCountryCodeDataListdata>[];
       (json['listData'] as List).forEach((v) {
-        listData.add(new PhoneCountryCodeDataListdata.fromJson(v));
+        listData!.add(new PhoneCountryCodeDataListdata.fromJson(v));
       });
     }
     name = json['name'];
@@ -46,7 +46,7 @@ class PhoneCountryCodeData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.listData != null) {
-      data['listData'] = this.listData.map((v) => v.toJson()).toList();
+      data['listData'] = this.listData!.map((v) => v.toJson()).toList();
     }
     data['name'] = this.name;
     return data;
@@ -54,10 +54,10 @@ class PhoneCountryCodeData {
 }
 
 class PhoneCountryCodeDataListdata {
-  String code;
-  String name;
-  int id;
-  String groupCode;
+  String? code;
+  String? name;
+  int? id;
+  String? groupCode;
 
   PhoneCountryCodeDataListdata({this.code, this.name, this.id, this.groupCode});
 

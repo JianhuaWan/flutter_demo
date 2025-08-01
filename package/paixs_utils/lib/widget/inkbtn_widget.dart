@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class InkBtn extends StatelessWidget {
   final double size;
-  final Function onTap;
+  final GestureTapCallback? onTap;
   final Widget child;
   final Color bwColor;
 
   const InkBtn({
-    Key key,
+    Key? key,
     this.size = 56,
-    @required this.onTap,
+    required this.onTap,
     this.child = const Icon(Icons.settings, color: Colors.white),
     this.bwColor = Colors.white10,
   }) : super(key: key);

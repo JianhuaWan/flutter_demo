@@ -6,32 +6,32 @@ import 'package:waterfall_flow/waterfall_flow.dart';
 
 class MyCustomScroll extends StatefulWidget {
   final List<Widget> headers;
-  final Widget Function(int, dynamic) itemModelBuilder;
-  final int itemCount;
-  final DataModel itemModel;
-  final int crossAxisCount;
-  final int expandedCount;
-  final double crossAxisSpacing;
-  final double mainAxisSpacing;
-  final double cacheExtent;
-  final Divider divider;
-  final EdgeInsetsGeometry headPadding;
-  final EdgeInsetsGeometry itemPadding;
-  final Widget btmWidget;
-  final bool isGengduo;
-  final bool isShuaxin;
-  final Widget refFooter;
-  final Widget refHeader;
-  final Future<int> Function(int) onLoading;
-  final Future<int> Function() onRefresh;
-  final Widget Function(double) onTapWidget;
-  final String btmText;
-  final ScrollController controller;
-  final Widget Function() maskWidget;
-  final double maskHeight;
-  final void Function(bool) onScrollToList;
+  final Widget Function(int, dynamic)? itemModelBuilder;
+  final int? itemCount;
+  final DataModel? itemModel;
+  final int? crossAxisCount;
+  final int? expandedCount;
+  final double? crossAxisSpacing;
+  final double? mainAxisSpacing;
+  final double? cacheExtent;
+  final Divider? divider;
+  final EdgeInsetsGeometry? headPadding;
+  final EdgeInsetsGeometry? itemPadding;
+  final Widget? btmWidget;
+  final bool? isGengduo;
+  final bool? isShuaxin;
+  final Widget? refFooter;
+  final Widget? refHeader;
+  final Future<int> Function(int)? onLoading;
+  final Future<int> Function()? onRefresh;
+  final Widget Function(double)? onTapWidget;
+  final String? btmText;
+  final ScrollController? controller;
+  final Widget Function()? maskWidget;
+  final double? maskHeight;
+  final void Function(bool)? onScrollToList;
   const MyCustomScroll({
-    Key key,
+    Key? key,
     this.headers = const <Widget>[],
     this.itemModelBuilder,
     this.itemCount,
@@ -105,15 +105,15 @@ class _MyCustomScrollState extends State<MyCustomScroll> {
   ///初始化函数
   Future initData() async {
     (widget.controller ?? con).addListener(() {
-      var s = homeListViewHeadKey.currentContext.findRenderObject().parentData.toString();
-      var firstMatch = RegExp('\\(.*?, (.*?)\\)').firstMatch(s);
-      var group = double.parse(firstMatch.group(1));
+      var s = homeListViewHeadKey.currentContext?.findRenderObject()?.parentData.toString();
+      var firstMatch = RegExp('\\(.*?, (.*?)\\)').firstMatch(s!);
+      var group = double.parse(firstMatch!.group(1)!);
       if (group <= (widget.maskHeight ?? 0.0)) {
         if (!isShowMask) {
           if (widget.onScrollToList == null) {
             setState(() {});
           } else {
-            widget.onScrollToList(true);
+            widget.onScrollToList!(true);
           }
         }
         isShowMask = true;
@@ -122,7 +122,7 @@ class _MyCustomScrollState extends State<MyCustomScroll> {
           if (widget.onScrollToList == null) {
             setState(() {});
           } else {
-            widget.onScrollToList(false);
+            widget.onScrollToList!(false);
           }
         }
         isShowMask = false;
@@ -136,10 +136,10 @@ class _MyCustomScrollState extends State<MyCustomScroll> {
       children: [
         RefresherWidget(
           isShuaxin: widget.isShuaxin ?? true,
-          isGengduo: widget.isGengduo ?? widget.itemModel.hasNext,
+          isGengduo: widget.isGengduo ?? widget.itemModel?.hasNext,
           footer: widget.refFooter,
           header: widget.refHeader,
-          onLoading: () => widget.onLoading(widget.itemModel.page),
+          onLoading: () => widget.onLoading!(widget.itemModel!.page!),
           onRefresh: widget.onRefresh,
           child: CustomScrollView(
             controller: widget.controller ?? con,
@@ -166,17 +166,18 @@ class _MyCustomScrollState extends State<MyCustomScroll> {
                     (_, i) {
                       // flog(i);
                       return widget.divider == null
-                          ? widget.itemModelBuilder(i, widget.itemModel.list[i])
+                          ? widget.itemModelBuilder!(i, widget.itemModel?.list[i])
                           : widget.crossAxisCount != null
-                              ? widget.itemModelBuilder(i, widget.itemModel.list[i])
+                              ? widget.itemModelBuilder!(i, widget.itemModel?.list[i])
                               : Column(
                                   children: [
-                                    widget.itemModelBuilder(i, widget.itemModel.list[i]),
-                                    if (i != widget.itemModel.list.length - 1) widget.divider,
+                                    widget.itemModelBuilder!(i, widget.itemModel?.list[i]),
+                                    if (i != widget.itemModel!.list.length -
+                                        1) widget.divider!,
                                   ],
                                 );
                     },
-                    childCount: widget.itemModel.list.length,
+                    childCount: widget.itemModel!.list.length,
                   ),
                   gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
                     crossAxisCount: widget.crossAxisCount ?? 1,
@@ -185,8 +186,9 @@ class _MyCustomScrollState extends State<MyCustomScroll> {
                   ),
                 ),
               ),
-              if (!widget.itemModel.hasNext)
-                if (widget.itemModel.list.length > (widget.expandedCount ?? 10))
+              if (!widget.itemModel!.hasNext!)
+                if (widget.itemModel!.list.length > (widget.expandedCount ??
+                    10))
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (_, i) {
@@ -199,7 +201,8 @@ class _MyCustomScrollState extends State<MyCustomScroll> {
           ),
         ),
         if (widget.maskWidget != null)
-          if (widget.onScrollToList == null) isShowMask ? widget.maskWidget() : SizedBox() else widget.maskWidget(),
+          if (widget.onScrollToList == null) isShowMask ? widget.maskWidget!
+            () : SizedBox() else widget.maskWidget!(),
       ],
     );
   }

@@ -5,23 +5,23 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefresherWidget extends StatefulWidget {
   final Widget child;
-  final Widget header;
-  final Widget footer;
+  final Widget? header;
+  final Widget? footer;
   final bool isShuaxin;
-  final bool isGengduo;
+  final bool? isGengduo;
   final int flag;
-  final Future<int> Function() onLoading;
-  final Future<int> Function() onRefresh;
+  final Future<int> Function()? onLoading;
+  final Future<int> Function()? onRefresh;
 
   const RefresherWidget({
-    Key key,
+    Key? key,
     this.header,
     this.footer,
     this.isShuaxin = true,
     this.isGengduo = false,
     this.onLoading,
     this.onRefresh,
-    @required this.child,
+    required this.child,
     this.flag = 0,
   }) : super(key: key);
 
@@ -38,9 +38,9 @@ class _RefresherWidgetState extends State<RefresherWidget> {
       child: SmartRefresher(
         controller: reCon,
         enablePullDown: widget.isShuaxin,
-        enablePullUp: widget.isGengduo,
+        enablePullUp: widget.isGengduo!,
         onRefresh: () async {
-          var flag = await widget.onRefresh();
+          var flag = await widget.onRefresh!();
           if (flag == -1 || flag == 1) {
             reCon.refreshFailed();
           } else {
@@ -48,7 +48,7 @@ class _RefresherWidgetState extends State<RefresherWidget> {
           }
         },
         onLoading: () async {
-          var flag = await widget.onLoading();
+          var flag = await widget.onLoading!();
           if (flag == -1 || flag == 1) {
             reCon.loadFailed();
           } else {

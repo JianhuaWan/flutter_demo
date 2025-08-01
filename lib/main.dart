@@ -78,7 +78,7 @@ class FlashPage extends StatefulWidget {
 }
 
 class _FlashPageState extends State<FlashPage> {
-  Timer timer;
+  Timer? timer;
 
   @override
   void initState() {
@@ -98,11 +98,11 @@ class _FlashPageState extends State<FlashPage> {
       if (v.tick == 3) {
         if (isFtoApp) {
           showGeneralDialog(
-            context: context,
+            context: context!,
             barrierColor: Colors.transparent,
             pageBuilder: (_, __, ___) => UserXiayi(),
           ).then((v) async {
-            if (v) {
+            if (v != null) {
               await Future.delayed(Duration(milliseconds: 500));
               if (user == null) {
                 // jumpPage(PassWordLogin(), isMove: false, isClose: true);
@@ -130,7 +130,7 @@ class _FlashPageState extends State<FlashPage> {
 
   @override
   void dispose() {
-    timer.cancel();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -209,7 +209,7 @@ class _FlashPageState extends State<FlashPage> {
 }
 
 class App extends StatefulWidget {
-  const App({Key key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -230,8 +230,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ///键盘收起自动失焦
       await Future.delayed(Duration(milliseconds: 100));
-      if (MediaQuery.of(context).viewInsets.bottom == 0) {
-        FocusScope.of(context).requestFocus(FocusNode());
+      if (MediaQuery.of(context!).viewInsets.bottom == 0) {
+        FocusScope.of(context!).requestFocus(FocusNode());
       }
     });
   }
