@@ -16,7 +16,7 @@ List<SingleChildWidget> pros = <SingleChildWidget>[
 UserProvider get userPro => Provider.of<UserProvider>(context!, listen: false);
 
 ///用户信息
-UserModel get user => userPro.userModel!;
+UserModel get user => userPro.userModel;
 
 AppProvider get app => Provider.of<AppProvider>(context!, listen: false);
 

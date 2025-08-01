@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
   ///用户信息(全局)
-  UserModel? userModel;
+  UserModel userModel= new UserModel();
 
   ///保存用户信息到内存
   void setUserModel(data, [String? token]) {
@@ -68,7 +68,7 @@ class UserProvider extends ChangeNotifier {
   Future<bool> cleanUserInfo() async {
     var sp = await SharedPreferences.getInstance();
     await sp.remove('user');
-    userModel = null;
+    userModel=new UserModel();
     notifyListeners();
     return true;
   }
@@ -76,7 +76,7 @@ class UserProvider extends ChangeNotifier {
   ///获取我的客户统计
   var myKehuTongjiDm = DataModel<Map>(hasNext: false, object: {});
   Future<int> apiCustomerStatistics({int page = 1, bool isRef = false}) async {
-    if (userModel != null) {
+    if (userModel.id != null) {
       myKehuTongjiDm.object = {};
       await Request.get(
         '/api/Customer/Statistics',
@@ -99,7 +99,7 @@ class UserProvider extends ChangeNotifier {
   ///获取我的权益统计
   var myQuanyiTongjiDm = DataModel<Map>(hasNext: false, object: {});
   Future<int> apiUserRightsStatistics({int page = 1, bool isRef = false}) async {
-    if (userModel != null) {
+    if (userModel.id != null) {
       myQuanyiTongjiDm.object = {};
       await Request.get(
         '/api/UserRights/Statistics',

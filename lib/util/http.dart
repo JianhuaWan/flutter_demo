@@ -277,7 +277,7 @@ class Request {
 
   ///返回用户token
   static String get getUserToken {
-    if (user == null) return '';
+    if (user.id == null) return '';
     return user.token!;
   }
 }
