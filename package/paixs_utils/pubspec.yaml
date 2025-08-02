@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_styled_toast: ^2.2.1
-  dio: 4.0.0-beta6
+  dio: 5.5.0+1
   pull_to_refresh: ^2.0.0
   cached_network_image: ^3.4.1
   image_picker: ^0.7.2

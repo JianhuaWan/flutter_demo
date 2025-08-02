@@ -18,7 +18,7 @@ class Http extends BaseHttp {
 /// App相关 API
 class PgyerApiInterceptor extends InterceptorsWrapper {
   @override
-  onRequest(RequestOptions options) async {
+  void  onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     try {
       // var str = options.path.split('/').last;
       // log('${options.baseUrl}${options.path}', name: '接口：${str.substring(0, str.indexOf('?'))}/Url');
@@ -46,7 +46,7 @@ class PgyerApiInterceptor extends InterceptorsWrapper {
 
     ///延时请求250毫秒
     // await Future.delayed(Duration(milliseconds: 500));
-    return options;
+    handler.next(options);
   }
 
   getNull(v) => v == '' ? null : v;

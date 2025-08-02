@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:dio/native_imp.dart';
-import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 export 'package:dio/dio.dart';
 
@@ -15,28 +14,50 @@ parseJson(String text) {
   return compute(_parseAndDecode, text);
 }
 
-abstract class BaseHttp extends DioForNative {
+abstract class BaseHttp extends DioMixin {
   BaseHttp() {
+    options = BaseOptions();
     /// 初始化 加入app通用处理
-    (transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
+    transformer=CustomTransformer();
     interceptors..add(HeaderInterceptor());
     init();
   }
-
   void init();
 }
+class CustomTransformer extends BackgroundTransformer {
+  @override
+  Future<String> transformRequest(RequestOptions options) {
+    return super.transformRequest(options);
+  }
 
+  @override
+  Future<dynamic> transformResponse(
+      RequestOptions options,
+      ResponseBody response,
+      ) async {
+    // 使用自定义的解析方法
+    final String data = await super.transformResponse(options, response) as String;
+    if (data.isNotEmpty) {
+      try {
+        return parseJson(data);
+      } catch (e) {
+        return data;
+      }
+    }
+    return data;
+  }
+}
 /// 添加常用Header
 class HeaderInterceptor extends InterceptorsWrapper {
   @override
-  onRequest(RequestOptions options) async {
-    options.connectTimeout = 1000 * 5;
-    options.receiveTimeout = 1000 * 5;
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    options.connectTimeout = Duration(milliseconds:1000 * 5);
+    options.receiveTimeout = Duration(milliseconds:1000 * 5);
     if(options.data is! FormData){
       options.headers['Content-Type'] = 'application/json';
       // options.headers['Content-Type'] = 'multipart/form-data';
     }    
-    return options;
+    handler.next(options);
   }
 }
 
