@@ -59,15 +59,10 @@ class AppbarWidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 9),
-                      Selector<AppProvider, String>(
-                        selector: (_, k) => k.city!,
+                      Selector<AppProvider, String?>(
+                        selector: (_, k) => k.city,
                         builder: (_, v, view) {
                           return MyText(v ?? '请稍后', size: 13);
-                          // if (v == null) {
-                          //   return MyText(v, size: 13);
-                          // } else {
-                          //   return MyText(v, size: 13);
-                          // }
                         },
                       ),
                       SizedBox(width: 16),

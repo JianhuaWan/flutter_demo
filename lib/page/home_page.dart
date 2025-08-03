@@ -306,39 +306,7 @@ class _HomePageState extends State<HomePage>
         divider: Divider(height: 32, color: Colors.transparent),
         itemModelBuilder: (i, home) => buildItem(i),
         onScrollToList: (v) => app.setIsShowHomeMask(v),
-        maskWidget: () {
-          return Selector<AppProvider, bool>(
-            selector: (_, k) => k.isShowHomeMask,
-            builder: (_, v, view) {
-              return AnimatedPositioned(
-                duration: Duration(milliseconds: 250),
-                curve: Curves.easeOutCubic,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: v
-                    ? 0
-                    : (region != null ||
-                            totalPrice != null ||
-                            layout != null ||
-                            area != null)
-                        ? 0
-                        : -56,
-                child: HomeSelectoWidget(fun: (v) async {
-                  region = v['quyu'];
-                  totalPrice = v['zongjia'];
-                  layout = v['huxing'];
-                  area = v['jianzhu'];
-                  app.setIsShowHomeMask(false);
-                  // loupanDm.list.clear();
-                  buildShowDialog(context);
-                  await this.getPageList(isRef: true);
-                  close();
-                }),
-              );
-            },
-          );
-        },
+        maskWidget: ()=>SizedBox(),
       ),
     );
   }

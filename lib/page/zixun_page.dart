@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/my_custom_scroll.dart';
@@ -154,9 +153,6 @@ class _ZixunViewState extends State<ZixunView>
   Widget build(BuildContext context) {
     super.build(context);
     return ScaffoldWidget(
-      // body: MyText(
-      //   widget.data['dictValue'] == '薪出品' || widget.data['dictValue'] == '薪房圈' ? '视频' : '富文本',
-      // ),
       body: AnimatedSwitchBuilder(
         value: zixunDm,
         errorOnTap: () => this.apiNewsGetPageList(isRef: true),
@@ -174,7 +170,7 @@ class _ZixunViewState extends State<ZixunView>
             itemModelBuilder: (i, v) {
               return WidgetTap(
                 onTap: () {
-                    jumpPage(ZixunInfoPage(data: v));
+                  jumpPage(ZixunInfoPage(data: v));
                 },
                 child: TweenWidget(
                   axis: Axis.vertical,

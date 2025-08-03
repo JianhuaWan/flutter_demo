@@ -124,6 +124,11 @@ class AppProvider extends ChangeNotifier {
             'dictValue': 'tab3',
             'dictKey': 3,
           },
+          {
+            'dictType': 'NewsType',
+            'dictValue': 'tab4',
+            'dictKey': 4,
+          },
         ];
         zidianDm.object = defaultDictData;
         zidianDm.setTime();
