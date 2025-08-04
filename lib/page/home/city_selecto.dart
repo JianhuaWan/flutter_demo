@@ -25,7 +25,30 @@ class PhoneCountryCodePage extends StatefulWidget {
 }
 
 class PageState extends State<PhoneCountryCodePage> {
-  List<String> letters = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
+  List<String> letters = [
+    '#',
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'P',
+    'R',
+    'S',
+    'T',
+    'W',
+    'X',
+    'Y',
+    'Z'
+  ];
   ScrollController _scrollController = ScrollController();
   double? value;
   bool flag = false;
@@ -34,6 +57,7 @@ class PageState extends State<PhoneCountryCodePage> {
   TextEditingController textCon = TextEditingController();
 
   var text;
+
   @override
   void initState() {
     RouteState.isSlideRight = false;
@@ -48,22 +72,35 @@ class PageState extends State<PhoneCountryCodePage> {
   }
 
   var cityDm = DataModel<List<PhoneCountryCodeData>>(object: []);
+
   Future getPhoneCodeDataList() async {
     var sp = await SharedPreferences.getInstance();
     app.sousuoList = sp.getStringList('sousuoList') ?? [];
-    if (app.shengshiquDm.object!.isEmpty) await app.getDropDownList(false);
+    if (app.shengshiquDm.object == null) await app.getDropDownList(false);
+    
+    // 创建一个临时列表来存储有数据的字母
+    List<String> lettersWithData = [];
+    
     letters.forEach((f) {
-      cityDm.object!.add(
-        PhoneCountryCodeData(
-          name: f,
-          listData: app.shengshiquDm.object!.where((w) {
-            return w['code'] == (f == '#' ? null : f);
-          }).map((e) {
-            return PhoneCountryCodeDataListdata(code: e['code'], name: e['name'], id: int.parse(e['id']));
-          }).toList(),
-        ),
-      );
+      var listData = app.shengshiquDm.object!.where((w) {
+        return w['code'] == (f == '#' ? null : f);
+      }).map((e) {
+        return PhoneCountryCodeDataListdata(
+            code: e['code'], name: e['name'], id: int.parse(e['id']));
+      }).toList();
+      
+      // 只有当该字母下有数据时才添加
+      if (listData.isNotEmpty) {
+        cityDm.object!.add(
+          PhoneCountryCodeData(
+            name: f,
+            listData: listData,
+          ),
+        );
+        lettersWithData.add(f);
+      }
     });
+    
     this.setState(() {
       cityDm.object!.insert(
         0,
@@ -79,9 +116,15 @@ class PageState extends State<PhoneCountryCodePage> {
           "name": "历史记录",
         }),
       );
+      
+      // 更新letters列表，只保留有数据的字母加上"历史记录"和"热门城市"
+      letters.clear();
+      letters.addAll(lettersWithData);
       letters.insert(0, '热');
       letters.insert(0, '历');
-      value = (size(context).height - 112 - 100 - padd(context).top) / letters.length;
+      
+      value = (size(context).height - 112 - 100 - padd(context).top) /
+          letters.length;
       cityDm.setTime();
     });
   }
@@ -118,11 +161,24 @@ class PageState extends State<PhoneCountryCodePage> {
                     itemCount: obj.length,
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
+                      // 检查是否是历史记录或热门城市（这些总是显示）
+                      bool isSpecialSection = index < 2;
+                      // 检查是否是字母分组且有数据
+                      bool hasData = isSpecialSection || 
+                          (index < obj.length && obj[index].listData!.isNotEmpty);
+                    
+                      // 如果不是特殊部分且没有数据，则不显示该项
+                      if (!isSpecialSection && !hasData) {
+                        return SizedBox.shrink(); // 返回一个空的widget
+                      }
+                    
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          PhoneCodeIndexName(obj[index].name!.toUpperCase()),
-                          if (index == 0)
+                          // 只有在有数据时才显示字母索引名称
+                          if (hasData) 
+                            PhoneCodeIndexName(obj[index].name!.toUpperCase()),
+                          if (index == 0 && hasData)
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               child: Selector<AppProvider, int>(
@@ -131,7 +187,8 @@ class PageState extends State<PhoneCountryCodePage> {
                                   return Wrap(
                                     spacing: 16,
                                     runSpacing: 16,
-                                    children: List.generate(app.sousuoList.length, (i) {
+                                    children: List.generate(
+                                        app.sousuoList.length, (i) {
                                       return GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -141,11 +198,14 @@ class PageState extends State<PhoneCountryCodePage> {
                                         },
                                         child: Container(
                                           height: 30,
-                                          width: size(context).width / 3 - (30 + 32) / 3,
+                                          width: size(context).width / 3 -
+                                              (30 + 32) / 3,
                                           color: Colors.white,
-                                          padding: EdgeInsets.symmetric(horizontal: 8),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8),
                                           alignment: Alignment.center,
-                                          child: MyText(app.sousuoList[i], size: 12, isBold: true),
+                                          child: MyText(app.sousuoList[i],
+                                              size: 12, isBold: true),
                                         ),
                                       );
                                     }),
@@ -153,17 +213,36 @@ class PageState extends State<PhoneCountryCodePage> {
                                 },
                               ),
                             )
-                          else if (index == 1)
+                          else if (index == 1 && hasData)
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               child: Wrap(
                                 spacing: 16,
                                 runSpacing: 16,
-                                children: List.generate(['东莞', '惠州', '深圳', '中山', '广州', '佛山', '肇庆', '珠海'].length, (i) {
+                                children: List.generate(
+                                    [
+                                      '东莞',
+                                      '惠州',
+                                      '深圳',
+                                      '中山',
+                                      '广州',
+                                      '佛山',
+                                      '肇庆',
+                                      '珠海'
+                                    ].length, (i) {
                                   return GestureDetector(
                                     onTap: () {
                                       showTc(
-                                        title: '确定切换到${['东莞', '惠州', '深圳', '中山', '广州', '佛山', '肇庆', '珠海'][i]}吗？',
+                                        title: '确定切换到${[
+                                          '东莞',
+                                          '惠州',
+                                          '深圳',
+                                          '中山',
+                                          '广州',
+                                          '佛山',
+                                          '肇庆',
+                                          '珠海'
+                                        ][i]}吗？',
                                         onPressed: () {
                                           ///东莞，惠州，深圳，中山，广州，佛山，肇庆，珠海
                                           app.city = [
@@ -176,25 +255,57 @@ class PageState extends State<PhoneCountryCodePage> {
                                             '肇庆',
                                             '珠海',
                                           ][i];
-                                          app.cityCode = ['441900', '441300', '440300', '442000', '440100', '440600', '441200', '440400'][i];
+                                          app.cityCode = [
+                                            '441900',
+                                            '441300',
+                                            '440300',
+                                            '442000',
+                                            '440100',
+                                            '440600',
+                                            '441200',
+                                            '440400'
+                                          ][i];
                                           app.setState();
-                                          Navigator.of(context).pop(['东莞', '惠州', '深圳', '中山', '广州', '佛山', '肇庆', '珠海'][i]);
+                                          Navigator.of(context).pop([
+                                            '东莞',
+                                            '惠州',
+                                            '深圳',
+                                            '中山',
+                                            '广州',
+                                            '佛山',
+                                            '肇庆',
+                                            '珠海'
+                                          ][i]);
                                         },
                                       );
                                     },
                                     child: Container(
                                       height: 30,
-                                      width: size(context).width / 3 - (30 + 32) / 3,
+                                      width: size(context).width / 3 -
+                                          (30 + 32) / 3,
                                       color: Colors.white,
-                                      padding: EdgeInsets.symmetric(horizontal: 8),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8),
                                       alignment: Alignment.center,
-                                      child: MyText(['东莞', '惠州', '深圳', '中山', '广州', '佛山', '肇庆', '珠海'][i], size: 12, isBold: true),
+                                      child: MyText(
+                                          [
+                                            '东莞',
+                                            '惠州',
+                                            '深圳',
+                                            '中山',
+                                            '广州',
+                                            '佛山',
+                                            '肇庆',
+                                            '珠海'
+                                          ][i],
+                                          size: 12,
+                                          isBold: true),
                                     ),
                                   );
                                 }),
                               ),
                             )
-                          else
+                          else if (hasData)
                             Container(
                               color: Colors.white,
                               child: MyListView(
@@ -209,16 +320,18 @@ class PageState extends State<PhoneCountryCodePage> {
                                   return GestureDetector(
                                     onTap: () {
                                       showTc(
-                                        title: '确定切换到${obj[index]
-                                            .listData![i].name}吗？',
+                                        title:
+                                            '确定切换到${obj[index].listData![i].name}吗？',
                                         onPressed: () {
-                                          app.city = obj[index].listData![i]
-                                              .name;
+                                          app.city =
+                                              obj[index].listData![i].name;
                                           app.cityCode = obj[index]
-                                              .listData![i].id.toString();
+                                              .listData![i]
+                                              .id
+                                              .toString();
                                           app.setState();
-                                          Navigator.of(context).pop
-                                            (obj[index].listData![i].toJson());
+                                          Navigator.of(context).pop(
+                                              obj[index].listData![i].toJson());
                                         },
                                       );
                                     },
@@ -263,14 +376,20 @@ class PageState extends State<PhoneCountryCodePage> {
                                         isScale: true,
                                         value: -100,
                                         curve: ElasticOutCurve(1),
-                                        child: MyText(v, color: Colors.white, size: 24, isBold: true),
+                                        child: MyText(v,
+                                            color: Colors.white,
+                                            size: 24,
+                                            isBold: true),
                                       )
                                     : TweenWidget(
                                         key: ValueKey(2),
                                         isScale: true,
                                         axis: Axis.vertical,
                                         curve: ElasticOutCurve(1),
-                                        child: MyText(v, color: Colors.white, size: 24, isBold: true),
+                                        child: MyText(v,
+                                            color: Colors.white,
+                                            size: 24,
+                                            isBold: true),
                                       );
                               },
                             ),
@@ -293,8 +412,10 @@ class PageState extends State<PhoneCountryCodePage> {
                         try {
                           int ii = v.localPosition.dy ~/ value!;
                           app.changeCityListIndex(letters[ii]);
-                          if (ii == letters.length - 1 || ii > letters.length - 1) {
-                            _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                          if (ii == letters.length - 1 ||
+                              ii > letters.length - 1) {
+                            _scrollController.jumpTo(
+                                _scrollController.position.maxScrollExtent);
                           } else {
                             if (ii >= 0) {
                               if (ii == 0) {
@@ -304,7 +425,8 @@ class PageState extends State<PhoneCountryCodePage> {
                                   _scrollController.jumpTo(45);
                                 } else {
                                   var ceil = (app.sousuoList.length / 3).ceil();
-                                  var height = 45.0 + ceil * 30 + (ceil - 1) * 16;
+                                  var height =
+                                      45.0 + ceil * 30 + (ceil - 1) * 16;
                                   _scrollController.jumpTo(height);
                                 }
                               } else {
@@ -314,7 +436,11 @@ class PageState extends State<PhoneCountryCodePage> {
                                     height += obj[i].listData!.length * 46.0;
                                   }
                                   var ceil = (app.sousuoList.length / 3).ceil();
-                                  var value = 45.0 + ceil * 30 + (ceil - 1) * 16 + 1 + 46;
+                                  var value = 45.0 +
+                                      ceil * 30 +
+                                      (ceil - 1) * 16 +
+                                      1 +
+                                      46;
                                   _scrollController.jumpTo(height + value);
                                 } else {
                                   var height = ii * 45.0;
@@ -322,7 +448,11 @@ class PageState extends State<PhoneCountryCodePage> {
                                     height += obj[i].listData!.length * 46.0;
                                   }
                                   var ceil = (app.sousuoList.length / 3).ceil();
-                                  var value = 45.0 + ceil * 30 + (ceil - 1) * 16 - 15 + 46;
+                                  var value = 45.0 +
+                                      ceil * 30 +
+                                      (ceil - 1) * 16 -
+                                      15 +
+                                      46;
                                   _scrollController.jumpTo(height + value);
                                 }
                               }
@@ -332,6 +462,20 @@ class PageState extends State<PhoneCountryCodePage> {
                       },
                       child: Column(
                         children: List.generate(letters.length, (ii) {
+                          // 检查是否应该显示该字母（历史记录和热门城市总是显示）
+                          bool shouldShowLetter = ii < 2; // 历史记录和热门城市总是显示
+                          if (!shouldShowLetter && ii < letters.length) {
+                            // 检查对应字母是否有数据
+                            int dataIndex = ii; // 对应主列表中的索引
+                            if (dataIndex < obj.length) {
+                              shouldShowLetter = obj[dataIndex].listData!.isNotEmpty;
+                            }
+                          }
+                          
+                          if (!shouldShowLetter) {
+                            return SizedBox.shrink();
+                          }
+                          
                           return Expanded(
                             child: GestureDetector(
                               behavior: HitTestBehavior.translucent,
@@ -339,14 +483,19 @@ class PageState extends State<PhoneCountryCodePage> {
                                 color: Colors.transparent,
                                 width: 32,
                                 alignment: Alignment.center,
-                                child: TweenWidget(delayed: 20 + 10 * ii, axis: Axis.vertical, child: MyText(letters[ii], isBold: true)),
+                                child: TweenWidget(
+                                    delayed: 20 + 10 * ii,
+                                    axis: Axis.vertical,
+                                    child: MyText(letters[ii], isBold: true)),
                               ),
                               onTapDown: (v) {
                                 app.changeCityListIndex(letters[ii]);
                               },
                               onTap: () {
-                                if (ii == letters.length - 1 || ii > letters.length - 1) {
-                                  _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                                if (ii == letters.length - 1 ||
+                                    ii > letters.length - 1) {
+                                  _scrollController.jumpTo(_scrollController
+                                      .position.maxScrollExtent);
                                 } else {
                                   if (ii >= 0) {
                                     if (ii == 0) {
@@ -355,29 +504,45 @@ class PageState extends State<PhoneCountryCodePage> {
                                       if (app.sousuoList.isEmpty) {
                                         _scrollController.jumpTo(45);
                                       } else {
-                                        var ceil = (app.sousuoList.length / 3).ceil();
-                                        var height = 45.0 + ceil * 30 + (ceil - 1) * 16;
+                                        var ceil =
+                                            (app.sousuoList.length / 3).ceil();
+                                        var height =
+                                            45.0 + ceil * 30 + (ceil - 1) * 16;
                                         _scrollController.jumpTo(height);
                                       }
                                     } else {
                                       if (app.sousuoList.isEmpty) {
                                         var height = ii * 45.0;
-                                        for (int i = 0; i < ii; i++) {
-                                          height += obj[i].listData!.length *
-                                              46.0;
+                                        for (int i = 2; i < ii; i++) { // 从2开始因为前两个是特殊项
+                                          if (i < obj.length) {
+                                            height += obj[i].listData!.length * 46.0;
+                                          }
                                         }
-                                        var ceil = (app.sousuoList.length / 3).ceil();
-                                        var value = 45.0 + ceil * 30 + (ceil - 1) * 16 + 1 + 46;
-                                        _scrollController.jumpTo(height + value);
+                                        var ceil =
+                                            (app.sousuoList.length / 3).ceil();
+                                        var value = 45.0 +
+                                            ceil * 30 +
+                                            (ceil - 1) * 16 +
+                                            1 +
+                                            46;
+                                        _scrollController
+                                            .jumpTo(height + value);
                                       } else {
                                         var height = ii * 45.0;
-                                        for (int i = 0; i < ii; i++) {
-                                          height += obj[i].listData!.length *
-                                              46.0;
+                                        for (int i = 2; i < ii; i++) { // 从2开始因为前两个是特殊项
+                                          if (i < obj.length) {
+                                            height += obj[i].listData!.length * 46.0;
+                                          }
                                         }
-                                        var ceil = (app.sousuoList.length / 3).ceil();
-                                        var value = 45.0 + ceil * 30 + (ceil - 1) * 16 - 15 + 46;
-                                        _scrollController.jumpTo(height + value);
+                                        var ceil =
+                                            (app.sousuoList.length / 3).ceil();
+                                        var value = 45.0 +
+                                            ceil * 30 +
+                                            (ceil - 1) * 16 -
+                                            15 +
+                                            46;
+                                        _scrollController
+                                            .jumpTo(height + value);
                                       }
                                     }
                                   }
@@ -410,7 +575,8 @@ class PageState extends State<PhoneCountryCodePage> {
                         var app = context.read<AppProvider>();
                         // 修复：先检查列表是否为空，再检查元素是否存在
                         bool itemExists = app.sousuoList.isNotEmpty &&
-                            app.sousuoList.indexOf(sousuoResult[i]['name']) != -1;
+                            app.sousuoList.indexOf(sousuoResult[i]['name']) !=
+                                -1;
                         if (!itemExists) {
                           app.sousuoList.insert(0, sousuoResult[i]['name']);
                         } else {
@@ -482,8 +648,10 @@ class SousuoAppbar extends StatefulWidget {
   final Function(dynamic)? onSubmitted;
   final String? text;
   final TextEditingController? textCon;
-  const SousuoAppbar({Key? key, this.onSubmitted, this.text, this.textCon}) :
-        super(key: key);
+
+  const SousuoAppbar({Key? key, this.onSubmitted, this.text, this.textCon})
+      : super(key: key);
+
   @override
   _SousuoAppbarState createState() => _SousuoAppbarState();
 }
@@ -513,7 +681,8 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                     ),
                     child: Row(
                       children: [
-                        Image.asset('assets/img/home_sousuo.png', width: 13, height: 13),
+                        Image.asset('assets/img/home_sousuo.png',
+                            width: 13, height: 13),
                         SizedBox(width: 10),
                         buildTFView(
                           context,
@@ -526,15 +695,21 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                             } else {
                               // 修复：先检查列表是否为空，再检查元素是否存在
                               bool itemExists = app.sousuoList.isNotEmpty &&
-                                  app.sousuoList.indexOf((widget.textCon ?? textCon).text) != -1;
+                                  app.sousuoList.indexOf(
+                                          (widget.textCon ?? textCon).text) !=
+                                      -1;
                               if (!itemExists) {
-                                app.sousuoList.insert(0, (widget.textCon ?? textCon).text);
+                                app.sousuoList.insert(
+                                    0, (widget.textCon ?? textCon).text);
                               } else {
-                                app.sousuoList.remove((widget.textCon ?? textCon).text);
-                                app.sousuoList.insert(0, (widget.textCon ?? textCon).text);
+                                app.sousuoList
+                                    .remove((widget.textCon ?? textCon).text);
+                                app.sousuoList.insert(
+                                    0, (widget.textCon ?? textCon).text);
                               }
                               var sp = await SharedPreferences.getInstance();
-                              await sp.setStringList('sousuoList', app.sousuoList);
+                              await sp.setStringList(
+                                  'sousuoList', app.sousuoList);
                             }
                           },
                           onChanged: (v) {
@@ -557,12 +732,16 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                     } else {
                       // 修复：先检查列表是否为空，再检查元素是否存在
                       bool itemExists = app.sousuoList.isNotEmpty &&
-                          app.sousuoList.indexOf((widget.textCon ?? textCon).text) != -1;
+                          app.sousuoList
+                                  .indexOf((widget.textCon ?? textCon).text) !=
+                              -1;
                       if (!itemExists) {
-                        app.sousuoList.insert(0, (widget.textCon ?? textCon).text);
+                        app.sousuoList
+                            .insert(0, (widget.textCon ?? textCon).text);
                       } else {
                         app.sousuoList.remove((widget.textCon ?? textCon).text);
-                        app.sousuoList.insert(0, (widget.textCon ?? textCon).text);
+                        app.sousuoList
+                            .insert(0, (widget.textCon ?? textCon).text);
                       }
                       var sp = await SharedPreferences.getInstance();
                       await sp.setStringList('sousuoList', app.sousuoList);
@@ -572,7 +751,9 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                     padding: EdgeInsets.only(right: 16, top: 8, bottom: 8),
                     child: MyText(
                       (widget.textCon ?? textCon).text == '' ? '取消' : '搜索',
-                      color: (widget.textCon ?? textCon).text == '' ? Color(0xFFB7B7B7) : Theme.of(context).primaryColor,
+                      color: (widget.textCon ?? textCon).text == ''
+                          ? Color(0xFFB7B7B7)
+                          : Theme.of(context).primaryColor,
                     ),
                   ),
                 )
@@ -586,7 +767,7 @@ class _SousuoAppbarState extends State<SousuoAppbar> {
                 children: [
                   Expanded(
                     child: Selector<AppProvider, String>(
-                      selector: (_, k) => k.city!,
+                      selector: (_, k) => k.city ?? '',
                       builder: (_, v, view) {
                         return MyText(
                           v ?? '请稍后',

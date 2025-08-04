@@ -104,7 +104,7 @@ class _FlashPageState extends State<FlashPage> {
           ).then((v) async {
             if (v != null) {
               await Future.delayed(Duration(milliseconds: 500));
-              if (user == null) {
+              if (user.id == null) {
                 jumpPage(App(), isMove: false, isClose: true);
               } else {
                 await userPro.refreshToken();
@@ -113,7 +113,7 @@ class _FlashPageState extends State<FlashPage> {
             }
           });
         } else {
-          if (user == null) {
+          if (user.id == null) {
             jumpPage(App(), isMove: false, isClose: true);
           } else {
             await userPro.refreshToken();

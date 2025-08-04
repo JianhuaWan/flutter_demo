@@ -110,7 +110,7 @@ class _SetupPageState extends State<SetupPage> {
               selectoColor: Color(0xff666666),
               selectoText: '',
               selectoOnTap: () {
-                if (user == null) {
+                if (user.id == null) {
                   jumpPage(PassWordLogin(), isMoveBtm: true);
                 } else {
                   jumpPage(ModifyUserInfo());
@@ -153,7 +153,7 @@ class _SetupPageState extends State<SetupPage> {
                     selectoOnTap: () {
                       switch (i) {
                         case 0:
-                          if (user == null) {
+                          if (user.id == null) {
                             jumpPage(PassWordLogin(), isMoveBtm: true);
                           } else {
                             jumpPage(XiugaiLogin());

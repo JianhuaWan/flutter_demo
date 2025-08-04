@@ -163,7 +163,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
               child: WidgetTap(
                 isElastic: true,
                 onTap: () {
-                  if (user == null) {
+                  if (user.id == null) {
                     jumpPage(PassWordLogin(), isMoveBtm: true);
                   } else {
                     jumpPage(ModifyUserInfo());
@@ -194,8 +194,8 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                                 isBold: true,
                                 color: Colors.white,
                               ),
-                              if (user != null) SizedBox(width: 5),
-                              if (user != null)
+                              if (user.id != null) SizedBox(width: 5),
+                              if (user.id != null)
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(56),
@@ -205,15 +205,18 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                                       horizontal: 12, vertical: 4),
                                   child: MyText(
                                     app.zidianDm.object!.isNotEmpty
-                                        ? app.zidianDm.object
-                                            !.where((w) =>
+                                        ? (app.zidianDm.object!
+                                            .where((w) =>
                                                 w['dictType'] == 'UserLevel')
-                                            .where((w) {
-                                            return w['dictKey'] ==
-                                                (user.userLevel == 0
-                                                    ? 1
-                                                    : user.userLevel);
-                                          }).first['dictValue']
+                                            .firstWhere(
+                                                (w) =>
+                                                    w['dictKey'] ==
+                                                    (user.userLevel == 0
+                                                        ? 1
+                                                        : user.userLevel),
+                                                orElse: () => {
+                                                      'dictValue': '未知身份'
+                                                    }))['dictValue']
                                         : '未知身份',
                                     color: Colors.white,
                                     size: 12,

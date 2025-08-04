@@ -19,16 +19,7 @@ class _BaozhangPageState extends State<BaozhangPage> {
   }
 
   ///初始化函数
-  Future initData() async {
-    await this.getData();
-  }
-
-  var data = DataModel();
-  Future<void> getData() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    data.setTime();
-    setState(() {});
-  }
+  Future initData() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +41,20 @@ class _BaozhangPageState extends State<BaozhangPage> {
               Center(
                 child: MyText(
                   '我们的保障',
-                  size: 46,
+                  size: 36,
                   color: Colors.white,
                   isBold: true,
                 ),
               ),
+              SizedBox(height: 20),
               Image.asset(
                 'assets/img/ic_launcher.png',
-                width: double.infinity,
-                fit: BoxFit.cover,
+                width: 70,
+                height: 70,
+                fit: BoxFit.scaleDown,
               ),
               Transform.translate(
-                offset: Offset(0, -56),
+                offset: Offset(0, 56),
                 child: MyListView(
                   isShuaxin: false,
                   itemCount: 4,
@@ -77,7 +70,8 @@ class _BaozhangPageState extends State<BaozhangPage> {
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             color: Colors.white,
-                            padding: EdgeInsets.only(left: 18, right: 18, bottom: 24, top: 48),
+                            padding: EdgeInsets.only(
+                                left: 18, right: 18, bottom: 24, top: 48),
                             alignment: Alignment.center,
                             child: [
                               MyText(
@@ -90,9 +84,12 @@ class _BaozhangPageState extends State<BaozhangPage> {
                                 size: 15,
                                 isOverflow: false,
                                 children: [
-                                  MyText.ts('2216450776@qq.com', color: Color(0xFFF06E6E)),
-                                  MyText.ts('， 工作人员收到信息审核无误后会按反馈数量以现金或其他等价物质赔付给你!咨询热线:'),
-                                  MyText.ts('13268680202', color: Color(0xFFF06E6E)),
+                                  MyText.ts('2216450776@qq.com',
+                                      color: Color(0xFFF06E6E)),
+                                  MyText.ts(
+                                      '， 工作人员收到信息审核无误后会按反馈数量以现金或其他等价物质赔付给你!咨询热线:'),
+                                  MyText.ts('13268680202',
+                                      color: Color(0xFFF06E6E)),
                                 ],
                               ),
                               MyText(
@@ -123,7 +120,8 @@ class _BaozhangPageState extends State<BaozhangPage> {
                           child: Container(
                             transform: Matrix4.translationValues(0, -13, 0),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+                              borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(15)),
                               gradient: LinearGradient(
                                 colors: [
                                   Color(0xFFFED049),
@@ -131,8 +129,10 @@ class _BaozhangPageState extends State<BaozhangPage> {
                                 ],
                               ),
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                            child: MyText(['承诺内容', '反馈流程', '保障范围', '特别提醒'][i], size: 18, color: Colors.white),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 10),
+                            child: MyText(['承诺内容', '反馈流程', '保障范围', '特别提醒'][i],
+                                size: 18, color: Colors.white),
                           ),
                         ),
                       ],
@@ -141,17 +141,6 @@ class _BaozhangPageState extends State<BaozhangPage> {
                 ),
               ),
             ],
-          ),
-          AnimatedSwitchBuilder(
-            value: data,
-            errorOnTap: (){},
-            initialState: Center(
-              child: Container(
-                color: Colors.white,
-                child: buildLoad(),
-              ),
-            ),
-            objectBuilder: (v) => SizedBox(),
           ),
           buildTitle(context, title: '', widgetColor: Colors.white),
         ],
