@@ -34,7 +34,30 @@ class _ChengjiaoPageState extends State<ChengjiaoPage> {
     await Request.get(
       '/api/Building/Hot',
       data: {"PageIndex": page},
-      catchError: (v) => renqibangDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成3条默认数据
+        List<Map<String, dynamic>> defaultBuildings = [
+          {
+            'buildingName': '热门楼盘1',
+            'images': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=热门1',
+            'price': '待定',
+            'areaName': '区域1'
+          },
+          {
+            'buildingName': '热门楼盘2',
+            'images': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=热门2',
+            'price': '25000元/㎡',
+            'areaName': '区域2'
+          },
+          {
+            'buildingName': '热门楼盘3',
+            'images': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=热门3',
+            'price': '30000元/㎡',
+            'areaName': '区域3'
+          },
+        ];
+        renqibangDm.addList(defaultBuildings, isRef, defaultBuildings.length);
+      },
       success: (v) => renqibangDm.addList(v['data'], isRef, v['total']),
     );
     setState(() {});

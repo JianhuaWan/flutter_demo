@@ -18,8 +18,8 @@ class UpappWidget extends StatefulWidget {
   final String banben;
   final String pgkVer;
 
-  const UpappWidget(this.content, this.url, this.banben, this.pgkVer, {Key?
-  key})
+  const UpappWidget(this.content, this.url, this.banben, this.pgkVer,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -34,10 +34,17 @@ class _UpappWidgetState extends State<UpappWidget> {
 
   /// 下载最新apk包
   Future<void> _executeDownload(BuildContext context, url) async {
-    pd = ProgressDialog(context: context);
-    pd.show(max: 100, msg: 'File Downloading...');
-    final path = await _apkLocalPath;
     Dio dio = new Dio();
+    pd = ProgressDialog(context: context);
+    pd.show(
+        max: 100,
+        msg: '正在下载...',
+        progressBgColor: Colors.transparent,
+        cancel: Cancel(cancelClicked: () {
+          dio.close();
+        }));
+
+    final path = await _apkLocalPath;
     await dio.download(url, path + '/' + apkName,
         onReceiveProgress: (received, total) async {
       if (total != -1) {
@@ -49,8 +56,9 @@ class _UpappWidgetState extends State<UpappWidget> {
             value: (currentProgress * 100).toInt(),
             msg: "正在下载...",
           );
+          flog(currentProgress);
         });
-        if (currentProgress == 1.0) {
+        if (currentProgress == "100%") {
           pd.close();
           if (await Permission.storage.request().isGranted) {
             _installApk();
