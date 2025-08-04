@@ -391,7 +391,7 @@ class TuijianLoupan extends StatefulWidget {
 }
 
 class _TuijianLoupanState extends State<TuijianLoupan> {
-  late int index;
+  late int index = -1;
 
   @override
   void initState() {

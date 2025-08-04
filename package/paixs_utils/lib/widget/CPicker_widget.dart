@@ -27,8 +27,7 @@ class CPickerWidget extends StatefulWidget {
     required this.onSelectedItemChanged,
     required List<Widget> children,
     bool looping = false,
-  })  : assert(children != null),
-        assert(diameterRatio != null),
+  })  : assert(diameterRatio != null),
         assert(diameterRatio > 0.0,
             RenderListWheelViewport.diameterRatioZeroMessage),
         assert(magnification > 0),
@@ -250,7 +249,7 @@ class _CupertinoPickerState extends State<CPickerWidget> {
         children: <Widget>[
           Positioned.fill(
             child: _CupertinoPickerSemantics(
-              scrollController: widget.scrollController ?? _controller!,
+              scrollController: widget.scrollController ?? _controller,
               child: ListWheelScrollView.useDelegate(
                 controller: widget.scrollController ?? _controller,
                 physics: const FixedExtentScrollPhysics(),
@@ -292,12 +291,11 @@ class _CupertinoPickerSemantics extends SingleChildRenderObjectWidget {
     required this.scrollController,
   }) : super(key: key, child: child);
 
-  final FixedExtentScrollController scrollController;
+  final FixedExtentScrollController? scrollController;
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderCupertinoPickerSemantics(
-          scrollController, Directionality.of(context));
+      _RenderCupertinoPickerSemantics(scrollController, Directionality.of(context));
 
   @override
   void updateRenderObject(BuildContext context,
@@ -310,21 +308,21 @@ class _CupertinoPickerSemantics extends SingleChildRenderObjectWidget {
 
 class _RenderCupertinoPickerSemantics extends RenderProxyBox {
   _RenderCupertinoPickerSemantics(
-      FixedExtentScrollController controller, this._textDirection) {
-    this.controller = controller;
+      FixedExtentScrollController? controller, this._textDirection)
+      : _controller = controller ?? FixedExtentScrollController() {
+    _controller.addListener(_handleScrollUpdate);
+    _currentIndex = _controller.initialItem ?? 0;
   }
 
   FixedExtentScrollController get controller => _controller;
   late FixedExtentScrollController _controller;
 
-  set controller(FixedExtentScrollController value) {
+  set controller(FixedExtentScrollController? value) {
     if (value == _controller) return;
-    if (_controller != null)
-      _controller.removeListener(_handleScrollUpdate);
-    else
-      _currentIndex = value.initialItem ?? 0;
-    value.addListener(_handleScrollUpdate);
-    _controller = value;
+    _controller.removeListener(_handleScrollUpdate);
+    _controller = value ?? FixedExtentScrollController();
+    _controller.addListener(_handleScrollUpdate);
+    _currentIndex = _controller.initialItem ?? 0;
   }
 
   TextDirection get textDirection => _textDirection;
@@ -339,17 +337,18 @@ class _RenderCupertinoPickerSemantics extends RenderProxyBox {
   int _currentIndex = 0;
 
   void _handleIncrease() {
-    controller.jumpToItem(_currentIndex + 1);
+    _controller.jumpToItem(_currentIndex + 1);
   }
 
   void _handleDecrease() {
-    if (_currentIndex == 0) return;
-    controller.jumpToItem(_currentIndex - 1);
+    if (_currentIndex > 0) {
+      _controller.jumpToItem(_currentIndex - 1);
+    }
   }
 
   void _handleScrollUpdate() {
-    if (controller.selectedItem == _currentIndex) return;
-    _currentIndex = controller.selectedItem;
+    if (_controller.selectedItem == _currentIndex) return;
+    _currentIndex = _controller.selectedItem;
     markNeedsSemanticsUpdate();
   }
 

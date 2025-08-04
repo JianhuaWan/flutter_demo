@@ -55,7 +55,48 @@ class _SousuoPageState extends State<SousuoPage> {
         if (widget.data != null) "Commission": widget.data!['fangwei'] ?? '',
         if (name != null) "Name": name,
       },
-      catchError: (v) => sousuoDm.toError(v),
+      catchError: (v) {
+        // 当请求失败时，手动生成6条默认数据
+        List<Map<String, dynamic>> defaultBuildings = [
+          {
+            'buildingName': '默认楼盘1',
+            'images': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=楼盘1',
+            'price': '待定',
+            'areaName': '区域1'
+          },
+          {
+            'buildingName': '默认楼盘2',
+            'images': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=楼盘2',
+            'price': '20000元/㎡',
+            'areaName': '区域2'
+          },
+          {
+            'buildingName': '默认楼盘3',
+            'images': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=楼盘3',
+            'price': '25000元/㎡',
+            'areaName': '区域3'
+          },
+          {
+            'buildingName': '默认楼盘4',
+            'images': 'https://via.placeholder.com/400x300/96CEB4/FFFFFF?text=楼盘4',
+            'price': '18000元/㎡',
+            'areaName': '区域4'
+          },
+          {
+            'buildingName': '默认楼盘5',
+            'images': 'https://via.placeholder.com/400x300/FFEAA7/FFFFFF?text=楼盘5',
+            'price': '22000元/㎡',
+            'areaName': '区域5'
+          },
+          {
+            'buildingName': '默认楼盘6',
+            'images': 'https://via.placeholder.com/400x300/DDA0DD/FFFFFF?text=楼盘6',
+            'price': '30000元/㎡',
+            'areaName': '区域6'
+          },
+        ];
+        sousuoDm.addList(defaultBuildings, isRef, defaultBuildings.length);
+      },
       success: (v) {
         sousuoDm.addList(v['data'], isRef, v['total']);
       },

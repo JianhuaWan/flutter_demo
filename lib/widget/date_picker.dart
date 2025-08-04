@@ -36,9 +36,9 @@ class DatePicker {
       context,
       _DatePickerRoute(
         showTitleActions: showTitleActions,
-        onChanged: onChanged!,
-        onConfirm: onConfirm!,
-        onCancel: onCancel!,
+        onChanged: onChanged,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -71,9 +71,9 @@ class DatePicker {
       context,
       _DatePickerRoute(
         showTitleActions: showTitleActions,
-        onChanged: onChanged!,
-        onConfirm: onConfirm!,
-        onCancel: onCancel!,
+        onChanged: onChanged,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -104,9 +104,9 @@ class DatePicker {
       context,
       _DatePickerRoute(
         showTitleActions: showTitleActions,
-        onChanged: onChanged!,
-        onConfirm: onConfirm!,
-        onCancel: onCancel!,
+        onChanged: onChanged,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -138,9 +138,9 @@ class DatePicker {
       context,
       _DatePickerRoute(
         showTitleActions: showTitleActions,
-        onChanged: onChanged!,
-        onConfirm: onConfirm!,
-        onCancel: onCancel!,
+        onChanged: onChanged,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -172,9 +172,9 @@ class DatePicker {
       context,
       _DatePickerRoute(
         showTitleActions: showTitleActions,
-        onChanged: onChanged!,
-        onConfirm: onConfirm!,
-        onCancel: onCancel!,
+        onChanged: onChanged,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -243,8 +243,8 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
           child: GestureDetector(
             onTap: () {},
             child: _DatePickerComponent(
-              onChanged: onChanged!,
-              locale: this.locale!,
+              onChanged: onChanged,
+              locale: this.locale,
               route: this,
               pickerModel: pickerModel,
             ),
