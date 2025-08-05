@@ -104,43 +104,6 @@ Future push(BuildContext context,
   }
 }
 
-Future toPage(Widget page, {
-  bool isMove = true,
-  bool isMoveBtm = false,
-  bool isNoClose = true,
-  bool isSlideBack = true,
-  bool isDelay = true,
-  int duration = 400,
-  bool opaque = false,
-}) async {
-  if (isNoClose) {
-    return Navigator.push(
-      context!,
-      CustomRoute(
-        isSlideBack ? page : WillPopScope(
-            onWillPop: () async => await Future.value(false), child: page),
-        opaque: opaque,
-        isMove: isMove,
-        isMoveBtm: isMoveBtm,
-        duration: Duration(milliseconds: duration),
-      ),
-    );
-  } else {
-    return Navigator.pushAndRemoveUntil(
-      context!,
-      CustomRoute(
-        isSlideBack ? page : WillPopScope(
-            onWillPop: () async => await Future.value(false), child: page),
-        opaque: opaque,
-        isMove: isMove,
-        isMoveBtm: isMoveBtm,
-        duration: Duration(milliseconds: duration),
-      ),
-          (v) => v == null,
-    );
-  }
-}
-
 /// 调起拨号页
 void launchTelURL(phone) async {
   String url = 'tel:' + phone;

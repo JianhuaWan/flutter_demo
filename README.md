@@ -23,3 +23,13 @@ samples, guidance on mobile development, and a full API reference.
 
 ## 运行环境
 flutter 3.24.5
+
+## demo 能力说明
+1. 登录/注册
+2. 闪屏页/隐私 协议
+3. 主页/详情页/列表页/搜索页/活动页/设置页
+4. app更新
+5. 滑动布局/懒加载/下拉刷新/上拉加载
+6. 权限检测
+=========================================
+7. 常用组件(dio/flutter_swiper_null_safety/flutter_svg/flutter_staggered_grid_view/flutter_swiper_null_safety/flutter_svg/flutter_staggered_grid_view/flutter_web)

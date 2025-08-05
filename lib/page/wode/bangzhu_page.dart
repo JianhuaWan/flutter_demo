@@ -64,7 +64,16 @@ class _BangzhuItemState extends State<BangzhuItem> with AutomaticKeepAliveClient
     await Request.get(
       '/api/Information/GetPageList',
       data: {"type": widget.mKey, "PageIndex": page},
-      catchError: (v) => bangzhuItemDm.toError(v),
+      catchError: (v) {
+        // 请求失败时生成4条模拟数据
+        final mockData = List.generate(4, (index) {
+          return {
+            'title': '常见问题${index + 1}',
+            'content': '这是第${index + 1}个常见问题的详细内容，用于在请求失败时显示。',
+          };
+        });
+        bangzhuItemDm.addList(mockData, isRef, mockData.length);
+      },
       success: (v) {
         bangzhuItemDm.addList(v['data'], isRef, v['total']);
       },
@@ -103,52 +112,6 @@ class _BangzhuItemState extends State<BangzhuItem> with AutomaticKeepAliveClient
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Divider(),
-                        // Html(data: list[i]['content']),
-                        // Divider(),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //     WidgetTap(
-                        //       isElastic: true,
-                        //       onTap: () async {
-                        //         await Future.delayed(Duration(milliseconds: 500));
-                        //         showToast('已解决');
-                        //       },
-                        //       child: Container(
-                        //         padding: EdgeInsets.symmetric(horizontal: 33, vertical: 9),
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(56),
-                        //           color: Theme.of(context).primaryColor,
-                        //         ),
-                        //         child: MyText(
-                        //           '已解决',
-                        //           color: Colors.white,
-                        //           textAlign: TextAlign.center,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     WidgetTap(
-                        //       isElastic: true,
-                        //       onTap: () async {
-                        //         await Future.delayed(Duration(milliseconds: 500));
-                        //         showToast('未解决');
-                        //       },
-                        //       child: Container(
-                        //         padding: EdgeInsets.symmetric(horizontal: 33, vertical: 9),
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(56),
-                        //           color: Color(0xFFE8E8E8),
-                        //         ),
-                        //         child: MyText(
-                        //           '未解决',
-                        //           color: Color(0x80666666),
-                        //           textAlign: TextAlign.center,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // SizedBox(height: 15),
                       ],
                     ),
                   ),

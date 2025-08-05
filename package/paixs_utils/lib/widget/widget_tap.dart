@@ -84,7 +84,10 @@ class _WidgetTapState extends State<WidgetTap> with TickerProviderStateMixin {
               animaStart(false);
               if (widget.isRipple) animac1?.forward(from: 0.0);
               if (widget.isElastic || widget.isRipple) await Future.delayed(widget.jumpTime);
-              widget.onTap!();
+              // 修复：添加空值检查
+              if (widget.onTap != null) {
+                widget.onTap!();
+              }
             },
           ),
           AnimatedBuilder(
@@ -131,6 +134,7 @@ class _WidgetTapState extends State<WidgetTap> with TickerProviderStateMixin {
           animaStart(false);
           if (widget.isRipple) animac1?.forward(from: 0.0);
           if (widget.isElastic || widget.isRipple) await Future.delayed(widget.jumpTime);
+          // 修复：添加空值检查
           if (widget.onTap != null) {
             widget.onTap!();
           }

@@ -24,12 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   paixs_utils:
     path: package/paixs_utils
-  provider: ^5.0.0
+  provider: ^6.1.2
   package_info_plus: 8.3.0
   open_file: ^3.0.3
   sn_progress_dialog: ^1.2.0
@@ -41,10 +40,9 @@ dependencies:
 
   # 加密包，如sha1
   crypto: ^3.0.1
-  
+  flutter_html: ^3.0.0-beta.2
   # 设备信息
   device_info: 2.0.1
-
 
   # 显示二维码
   qr_flutter: 4.0.0
