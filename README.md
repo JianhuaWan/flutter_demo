@@ -31,5 +31,4 @@ flutter 3.24.5
 4. app更新
 5. 滑动布局/懒加载/下拉刷新/上拉加载
 6. 权限检测
-=========================================
 7. 常用组件(dio/flutter_swiper_null_safety/flutter_svg/flutter_staggered_grid_view/flutter_swiper_null_safety/flutter_svg/flutter_staggered_grid_view/flutter_web)
