@@ -44,7 +44,7 @@ class WrapperImage extends StatelessWidget {
       if (urlBuilder == null) {
         if (url == null || url == '')
           return Image.asset(
-            'assets/img/no_loupan_cover.png',
+            'assets/img/no_property_cover.png',
             width: width,
             height: height,
             fit: fit,
@@ -84,7 +84,7 @@ class WrapperImage extends StatelessWidget {
       } else {
         if (urlBuilder?.call() == null || urlBuilder?.call() == '')
           return Image.asset(
-            'assets/img/no_loupan_cover.png',
+            'assets/img/no_property_cover.png',
             width: width,
             height: height,
             fit: fit,
@@ -124,7 +124,7 @@ class WrapperImage extends StatelessWidget {
       }
     } catch (e) {
       return Image.asset(
-        'assets/img/no_loupan_cover.png',
+        'assets/img/no_property_cover.png',
         width: width,
         height: height,
         fit: fit,

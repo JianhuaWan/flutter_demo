@@ -67,7 +67,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
               child: Stack(
                 children: [
                   Image.asset(
-                    'assets/img/yaoqing_hongbao.png',
+                    'assets/img/invitation_redpack.png',
                   ),
                   Positioned.fill(
                     child: Padding(
@@ -79,7 +79,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
                               alignment: Alignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/img/yaoqing_yuan.png',
+                                  'assets/img/invitation_circle.png',
                                   height: 104,
                                 ),
                                 ClipOval(
@@ -118,7 +118,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                 alignment: Alignment.center,
                                 children: [
                                   Image.asset(
-                                    'assets/img/yaoqing_btn.png',
+                                    'assets/img/invitation_button.png',
                                     height: 67,
                                   ),
                                   Padding(
@@ -143,7 +143,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
           ),
           Positioned.fill(
             child: Image.asset(
-              'assets/img/yaoqing_bg.png',
+              'assets/img/invitation_background.png',
               fit: BoxFit.fill,
             ),
           ),
@@ -165,7 +165,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
                   child: Stack(
                     children: [
                       Image.asset(
-                        'assets/img/yaoqing_hongbao.png',
+                        'assets/img/invitation_redpack.png',
                       ),
                       Positioned.fill(
                         child: Padding(
@@ -177,7 +177,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                   alignment: Alignment.center,
                                   children: [
                                     Image.asset(
-                                      'assets/img/yaoqing_yuan.png',
+                                      'assets/img/invitation_circle.png',
                                       height: 87,
                                     ),
                                     ClipOval(
@@ -213,7 +213,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                   alignment: Alignment.center,
                                   children: [
                                     Image.asset(
-                                      'assets/img/yaoqing_btn.png',
+                                      'assets/img/invitation_button.png',
                                       height: 67,
                                     ),
                                     Padding(
@@ -286,10 +286,10 @@ class _YaoqingPageState extends State<YaoqingPage> {
                               SizedBox(height: 16),
                               Image.asset(
                                 [
-                                  'assets/img/yaoqing_qq.png',
-                                  'assets/img/yaoqing_qq.png',
-                                  'assets/img/yaoqing_qq.png',
-                                  'assets/img/yaoqing_qq.png',
+                                  'assets/img/invitation_qq.png',
+                                  'assets/img/invitation_qq.png',
+                                  'assets/img/invitation_qq.png',
+                                  'assets/img/invitation_qq.png',
                                 ][i],
                                 width: 42,
                                 height: 42,

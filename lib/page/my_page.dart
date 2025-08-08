@@ -33,38 +33,38 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
   var caidanList1 = [
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
   ];
 
   var caidanList2 = [
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
   ];
@@ -137,7 +137,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: Image.asset(
-            'assets/img/5ee39872586de@2x@2x.png',
+            'assets/img/default_avatar.png',
             width: double.infinity,
             fit: BoxFit.cover,
           ),
@@ -252,7 +252,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                         padding:
                             EdgeInsets.symmetric(vertical: 17, horizontal: 8),
                         child: Image.asset(
-                          'assets/img/wode_shezhi.png',
+                          'assets/img/my_settings.png',
                           width: 15,
                           height: 15,
                         ),
@@ -278,7 +278,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                     child: Row(
                       children: [
                         Image.asset(
-                          'assets/img/wode_tuiyou.png',
+                          'assets/img/my_recommendations.png',
                           width: 14,
                           height: 14,
                         ),

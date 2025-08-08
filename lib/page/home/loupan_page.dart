@@ -390,9 +390,9 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                               SizedBox(height: 16),
                                               Image.asset(
                                                 [
-                                                  'assets/img/yaoqing_qq.png',
-                                                  'assets/img/yaoqing_qq.png',
-                                                  'assets/img/yaoqing_qq.png',
+                                                  'assets/img/invitation_qq.png',
+                                                  'assets/img/invitation_qq.png',
+                                                  'assets/img/invitation_qq.png',
                                                 ][i],
                                                 width: 42,
                                                 height: 42,
@@ -471,8 +471,8 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     children: [
                       Image.asset(
                         loupanDm.object['isFavorite']
-                            ? 'assets/img/no_shoucang.png'
-                            : 'assets/img/loupan_shoucang.png',
+                            ? 'assets/img/no_collection.png'
+                            : 'assets/img/property_collection.png',
                         width: 22,
                         height: 22,
                       ),
@@ -503,7 +503,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     children: [
                       Icon(Icons.phone_in_talk_outlined),
                       // Image.asset(
-                      //   'assets/img/loupan_tuijian.png',
+                      //   'assets/img/property_recommend.png',
                       //   width: 22,
                       //   height: 22,
                       // ),
@@ -1411,7 +1411,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/img/home_chakan.png',
+                  'assets/img/home_view.png',
                   width: 16,
                   height: 16,
                 ),
@@ -1423,7 +1423,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                 ),
                 SizedBox(width: 28),
                 Image.asset(
-                  'assets/img/home_fenxiang.png',
+                  'assets/img/home_share.png',
                   width: 16,
                   height: 16,
                 ),

@@ -73,7 +73,7 @@ WidgetTap buildBackBtn([color, isPadd = true]) {
     child: Padding(
       padding: EdgeInsets.all(isPadd ? 12 : 0),
       child: Image.asset(
-        'assets/img/fanhui.png',
+        'assets/img/back.png',
         height: 19,
         width: 11,
         color: color,

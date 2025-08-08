@@ -69,20 +69,20 @@ class _BnbWidgetState extends State<BnbWidget> {
                       Image.asset(
                         [
                           [
-                            'assets/img/home0.png',
-                            'assets/img/home1.png',
+                            'assets/img/home_inactive.png',
+                            'assets/img/home_active.png',
                           ][v == 0 ? 0 : 1],
                           [
-                            'assets/img/home0.png',
-                            'assets/img/home1.png',
+                            'assets/img/home_inactive.png',
+                            'assets/img/home_active.png',
                           ][v == 1 ? 0 : 1],
                           [
-                            'assets/img/home0.png',
-                            'assets/img/home1.png',
+                            'assets/img/home_inactive.png',
+                            'assets/img/home_active.png',
                           ][v == 2 ? 0 : 1],
                           [
-                            'assets/img/home0.png',
-                            'assets/img/home1.png',
+                            'assets/img/home_inactive.png',
+                            'assets/img/home_active.png',
                           ][v == 3 ? 0 : 1],
                         ][_index],
                         width: 24,

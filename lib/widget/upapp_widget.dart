@@ -113,7 +113,7 @@ class _UpappWidgetState extends State<UpappWidget> {
                           Transform.translate(
                             offset: Offset(0, -2),
                             child: Image.asset(
-                              'assets/img/upapp.png',
+                              'assets/img/upgrade_app.png',
                               fit: BoxFit.cover,
                             ),
                           ),

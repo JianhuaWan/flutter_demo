@@ -1163,7 +1163,7 @@ class WeChatAndQqLoginWidget extends StatelessWidget {
                   // handleQqLogin();
                 },
                 child: Image.asset(
-                  'assets/img/qq.png',
+                  'assets/img/qq_logo.png',
                   width: 34,
                   height: 34,
                 ),
@@ -1174,7 +1174,7 @@ class WeChatAndQqLoginWidget extends StatelessWidget {
                 onTap: () async {
                 },
                 child: Image.asset(
-                  'assets/img/weibo.png',
+                  'assets/img/weibo_logo.png',
                   width: 34,
                   height: 34,
                 ),

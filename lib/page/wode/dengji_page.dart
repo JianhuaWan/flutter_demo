@@ -48,7 +48,7 @@ class _DengjiPageState extends State<DengjiPage> with NoSlidingReturn {
               Row(
                 children: [
                   Image.asset(
-                    'assets/img/dengji_1.png',
+                    'assets/img/level_1.png',
                     width: 25,
                     height: 28,
                   ),
@@ -176,7 +176,7 @@ class _DengjiPageState extends State<DengjiPage> with NoSlidingReturn {
               Row(
                 children: [
                   Image.asset(
-                    'assets/img/dengji_1.png',
+                    'assets/img/level_1.png',
                     width: 25,
                     height: 28,
                   ),
@@ -302,7 +302,7 @@ class _DengjiPageState extends State<DengjiPage> with NoSlidingReturn {
               Row(
                 children: [
                   Image.asset(
-                    'assets/img/dengji_1.png',
+                    'assets/img/level_1.png',
                     width: 25,
                     height: 28,
                   ),
@@ -428,7 +428,7 @@ class _DengjiPageState extends State<DengjiPage> with NoSlidingReturn {
               Row(
                 children: [
                   Image.asset(
-                    'assets/img/dengji_1.png',
+                    'assets/img/level_1.png',
                     width: 25,
                     height: 28,
                   ),

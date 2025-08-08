@@ -139,7 +139,7 @@ class _FlashPageState extends State<FlashPage> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/img/baozhang.png',
+              'assets/img/guarantee.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -157,7 +157,7 @@ class _FlashPageState extends State<FlashPage> {
                   delayed: 500,
                   curve: ElasticOutCurve(1),
                   child: Image.asset(
-                    'assets/img/ic_launcher.png',
+                    'assets/img/app_icon.png',
                     width: 106,
                     height: 106,
                   ),

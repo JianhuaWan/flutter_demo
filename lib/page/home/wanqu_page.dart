@@ -132,7 +132,7 @@ class _WanquPageState extends State<WanquPage> {
                               alignment: Alignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/img/home_remen.png',
+                                  'assets/img/home_hot.png',
                                   width: 48,
                                   height: 24,
                                   color: Colors.red,

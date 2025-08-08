@@ -65,46 +65,46 @@ class CaidanWidget extends StatefulWidget {
 class _CaidanWidgetState extends State<CaidanWidget> {
   var caidanList1 = [
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
   ];
 
   var caidanList2 = [
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
   ];
@@ -230,7 +230,7 @@ class ZixunWidget extends StatelessWidget {
                 left: 0,
                 top: 0,
                 child: Image.asset(
-                  'assets/img/home_remen.png',
+                  'assets/img/home_hot.png',
                   width: 48,
                   height: 24,
                 ),
@@ -704,7 +704,7 @@ class _LunboWidgetState extends State<LunboWidget> with TickerProviderStateMixin
                           );
                         },
                         child: Image.asset(
-                          'assets/img/loupan_vr.png',
+                          'assets/img/property_vr.png',
                           width: 82,
                           height: 82,
                         ),
@@ -829,7 +829,7 @@ class LoupanItem extends StatelessWidget {
                         Row(
                           children: [
                             Image.asset(
-                              'assets/img/home_chakan.png',
+                              'assets/img/home_view.png',
                               width: 12,
                               height: 12,
                             ),
@@ -841,7 +841,7 @@ class LoupanItem extends StatelessWidget {
                             ),
                             SizedBox(width: 15),
                             Image.asset(
-                              'assets/img/home_fenxiang.png',
+                              'assets/img/home_share.png',
                               width: 12,
                               height: 12,
                             ),

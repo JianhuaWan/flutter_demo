@@ -90,7 +90,7 @@ class _GuanyuPageState extends State<GuanyuPage> {
         child: Column(
           children: [
             Image.asset(
-              'assets/img/ic_launcher.png',
+              'assets/img/app_icon.png',
               width: 70,
               height: 70,
             ),

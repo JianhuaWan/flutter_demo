@@ -26,7 +26,7 @@ class _BaozhangPageState extends State<BaozhangPage> {
       body: Stack(
         children: [
           Image.asset(
-            'assets/img/baozhang.png',
+            'assets/img/guarantee.png',
             width: double.infinity,
             fit: BoxFit.cover,
             alignment: Alignment.topCenter,
@@ -46,7 +46,7 @@ class _BaozhangPageState extends State<BaozhangPage> {
               ),
               SizedBox(height: 20),
               Image.asset(
-                'assets/img/ic_launcher.png',
+                'assets/img/app_icon.png',
                 width: 70,
                 height: 70,
                 fit: BoxFit.scaleDown,
@@ -108,7 +108,7 @@ class _BaozhangPageState extends State<BaozhangPage> {
                           child: Container(
                             transform: Matrix4.translationValues(0, -13, 0),
                             child: Image.asset(
-                              'assets/img/bz_img2.png',
+                              'assets/img/bz_image2.png',
                               height: 13,
                             ),
                           ),

@@ -21,23 +21,23 @@ class ShangxueyuanPage extends StatefulWidget {
 class _ShangxueyuanPageState extends State<ShangxueyuanPage> {
   var caidanList = [
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
     {
-      'img': 'assets/img/yaoqing_qq.png',
+      'img': 'assets/img/invitation_qq.png',
       'name': 'test',
     },
   ];

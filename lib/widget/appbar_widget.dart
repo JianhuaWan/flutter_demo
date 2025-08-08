@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/page/home/city_selecto.dart';
+import 'package:flutter_app/page/home/city_selector.dart';
 import 'package:flutter_app/page/home/sousuo_page.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';
@@ -52,7 +52,7 @@ class AppbarWidget extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: Image.asset(
-                          'assets/img/home_dingwei.png',
+                          'assets/img/home_location.png',
                           width: 13,
                           height: 13,
                         ),
@@ -76,7 +76,7 @@ class AppbarWidget extends StatelessWidget {
               ),
               SizedBox(width: 16),
               Image.asset(
-                'assets/img/home_sousuo.png',
+                'assets/img/home_search.png',
                 width: 13,
                 height: 13,
               ),

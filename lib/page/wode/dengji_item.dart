@@ -44,9 +44,9 @@ class _DengjiItemPageState extends State<DengjiItemPage> with AutomaticKeepAlive
             children: [
               SizedBox(height: 4),
               [
-                Image.asset('assets/img/dengji_01.png'),
-                Image.asset('assets/img/dengji_01.png'),
-                Image.asset('assets/img/dengji_01.png'),
+                Image.asset('assets/img/level_01.png'),
+                Image.asset('assets/img/level_01.png'),
+                Image.asset('assets/img/level_01.png'),
               ][int.parse(widget.userLevel!) - 1],
             ],
           );

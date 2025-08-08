@@ -492,7 +492,7 @@ class _HomePageState extends State<HomePage>
                                       alignment: Alignment.center,
                                       children: [
                                         Image.asset(
-                                          'assets/img/home_remen.png',
+                                          'assets/img/home_hot.png',
                                           width: 48,
                                           height: 24,
                                           color: Colors.red,
@@ -618,7 +618,7 @@ class _ShareAppUiState extends State<ShareAppUi> with TickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/img/share_app.png',
+                    'assets/img/share_application.png',
                   ),
                   WidgetTap(
                     isElastic: true,
@@ -631,7 +631,7 @@ class _ShareAppUiState extends State<ShareAppUi> with TickerProviderStateMixin {
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          'assets/img/share_app_btn.png',
+                          'assets/img/share_button.png',
                           height: 37,
                         ),
                         MyText(
@@ -648,7 +648,7 @@ class _ShareAppUiState extends State<ShareAppUi> with TickerProviderStateMixin {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Image.asset(
-                        'assets/img/share_app_close.png',
+                        'assets/img/share_close.png',
                         width: 26,
                         height: 26,
                       ),
