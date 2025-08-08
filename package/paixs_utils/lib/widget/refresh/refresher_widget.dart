@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../util/utils.dart';
-import '../widget/views.dart';
+import '../../util/utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../layout/views.dart';
 
 class RefresherWidget extends StatefulWidget {
   final Widget child;

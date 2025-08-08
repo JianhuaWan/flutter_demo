@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/refresher_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/refresh/refresher_widget.dart';
+
+import '../form/mytext.dart';
+import '../layout/views.dart';
 
 ///列表试图类型
 enum ListViewType {

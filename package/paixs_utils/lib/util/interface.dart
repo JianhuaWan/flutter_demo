@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:paixs_utils/config/net/pgyer_api.dart';
 import '../util/utils.dart';
-import '../widget/views.dart';
 import '../model/data_model.dart';
 import '../util/textedit_util.dart';
+import '../widget/layout/views.dart';
 
 class ValueModel {
   final String text;

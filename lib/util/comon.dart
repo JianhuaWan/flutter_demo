@@ -8,7 +8,7 @@ import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/widget/upapp_widget.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/route.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
 
 import 'http.dart';
 

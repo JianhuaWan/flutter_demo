@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paixs_utils/model/data_model.dart';
-import 'package:paixs_utils/widget/anima_switch_widget.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
+import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
 
 class DengjiItemPage extends StatefulWidget {
   final String? userLevel;

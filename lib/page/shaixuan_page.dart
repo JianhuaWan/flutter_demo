@@ -1,11 +1,10 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/refresh/mylistview.dart';
 
 ///筛选
 class HomeSelectoWidget extends StatefulWidget {

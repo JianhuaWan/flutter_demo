@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/upapp_widget.dart';
 
@@ -18,13 +17,13 @@ import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/config/net/api.dart';
 import 'package:paixs_utils/config/net/pgyer_api.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/image.dart';
-import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/route.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/media/image.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:paixs_utils/widget/refresh/mylistview.dart';
 import 'package:provider/provider.dart';
 
 import '../login_page.dart';

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/phone_country_code_data.dart';
@@ -9,13 +7,13 @@ import 'package:flutter_app/view/views.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/anima_switch_widget.dart';
-import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/route.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:paixs_utils/widget/refresh/mylistview.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

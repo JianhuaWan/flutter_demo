@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'dart:convert';
 
-import 'package:paixs_utils/widget/CPicker_widget.dart';
+import 'package:paixs_utils/widget/media/CPicker_widget.dart';
 
 typedef void ChangeData(Map<String, dynamic> map);
 typedef List<Widget> CreateWidgetList();

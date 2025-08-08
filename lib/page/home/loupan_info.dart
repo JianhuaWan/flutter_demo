@@ -4,9 +4,9 @@ import 'package:flutter_app/widget/tab_link_widget.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:paixs_utils/widget/refresh/mylistview.dart';
 
 class LoupanInfo extends StatefulWidget {
   final Map? data;

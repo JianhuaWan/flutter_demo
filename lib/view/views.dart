@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
 
 Widget get errorView {
   return SafeArea(

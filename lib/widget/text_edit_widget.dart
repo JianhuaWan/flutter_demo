@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
 
 class TextEditWidget extends StatefulWidget {
   final String? hint;

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/route.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
 
 const Duration _bottomSheetDuration = Duration(milliseconds: 600);
 const Duration _bottomSheetreverseDuration = Duration(milliseconds: 300);

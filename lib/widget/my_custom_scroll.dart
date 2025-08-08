@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paixs_utils/model/data_model.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/refresher_widget.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/refresh/refresher_widget.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 class MyCustomScroll extends StatefulWidget {

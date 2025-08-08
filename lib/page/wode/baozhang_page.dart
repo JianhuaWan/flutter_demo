@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paixs_utils/model/data_model.dart';
-import 'package:paixs_utils/widget/anima_switch_widget.dart';
-import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/refresh/mylistview.dart';
 
 class BaozhangPage extends StatefulWidget {
   @override

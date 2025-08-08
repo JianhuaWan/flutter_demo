@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/page/home/city_selecto.dart';
 import 'package:flutter_app/page/home/sousuo_page.dart';
 import 'package:flutter_app/provider/app_provider.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/route.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
 import 'package:provider/provider.dart';
 
 class AppbarWidget extends StatelessWidget {

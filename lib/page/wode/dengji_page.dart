@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/page/wode/dengji_item.dart';
 import 'package:flutter_app/widget/no_sliding_return.dart';
 import 'package:flutter_app/widget/tab_widget.dart';
-import 'package:paixs_utils/widget/mylistview.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/refresh/mylistview.dart';
 
 class DengjiPage extends StatefulWidget {
   @override

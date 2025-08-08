@@ -6,9 +6,9 @@ import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/route.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
 
 ///修改登录密码
 class XiugaiLogin extends StatefulWidget {

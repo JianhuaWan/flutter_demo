@@ -12,12 +12,12 @@ import 'package:flutter_app/page/home/xiaoshoubang_page.dart';
 import 'package:flutter_app/view/views.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/custom_scroll_physics.dart';
-import 'package:paixs_utils/widget/image.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/photo_widget.dart';
-import 'package:paixs_utils/widget/route.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/custom_scroll_physics.dart';
+import 'package:paixs_utils/widget/media/image.dart';
+import 'package:paixs_utils/widget/media/photo_widget.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
 
 class BigTitleWidget extends StatelessWidget {
   final String? title;

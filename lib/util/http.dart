@@ -5,7 +5,7 @@ import 'package:paixs_utils/config/net/api.dart';
 import 'package:paixs_utils/config/net/pgyer_api.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
 
 class Request {
   static Future<void> post(

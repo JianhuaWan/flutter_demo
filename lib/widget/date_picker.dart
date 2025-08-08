@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/CPicker_widget.dart';
+import 'package:paixs_utils/widget/media/CPicker_widget.dart';
 
 import 'date_picker.dart';
 

@@ -4,12 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:paixs_utils/config/net/Config.dart';
-import '../util/utils.dart';
-import '../widget/views.dart';
+import '../../util/utils.dart';
+import '../form/mytext.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'custom_scroll_physics.dart';
-import 'mytext.dart';
+
+import '../layout/custom_scroll_physics.dart';
+import '../layout/views.dart';
 
 class PhotoView extends StatefulWidget {
   final List images;

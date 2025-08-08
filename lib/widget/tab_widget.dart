@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
-import 'package:paixs_utils/widget/custom_scroll_physics.dart';
-import 'package:paixs_utils/widget/route.dart';
+import 'package:paixs_utils/widget/layout/custom_scroll_physics.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
 
 class TabWidget extends StatefulWidget {
   final List<String>? tabList;

@@ -10,11 +10,11 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:paixs_utils/config/net/Config.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/image.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
+import 'package:paixs_utils/widget/media/image.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 

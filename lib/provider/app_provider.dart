@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppProvider extends ChangeNotifier {

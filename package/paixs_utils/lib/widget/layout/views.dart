@@ -5,20 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:paixs_utils/model/data_model.dart';
-import 'package:paixs_utils/widget/anima_switch_widget.dart';
-import 'package:paixs_utils/widget/route.dart';
-import 'package:paixs_utils/widget/tween_widget.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
-import '../util/utils.dart';
-import '../widget/sheet_widget.dart';
+import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
+import 'package:paixs_utils/widget/navigation/route.dart';
+import 'package:paixs_utils/widget/animation/tween_widget.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'CPicker_widget.dart';
-import 'button.dart';
-import 'inkbtn_widget.dart';
-import 'my_classicHeader.dart' as myh;
-import 'mylistview.dart';
-import 'mytext.dart';
+import '../../util/utils.dart';
+import '../form/button.dart';
+import '../form/mytext.dart';
+import '../interaction/inkbtn_widget.dart';
+import '../interaction/widget_tap.dart';
+import '../media/CPicker_widget.dart';
+import '../refresh/my_classicHeader.dart' as myh;
+import '../refresh/mylistview.dart';
+import 'sheet_widget.dart';
 
 ///
 ///全局可用的小功能

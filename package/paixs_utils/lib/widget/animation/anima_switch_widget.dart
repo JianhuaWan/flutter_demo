@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../model/data_model.dart';
+import '../../model/data_model.dart';
+import '../layout/views.dart';
 import 'animated_switcher_widget.dart';
 import 'shimmer_widget.dart';
-import 'views.dart';
 
 class AnimatedSwitchBuilder<T> extends StatefulWidget {
   const AnimatedSwitchBuilder({

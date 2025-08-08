@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
 
 class TabLinkWidget extends StatefulWidget {
   final List<String>? headers;

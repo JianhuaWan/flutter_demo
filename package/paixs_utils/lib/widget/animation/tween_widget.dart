@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/views.dart';
+
+import '../layout/views.dart';
 
 class TweenWidget extends StatefulWidget {
   final Widget? child;

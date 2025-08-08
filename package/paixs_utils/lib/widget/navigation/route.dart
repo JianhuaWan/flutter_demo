@@ -3,12 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/animation.dart' show Curves;
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/pages.dart' as p;
+import 'package:paixs_utils/widget/layout/pages.dart' as p;
+
+import '../form/mytext.dart';
 
 ///手势宽度
 const double _kBackGestureWidth = 20.0;

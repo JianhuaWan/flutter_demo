@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/anima_switch_widget.dart';
+import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart' as pr;
 
 enum IconPosition { left, right, top, bottom }

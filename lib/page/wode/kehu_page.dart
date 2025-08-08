@@ -12,11 +12,11 @@ import 'package:flutter_app/widget/tween_widget.dart';
 import 'package:flutter_app/widget/widgets.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
-import 'package:paixs_utils/widget/anima_switch_widget.dart';
-import 'package:paixs_utils/widget/mytext.dart';
-import 'package:paixs_utils/widget/scaffold_widget.dart';
-import 'package:paixs_utils/widget/views.dart';
-import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
+import 'package:paixs_utils/widget/form/mytext.dart';
+import 'package:paixs_utils/widget/interaction/widget_tap.dart';
+import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:paixs_utils/widget/layout/views.dart';
 import 'package:provider/provider.dart';
 
 class KehuPage extends StatefulWidget {
@@ -73,12 +73,6 @@ class _KehuPageState extends State<KehuPage> with NoSlidingReturn, TickerProvide
         {'key': '7', 'value': '已签约', 'key2': zimuList[7]},
         {'key': '8', 'value': '已成交', 'key2': zimuList[8]},
         {'key': '9', 'value': '已退房', 'key2': zimuList[9]},
-        // {'key': '7', 'value': '已签约', 'key2': 'g'},
-        // {'key': '8', 'value': '已确认', 'key2': 'h'},
-        // {'key': '9', 'value': '已失败', 'key2': 'i'},
-        // {'key': '10', 'value': '未通过', 'key2': 'j'},
-        // {'key': '11', 'value': '不通过', 'key2': 'k'},
-        // {'key': '12', 'value': '待审批', 'key2': 'l'},
       ];
       tabCon = TabController(vsync: this, length: kehuUiList.length, initialIndex: widget.index);
       setState(() {});

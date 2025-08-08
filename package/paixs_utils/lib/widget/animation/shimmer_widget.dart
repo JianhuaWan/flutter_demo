@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widget/views.dart';
+import '../form/mytext.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'mytext.dart';
+import '../layout/views.dart';
+
 
 enum ShimmerType {
   loupan,
