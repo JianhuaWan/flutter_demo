@@ -82,7 +82,7 @@ class _PhotoViewState extends State<PhotoView> {
                         imageProvider: widget.isByte
                             ? MemoryImage(Uint8List.fromList(List.castFrom<dynamic, int>(widget.images[index])))
                             : CachedNetworkImageProvider(
-                                widget.isUrl ? '${widget.images[index]}' : '${widget.imgUrl ?? Config.ImgBaseUrl1}${widget.images[index]}',
+                                widget.isUrl ? '${widget.images[index]}' : '${widget.imgUrl ?? Config.BaseUrlDev}${widget.images[index]}',
                               )as ImageProvider<Object>,
                       );
                     },

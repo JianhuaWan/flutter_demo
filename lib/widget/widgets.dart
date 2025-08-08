@@ -143,18 +143,6 @@ class _CaidanWidgetState extends State<CaidanWidget> {
                   delayed: 200,
                   child: Column(
                     children: [
-                      // TweenWidget(
-                      //   isScale: true,
-                      //   value: 1,
-                      //   delayed: 100 + 50 * i,
-                      //   curve: ElasticOutCurve(1),
-                      //   time: 500,
-                      //   child: Image.asset(
-                      //     caidanList1[i]['img'],
-                      //     width: 40,
-                      //     height: 40,
-                      //   ),
-                      // ),
                       Image.asset(
                         caidanList1[i]['img']!,
                         width: 40,
@@ -199,18 +187,6 @@ class _CaidanWidgetState extends State<CaidanWidget> {
                   delayed: 300,
                   child: Column(
                     children: [
-                      // TweenWidget(
-                      //   isScale: true,
-                      //   value: 1,
-                      //   delayed: 300 + 50 * i,
-                      //   curve: ElasticOutCurve(1),
-                      //   time: 500,
-                      //   child: Image.asset(
-                      //     caidanList2[i]['img'],
-                      //     width: 40,
-                      //     height: 40,
-                      //   ),
-                      // ),
                       Image.asset(
                         caidanList2[i]['img']!,
                         width: 40,
@@ -753,39 +729,6 @@ class _LunboWidgetState extends State<LunboWidget> with TickerProviderStateMixin
               );
             }),
           ),
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: Padding(
-          //     padding: EdgeInsets.only(bottom: 29),
-          //     child: ClipRRect(
-          //       borderRadius: BorderRadius.circular(25),
-          //       child: Container(
-          //         height: 25,
-          //         color: Colors.white.withOpacity(0.9),
-          //         child: TabBar(
-          //           controller: tabCon,
-          //           indicatorSize: TabBarIndicatorSize.tab,
-          //           isScrollable: true,
-          //           indicatorColor: Theme.of(context).primaryColor,
-          //           unselectedLabelColor: Common.black,
-          //           indicator: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(56),
-          //             color: Theme.of(context).primaryColor,
-          //           ),
-          //           labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-          //           labelPadding: EdgeInsets.symmetric(horizontal: 10),
-          //           labelColor: Colors.white,
-          //           tabs: pageList.map((m) {
-          //             return Padding(
-          //               padding: EdgeInsets.only(top: 2),
-          //               child: Tab(text: m['name']),
-          //             );
-          //           }).toList(),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Positioned(
             bottom: 29,
             right: 16,

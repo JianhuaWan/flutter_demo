@@ -1891,79 +1891,6 @@ class _DianpingTanChuangState extends State<DianpingTanChuang> {
                               }
                               close(true);
                             }
-                            // if (con.text != '') {
-                            //   if (widget.type == 0) {
-                            //     Request.post(
-                            //       '/api/Comment/Create',
-                            //       data: {
-                            //         "buildingId": widget.id,
-                            //         "content": con.text,
-                            //         "tag": "优点",
-                            //       },
-                            //       isLoading: true,
-                            //       catchError: (v) => showToast(v),
-                            //       fail: (v) => showToast(v),
-                            //       success: (v) {
-                            //         Request.post(
-                            //           '/api/Comment/Create',
-                            //           data: {
-                            //             "buildingId": widget.id,
-                            //             "content": con1.text,
-                            //             "tag": "缺点",
-                            //           },
-                            //           isLoading: true,
-                            //           catchError: (v) => showToast(v),
-                            //           fail: (v) => showToast(v),
-                            //           success: (v) {
-                            //             showToast('提交成功！');
-                            //             close(true);
-                            //           },
-                            //         );
-                            //       },
-                            //     );
-                            //   } else if (widget.type == 1) {
-                            //     Request.post(
-                            //       '/api/Question/Create',
-                            //       data: {
-                            //         "buildingId": widget.id,
-                            //         "content": con.text,
-                            //         "buildingName": "string",
-                            //         "questionType": 0,
-                            //         "baseIsDelete": true,
-                            //         "level": 0,
-                            //       },
-                            //       isLoading: true,
-                            //       catchError: (v) => showToast(v),
-                            //       fail: (v) => showToast(v),
-                            //       success: (v) {
-                            //         showToast('提交成功！');
-                            //         close(true);
-                            //       },
-                            //     );
-                            //   } else {
-                            //     Request.post(
-                            //       '/api/Question/Reply',
-                            //       data: {
-                            //         "id": widget.wentiId,
-                            //         "buildingId": widget.id,
-                            //         "content": con.text,
-                            //         "buildingName": "string",
-                            //         "questionType": 0,
-                            //         "baseIsDelete": true,
-                            //         "level": 0,
-                            //       },
-                            //       isLoading: true,
-                            //       catchError: (v) => showToast(v),
-                            //       fail: (v) => showToast(v),
-                            //       success: (v) {
-                            //         showToast('提交成功！');
-                            //         close(true);
-                            //       },
-                            //     );
-                            //   }
-                            // } else {
-                            //   showToast('内容不能为空哦!');
-                            // }
                           },
                         ],
                       ),
@@ -2015,18 +1942,6 @@ class _VrVideoPageState extends State<VrVideoPage>
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      // body: Column(
-      //   children: [
-      //     Button(
-      //       onPressed: () async {
-      //         await VideoPlayer360.playVideoURL(
-      //           "https://github.com/stephangopaul/video_samples/blob/master/gb.mp4?raw=true",
-      //         );
-      //       },
-      //       child: Text("Click to play Video URL"),
-      //     ),
-      //   ],
-      // ),
       bgColor: Colors.white,
       brightness: widget.data == null
           ? flag
@@ -2057,16 +1972,6 @@ class _VrVideoPageState extends State<VrVideoPage>
             )
           : Stack(
               children: [
-                // WebView(
-                //   initialUrl: widget.url,
-                //   onProgress: (v) {
-                //     setState(() {
-                //       progress = v;
-                //     });
-                //   },
-                //   gestureNavigationEnabled: true,
-                //   javascriptMode: JavascriptMode.unrestricted,
-                // ),
                 AnimatedContainer(
                   duration: Duration(milliseconds: 250),
                   height: progress >= 100 ? 0 : 2,
@@ -2164,18 +2069,6 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
               );
             });
           });
-          // ComonUtil.isLogin(() async {
-          //   var res = await showGeneralDialog(
-          //     context: context,
-          //     barrierColor: Colors.transparent,
-          //     pageBuilder: (_, __, ___) {
-          //       return DianpingTanChuang(widget.data['id'], type: 1);
-          //     },
-          //   );
-          //   if (res != null) {
-          //     this.apiQuestionGetPageList(isRef: true);
-          //   }
-          // });
         },
         child: Container(
           height: 40,
@@ -2210,22 +2103,6 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                   .toList());
               return WidgetTap(
                 onTap: () async {
-                  // if (list[i]['replyUserName'] == null) {
-                  //   var res = await showGeneralDialog(
-                  //     context: context,
-                  //     barrierColor: Colors.transparent,
-                  //     pageBuilder: (_, __, ___) {
-                  //       return DianpingTanChuang(
-                  //         widget.data['id'],
-                  //         type: 2,
-                  //         wentiId: list[i]['id'],
-                  //       );
-                  //     },
-                  //   );
-                  //   if (res != null) {
-                  //     this.apiQuestionGetPageList(isRef: true);
-                  //   }
-                  // }
                 },
                 child: Column(
                   children: [

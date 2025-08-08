@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'dart:async';
 import 'dart:isolate';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
-import 'dart:math';
 
 class Luban {
   Luban._();
@@ -44,17 +42,6 @@ class Luban {
       results.add(_lubanCompress(_o));
     });
     return results;
-  }
-
-  static bool _parseType(String path, List<String> suffix) {
-    bool _result = false;
-    for (int i = 0; i < suffix.length; i++) {
-      if (path.endsWith(suffix[i])) {
-        _result = true;
-        break;
-      }
-    }
-    return _result;
   }
 
   static String _lubanCompress(CompressObject object) {

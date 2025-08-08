@@ -5,9 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/page/home/loupan_page.dart';
 import 'package:flutter_app/page/home/wanqu_page.dart';
-import 'package:flutter_app/page/shaixuan_page.dart';
 import 'package:flutter_app/page/zixun_page.dart';
-import 'package:flutter_app/provider/app_provider.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/appbar_widget.dart';
@@ -23,7 +21,6 @@ import 'package:paixs_utils/widget/route.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
 import 'package:paixs_utils/widget/widget_tap.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -659,34 +656,6 @@ class _ShareAppUiState extends State<ShareAppUi> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-
-                  // Html(
-                  //   data: '''感谢您选择内当家App！<br/>我们非常重视您的个人信息和隐私保护，为了更好地保障您的个人权益，请您务必审慎阅读、充分理解<a href="12">《用户协议》</a>和<a href="11">《隐私政策》</a>各条款，包括但不限于：<br>1.在您使用软件及服务的过程中，向你提供相关基本功能，我们将根据合法、正当、必要的原则，收集或使用必要的个人信息；<br/>2.基于您的授权，我们可能会获取您的地理位置、通讯录、相机等相关软件权限；<br/>3.我们会采取符合标准的技术措施和数据安全措施来保护您的个人信息安全；<br/>4.您可以查询、更正、管理您的个人信息，我们也提供账户注销的渠道；<br/>如您同意以上协议内容，请点击“同意”开始使用我们的产品和服务。''',
-                  //   defaultTextStyle: TextStyle(color: Colors.black54),
-                  //   linkStyle: TextStyle(color: Theme.of(context).primaryColor),
-                  //   padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-                  //   onLinkTap: (v) {
-                  //     jumpPage(XieyiPage(type: v));
-                  //   },
-                  // ),
-                  // BtnWidget(
-                  //   isShowShadow: false,
-                  //   titles: ['不同意并退出', '同意'],
-                  //   bgColor: Colors.transparent,
-                  //   btnHeight: [10, 12],
-                  //   value: [50, 50],
-                  //   time: [750, 750],
-                  //   delayed: [0, 100],
-                  //   axis: [Axis.vertical, Axis.vertical],
-                  //   curve: [ElasticOutCurve(1), ElasticOutCurve(1)],
-                  //   onTap: [
-                  //     () => exit(0),
-                  //     () {
-                  //       userPro.addFirstTimeOpenAppFlag();
-                  //       close(true);
-                  //     },
-                  //   ],
-                  // ),
                 ],
               ),
             ),

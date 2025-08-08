@@ -6,8 +6,6 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'net/Config.dart';
 
 class ImageHelper {
-  // static const String baseUrl = Config.ImgBaseUrl;
-  // static const String imagePrefix = '$baseUrl/';
 
   static String wrapUrl(String url, {int w = 0, String? imgUrl}) {
     if (url.startsWith('http')) {
@@ -16,7 +14,7 @@ class ImageHelper {
     if (url.trim().length == 0) {
       return randomUrl(); //默认
     }
-    String path = '${imgUrl ?? Config.ImgBaseUrl1}$url' + (w == 0 ? '' : '?x-oss-process=image/resize,w_$w');
+    String path = '${imgUrl ?? Config.BaseUrlDev}$url' + (w == 0 ? '' : '?x-oss-process=image/resize,w_$w');
     return path;
   }
 
@@ -47,15 +45,6 @@ class ImageHelper {
     double? size,
     Color? color,
   }) {
-    // return SizedBox(
-    //   width: width,
-    //   height: height,
-    //   child: Icon(
-    //     Icons.error_outline,
-    //     size: size,
-    //     color: color,
-    //   ),
-    // );
     return ColoredBox(
       color: Colors.black.withOpacity(0.05),
       child: Center(

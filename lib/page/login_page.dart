@@ -340,34 +340,6 @@ class _PhoneLoginState extends State<PhoneLogin> {
                               });
                             },
                           );
-                          // buildShowDialog(context);
-                          // await Smssdk.getTextCode(phoneCon.text, "86", "15733748", (dynamic ret, Map err) {
-                          //   flog(ret);
-                          //   flog(err, 'error');
-                          //   if (err == null) {
-                          //     showToast('已发送，请查收!');
-                          //     setState(() {
-                          //       isSend = true;
-                          //     });
-                          //   } else {
-                          //     showToast('验证码发送失败');
-                          //   }
-                          // });
-                          // close();
-                          // Request.post(
-                          //   '/buyer/getRegisterCode',
-                          //   data: {"mobile": phoneCon.text},
-                          //   isLoading: true,
-                          //   catchError: (v) {
-                          //     showToast(v.toString());
-                          //   },
-                          //   success: (v) {
-                          //     showToast('已发送，请查收!');
-                          //     setState(() {
-                          //       isSend = true;
-                          //     });
-                          //   },
-                          // );
                         }
                       }
                     },
@@ -575,34 +547,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                             },
                           );
-                          // await Smssdk.getTextCode(phoneCon.text, "86", "15733748", (dynamic ret, Map err) {
-                          //   flog(ret);
-                          //   flog(err, 'error');
-                          //   if (err == null) {
-                          //     showToast('已发送，请查收!');
-                          //     setState(() {
-                          //       isSend = true;
-                          //     });
-                          //   } else {
-                          //     showToast('验证码发送失败');
-                          //   }
-                          // });
-                          // Request.put(
-                          //   '/api/User/VerifyCode?phoneNumber=${phoneCon.text}',
-                          //   isLoading: true,
-                          //   catchError: (v) {
-                          //     showToast(v.toString());
-                          //   },
-                          //   fail: (v) {
-                          //     showToast(v.toString());
-                          //   },
-                          //   success: (v) {
-                          //     showToast('已发送，请查收!');
-                          //     setState(() {
-                          //       isSend = true;
-                          //     });
-                          //   },
-                          // );
                         }
                       }
                     },
@@ -860,20 +804,6 @@ class _FindPassState extends State<FindPass> {
                             showToast('请输入正确的手机号码!');
                             return;
                           }
-                          // Request.post(
-                          //   '/buyer/getRegisterCode',
-                          //   data: {"mobile": phoneCon.text},
-                          //   isLoading: true,
-                          //   catchError: (v) {
-                          //     showToast(v.toString());
-                          //   },
-                          //   success: (v) {
-                          //     showToast('已发送，请查收!');
-                          //     setState(() {
-                          //       isSend = true;
-                          //     });
-                          //   },
-                          // );
                           Request.post(
                             '/api/Sms/Send',
                             data: {"phoneNumber": phoneCon.text, "smsType": 1},
@@ -887,20 +817,6 @@ class _FindPassState extends State<FindPass> {
                               });
                             },
                           );
-                          // buildShowDialog(context);
-                          // await Smssdk.getTextCode(phoneCon.text, "86", "15733748", (dynamic ret, Map err) {
-                          //   flog(ret);
-                          //   flog(err, 'error');
-                          //   if (err == null) {
-                          //     showToast('已发送，请查收!');
-                          //     setState(() {
-                          //       isSend = true;
-                          //     });
-                          //   } else {
-                          //     showToast('验证码发送失败');
-                          //   }
-                          // });
-                          // close();
                         }
                       }
                     },
@@ -1271,45 +1187,6 @@ class WeChatAndQqLoginWidget extends StatelessWidget {
     );
   }
 
-  // Future<Null> handleQqLogin() async {
-  //   try {
-  //     // var qqResult = await FlutterQq.login();
-  //     // showToast(
-  //     //   'msg：${qqResult.message}\n\ncode：${qqResult.code}\n\nres：${qqResult.response}\n\n',
-  //     //   duration: Duration(minutes: 1),
-  //     // );
-  //     var output;
-  //     if (qqResult.code == 0) {
-  //       Request.post(
-  //         '/api/User/ThirdLogin',
-  //         data: {"openId": qqResult.response['openid']},
-  //         isLoading: true,
-  //         catchError: (v) => showToast(v.toString()),
-  //         fail: (v) => showToast(v.toString()),
-  //         success: (v) {
-  //           if (v['data'] == null) {
-  //             jumpPage(RegisterPage(qqResult.response['openid']));
-  //           } else {
-  //             userPro.setUserModel(v['data']);
-  //             showToast('登录成功');
-  //             jumpPage(App(), isClose: true, isMoveBtm: true);
-  //           }
-  //         },
-  //       );
-  //       output = "登录成功" + qqResult.response.toString();
-  //       flog(output);
-  //     } else if (qqResult.code == 1) {
-  //       output = "登录失败" + qqResult.message;
-  //       showToast(output);
-  //     } else {
-  //       output = "用户取消";
-  //       showToast(output);
-  //     }
-  //   } catch (error) {
-  //     showToast('QQ登录失败');
-  //     flog("flutter_plugin_qq_example:" + error.toString());
-  //   }
-  // }
 }
 
 class LoginTitleWidget extends StatelessWidget {
@@ -1321,22 +1198,6 @@ class LoginTitleWidget extends StatelessWidget {
     return buildTitle(
       context,
       title: '',
-      // rigthWidget: !isZhuche
-      //     ? null
-      //     : WidgetTap(
-      //         isElastic: true,
-      //         onTap: () {
-      //           jumpPage(RegisterPage(null), isMoveBtm: true);
-      //         },
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(16.0),
-      //           child: MyText(
-      //             '注册',
-      //             size: 16,
-      //             color: Theme.of(context).primaryColor,
-      //           ),
-      //         ),
-      //       ),
     );
   }
 }

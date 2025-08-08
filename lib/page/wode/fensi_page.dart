@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/text_edit_widget.dart';

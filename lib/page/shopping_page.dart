@@ -190,14 +190,6 @@ class _ShoppingPageState extends State<ShoppingPage> with AutomaticKeepAliveClie
           null,
           kehuType,
           tuijianLoupan,
-          // [
-          //   daofangTime.year,
-          //   daofangTime.month,
-          //   daofangTime.day,
-          // ].join('-')+'\t'+[
-          //   daofangTime.hour,
-          //   daofangTime.minute,
-          // ].join(':'),
           daofangTime.toString().split('.').first.split(':')[0] + ":" + daofangTime.toString().split('.').first.split(':')[1],
           null,
           peitongZhuchang

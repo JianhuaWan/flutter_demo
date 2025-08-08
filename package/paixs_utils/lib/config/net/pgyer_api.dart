@@ -10,7 +10,7 @@ final Http http = Http();
 class Http extends BaseHttp {
   @override
   void init() {
-    options.baseUrl = Config.BaseUrl;
+    options.baseUrl = Config.BaseUrlDev;
     interceptors.add(PgyerApiInterceptor());
   }
 }
@@ -20,11 +20,6 @@ class PgyerApiInterceptor extends InterceptorsWrapper {
   @override
   void  onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     try {
-      // var str = options.path.split('/').last;
-      // log('${options.baseUrl}${options.path}', name: '接口：${str.substring(0, str.indexOf('?'))}/Url');
-      // log(convert.json.encode(options.data), name: '接口：${str.substring(0, str.indexOf('?'))}/发送数据');
-      // log(options.headers['Authorization'].toString(), name: '接口：${str.substring(0, str.indexOf('?'))}/token');
-      // var str = options.path.split('/').last;
       log('${options.method}', name: 'Method');
       log('${options.baseUrl}${options.path}', name: 'Url');
       log('${getNull(options.headers['Authorization'])}', name: 'Token');
@@ -34,33 +29,15 @@ class PgyerApiInterceptor extends InterceptorsWrapper {
         log(convert.json.encode(options.data), name: '发送数据');
       }
     } catch (e) {
-      // var dioError = e as DioError;
-      // log(dioError.response.data);
       log(e.toString());
-      // var str = options.path.split('/').last;
-      // log('${options.baseUrl}${options.path}', name: '接口：$str/Url');
-      // log('${getNull(options.headers['Authorization'])}', name: '接口：$str/Token');
-      // log(convert.json.encode(options.data), name: '接口：$str/发送数据');
-      // if (!options.path.contains('upload')) log(convert.json.encode(options.data), name: '接口：$str/发送数据');
     }
 
     ///延时请求250毫秒
-    // await Future.delayed(Duration(milliseconds: 500));
     handler.next(options);
   }
 
   getNull(v) => v == '' ? null : v;
 
-  // @override
-  // onResponse(Response response) {
-  //   ResponseData respData = response.data is String ? ResponseData.fromJson(convert.jsonDecode(response.data), response.request) : ResponseData.fromJson(response.data, response.request);
-  //   response.data = respData.data ?? {"code": respData.code, "message": respData.message};
-  //   if (!respData.success) {
-  //     throw NotSuccessException.fromRespData(respData);
-  //   } else {
-  //     return http.resolve(response);
-  //   }
-  // }
 }
 
 class ResponseData extends BaseResponseData {

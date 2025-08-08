@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/provider_config.dart';
@@ -82,12 +81,6 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
     var list = app.allQuyuDm.object!.where((w) => w['level'] == 3).toList();
     var quyuList = list.where((w) => w['parentId'] == app.cityCode).toList();
     setState(() => cityList = quyuList);
-    // var v = await rootBundle.loadString('data/province.json');
-    // List data = json.decode(v);
-    // List cityListMap = [];
-    // data.forEach((f) => cityListMap.addAll(f['cities']));
-    // var i = cityListMap.indexWhere((w) => w['cityid'] == app.cityCode);
-    // var list = cityListMap[i]['district'] as List;
   }
 
   @override
@@ -238,54 +231,6 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                         return [
                           MyText('价格区间(万)', isBold: true),
                           SizedBox(height: 16),
-                          // Padding(
-                          //   padding: EdgeInsets.symmetric(vertical: 14),
-                          //   child: Row(
-                          //     children: [
-                          //       Expanded(
-                          //         child: ClipRRect(
-                          //           borderRadius: BorderRadius.circular(56),
-                          //           child: Container(
-                          //             height: 35,
-                          //             padding: EdgeInsets.symmetric(horizontal: 16),
-                          //             color: Colors.white,
-                          //             child: buildTFView(
-                          //               context,
-                          //               con: textCon1,
-                          //               onChanged: (v) {},
-                          //               hintText: '最小',
-                          //               hintColor: Colors.black26,
-                          //               textAlign: TextAlign.center,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       Container(
-                          //         height: 1,
-                          //         width: 24,
-                          //         margin: EdgeInsets.symmetric(horizontal: 16),
-                          //         color: Colors.black,
-                          //       ),
-                          //       Expanded(
-                          //         child: ClipRRect(
-                          //           borderRadius: BorderRadius.circular(56),
-                          //           child: Container(
-                          //             height: 35,
-                          //             padding: EdgeInsets.symmetric(horizontal: 16),
-                          //             color: Colors.white,
-                          //             child: buildTFView(
-                          //               context,
-                          //               con: textCon2,
-                          //               hintText: '最大',
-                          //               hintColor: Colors.black26,
-                          //               textAlign: TextAlign.center,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           Wrap(
                             runSpacing: 8,
                             spacing: 8,
@@ -584,36 +529,6 @@ class _HomeSelectoWidgetState extends State<HomeSelectoWidget> {
                               );
                             }),
                           ),
-                          // MyText('开盘时间', isBold: true),
-                          // SizedBox(height: 14),
-                          // Wrap(
-                          //   runSpacing: 8,
-                          //   spacing: 8,
-                          //   children: List.generate(kaipanList.length, (i) {
-                          //     return WidgetTap(
-                          //       onTap: () {
-                          //         setState(() {
-                          //           kaipan = i;
-                          //         });
-                          //       },
-                          //       child: Container(
-                          //         decoration: BoxDecoration(
-                          //           color: Colors.white,
-                          //           borderRadius: BorderRadius.circular(4),
-                          //           border: Border.all(color: Color(0xFF2B8FFC).withOpacity(kaipan == i ? 1 : 0)),
-                          //         ),
-                          //         width: size(context).width / 4 - (8 * 3 + 32) / 4,
-                          //         alignment: Alignment.center,
-                          //         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-                          //         child: MyText(
-                          //           kaipanList[i],
-                          //           size: 12,
-                          //           color: kaipan == i ? Color(0xFF2B8FFC) : Colors.black,
-                          //         ),
-                          //       ),
-                          //     );
-                          //   }),
-                          // ),
                         ][i];
                       },
                     ),

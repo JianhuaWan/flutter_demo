@@ -268,20 +268,6 @@ class _DengjiPageState extends State<DengjiPage> with NoSlidingReturn {
                   );
                 }),
               )
-              // SizedBox(height: 22),
-              // WidgetTap(
-              //   isElastic: true,
-              //   child: ClipRRect(
-              //     borderRadius: BorderRadius.circular(4),
-              //     child: Container(
-              //       color: Theme.of(context).primaryColor,
-              //       width: double.infinity,
-              //       alignment: Alignment.center,
-              //       padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
-              //       child: MyText('已达标当前等级', color: Colors.white, size: 12),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           decoration: BoxDecoration(

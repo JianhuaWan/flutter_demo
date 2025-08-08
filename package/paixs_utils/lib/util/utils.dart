@@ -141,7 +141,7 @@ Future<void> error(e, Function(dynamic, int, int) callback) async {
   break;
   case DioExceptionType.unknown:
   var str = error.message?.contains('SocketException')?? false;
-  callback(str ? '网络连接失败' : '请求错误', 2, 200);
+  callback(str ? '网络连接失败' : '服务器连接失败', 2, 200);
   break;
   case DioExceptionType.connectionTimeout:
   callback('连接超时', 3, 200);

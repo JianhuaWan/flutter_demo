@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/util/http.dart';
 import 'package:flutter_app/widget/no_sliding_return.dart';
 import 'package:flutter_app/widget/tab_widget.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/anima_switch_widget.dart';
 import 'package:paixs_utils/widget/mylistview.dart';
+import 'package:paixs_utils/widget/mytext.dart';
 import 'package:paixs_utils/widget/scaffold_widget.dart';
 import 'package:paixs_utils/widget/views.dart';
+import 'package:paixs_utils/widget/widget_tap.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class BangzhuPage extends StatefulWidget {
   @override
@@ -112,6 +116,52 @@ class _BangzhuItemState extends State<BangzhuItem> with AutomaticKeepAliveClient
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Divider(),
+                        Html(data: list[i]['content']),
+                        Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            WidgetTap(
+                              isElastic: true,
+                              onTap: () async {
+                                await Future.delayed(Duration(milliseconds: 500));
+                                showToast('已解决');
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 33, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(56),
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                child: MyText(
+                                  '已解决',
+                                  color: Colors.white,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            WidgetTap(
+                              isElastic: true,
+                              onTap: () async {
+                                await Future.delayed(Duration(milliseconds: 500));
+                                showToast('未解决');
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 33, vertical: 9),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(56),
+                                  color: Color(0xFFE8E8E8),
+                                ),
+                                child: MyText(
+                                  '未解决',
+                                  color: Color(0x80666666),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 15),
                       ],
                     ),
                   ),

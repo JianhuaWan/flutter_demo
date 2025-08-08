@@ -71,38 +71,32 @@ class DataModel<T> {
 
   ///List成功状态处理
   void toList(Response<dynamic> res, bool isRef, T Function(dynamic) fun) {
-    if (res != null) {
-      addList(res.data, isRef, fun);
-      addPage(res.data);
-      List list;
-      try {
-        list = res.data['data'] as List;
-      } catch (e) {
-        list = res.data as List;
-      }
-      this.flag = list.isEmpty
-          ? this.page == 1
-              ? 2
-              : -2
-          : getTime();
-      if (list.isEmpty) this.msg = '暂无更多数据';
+    addList(res.data, isRef, fun);
+    addPage(res.data);
+    List list;
+    try {
+      list = res.data['data'] as List;
+    } catch (e) {
+      list = res.data as List;
     }
+    this.flag = list.isEmpty
+        ? this.page == 1
+            ? 2
+            : -2
+        : getTime();
+    if (list.isEmpty) this.msg = '暂无更多数据';
   }
 
   ///value成功状态处理
   void toValue(Response<dynamic> res, List<dynamic> Function(dynamic) fun) {
-    if (res != null) {
-      this.value = fun.call(res.data);
-      this.flag = getTime();
-    }
+    this.value = fun.call(res.data);
+    this.flag = getTime();
   }
 
   ///Objiect成功状态处理
   void toObject(Response<dynamic> res, [T Function(dynamic)? fun]) {
-    if (res != null) {
-      this.object = fun == null ? res.data : fun.call(res.data);
-      this.flag = getTime();
-    }
+    this.object = fun == null ? res.data : fun.call(res.data);
+    this.flag = getTime();
   }
 
   ///打印数据
@@ -143,18 +137,14 @@ class DataModel<T> {
     data["msg"] = msg;
     data["page"] = page;
     data["hasNext"] = hasNext;
-    if (value != null) {
-      var v = value;
-      var arr0 = [];
-      v.forEach((v) => arr0.add(v));
-      data["value"] = arr0;
-    }
-    if (list != null) {
-      var v = list;
-      var arr0 = [];
-      v.forEach((v) => arr0.add(v));
-      data["list"] = arr0;
-    }
+    var v = value;
+    var arr0 = [];
+    v.forEach((v) => arr0.add(v));
+    data["value"] = arr0;
+    v = list;
+    arr0 = [];
+    v.forEach((v) => arr0.add(v));
+    data["list"] = arr0;
     data["object"] = object;
     return data;
   }

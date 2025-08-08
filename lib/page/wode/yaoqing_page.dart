@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
@@ -9,7 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/widget/flutter_luban.dart';
+import 'package:paixs_utils/config/net/Config.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/image.dart';
 import 'package:paixs_utils/widget/mytext.dart';
@@ -98,7 +97,8 @@ class _YaoqingPageState extends State<YaoqingPage> {
                             child: Container(
                               color: Colors.white,
                               child: QrImage(
-                                data: 'https://app.rayt.cc/user/register.html#/?inviteCode=${user?.inviteCode}',
+                                data: Config.BaseUrlDev+'/user/register'
+                              '.html#/?inviteCode=${user?.inviteCode}',
                               ),
                             ),
                           ),
@@ -108,7 +108,10 @@ class _YaoqingPageState extends State<YaoqingPage> {
                             child: WidgetTap(
                               isElastic: true,
                               onTap: () async {
-                                await FlutterClipboard.copy('https://app.rayt.cc/user/register.html#/?inviteCode=${user?.inviteCode}');
+                                await FlutterClipboard.copy(Config
+                                    .BaseUrlDev +
+                                    '/user/register.html#/?inviteCode=${user
+                                        ?.inviteCode}');
                                 showToast('复制成功');
                               },
                               child: Stack(
@@ -192,7 +195,8 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                 child: Container(
                                   color: Colors.white,
                                   child: QrImage(
-                                    data: 'https://app.rayt.cc/user/register.html#/?inviteCode=${user?.inviteCode}',
+                                    data: Config.BaseUrlDev+'/user/register.html#/?inviteCode=${user
+                                        ?.inviteCode}',
                                   ),
                                 ),
                               ),
@@ -200,7 +204,9 @@ class _YaoqingPageState extends State<YaoqingPage> {
                               WidgetTap(
                                 isElastic: true,
                                 onTap: () async {
-                                  await FlutterClipboard.copy('https://app.rayt.cc/user/register.html#/?inviteCode=${user?.inviteCode}');
+                                  await FlutterClipboard.copy(
+                                      Config.BaseUrlDev+'/user/register.html#/?inviteCode=${user
+                                          ?.inviteCode}');
                                   showToast('复制成功');
                                 },
                                 child: Stack(
@@ -248,7 +254,7 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                 close();
                                 break;
                               case 1:
-                                // handleShareToQQ();
+                              // handleShareToQQ();
                                 buildShowDialog(context);
                                 var uint8list = await _capturePng();
                                 close();
@@ -258,11 +264,14 @@ class _YaoqingPageState extends State<YaoqingPage> {
                                 close();
                                 break;
                               case 3:
-                                if ((await Permission.storage.request()).isGranted) {
+                                if ((await Permission.storage.request())
+                                    .isGranted) {
                                   buildShowDialog(context);
                                   var uint8list = await _capturePng();
                                   var flag = await ImageGallerySaver
-                                      .saveImage(uint8list!, name: '${user?.inviteCode}_${Random().nextInt(9999)}');
+                                      .saveImage(uint8list!,
+                                      name: '${user?.inviteCode}_${Random()
+                                          .nextInt(9999)}');
                                   flog(flag);
                                   close();
                                   showToast('保存成功');
@@ -312,27 +321,3 @@ class _YaoqingPageState extends State<YaoqingPage> {
     );
   }
 }
-
-// Future<Null> handleShareToQQ() async {
-//   ShareQQContent shareContent = new ShareQQContent(
-//     title: "测试title",
-//     targetUrl: "https://www.baidu.com",
-//     summary: "测试summary",
-//     imageLocalUrl: "http://inews.gtimg.com/newsapp_bt/0/876781763/1000",
-//     // imageUrl: "http://inews.gtimg.com/newsapp_bt/0/876781763/1000",
-//   );
-//   try {
-//     var qqResult = await FlutterQq.shareToQQ(shareContent);
-//     var output;
-//     if (qqResult.code == 0) {
-//       output = "分享成功";
-//     } else if (qqResult.code == 1) {
-//       output = "分享失败" + qqResult.message;
-//     } else {
-//       output = "用户取消";
-//     }
-//     flog(output);
-//   } catch (error) {
-//     flog("flutter_plugin_qq_example:" + error.toString());
-//   }
-// }

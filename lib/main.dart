@@ -24,16 +24,12 @@ import 'widget/widgets.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isIOS || Platform.isAndroid) {
-    // await bd.enableFluttifyLog(true);
-    // await bd.BmapService.instance.init(iosKey: 'm5LjBSEiEUf4g8z60ys9lRLi9uf5d9xi');
   }
   runApp(MultiProvider(providers: pros, child: MyApp()));
-  // PaintingBinding.instance.imageCache.maximumSizeBytes = 5000 << 20;
   //缓存个数 100
   PaintingBinding.instance.imageCache.maximumSize = 1000;
   //缓存大小 50m
   PaintingBinding.instance.imageCache.maximumSizeBytes = 5000 << 20;
-  // SystemChrome.setEnabledSystemUIOverlays([]);
   RouteState.isMove = true;
   RouteState.setOffsetState(false);
   ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
