@@ -13,6 +13,9 @@ import 'package:paixs_utils/widget/layout/views.dart';
 import 'package:paixs_utils/widget/navigation/route.dart';
 import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
 
+import '../../viewmodel/login_controller.dart';
+import '../base_page.dart';
+
 ///密码登录
 class PassWordLogin extends StatefulWidget {
   @override

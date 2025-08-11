@@ -14,7 +14,7 @@ import 'package:crypto/crypto.dart';
 
 ///上传file
 Future<String?> uploadFile(PickedFile file) async {
-  try{
+  try {
     List<int> byteData = await file.readAsBytes();
     List paths = file.path.split("/");
     MultipartFile multipartFile = MultipartFile.fromBytes(
@@ -24,7 +24,7 @@ Future<String?> uploadFile(PickedFile file) async {
     FormData formData = FormData.fromMap({"file": multipartFile});
     var response = await http.post('/File/UploadFile', data: formData);
     return response.data;
-  }catch (e) {
+  } catch (e) {
     flog(e, 'uploadFile error');
     return null;
   }
@@ -53,35 +53,38 @@ Future<String?> uploadUn8(Uint8List img) async {
       contentType: MediaType("image", "jpeg"),
     );
     FormData formData = FormData.fromMap({"file": multipartFile});
-    var response = await http.post(
-        '/resources/upload/', data: formData);
+    var response = await http.post('/resources/upload/', data: formData);
     return response.data;
   } catch (e) {
     flog(e, 'uploadUn8 error');
     return null;
   }
 }
+
 ///ios风格-路由跳转
 ///
 ///isBtm ： 是否从底部弹出，默认右边
 ///
 ///page : 跳转的页面
-Future push(BuildContext context,
-    Widget page, {
-      bool isMove = true,
-      bool isMoveBtm = false,
-      bool isNoClose = true,
-      bool isSlideBack = true,
-      bool isDelay = true,
-      int duration = 400,
-      bool opaque = false,
-    }) async {
+Future push(
+  BuildContext context,
+  Widget page, {
+  bool isMove = true,
+  bool isMoveBtm = false,
+  bool isNoClose = true,
+  bool isSlideBack = true,
+  bool isDelay = true,
+  int duration = 400,
+  bool opaque = false,
+}) async {
   if (isNoClose) {
     return Navigator.push(
       context,
       CustomRoute(
-        isSlideBack ? page : WillPopScope(
-            onWillPop: () async => await Future.value(false), child: page),
+        isSlideBack
+            ? page
+            : WillPopScope(
+                onWillPop: () async => await Future.value(false), child: page),
         opaque: opaque,
         isMove: isMove,
         isMoveBtm: isMoveBtm,
@@ -92,14 +95,16 @@ Future push(BuildContext context,
     return Navigator.pushAndRemoveUntil(
       context,
       CustomRoute(
-        isSlideBack ? page : WillPopScope(
-            onWillPop: () async => await Future.value(false), child: page),
+        isSlideBack
+            ? page
+            : WillPopScope(
+                onWillPop: () async => await Future.value(false), child: page),
         opaque: opaque,
         isMove: isMove,
         isMoveBtm: isMoveBtm,
         duration: Duration(milliseconds: duration),
       ),
-          (v) => v == null,
+      (v) => v == null,
     );
   }
 }
@@ -128,36 +133,36 @@ close([map]) async {
 Future<void> error(e, Function(dynamic, int, int) callback) async {
   var error = e as DioException;
   switch (error.type) {
-  case DioExceptionType.badResponse:
-  try {
-  if (error.response?.data['msg'] == null) {
-  callback('服务器连接失败', 1, error.response!.statusCode!);
-  } else {
-  callback(error.response?.data['msg'], 1, error.response!.statusCode!);
-  }
-  } catch (e) {
-  callback('服务器连接失败', 1, error.response!.statusCode!);
-  }
-  break;
-  case DioExceptionType.unknown:
-  var str = error.message?.contains('SocketException')?? false;
-  callback(str ? '网络连接失败' : '服务器连接失败', 2, 200);
-  break;
-  case DioExceptionType.connectionTimeout:
-  callback('连接超时', 3, 200);
-  break;
-  case DioExceptionType.sendTimeout:
-  callback('发送超时', 4, 200);
-  break;
-  case DioExceptionType.receiveTimeout:
-  callback('接收超时', 5, 200);
-  break;
-  case DioExceptionType.cancel:
-  callback('连接被取消', 6, 200);
-  break;
-  default:
-  callback('未知错误', 7, 200);
-  break;
+    case DioExceptionType.badResponse:
+      try {
+        if (error.response?.data['msg'] == null) {
+          callback('服务器连接失败', 1, error.response!.statusCode!);
+        } else {
+          callback(error.response?.data['msg'], 1, error.response!.statusCode!);
+        }
+      } catch (e) {
+        callback('服务器连接失败', 1, error.response!.statusCode!);
+      }
+      break;
+    case DioExceptionType.unknown:
+      var str = error.message?.contains('SocketException') ?? false;
+      callback(str ? '网络连接失败' : '服务器连接失败', 2, 200);
+      break;
+    case DioExceptionType.connectionTimeout:
+      callback('连接超时', 3, 200);
+      break;
+    case DioExceptionType.sendTimeout:
+      callback('发送超时', 4, 200);
+      break;
+    case DioExceptionType.receiveTimeout:
+      callback('接收超时', 5, 200);
+      break;
+    case DioExceptionType.cancel:
+      callback('连接被取消', 6, 200);
+      break;
+    default:
+      callback('未知错误', 7, 200);
+      break;
   }
 }
 
@@ -246,9 +251,7 @@ String chatTime(DateTime old) {
   var day = hour * 24;
   // var week = day * 7;
   // var month = day * 30;
-  var now = DateTime
-      .now()
-      .millisecondsSinceEpoch; //获取当前时间毫秒
+  var now = DateTime.now().millisecondsSinceEpoch; //获取当前时间毫秒
   var diffValue = now - old.millisecondsSinceEpoch; //时间差
   if (diffValue < 0) return "刚刚";
   var result = '';
@@ -296,9 +299,7 @@ String toTime(date, [bool isParse = true]) {
   var day = hour * 24;
   var week = day * 7;
   var month = day * 30;
-  var now = DateTime
-      .now()
-      .millisecondsSinceEpoch; //获取当前时间毫秒
+  var now = DateTime.now().millisecondsSinceEpoch; //获取当前时间毫秒
   var diffValue = now - old.millisecondsSinceEpoch; //时间差
   if (diffValue < 0) return "刚刚";
   var result = '';
@@ -333,17 +334,14 @@ String toTime(date, [bool isParse = true]) {
 }
 
 ///获取当前时间戳
-int getTime() =>
-    DateTime
-        .now()
-        .millisecondsSinceEpoch;
+int getTime() => DateTime.now().millisecondsSinceEpoch;
 
 ///获取iso8601
 String getIso8601String([DateTime? time]) {
   return DateTime.fromMillisecondsSinceEpoch(
-    time == null ? DateTime
-        .now()
-        .millisecondsSinceEpoch : time.millisecondsSinceEpoch,
+    time == null
+        ? DateTime.now().millisecondsSinceEpoch
+        : time.millisecondsSinceEpoch,
     isUtc: true,
   ).toIso8601String();
 }
@@ -354,15 +352,9 @@ String toDate(milliseconds) {
     return '';
   } else {
     return [
-      DateTime
-          .fromMillisecondsSinceEpoch(milliseconds)
-          .year,
-      DateTime
-          .fromMillisecondsSinceEpoch(milliseconds)
-          .month,
-      DateTime
-          .fromMillisecondsSinceEpoch(milliseconds)
-          .day,
+      DateTime.fromMillisecondsSinceEpoch(milliseconds).year,
+      DateTime.fromMillisecondsSinceEpoch(milliseconds).month,
+      DateTime.fromMillisecondsSinceEpoch(milliseconds).day,
     ].join('-');
   }
 }

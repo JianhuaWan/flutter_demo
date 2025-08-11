@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/page/mine/agreement_page.dart';
+import 'package:flutter_app/res/app_string.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/page/home/home_page.dart';
@@ -25,6 +26,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isIOS || Platform.isAndroid) {
   }
+  await Future.wait([
+    initAppString(),
+  ]);
   runApp(MultiProvider(providers: pros, child: MyApp()));
   //缓存个数 100
   PaintingBinding.instance.imageCache.maximumSize = 1000;

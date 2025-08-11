@@ -798,7 +798,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
               '${loupanDm.object['cityName']}${loupanDm.object['areaName']}${loupanDm.object['buildAddress']}',
               isBold: true,
               size: 12,
-              color: Common.black,
+              color: CommonColor.black,
             ),
           ],
         ),
@@ -848,7 +848,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       child: MyText(
                         wendaDm.list[i]['content'],
                         isBold: true,
-                        color: Common.black,
+                        color: CommonColor.black,
                       ),
                     )
                   ],
@@ -903,7 +903,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                   wendaDm.list[i]['id'])
                                               .toList()[ii]['replyUserName'],
                                           isBold: true,
-                                          color: Common.black,
+                                          color: CommonColor.black,
                                         ),
                                         SizedBox(height: 2),
                                         MyText(
@@ -913,7 +913,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                                   wendaDm.list[i]['id'])
                                               .toList()[ii]['baseModifyTime']),
                                           size: 9,
-                                          color: Common.black,
+                                          color: CommonColor.black,
                                         ),
                                       ],
                                     ),
@@ -928,7 +928,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                                     .toList()[ii]['content'],
                                 size: 12,
                                 isOverflow: false,
-                                color: Common.black,
+                                color: CommonColor.black,
                               ),
                             ],
                           ),
@@ -1024,11 +1024,11 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
           child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(vertical: 12),
-            color: Common.smallColor.withOpacity(0.1),
+            color: CommonColor.smallColor.withOpacity(0.1),
             child: MyText(
               '我要提问',
               isBold: true,
-              color: Common.smallColor,
+              color: CommonColor.smallColor,
             ),
           ),
         ),
@@ -1080,15 +1080,15 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                               borderRadius: BorderRadius.circular(56),
                               color: loupanDianpingDm.list[i]['tag'] == '优点'
                                   ? Color(0xffF7DDA9)
-                                  : Common.smallColor.withOpacity(0.1),
+                                  : CommonColor.smallColor.withOpacity(0.1),
                             ),
                             padding: EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 4),
                             child: MyText(
                               loupanDianpingDm.list[i]['tag'],
                               color: loupanDianpingDm.list[i]['tag'] == '优点'
-                                  ? Common.black
-                                  : Common.black,
+                                  ? CommonColor.black
+                                  : CommonColor.black,
                               size: 12,
                               isBold: true,
                             ),
@@ -1107,7 +1107,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                         child: MyText(
                           loupanDianpingDm.list[i]['content'],
                           isOverflow: false,
-                          color: Common.black,
+                          color: CommonColor.black,
                         ),
                       ),
                     ],
@@ -1137,11 +1137,11 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
           child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(vertical: 12),
-            color: Common.smallColor.withOpacity(0.1),
+            color: CommonColor.smallColor.withOpacity(0.1),
             child: MyText(
               '写评论',
               isBold: true,
-              color: Common.smallColor,
+              color: CommonColor.smallColor,
             ),
           ),
         ),
@@ -1243,12 +1243,12 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                 child: MyText(
                   '房型：',
                   size: 13,
-                  color: Common.black,
+                  color: CommonColor.black,
                   children: [
                     MyText.ts(
                       '${loupanDm.object['hubs'][0]['layout']}',
                       isBold: true,
-                      color: Common.black,
+                      color: CommonColor.black,
                     ),
                   ],
                 ),
@@ -1258,12 +1258,12 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                   '面积：',
                   size: 13,
                   textAlign: TextAlign.right,
-                  color: Common.black,
+                  color: CommonColor.black,
                   children: [
                     MyText.ts(
                       '${loupanDm.object['hubs'][0]['area']}㎡',
                       isBold: true,
-                      color: Common.black,
+                      color: CommonColor.black,
                     ),
                   ],
                 ),
@@ -1274,7 +1274,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
           MyText(
             '价格：',
             size: 13,
-            color: Common.black,
+            color: CommonColor.black,
             children: [
               MyText.ts(
                 '${loupanDm.object['hubs'][0]['price']}',
@@ -1304,7 +1304,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     loupanDm.object['buildingName'],
                     size: 20,
                     isBold: true,
-                    color: Common.black,
+                    color: CommonColor.black,
                   ),
                 ),
                 MyText(
@@ -1344,7 +1344,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                             loupanDm.object['propertyType'],
                             loupanDm.object['saleStatus'],
                           ][i],
-                          color: Common.smallColor,
+                          color: CommonColor.smallColor,
                           size: 12,
                         ),
                       );
@@ -1358,13 +1358,13 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     children: [
                       MyText(
                         '项目详情',
-                        color: Common.smallColor,
+                        color: CommonColor.smallColor,
                         isBold: true,
                       ),
                       Icon(
                         Icons.chevron_right_rounded,
                         size: 20,
-                        color: Common.smallColor,
+                        color: CommonColor.smallColor,
                       ),
                     ],
                   ),
@@ -1384,7 +1384,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       MyText.ts(
                         loupanDm.object['areaName'],
                         isBold: true,
-                        color: Common.black,
+                        color: CommonColor.black,
                       ),
                     ],
                   ),
@@ -1399,7 +1399,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       MyText.ts(
                         '${loupanDm.object['buildingArea']}㎡',
                         isBold: true,
-                        color: Common.black,
+                        color: CommonColor.black,
                       ),
                     ],
                   ),
@@ -1458,7 +1458,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       child: MyText(
                         '价格变动提醒',
                         isBold: true,
-                        color: Common.black,
+                        color: CommonColor.black,
                       ),
                     ),
                   ),
@@ -1484,7 +1484,7 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                       child: MyText(
                         '开盘提醒',
                         isBold: true,
-                        color: Common.black,
+                        color: CommonColor.black,
                       ),
                     ),
                   ),
@@ -1523,12 +1523,12 @@ class _LoupanPageState extends State<LoupanPage> with NoSlidingReturn {
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      color: Common.smallColor.withOpacity(0.1),
+                      color: CommonColor.smallColor.withOpacity(0.1),
                       child: MyText(
                         loupanDm.object['award'],
                         // '项目奖金最高34100.00元/套',
                         isBold: true,
-                        color: Common.smallColor,
+                        color: CommonColor.smallColor,
                       ),
                     ),
                   ),
@@ -2073,12 +2073,12 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
         child: Container(
           height: 40,
           alignment: Alignment.center,
-          color: Common.smallColor.withOpacity(0.1),
+          color: CommonColor.smallColor.withOpacity(0.1),
           margin: EdgeInsets.all(8),
           child: MyText(
             '我要提问',
             isBold: true,
-            color: Common.smallColor,
+            color: CommonColor.smallColor,
           ),
         ),
       ),
@@ -2123,7 +2123,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                           child: MyText(
                             list[i]['content'],
                             isBold: true,
-                            color: Common.black,
+                            color: CommonColor.black,
                           ),
                         )
                       ],
@@ -2180,7 +2180,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                                                       .toList()[ii]
                                                   ['replyUserName'],
                                               isBold: true,
-                                              color: Common.black,
+                                              color: CommonColor.black,
                                             ),
                                             SizedBox(height: 2),
                                             MyText(
@@ -2191,7 +2191,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                                                       .toList()[ii]
                                                   ['baseModifyTime']),
                                               size: 9,
-                                              color: Common.black,
+                                              color: CommonColor.black,
                                             ),
                                           ],
                                         ),
@@ -2206,7 +2206,7 @@ class _LoupanWendaPageState extends State<LoupanWendaPage> {
                                         .toList()[ii]['content'],
                                     size: 12,
                                     isOverflow: false,
-                                    color: Common.black,
+                                    color: CommonColor.black,
                                   ),
                                 ],
                               ),
@@ -2295,12 +2295,12 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
         child: Container(
           height: 40,
           alignment: Alignment.center,
-          color: Common.smallColor.withOpacity(0.1),
+          color: CommonColor.smallColor.withOpacity(0.1),
           margin: EdgeInsets.all(8),
           child: MyText(
             '我要点评',
             isBold: true,
-            color: Common.smallColor,
+            color: CommonColor.smallColor,
           ),
         ),
       ),
@@ -2342,15 +2342,15 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
                                 borderRadius: BorderRadius.circular(56),
                                 color: loupanDianpingDm.list[i]['tag'] == '优点'
                                     ? Color(0xffF7DDA9)
-                                    : Common.smallColor.withOpacity(0.1),
+                                    : CommonColor.smallColor.withOpacity(0.1),
                               ),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               child: MyText(
                                 loupanDianpingDm.list[i]['tag'],
                                 color: loupanDianpingDm.list[i]['tag'] == '优点'
-                                    ? Common.black
-                                    : Common.black,
+                                    ? CommonColor.black
+                                    : CommonColor.black,
                                 size: 12,
                                 isBold: true,
                               ),
@@ -2369,7 +2369,7 @@ class _LoupanDianpingPageState extends State<LoupanDianpingPage> {
                           child: MyText(
                             loupanDianpingDm.list[i]['content'],
                             isOverflow: false,
-                            color: Common.black,
+                            color: CommonColor.black,
                           ),
                         ),
                       ],
@@ -2442,12 +2442,12 @@ class _HuxingPageState extends State<HuxingPage> {
                     child: MyText(
                       '房型：',
                       size: 13,
-                      color: Common.black,
+                      color: CommonColor.black,
                       children: [
                         MyText.ts(
                           '${widget.list![i]['layout']}',
                           isBold: true,
-                          color: Common.black,
+                          color: CommonColor.black,
                         ),
                       ],
                     ),
@@ -2457,12 +2457,12 @@ class _HuxingPageState extends State<HuxingPage> {
                       '面积：',
                       size: 13,
                       textAlign: TextAlign.right,
-                      color: Common.black,
+                      color: CommonColor.black,
                       children: [
                         MyText.ts(
                           '${widget.list![i]['area']}㎡',
                           isBold: true,
-                          color: Common.black,
+                          color: CommonColor.black,
                         ),
                       ],
                     ),
@@ -2473,7 +2473,7 @@ class _HuxingPageState extends State<HuxingPage> {
               MyText(
                 '价格：',
                 size: 13,
-                color: Common.black,
+                color: CommonColor.black,
                 children: [
                   MyText.ts(
                     '${widget.list![i]['price']}',

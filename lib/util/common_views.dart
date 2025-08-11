@@ -4,6 +4,8 @@ import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';
 import 'package:paixs_utils/widget/interaction/widget_tap.dart';
 
+import 'color_config.dart';
+
 Widget get errorView {
   return SafeArea(
     child: Column(
@@ -64,7 +66,23 @@ Widget get errorView {
     ),
   );
 }
-
+TextStyle mediumStyle({double? textSize,
+  Color textColor = CommonColor.whiteColor}) {
+  return textStyle(
+    FontWeight.w500,
+    textSize: textSize,
+    textColor: textColor,
+  );
+}
+TextStyle textStyle(FontWeight fontWeight, {double? textSize,
+  Color textColor = CommonColor.whiteColor, double? height}) {
+  return TextStyle(
+      fontSize: textSize,
+      color: textColor,
+      fontWeight: fontWeight,
+      height: height
+  );
+}
 ///返回按钮
 WidgetTap buildBackBtn([color, isPadd = true]) {
   return WidgetTap(
@@ -136,6 +154,7 @@ ToastFuture showNotCollected() {
 DecorationImage buildBgImage(String assets) {
   return DecorationImage(image: AssetImage(assets), fit: BoxFit.fill);
 }
+
 
 ///构建文本框
 Widget buildTFView(

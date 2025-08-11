@@ -41,7 +41,7 @@ class BigTitleWidget extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
           SizedBox(width: 8),
-          MyText(title ?? '标题', size: 16, isBold: true, color: Common.black),
+          MyText(title ?? '标题', size: 16, isBold: true, color: CommonColor.black),
           Spacer(),
           if (isShowMore ?? false)
             WidgetTap(
@@ -49,7 +49,7 @@ class BigTitleWidget extends StatelessWidget {
               onTap: onTap,
               child: Container(
                 padding: isPadding ?? true ? EdgeInsets.symmetric(horizontal: 22) : EdgeInsets.zero,
-                child: MyText('更多', isBold: true, color: Common.black),
+                child: MyText('更多', isBold: true, color: CommonColor.black),
               ),
             ),
         ],

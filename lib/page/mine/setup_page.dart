@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/page/mine/agreement_page.dart';
 import 'package:flutter_app/page/login/edit_login.dart';
+import 'package:flutter_app/res/app_string.dart';
+import 'package:flutter_app/res/lang_type.dart';
 import 'package:flutter_app/widget/update_install_widget.dart';
 
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -127,7 +129,7 @@ class _SetupPageState extends State<SetupPage> {
               color: Colors.white,
               child: MyListView(
                 isShuaxin: false,
-                itemCount: 5,
+                itemCount: 6,
                 physics: NeverScrollableScrollPhysics(),
                 listViewType: ListViewType.Separated,
                 divider: Divider(height: 0, indent: 16),
@@ -135,12 +137,11 @@ class _SetupPageState extends State<SetupPage> {
                   return ItemEditWidget(
                     title: [
                       '修改登录密码',
-                      // '修改提现密码',
                       '意见反馈',
                       '关于我们',
                       '使用协议',
                       '隐私政策',
-                      // '注销账号',
+                      '切换语言',
                     ][i],
                     padding: EdgeInsets.symmetric(horizontal: 17, vertical: 15),
                     isShowDivider: false,
@@ -168,6 +169,19 @@ class _SetupPageState extends State<SetupPage> {
                           break;
                         case 4:
                           jumpPage(AgreementPage(type: '11'));
+                          break;
+                        case 5:
+                          // WidgetTap(
+                          //   isElastic: true,
+                          //   onTap: () {
+                          //     showTc(
+                          //       onPressed: () async {
+                                  changeLanguage(LangType.zhCN);
+                            //     },
+                            //     title: '确定切换语言吗？',
+                            //   );
+                            // },
+                          // );
                           break;
                         default:
                           showToast('开发中');

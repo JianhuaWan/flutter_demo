@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:flutter_app/provider/provider_config.dart';
+import 'package:flutter_app/res/app_string.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';
 import 'package:paixs_utils/widget/interaction/widget_tap.dart';
 import 'package:provider/provider.dart';
@@ -33,10 +34,10 @@ class _CoreTabWidgetState extends State<CoreTabWidget> {
           Container(
             child: Row(
               children: <Widget>[
-                buildBtb('tab0', 0),
-                buildBtb('tab1', 1),
-                buildBtb('tab2', 2),
-                buildBtb('tab3', 3),
+                buildBtb(AppString.home, 0),
+                buildBtb(AppString.information, 1),
+                buildBtb(AppString.recommend, 2),
+                buildBtb(AppString.me, 3),
               ],
             ),
           ),
