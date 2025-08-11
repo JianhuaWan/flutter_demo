@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/page/home/sousuo_page.dart';
+import 'package:flutter_app/page/home/search_page.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';
 import 'package:paixs_utils/widget/interaction/widget_tap.dart';
@@ -27,7 +27,7 @@ class AppbarWidget extends StatelessWidget {
       color: Colors.white,
       child: WidgetTap(
         onTap: () {
-          jumpPage(SousuoPage());
+          jumpPage(SearchPage());
         },
         child: Container(
           alignment: Alignment.center,

@@ -3,23 +3,23 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/page/wode/xieyi_page.dart';
+import 'package:flutter_app/page/mine/agreement_page.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:flutter_app/page/home_page.dart';
-import 'package:flutter_app/page/my_page.dart';
-import 'package:flutter_app/page/shopping_page.dart';
-import 'package:flutter_app/page/zixun_page.dart';
+import 'package:flutter_app/page/home/home_page.dart';
+import 'package:flutter_app/page/mine/mine_page.dart';
+import 'package:flutter_app/page/recommend/recommend_page.dart';
+import 'package:flutter_app/page/Information/information_page.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/widget/bnb_widget.dart';
+import 'package:flutter_app/widget/core_tab_widget.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';
 import 'package:paixs_utils/widget/navigation/route.dart';
 import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
-import 'widget/tween_widget.dart';
-import 'widget/widgets.dart';
+import 'widget/animation_widget.dart';
+import 'widget/base_widgets.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -99,7 +99,7 @@ class _FlashPageState extends State<FlashPage> {
           showGeneralDialog(
             context: context!,
             barrierColor: Colors.transparent,
-            pageBuilder: (_, __, ___) => UserXiayi(),
+            pageBuilder: (_, __, ___) => UserAgreement(),
           ).then((v) async {
             if (v != null) {
               await Future.delayed(Duration(milliseconds: 500));
@@ -147,7 +147,7 @@ class _FlashPageState extends State<FlashPage> {
             child: Column(
               children: [
                 SizedBox(height: 89.5),
-                TweenWidget(
+                AnimationWidget(
                   isOpen: true,
                   key: ValueKey(Random()),
                   axis: Axis.vertical,
@@ -163,7 +163,7 @@ class _FlashPageState extends State<FlashPage> {
                   ),
                 ),
                 SizedBox(height: 16),
-                TweenWidget(
+                AnimationWidget(
                   isOpen: true,
                   key: ValueKey(Random()),
                   axis: Axis.vertical,
@@ -179,7 +179,7 @@ class _FlashPageState extends State<FlashPage> {
                   ),
                 ),
                 SizedBox(height: 24),
-                TweenWidget(
+                AnimationWidget(
                   isOpen: true,
                   key: ValueKey(Random()),
                   axis: Axis.vertical,
@@ -248,7 +248,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         children: <Widget>[
           Scaffold(
             backgroundColor: Colors.white,
-            bottomNavigationBar: BnbWidget(callback: (i) {
+            bottomNavigationBar: CoreTabWidget(callback: (i) {
               // setState(() {});
               app.pageCon.jumpToPage(i);
             }),
@@ -263,9 +263,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                       HomePage(),
                     ],
                   ),
-                  ZixunPage(),
-                  ShoppingPage(),
-                  MyPage(),
+                  InformationPage(),
+                  RecommendPage(),
+                  MinePage(),
                 ],
               ),
             ),
@@ -276,12 +276,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 }
 
-class UserXiayi extends StatefulWidget {
+class UserAgreement extends StatefulWidget {
   @override
-  _UserXiayiState createState() => _UserXiayiState();
+  _UserAgreementState createState() => _UserAgreementState();
 }
 
-class _UserXiayiState extends State<UserXiayi> with TickerProviderStateMixin {
+class _UserAgreementState extends State<UserAgreement> with TickerProviderStateMixin {
   TextEditingController con = TextEditingController();
 
   @override
@@ -293,7 +293,7 @@ class _UserXiayiState extends State<UserXiayi> with TickerProviderStateMixin {
         body: Container(
           color: Colors.black45,
           alignment: Alignment.center,
-          child: TweenWidget(
+          child: AnimationWidget(
             axis: Axis.vertical,
             isOpen: true,
             child: Container(
@@ -318,7 +318,7 @@ class _UserXiayiState extends State<UserXiayi> with TickerProviderStateMixin {
                         ),
                       },
                       onLinkTap: (v, _, __) {
-                        jumpPage(XieyiPage(type: v));
+                        jumpPage(AgreementPage(type: v));
                       },
                     ),
                   ),

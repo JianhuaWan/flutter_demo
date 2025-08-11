@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/phone_country_code_data.dart';
+import 'package:flutter_app/model/country_code_data.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/view/views.dart';
-import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/util/common_views.dart';
+import 'package:flutter_app/widget/animation_widget.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
@@ -352,7 +352,7 @@ class PageState extends State<PhoneCountryCodePage> {
                     },
                   ),
                   if (flag)
-                    TweenWidget(
+                    AnimationWidget(
                       axis: Axis.vertical,
                       delayed: 100,
                       curve: ElasticOutCurve(1),
@@ -368,7 +368,7 @@ class PageState extends State<PhoneCountryCodePage> {
                               selector: (_, k) => k.cityListIndex,
                               builder: (_, v, view) {
                                 return getTime() % 2 != 0
-                                    ? TweenWidget(
+                                    ? AnimationWidget(
                                         key: ValueKey(1),
                                         axis: Axis.vertical,
                                         isScale: true,
@@ -379,7 +379,7 @@ class PageState extends State<PhoneCountryCodePage> {
                                             size: 24,
                                             isBold: true),
                                       )
-                                    : TweenWidget(
+                                    : AnimationWidget(
                                         key: ValueKey(2),
                                         isScale: true,
                                         axis: Axis.vertical,
@@ -481,7 +481,7 @@ class PageState extends State<PhoneCountryCodePage> {
                                 color: Colors.transparent,
                                 width: 32,
                                 alignment: Alignment.center,
-                                child: TweenWidget(
+                                child: AnimationWidget(
                                     delayed: 20 + 10 * ii,
                                     axis: Axis.vertical,
                                     child: MyText(letters[ii], isBold: true)),

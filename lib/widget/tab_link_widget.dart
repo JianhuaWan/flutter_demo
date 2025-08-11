@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widget/tween_widget.dart';
-import 'package:flutter_app/widget/widgets.dart';
+import 'package:flutter_app/widget/animation_widget.dart';
+import 'package:flutter_app/widget/base_widgets.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/layout/views.dart';
 
@@ -316,7 +316,7 @@ class _TabLinkWidgetState extends State<TabLinkWidget>
               //   return Tab(text: m);
               // }).toList(),
               tabs: List.generate(widget.headers!.length, (i) {
-                return TweenWidget(
+                return AnimationWidget(
                   delayed: 50 + 100 * i,
                   child: Tab(text: widget.headers![i]),
                 );

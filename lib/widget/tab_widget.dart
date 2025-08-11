@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widget/tween_widget.dart';
+import 'package:flutter_app/widget/animation_widget.dart';
 import 'package:paixs_utils/widget/layout/custom_scroll_physics.dart';
 import 'package:paixs_utils/widget/navigation/route.dart';
 
@@ -77,7 +77,7 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
               //   return
               // // }).toList(),
               tabs: List.generate(widget.tabList!.length, (i) {
-                return TweenWidget(
+                return AnimationWidget(
                   delayed: (RouteState.isFromDown ? 100 : 50) + 100 * i,
                   axis: RouteState.isFromDown ? Axis.vertical : Axis.horizontal,
                   child: Tab(text: widget.tabList![i]),
