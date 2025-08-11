@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/page/home/city_selector.dart';
 import 'package:flutter_app/page/home/sousuo_page.dart';
 import 'package:flutter_app/provider/app_provider.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';
@@ -42,8 +41,8 @@ class AppbarWidget extends StatelessWidget {
               WidgetTap(
                 isElastic: true,
                 onTap: () {
-                  jumpPage(PhoneCountryCodePage(), callback: (v) => callback!
-                    (v));
+                  // jumpPage(PhoneCountryCodePage(), callback: (v) => callback!
+                    // (v));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
