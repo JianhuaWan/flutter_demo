@@ -6,7 +6,7 @@ import 'package:flutter_app/page/login/edit_login.dart';
 import 'package:flutter_app/widget/update_install_widget.dart';
 
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:flutter_app/util/base_http.dart';
+import 'package:flutter_app/net/base_http.dart';
 import 'package:flutter_app/model/user_model.dart';
 import 'package:flutter_app/provider/provider_config.dart';
 import 'package:flutter_app/provider/user_provider.dart';

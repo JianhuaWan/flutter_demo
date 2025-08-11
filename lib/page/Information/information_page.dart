@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/util/base_http.dart';
 import 'package:flutter_app/widget/custom_scroll_widget.dart';
 import 'package:flutter_app/widget/tab_widget.dart';
 import 'package:flutter_app/widget/animation_widget.dart';
@@ -12,6 +11,8 @@ import 'package:paixs_utils/widget/layout/views.dart';
 import 'package:paixs_utils/widget/media/image.dart';
 import 'package:paixs_utils/widget/navigation/route.dart';
 import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+
+import '../../net/base_http.dart';
 
 class InformationPage extends StatefulWidget {
   final bool isHome;

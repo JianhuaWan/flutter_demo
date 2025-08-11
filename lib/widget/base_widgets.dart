@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/config/color_config.dart';
+import 'package:flutter_app/util/color_config.dart';
 import 'package:flutter_app/page/home/help_find_page.dart';
 import 'package:flutter_app/page/home/clinch_deal_page.dart';
 import 'package:flutter_app/page/home/house_loan_page.dart';

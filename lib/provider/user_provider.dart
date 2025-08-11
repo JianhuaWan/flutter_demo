@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/user_model.dart';
-import 'package:flutter_app/util/base_http.dart';
+import 'package:flutter_app/net/base_http.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/util/base_http.dart';
+import 'package:flutter_app/net/base_http.dart';
 import 'package:paixs_utils/model/data_model.dart';
 import 'package:paixs_utils/widget/animation/anima_switch_widget.dart';
 import 'package:paixs_utils/widget/form/mytext.dart';

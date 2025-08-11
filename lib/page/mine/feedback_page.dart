@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/util/base_http.dart';
+import 'package:flutter_app/net/base_http.dart';
 import 'package:flutter_app/util/common_views.dart';
 import 'package:flutter_app/widget/animation_widget.dart';
 import 'package:flutter_app/widget/base_widgets.dart';

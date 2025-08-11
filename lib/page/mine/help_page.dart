@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/util/base_http.dart';
+import 'package:flutter_app/net/base_http.dart';
 import 'package:flutter_app/widget/no_sliding_widget.dart';
 import 'package:flutter_app/widget/tab_widget.dart';
 import 'package:flutter_html/flutter_html.dart';

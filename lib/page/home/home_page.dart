@@ -5,7 +5,7 @@ import 'package:flutter_app/page/home/house_page.dart';
 import 'package:flutter_app/page/home/house_bay_area_page.dart';
 import 'package:flutter_app/page/Information/information_page.dart';
 import 'package:flutter_app/provider/provider_config.dart';
-import 'package:flutter_app/util/base_http.dart';
+import 'package:flutter_app/net/base_http.dart';
 import 'package:flutter_app/widget/appbar_widget.dart';
 import 'package:flutter_app/widget/custom_scroll_widget.dart';
 import 'package:flutter_app/widget/animation_widget.dart';
@@ -19,6 +19,8 @@ import 'package:paixs_utils/widget/layout/views.dart';
 import 'package:paixs_utils/widget/media/image.dart';
 import 'package:paixs_utils/widget/navigation/route.dart';
 import 'package:paixs_utils/widget/layout/scaffold_widget.dart';
+import 'package:flutter_app/model/news_model.dart';
+import 'package:flutter_app/net/service_api.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -132,39 +134,12 @@ class _HomePageState extends State<HomePage>
   }
 
   ///获取资讯信息列表
-  var zixunDm = DataModel(hasNext: false);
+  late DataModel zixunDm;
 
   Future<int> apiNewsGetPageList({int page = 1, bool isRef = false}) async {
-    await Request.get(
-      '/api/News/GetPageList',
-      data: {"PageIndex": page, "city": app.cityCode ?? "-1"},
-      catchError: (v) {
-        // 当请求失败时，手动生成几条默认数据
-        List<Map<String, dynamic>> defaultNews = [
-          {
-            'preview': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=资讯1',
-            'content': '',
-            'title': '默认资讯标题1'
-          },
-          {
-            'preview': 'https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=资讯2',
-            'content': '',
-            'title': '默认资讯标题2'
-          },
-          {
-            'preview': 'https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=资讯3',
-            'content': '',
-            'title': '默认资讯标题3'
-          },
-        ];
-        zixunDm.addList(defaultNews, isRef, defaultNews.length);
-      },
-      success: (v) {
-        zixunDm.addList(v['data'], isRef, v['total']);
-      },
-    );
+    int result = await ServiceApi.apiNewsGetPageList(page: page, isRef: isRef);
     setState(() {});
-    return zixunDm.flag!;
+    return result;
   }
 
   ///获取湾区推荐
@@ -276,7 +251,7 @@ class _HomePageState extends State<HomePage>
           if (v != null) {
             bannerDm.flag = 0;
             guanggaoDm.flag = 0;
-            zixunDm.flag = 0;
+            NewsModel.zixunDm.flag = 0;
             loupanDm.flag = 0;
             loupanDm.list.clear();
 
@@ -287,6 +262,7 @@ class _HomePageState extends State<HomePage>
             await this.getGuanggaoList();
             await this.apiBuildingGetRecommend(isRef: true);
             await this.apiNewsGetPageList(isRef: true);
+    NewsModel.zixunDm = zixunDm;
             await this.getPageList(isRef: true);
           }
         },
@@ -542,7 +518,7 @@ class _HomePageState extends State<HomePage>
         },
       ),
       AnimatedSwitchBuilder(
-        value: zixunDm,
+        value: NewsModel.zixunDm,
         errorOnTap: () => this.apiNewsGetPageList(),
         isAnimatedSize: true,
         noDataView: SizedBox(),
@@ -561,9 +537,9 @@ class _HomePageState extends State<HomePage>
                 WidgetTap(
                   isElastic: true,
                   onTap: () {
-                      jumpPage(ZixunInfoPage(data: list[0]));
+                    jumpPage(ZixunInfoPage(data: NewsModel.zixunDm.list[0]));
                   },
-                  child: InformationWidget(data: list[0]),
+                  child: InformationWidget(data: NewsModel.zixunDm.list[0]),
                 ),
               ],
             ),

@@ -10,7 +10,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paixs_utils/util/utils.dart';
 import 'package:paixs_utils/widget/navigation/route.dart';
 
-import 'base_http.dart';
+import '../net/base_http.dart';
 
 class ComonUtil {
   static isLogin(Function fun) {
